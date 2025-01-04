@@ -16,7 +16,7 @@ export default function Footer() {
             <Heart className="h-4 w-4 text-red-500" />
             <span>by</span>
             <a 
-              href="https://github.com/saikumar" 
+              href="https://github.com/saikumar2304" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-500"
