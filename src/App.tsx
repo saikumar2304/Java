@@ -95,6 +95,7 @@ import ComparableInterface from './pages/java-collections/Comparable';
 import ComparableVsComparator from './pages/java-collections/ComparableVsComparator';
 import Iterator from './pages/java-collections/Iterator';
 import JavaMCQs from "./pages/java-mcqs/JavaMCQs";
+import Playground from './pages/playground/Playground';
 
 function App() {
   return (
@@ -110,7 +111,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/type/:typeName" element={<TypePage />} />
-                <Route path="/playground" element={<PlaygroundPage />} />
+                <Route path="/playground" element={<Playground />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/compare" element={<ComparePage />} />
                 <Route path="/java-basics/intro" element={<IntroductionBasics />} />

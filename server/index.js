@@ -1,56 +1,65 @@
-const express = require('express');
-const { exec } = require('child_process');
-const fs = require('fs').promises;
-const path = require('path');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import { exec } from 'child_process';
+import { writeFile, mkdir } from 'fs/promises';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import { existsSync } from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
+const PORT = process.env.PORT || 3001;
+
 app.use(cors());
 app.use(express.json());
 
-const TEMP_DIR = path.join(__dirname, 'temp');
+// Create a directory for temporary files
+const tempDir = join(__dirname, 'temp');
 
 // Ensure temp directory exists
-if (!fs.existsSync(TEMP_DIR)) {
-  fs.mkdirSync(TEMP_DIR, { recursive: true });
+if (!existsSync(tempDir)) {
+  await mkdir(tempDir, { recursive: true });
 }
 
 app.post('/compile', async (req, res) => {
   const { code } = req.body;
-  const timestamp = Date.now();
-  const fileName = `Main${timestamp}.java`;
-  const filePath = path.join(TEMP_DIR, fileName);
+  const filename = 'Main.java';
+  const filepath = join(tempDir, filename);
   
   try {
     // Write code to file
-    await fs.writeFile(filePath, code);
+    await writeFile(filepath, code);
     
-    // Compile and run with timeout
-    exec(
-      `cd ${TEMP_DIR} && javac ${fileName} && java Main${timestamp}`,
-      { timeout: 5000 }, // 5 second timeout
-      async (error, stdout, stderr) => {
-        // Clean up
-        try {
-          await fs.unlink(filePath);
-          await fs.unlink(path.join(TEMP_DIR, `Main${timestamp}.class`));
-        } catch (e) {
-          console.error('Cleanup error:', e);
+    // Compile and run in a single promise
+    const result = await new Promise((resolve) => {
+      // Compile - wrap filepath in quotes to handle spaces
+      exec(`javac "${filepath}"`, (compileError, compileStdout, compileStderr) => {
+        if (compileError) {
+          resolve({ error: compileStderr });
+          return;
         }
+        
+        // Run - cd to temp directory first to avoid path issues
+        exec(`cd "${tempDir}" && java Main`, (runError, runStdout, runStderr) => {
+          if (runError) {
+            resolve({ error: runStderr });
+            return;
+          }
+          resolve({ output: runStdout });
+        });
+      });
+    });
 
-        if (error) {
-          res.json({ error: stderr || error.message });
-        } else {
-          res.json({ output: stdout });
-        }
-      }
-    );
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.json(result);
+  } catch (error) {
+    console.error('Error:', error);
+    res.json({ error: 'Error processing code: ' + error.message });
   }
 });
 
-const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`Temp directory: ${tempDir}`);
 });
