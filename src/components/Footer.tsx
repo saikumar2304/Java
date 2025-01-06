@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { Code2, Heart } from 'lucide-react';
 
 export default function Footer() {
@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex items-center space-x-2">
             <Code2 className="h-5 w-5 text-indigo-400" />
-            <span className="text-gray-300">Java Methods Documentation</span>
+            <span className="text-gray-300">Java guide</span>
           </div>
           
           <div className="flex items-center space-x-1 text-gray-400">
