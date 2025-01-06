@@ -1,35 +1,66 @@
 import React from 'react';
-import { Copy } from 'lucide-react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Check, Copy } from 'lucide-react';
 
 interface CodeBlockProps {
   code: string;
-  label?: string;
+  language: string;
 }
 
-export default function CodeBlock({ code, label }: CodeBlockProps) {
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(code);
+const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
+  const [copied, setCopied] = React.useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <div className="relative group">
-      {label && (
-        <span className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block">
-          {label}
-        </span>
-      )}
-      <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 relative">
-        <button
-          onClick={copyToClipboard}
-          className="absolute right-2 top-2 p-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700"
-          title="Copy to clipboard"
+      <button
+        onClick={handleCopy}
+        className="absolute right-2 top-2 p-1.5 rounded-lg bg-gray-800 dark:bg-gray-700 
+                 text-gray-300 hover:text-white hover:bg-gray-700 dark:hover:bg-gray-600 
+                 transition-all duration-200 opacity-0 group-hover:opacity-100 focus:outline-none z-10"
+        title="Copy code"
+      >
+        {copied ? (
+          <Check className="w-4 h-4 text-green-500" />
+        ) : (
+          <Copy className="w-4 h-4" />
+        )}
+      </button>
+      <div className="overflow-x-auto">
+        <SyntaxHighlighter
+          language={language}
+          style={vscDarkPlus}
+          customStyle={{
+            margin: 0,
+            padding: '1rem',
+            borderRadius: '0.375rem',
+            backgroundColor: '#1e1e1e',
+            fontSize: '13px',
+            minWidth: '100%',
+          }}
+          showLineNumbers={true}
+          wrapLines={false}
+          lineNumberStyle={{
+            minWidth: '2em',
+            paddingRight: '1em',
+            color: '#6e7681',
+            textAlign: 'right',
+            borderRight: '1px solid #404040',
+            marginRight: '1em',
+            fontSize: '12px'
+          }}
         >
-          <Copy className="h-4 w-4 text-gray-500 dark:text-gray-400" />
-        </button>
-        <pre className="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">
-          <code>{code}</code>
-        </pre>
+          {code.trim()}
+        </SyntaxHighlighter>
       </div>
     </div>
   );
-}
+};
+
+export default CodeBlock;
