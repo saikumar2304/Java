@@ -181,7 +181,7 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="w-64 bg-gray-800 text-gray-100 flex-shrink-0 overflow-y-auto">
+    <div className="w-64 bg-gray-800 text-gray-100 flex-shrink-0 fixed h-[calc(100vh-4rem)] overflow-y-auto">
       <div className="p-4">
         {sections.map((section) => (
           <div key={section.title} className="mb-4">

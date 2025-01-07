@@ -33,6 +33,12 @@ const Navbar: React.FC = () => {
                   Playground
                 </Link>
                 <Link 
+                  to="/hands-on" 
+                  className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  Hands-On
+                </Link>
+                <Link 
                   to="/java-mcqs" 
                   className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
