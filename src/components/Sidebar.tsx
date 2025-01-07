@@ -1,459 +1,221 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, ChevronRight } from 'lucide-react';
-import { BiQuestionMark } from 'react-icons/bi';
+
+interface Section {
+  title: string;
+  items: {
+    title: string;
+    path: string;
+  }[];
+}
+
+const sections: Section[] = [
+  {
+    title: 'Java Basics',
+    items: [
+      { title: 'Introduction', path: '/java-basics/introduction' },
+      { title: 'Hello World', path: '/java-basics/hello-world' },
+      { title: 'Java Syntax', path: '/java-basics/java-syntax' },
+      { title: 'Identifiers', path: '/java-basics/identifiers' },
+      { title: 'Keywords', path: '/java-basics/keywords' },
+      { title: 'Data Types', path: '/java-basics/data-types' },
+      { title: 'Variables', path: '/java-basics/variables' },
+      { title: 'Variable Scope', path: '/java-basics/variable-scope' },
+      { title: 'Operators', path: '/java-basics/operators' },
+      { title: 'User Input', path: '/java-basics/user-input' },
+      { title: 'Type Casting', path: '/java-basics/type-casting' },
+      { title: 'Comments', path: '/java-basics/comments' },
+    ],
+  },
+  {
+    title: 'Flow Control',
+    items: [
+      { title: 'If Statement', path: '/java-flow-control/if-statement' },
+      { title: 'If-Else', path: '/java-flow-control/if-else' },
+      { title: 'If-Else-If', path: '/java-flow-control/if-else-if' },
+      { title: 'Switch', path: '/java-flow-control/switch' },
+      { title: 'For Loop', path: '/java-flow-control/for-loop' },
+      { title: 'While Loop', path: '/java-flow-control/while-loop' },
+      { title: 'Do-While', path: '/java-flow-control/do-while' },
+      { title: 'Break', path: '/java-flow-control/break' },
+      { title: 'Continue', path: '/java-flow-control/continue' },
+      { title: 'Return', path: '/java-flow-control/return' },
+      { title: 'Enhanced For', path: '/java-flow-control/enhanced-for' },
+    ],
+  },
+  {
+    title: 'Methods',
+    items: [
+      { title: 'Introduction', path: '/java-methods/intro' },
+      { title: 'Method Declaration', path: '/java-methods/declaration' },
+      { title: 'Method Parameters', path: '/java-methods/parameters' },
+      { title: 'Method Calling', path: '/java-methods/calling' },
+      { title: 'Static vs Instance', path: '/java-methods/static-vs-instance' },
+      { title: 'Access Modifiers', path: '/java-methods/access-modifiers' },
+      { title: 'Command Line Args', path: '/java-methods/command-line-args' },
+      { title: 'Varargs', path: '/java-methods/varargs' },
+      { title: 'Method Overloading', path: '/java-methods/overloading' },
+      { title: 'Recursion', path: '/java-methods/recursion' },
+      { title: 'Pass by Value', path: '/java-methods/pass-by-value' },
+    ],
+  },
+  {
+    title: 'Arrays',
+    items: [
+      { title: 'Introduction', path: '/java-arrays/introduction' },
+      { title: 'Array Declaration', path: '/java-arrays/declaration' },
+      { title: 'Array Initialization', path: '/java-arrays/initialization' },
+      { title: 'Array Access', path: '/java-arrays/access' },
+      { title: 'Multidimensional', path: '/java-arrays/multidimensional' },
+      { title: 'Jagged Arrays', path: '/java-arrays/jagged-arrays' },
+      { title: 'Array Methods', path: '/java-arrays/methods' },
+      { title: 'Array Sorting', path: '/java-arrays/sorting' },
+      { title: 'Array Searching', path: '/java-arrays/searching' },
+      { title: 'Array Copy', path: '/java-arrays/copy' },
+    ],
+  },
+  {
+    title: 'Strings',
+    items: [
+      { title: 'Introduction', path: '/java-strings/introduction' },
+      { title: 'String Creation', path: '/java-strings/creation' },
+      { title: 'String Methods', path: '/java-strings/methods' },
+      { title: 'String Pool', path: '/java-strings/string-pool' },
+      { title: 'String Immutability', path: '/java-strings/immutability' },
+      { title: 'String Comparison', path: '/java-strings/comparison' },
+      { title: 'String Buffer', path: '/java-strings/string-buffer' },
+      { title: 'String Builder', path: '/java-strings/string-builder' },
+      { title: 'String Formatting', path: '/java-strings/formatting' },
+      { title: 'Regular Expressions', path: '/java-strings/regex' },
+    ],
+  },
+  {
+    title: 'OOP Concepts',
+    items: [
+      { title: 'Introduction', path: '/java-oop/introduction' },
+      { title: 'Classes & Objects', path: '/java-oop/classes-objects' },
+      { title: 'Constructors', path: '/java-oop/constructors' },
+      { title: 'Access Modifiers', path: '/java-oop/access-modifiers' },
+      { title: 'Encapsulation', path: '/java-oop/encapsulation' },
+      { title: 'Inheritance', path: '/java-oop/inheritance' },
+      { title: 'Polymorphism', path: '/java-oop/polymorphism' },
+      { title: 'Abstraction', path: '/java-oop/abstraction' },
+      { title: 'Interfaces', path: '/java-oop/interfaces' },
+      { title: 'Abstract Classes', path: '/java-oop/abstract-classes' },
+      { title: 'Static Members', path: '/java-oop/static-members' },
+      { title: 'Final Keyword', path: '/java-oop/final-keyword' },
+      { title: 'Package', path: '/java-oop/package' },
+      { title: 'Object Class', path: '/java-oop/object-class' },
+    ],
+  },
+  {
+    title: 'Exception Handling',
+    items: [
+      { title: 'Introduction', path: '/java-exceptions/introduction' },
+      { title: 'Try Catch', path: '/java-exceptions/try-catch' },
+      { title: 'Multiple Catch', path: '/java-exceptions/multiple-catch' },
+      { title: 'Throw & Throws', path: '/java-exceptions/throw-throws' },
+      { title: 'Finally Block', path: '/java-exceptions/finally' },
+      { title: 'Custom Exceptions', path: '/java-exceptions/custom-exceptions' },
+      { title: 'Exception Types', path: '/java-exceptions/types' },
+    ],
+  },
+  {
+    title: 'Collections',
+    items: [
+      { title: 'Introduction', path: '/java-collections/introduction' },
+      { title: 'Collection Interface', path: '/java-collections/collection-interface' },
+      { title: 'List Interface', path: '/java-collections/list-interface' },
+      { title: 'ArrayList', path: '/java-collections/array-list' },
+      { title: 'LinkedList', path: '/java-collections/linked-list' },
+      { title: 'Vector', path: '/java-collections/vector' },
+      { title: 'Stack', path: '/java-collections/stack' },
+      { title: 'Queue Interface', path: '/java-collections/queue-interface' },
+      { title: 'PriorityQueue', path: '/java-collections/priority-queue' },
+      { title: 'Deque Interface', path: '/java-collections/deque-interface' },
+      { title: 'Set Interface', path: '/java-collections/set-interface' },
+      { title: 'HashSet', path: '/java-collections/hashset' },
+      { title: 'LinkedHashSet', path: '/java-collections/linked-hashset' },
+      { title: 'TreeSet', path: '/java-collections/treeset' },
+      { title: 'Map Interface', path: '/java-collections/map-interface' },
+      { title: 'HashMap', path: '/java-collections/hashmap' },
+      { title: 'LinkedHashMap', path: '/java-collections/linked-hashmap' },
+      { title: 'TreeMap', path: '/java-collections/treemap' },
+      { title: 'Hashtable', path: '/java-collections/hashtable' },
+      { title: 'Comparable', path: '/java-collections/comparable' },
+      { title: 'Comparator', path: '/java-collections/comparator' },
+      { title: 'Iterator', path: '/java-collections/iterator' },
+    ],
+  },
+  {
+    title: 'File Handling',
+    items: [
+      { title: 'Introduction', path: '/java-files/introduction' },
+      { title: 'File Class', path: '/java-files/file-class' },
+      { title: 'FileReader', path: '/java-files/file-reader' },
+      { title: 'FileWriter', path: '/java-files/file-writer' },
+      { title: 'BufferedReader', path: '/java-files/buffered-reader' },
+      { title: 'BufferedWriter', path: '/java-files/buffered-writer' },
+      { title: 'File Streams', path: '/java-files/file-streams' },
+    ],
+  },
+];
 
 const Sidebar: React.FC = () => {
   const location = useLocation();
-  const isActive = (path: string) => location.pathname === path;
-  
-  // State for collapsible sections
-  const [openSections, setOpenSections] = useState({
-    basics: true,
-    flowControl: true,
-    methods: true,
-    arrays: true,
-    strings: true,
-    oop: true,
-    interfaces: true,
-    collections: true
+  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>(() => {
+    // Initialize with all sections closed except Java Basics
+    const initial: { [key: string]: boolean } = {};
+    sections.forEach(section => {
+      initial[section.title] = section.title === 'Java Basics';
+    });
+    return initial;
   });
 
-  const toggleSection = (section: string) => {
+  const toggleSection = (title: string) => {
     setOpenSections(prev => ({
       ...prev,
-      [section]: !prev[section]
+      [title]: !prev[title]
     }));
   };
 
-  const linkClass = (path: string) => `
-    block px-3 py-2 rounded-md text-sm transition-colors
-    ${isActive(path) 
-      ? 'bg-gray-700 text-white' 
-      : 'text-gray-300 hover:bg-gray-700/50 hover:text-white'}
-  `;
-
-  const sectionClass = (isOpen: boolean) => `
-    mb-2 transition-all duration-200
-    ${isOpen ? 'pb-2' : ''}
-  `;
-
-  const headerClass = `
-    flex items-center justify-between px-2 py-2 text-sm font-semibold text-gray-400
-    hover:text-gray-200 cursor-pointer transition-colors
-  `;
-
-  const sidebarItems = [
-    {
-      title: "Java MCQs",
-      path: "/java-mcqs",
-      icon: BiQuestionMark,
-      items: []
-    }
-  ];
-
   return (
-    <div className="bg-gray-800 text-gray-100 h-full overflow-y-auto px-3 py-4">
-      <nav className="space-y-1">
-        {/* Java Basics */}
-        <div className={sectionClass(openSections.basics)}>
-          <div 
-            className={headerClass}
-            onClick={() => toggleSection('basics')}
-          >
-            <span>Java Basics</span>
-            {openSections.basics ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
+    <div className="w-64 bg-gray-800 text-gray-100 flex-shrink-0 overflow-y-auto">
+      <div className="p-4">
+        {sections.map((section) => (
+          <div key={section.title} className="mb-4">
+            <button
+              onClick={() => toggleSection(section.title)}
+              className="flex items-center justify-between w-full px-2 py-2 text-sm font-semibold rounded hover:bg-gray-700"
+            >
+              {section.title}
+              {openSections[section.title] ? (
+                <ChevronDown className="h-4 w-4" />
+              ) : (
+                <ChevronRight className="h-4 w-4" />
+              )}
+            </button>
+            {openSections[section.title] && (
+              <div className="ml-4 mt-2 space-y-1">
+                {section.items.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`block px-2 py-1 text-sm rounded ${
+                      location.pathname === item.path
+                        ? 'bg-blue-500 text-white'
+                        : 'text-gray-300 hover:bg-gray-700'
+                    }`}
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
-          {openSections.basics && (
-            <div className="ml-2 space-y-1">
-              <Link to="/java-basics/intro" className={linkClass('/java-basics/intro')}>
-                Introduction
-              </Link>
-              <Link to="/java-basics/hello-world" className={linkClass('/java-basics/hello-world')}>
-                Hello World
-              </Link>
-              <Link to="/java-basics/syntax" className={linkClass('/java-basics/syntax')}>
-                Java Syntax
-              </Link>
-              <Link to="/java-basics/identifiers" className={linkClass('/java-basics/identifiers')}>
-                Identifiers
-              </Link>
-              <Link to="/java-basics/keywords" className={linkClass('/java-basics/keywords')}>
-                Keywords
-              </Link>
-              <Link to="/java-basics/data-types" className={linkClass('/java-basics/data-types')}>
-                Data Types
-              </Link>
-              <Link to="/java-basics/variables" className={linkClass('/java-basics/variables')}>
-                Variables
-              </Link>
-              <Link to="/java-basics/variable-scope" className={linkClass('/java-basics/variable-scope')}>
-                Variable Scope
-              </Link>
-              <Link to="/java-basics/operators" className={linkClass('/java-basics/operators')}>
-                Operators
-              </Link>
-              <Link to="/java-basics/user-input" className={linkClass('/java-basics/user-input')}>
-                User Input
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* Flow Control */}
-        <div className={sectionClass(openSections.flowControl)}>
-          <div 
-            className={headerClass}
-            onClick={() => toggleSection('flowControl')}
-          >
-            <span>Flow Control</span>
-            {openSections.flowControl ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-          </div>
-          {openSections.flowControl && (
-            <div className="ml-2 space-y-1">
-              <Link to="/java-flow-control/if-statement" className={linkClass('/java-flow-control/if-statement')}>
-                If Statement
-              </Link>
-              <Link to="/java-flow-control/if-else" className={linkClass('/java-flow-control/if-else')}>
-                If-Else
-              </Link>
-              <Link to="/java-flow-control/if-else-if" className={linkClass('/java-flow-control/if-else-if')}>
-                If-Else-If
-              </Link>
-              <Link to="/java-flow-control/switch" className={linkClass('/java-flow-control/switch')}>
-                Switch Statement
-              </Link>
-              <Link to="/java-flow-control/for-loop" className={linkClass('/java-flow-control/for-loop')}>
-                For Loop
-              </Link>
-              <Link to="/java-flow-control/while-loop" className={linkClass('/java-flow-control/while-loop')}>
-                While Loop
-              </Link>
-              <Link to="/java-flow-control/do-while" className={linkClass('/java-flow-control/do-while')}>
-                Do While
-              </Link>
-              <Link to="/java-flow-control/break" className={linkClass('/java-flow-control/break')}>
-                Break
-              </Link>
-              <Link to="/java-flow-control/continue" className={linkClass('/java-flow-control/continue')}>
-                Continue
-              </Link>
-              <Link to="/java-flow-control/return" className={linkClass('/java-flow-control/return')}>
-                Return
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* Methods */}
-        <div className={sectionClass(openSections.methods)}>
-          <div 
-            className={headerClass}
-            onClick={() => toggleSection('methods')}
-          >
-            <span>Methods</span>
-            {openSections.methods ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-          </div>
-          {openSections.methods && (
-            <div className="ml-2 space-y-1">
-              <Link to="/java-methods/intro" className={linkClass('/java-methods/intro')}>
-                Introduction
-              </Link>
-              <Link to="/java-methods/declaration" className={linkClass('/java-methods/declaration')}>
-                Declaration
-              </Link>
-              <Link to="/java-methods/parameters" className={linkClass('/java-methods/parameters')}>
-                Parameters
-              </Link>
-              <Link to="/java-methods/calling" className={linkClass('/java-methods/calling')}>
-                Method Calling
-              </Link>
-              {/* <Link to="/java-methods/return-type" className={linkClass('/java-methods/return-type')}>
-                Return Type
-              </Link> */}
-              <Link to="/java-methods/static-vs-instance" className={linkClass('/java-methods/static-vs-instance')}>
-                Static vs Instance
-              </Link>
-              <Link to="/java-methods/access-modifiers" className={linkClass('/java-methods/access-modifiers')}>
-                Access Modifiers
-              </Link>
-              <Link to="/java-methods/overloading" className={linkClass('/java-methods/overloading')}>
-                Method Overloading
-              </Link>
-              <Link to="/java-methods/recursion" className={linkClass('/java-methods/recursion')}>
-                Recursion
-              </Link>
-              <Link to="/java-methods/varargs" className={linkClass('/java-methods/varargs')}>
-                Varargs
-              </Link>
-              <Link to="/java-methods/command-line-args" className={linkClass('/java-methods/command-line-args')}>
-                Command Line Args
-              </Link>
-              <Link to="/java-methods/return-types" className={linkClass('/java-methods/return-types')}>
-                Return Types
-              </Link>
-              {/* <Link to="/java-methods/method-overriding" className={linkClass('/java-methods/method-overriding')}>
-                Method Overriding
-              </Link> */}
-            </div>
-          )}
-        </div>
-
-        {/* Arrays */}
-        <div className={sectionClass(openSections.arrays)}>
-          <div 
-            className={headerClass}
-            onClick={() => toggleSection('arrays')}
-          >
-            <span>Arrays</span>
-            {openSections.arrays ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-          </div>
-          {openSections.arrays && (
-            <div className="ml-2 space-y-1">
-              <Link to="/java-arrays/introduction" className={linkClass('/java-arrays/introduction')}>
-                Introduction
-              </Link>
-              <Link to="/java-arrays/initialization" className={linkClass('/java-arrays/initialization')}>
-                Initialization
-              </Link>
-              <Link to="/java-arrays/multidimensional" className={linkClass('/java-arrays/multidimensional')}>
-                Multidimensional
-              </Link>
-              <Link to="/java-arrays/jagged-arrays" className={linkClass('/java-arrays/jagged-arrays')}>
-                Jagged Arrays
-              </Link>
-              <Link to="/java-arrays/array-class-methods" className={linkClass('/java-arrays/array-class-methods')}>
-                Array Class Methods
-              </Link>
-              {/* <Link to="/java-arrays/array-list" className={linkClass('/java-arrays/array-list')}>
-                ArrayList
-              </Link> */}
-            </div>
-          )}
-        </div>
-
-        {/* Strings */}
-        <div className={sectionClass(openSections.strings)}>
-          <div 
-            className={headerClass}
-            onClick={() => toggleSection('strings')}
-          >
-            <span>Strings</span>
-            {openSections.strings ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-          </div>
-          {openSections.strings && (
-            <div className="ml-2 space-y-1">
-              <Link to="/java-strings/introduction" className={linkClass('/java-strings/introduction')}>
-                Introduction
-              </Link>
-              <Link to="/java-strings/string-class" className={linkClass('/java-strings/string-class')}>
-                String Class
-              </Link>
-              <Link to="/java-strings/methods" className={linkClass('/java-strings/methods')}>
-                String Methods
-              </Link>
-              <Link to="/java-strings/immutability" className={linkClass('/java-strings/immutability')}>
-                Immutability
-              </Link>
-              <Link to="/java-strings/concatenation" className={linkClass('/java-strings/concatenation')}>
-                Concatenation
-              </Link>
-              <Link to="/java-strings/comparison" className={linkClass('/java-strings/comparison')}>
-                String Comparison
-              </Link>
-              <Link to="/java-strings/string-buffer" className={linkClass('/java-strings/string-buffer')}>
-                StringBuffer
-              </Link>
-              <Link to="/java-strings/string-builder" className={linkClass('/java-strings/string-builder')}>
-                StringBuilder
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* OOP */}
-        <div className={sectionClass(openSections.oop)}>
-          <div 
-            className={headerClass}
-            onClick={() => toggleSection('oop')}
-          >
-            <span>Object-Oriented Programming</span>
-            {openSections.oop ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-          </div>
-          {openSections.oop && (
-            <div className="ml-2 space-y-1">
-              <Link to="/java-oop/introduction" className={linkClass('/java-oop/introduction')}>
-                Introduction
-              </Link>
-              <Link to="/java-oop/classes-objects" className={linkClass('/java-oop/classes-objects')}>
-                Classes & Objects
-              </Link>
-              <Link to="/java-oop/constructors" className={linkClass('/java-oop/constructors')}>
-                Constructors
-              </Link>
-              <Link to="/java-oop/object-class" className={linkClass('/java-oop/object-class')}>
-                Object Class
-              </Link>
-              <Link to="/java-oop/abstraction" className={linkClass('/java-oop/abstraction')}>
-                Abstraction
-              </Link>
-              <Link to="/java-oop/encapsulation" className={linkClass('/java-oop/encapsulation')}>
-                Encapsulation
-              </Link>
-              <Link to="/java-oop/inheritance" className={linkClass('/java-oop/inheritance')}>
-                Inheritance
-              </Link>
-              <Link to="/java-oop/polymorphism" className={linkClass('/java-oop/polymorphism')}>
-                Polymorphism
-              </Link>
-              <Link to="/java-oop/method-overloading" className={linkClass('/java-oop/method-overloading')}>
-                Method Overloading
-              </Link>
-              <Link to="/java-oop/packages" className={linkClass('/java-oop/packages')}>
-                Packages
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* Interfaces */}
-        <div className={sectionClass(openSections.interfaces)}>
-          <div 
-            className={headerClass}
-            onClick={() => toggleSection('interfaces')}
-          >
-            <span>Interfaces</span>
-            {openSections.interfaces ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-          </div>
-          {openSections.interfaces && (
-            <div className="ml-2 space-y-1">
-              <Link to="/java-oop/interfaces" className={linkClass('/java-oop/interfaces')}>
-                Introduction to Interfaces
-              </Link>
-              <Link to="/java-oop/interfaces-inheritance" className={linkClass('/java-oop/interfaces-inheritance')}>
-                Interfaces & Inheritance
-              </Link>
-              <Link to="/java-oop/class-vs-interface" className={linkClass('/java-oop/class-vs-interface')}>
-                Class vs Interface
-              </Link>
-              <Link to="/java-oop/functional-interface" className={linkClass('/java-oop/functional-interface')}>
-                Functional Interface
-              </Link>
-              <Link to="/java-oop/nested-interface" className={linkClass('/java-oop/nested-interface')}>
-                Nested Interface
-              </Link>
-              <Link to="/java-oop/marker-interface" className={linkClass('/java-oop/marker-interface')}>
-                Marker Interface
-              </Link>
-              <Link to="/java-oop/comparator-interface" className={linkClass('/java-oop/comparator-interface')}>
-                Comparator Interface
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* Collections */}
-        <div className={sectionClass(openSections.collections)}>
-          <div 
-            className={headerClass}
-            onClick={() => toggleSection('collections')}
-          >
-            <span>Collections</span>
-            {openSections.collections ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-          </div>
-          {openSections.collections && (
-            <div className="ml-2 space-y-1">
-              <Link to="/java-collections/introduction" className={linkClass('/java-collections/introduction')}>
-                Introduction to Collections
-              </Link>
-              <Link to="/java-collections/collection-classes" className={linkClass('/java-collections/collection-classes')}>
-                Collection Classes
-              </Link>
-              <Link to="/java-collections/collection-interface" className={linkClass('/java-collections/collection-interface')}>
-                Collection Interface
-              </Link>
-              <Link to="/java-collections/list-interface" className={linkClass('/java-collections/list-interface')}>
-                List Interface
-              </Link>
-              <Link to="/java-collections/array-list" className={linkClass('/java-collections/array-list')}>
-                ArrayList
-              </Link>
-              <Link to="/java-collections/vector" className={linkClass('/java-collections/vector')}>
-                Vector Class
-              </Link>
-              <Link to="/java-collections/linked-list" className={linkClass('/java-collections/linked-list')}>
-                LinkedList
-              </Link>
-              <Link to="/java-collections/stack" className={linkClass('/java-collections/stack')}>
-                Stack Class
-              </Link>
-              <Link to="/java-collections/set" className={linkClass('/java-collections/set')}>
-                Set Interface
-              </Link>
-              <Link to="/java-collections/hashset" className={linkClass('/java-collections/hashset')}>
-                HashSet
-              </Link>
-              <Link to="/java-collections/treeset" className={linkClass('/java-collections/treeset')}>
-                TreeSet
-              </Link>
-              <Link to="/java-collections/linked-hashset" className={linkClass('/java-collections/linked-hashset')}>
-                LinkedHashSet
-              </Link>
-              <Link to="/java-collections/queue-interface" className={linkClass('/java-collections/queue-interface')}>
-                Queue Interface
-              </Link>
-              <Link to="/java-collections/priority-queue" className={linkClass('/java-collections/priority-queue')}>
-                PriorityQueue
-              </Link>
-              <Link to="/java-collections/deque-interface" className={linkClass('/java-collections/deque-interface')}>
-                Deque Interface
-              </Link>
-              <Link to="/java-collections/map-interface" className={linkClass('/java-collections/map-interface')}>
-                Map Interface
-              </Link>
-              <Link to="/java-collections/hashmap" className={linkClass('/java-collections/hashmap')}>
-                HashMap
-              </Link>
-              <Link to="/java-collections/linked-hashmap" className={linkClass('/java-collections/linked-hashmap')}>
-                LinkedHashMap
-              </Link>
-              <Link to="/java-collections/hashtable" className={linkClass('/java-collections/hashtable')}>
-                Hashtable
-              </Link>
-              <Link to="/java-collections/dictionary" className={linkClass('/java-collections/dictionary')}>
-                Dictionary Class
-              </Link>
-              <Link to="/java-collections/sorted-set" className={linkClass('/java-collections/sorted-set')}>
-                SortedSet Interface
-              </Link>
-              <Link to="/java-collections/comparable" className={linkClass('/java-collections/comparable')}>
-                Comparable Interface
-              </Link>
-              <Link to="/java-collections/comparable-vs-comparator" className={linkClass('/java-collections/comparable-vs-comparator')}>
-                Comparable vs Comparator
-              </Link>
-              <Link to="/java-collections/iterator" className={linkClass('/java-collections/iterator')}>
-                Iterator
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* Java MCQs */}
-        <div className={sectionClass(true)}>
-          <Link 
-            to="/java-mcqs" 
-            className={`${headerClass} ${
-              isActive('/java-mcqs') ? 'text-white bg-gray-700' : ''
-            }`}
-          >
-            <div className="flex items-center">
-              <BiQuestionMark className="mr-2" size={18} />
-              <span>Java MCQs</span>
-            </div>
-          </Link>
-        </div>
-      </nav>
+        ))}
+      </div>
     </div>
   );
 };

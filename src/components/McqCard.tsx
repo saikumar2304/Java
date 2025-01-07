@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CodeBlock from './CodeBlock';
 import { Copy, Check } from 'lucide-react';
 
@@ -15,6 +15,7 @@ interface McqCardProps {
   difficulty: 'Easy' | 'Medium' | 'Hard';
   category: string;
   hasCode?: boolean;
+  sectionCategory: string;
 }
 
 const McqCard: React.FC<McqCardProps> = ({
@@ -24,11 +25,30 @@ const McqCard: React.FC<McqCardProps> = ({
   explanation,
   difficulty,
   category,
-  hasCode = false
+  hasCode = false,
+  sectionCategory
 }) => {
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [showExplanation, setShowExplanation] = useState(false);
+  // Use both section category and question id in the key
+  const stateKey = `mcq-${sectionCategory}-${id}-state`;
+  
+  const [selectedOption, setSelectedOption] = useState<number | null>(() => {
+    const saved = localStorage.getItem(stateKey);
+    return saved ? JSON.parse(saved).selectedOption : null;
+  });
+  
+  const [showExplanation, setShowExplanation] = useState<boolean>(() => {
+    const saved = localStorage.getItem(stateKey);
+    return saved ? JSON.parse(saved).showExplanation : false;
+  });
+  
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem(stateKey, JSON.stringify({
+      selectedOption,
+      showExplanation
+    }));
+  }, [selectedOption, showExplanation, stateKey]);
 
   const handleOptionClick = (index: number) => {
     setSelectedOption(index);

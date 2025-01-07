@@ -84,7 +84,11 @@ const JavaMCQs: React.FC = () => {
           {/* MCQ Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {getMCQs().map(mcq => (
-              <McqCard key={mcq.id} {...mcq} />
+              <McqCard
+                key={`${selectedCategory}-${mcq.id}`}
+                {...mcq}
+                sectionCategory={selectedCategory}
+              />
             ))}
           </div>
         </div>
