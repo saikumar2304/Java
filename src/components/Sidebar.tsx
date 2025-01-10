@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronRight, Code2 } from 'lucide-react';
 
 interface Section {
   title: string;
@@ -160,6 +160,11 @@ const sections: Section[] = [
       { title: 'File Streams', path: '/java-files/file-streams' },
     ],
   },
+  {
+    title: 'Flow Control',
+    path: '/hands-on/flow-control',
+    icon: <Code2 className="h-5 w-5" />
+  }
 ];
 
 const Sidebar: React.FC = () => {

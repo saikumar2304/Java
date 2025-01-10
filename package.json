@@ -18,6 +18,8 @@
     "@codemirror/view": "^6.23.1",
     "@monaco-editor/react": "^4.6.0",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@uiw/codemirror-theme-vscode": "^4.23.7",
+    "@uiw/react-codemirror": "^4.23.7",
     "codemirror": "^6.0.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
