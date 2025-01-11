@@ -155,167 +155,163 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-900">
         <Navbar />
-        <div className="flex">
-          <Sidebar />
-          <div className="flex-1 ml-64">
-            <div className="pt-16">
-              <main className="container mx-auto px-4 py-8">
-                <Routes>
-                  {/* Main Routes */}
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/playground" element={<Playground />} />
-                  <Route path="/java-mcqs" element={<JavaMCQs />} />
-                  <Route path="/hands-on" element={<HandsOnPage />} />
-                  <Route path="/hands-on/basics" element={<HandsOnBasics />} />
-                  <Route path="/hands-on/basics/:exerciseId" element={<BasicsPrintHello />} />
+        <Sidebar />
+        <div className="pl-64 pt-16">
+          <main className="p-8">
+            <Routes>
+              {/* Main Routes */}
+              <Route path="/" element={<HomePage />} />
+              <Route path="/playground" element={<Playground />} />
+              <Route path="/java-mcqs" element={<JavaMCQs />} />
+              <Route path="/hands-on" element={<HandsOnPage />} />
+              <Route path="/hands-on/basics" element={<HandsOnBasics />} />
+              <Route path="/hands-on/basics/:exerciseId" element={<BasicsPrintHello />} />
 
-                  {/* Java Basics Routes */}
-                  <Route path="/java-basics/introduction" element={<Introduction />} />
-                  <Route path="/java-basics/hello-world" element={<HelloWorld />} />
-                  <Route path="/java-basics/java-syntax" element={<JavaSyntax />} />
-                  <Route path="/java-basics/identifiers" element={<Identifiers />} />
-                  <Route path="/java-basics/keywords" element={<Keywords />} />
-                  <Route path="/java-basics/data-types" element={<DataTypes />} />
-                  <Route path="/java-basics/variables" element={<Variables />} />
-                  <Route path="/java-basics/variable-scope" element={<VariableScope />} />
-                  <Route path="/java-basics/operators" element={<Operators />} />
-                  <Route path="/java-basics/user-input" element={<UserInput />} />
-                  <Route path="/java-basics/type-casting" element={<TypeCasting />} />
-                  <Route path="/java-basics/comments" element={<Comments />} />
+              {/* Java Basics Routes */}
+              <Route path="/java-basics/introduction" element={<Introduction />} />
+              <Route path="/java-basics/hello-world" element={<HelloWorld />} />
+              <Route path="/java-basics/java-syntax" element={<JavaSyntax />} />
+              <Route path="/java-basics/identifiers" element={<Identifiers />} />
+              <Route path="/java-basics/keywords" element={<Keywords />} />
+              <Route path="/java-basics/data-types" element={<DataTypes />} />
+              <Route path="/java-basics/variables" element={<Variables />} />
+              <Route path="/java-basics/variable-scope" element={<VariableScope />} />
+              <Route path="/java-basics/operators" element={<Operators />} />
+              <Route path="/java-basics/user-input" element={<UserInput />} />
+              <Route path="/java-basics/type-casting" element={<TypeCasting />} />
+              <Route path="/java-basics/comments" element={<Comments />} />
 
-                  {/* Flow Control Routes */}
-                  <Route path="/java-flow-control/if-statement" element={<IfStatement />} />
-                  <Route path="/java-flow-control/if-else" element={<IfElse />} />
-                  <Route path="/java-flow-control/if-else-if" element={<IfElseIf />} />
-                  <Route path="/java-flow-control/switch" element={<Switch />} />
-                  <Route path="/java-flow-control/for-loop" element={<ForLoop />} />
-                  <Route path="/java-flow-control/while-loop" element={<WhileLoop />} />
-                  <Route path="/java-flow-control/do-while" element={<DoWhile />} />
-                  <Route path="/java-flow-control/break" element={<Break />} />
-                  <Route path="/java-flow-control/continue" element={<Continue />} />
-                  <Route path="/java-flow-control/return" element={<Return />} />
-                  <Route path="/java-flow-control/enhanced-for" element={<EnhancedFor />} />
+              {/* Flow Control Routes */}
+              <Route path="/java-flow-control/if-statement" element={<IfStatement />} />
+              <Route path="/java-flow-control/if-else" element={<IfElse />} />
+              <Route path="/java-flow-control/if-else-if" element={<IfElseIf />} />
+              <Route path="/java-flow-control/switch" element={<Switch />} />
+              <Route path="/java-flow-control/for-loop" element={<ForLoop />} />
+              <Route path="/java-flow-control/while-loop" element={<WhileLoop />} />
+              <Route path="/java-flow-control/do-while" element={<DoWhile />} />
+              <Route path="/java-flow-control/break" element={<Break />} />
+              <Route path="/java-flow-control/continue" element={<Continue />} />
+              <Route path="/java-flow-control/return" element={<Return />} />
+              <Route path="/java-flow-control/enhanced-for" element={<EnhancedFor />} />
 
-                  {/* Methods Routes */}
-                  <Route path="/java-methods/intro" element={<MethodIntro />} />
-                  <Route path="/java-methods/declaration" element={<MethodDeclaration />} />
-                  <Route path="/java-methods/parameters" element={<MethodParameters />} />
-                  <Route path="/java-methods/calling" element={<MethodCalling />} />
-                  <Route path="/java-methods/static-vs-instance" element={<StaticVsInstance />} />
-                  <Route path="/java-methods/access-modifiers" element={<MethodAccessModifiers />} />
-                  <Route path="/java-methods/command-line-args" element={<CommandLineArgs />} />
-                  <Route path="/java-methods/varargs" element={<Varargs />} />
-                  <Route path="/java-methods/overloading" element={<MethodOverloading />} />
-                  <Route path="/java-methods/recursion" element={<Recursion />} />
-                  <Route path="/java-methods/pass-by-value" element={<PassByValue />} />
+              {/* Methods Routes */}
+              <Route path="/java-methods/intro" element={<MethodIntro />} />
+              <Route path="/java-methods/declaration" element={<MethodDeclaration />} />
+              <Route path="/java-methods/parameters" element={<MethodParameters />} />
+              <Route path="/java-methods/calling" element={<MethodCalling />} />
+              <Route path="/java-methods/static-vs-instance" element={<StaticVsInstance />} />
+              <Route path="/java-methods/access-modifiers" element={<MethodAccessModifiers />} />
+              <Route path="/java-methods/command-line-args" element={<CommandLineArgs />} />
+              <Route path="/java-methods/varargs" element={<Varargs />} />
+              <Route path="/java-methods/overloading" element={<MethodOverloading />} />
+              <Route path="/java-methods/recursion" element={<Recursion />} />
+              <Route path="/java-methods/pass-by-value" element={<PassByValue />} />
 
-                  {/* Arrays Routes */}
-                  <Route path="/java-arrays/introduction" element={<ArrayIntro />} />
-                  <Route path="/java-arrays/declaration" element={<ArrayDeclaration />} />
-                  <Route path="/java-arrays/initialization" element={<ArrayInitialization />} />
-                  <Route path="/java-arrays/access" element={<ArrayAccess />} />
-                  <Route path="/java-arrays/multidimensional" element={<Multidimensional />} />
-                  <Route path="/java-arrays/jagged-arrays" element={<JaggedArrays />} />
-                  <Route path="/java-arrays/methods" element={<ArrayMethods />} />
-                  <Route path="/java-arrays/sorting" element={<ArraySorting />} />
-                  <Route path="/java-arrays/searching" element={<ArraySearching />} />
-                  <Route path="/java-arrays/copy" element={<ArrayCopy />} />
+              {/* Arrays Routes */}
+              <Route path="/java-arrays/introduction" element={<ArrayIntro />} />
+              <Route path="/java-arrays/declaration" element={<ArrayDeclaration />} />
+              <Route path="/java-arrays/initialization" element={<ArrayInitialization />} />
+              <Route path="/java-arrays/access" element={<ArrayAccess />} />
+              <Route path="/java-arrays/multidimensional" element={<Multidimensional />} />
+              <Route path="/java-arrays/jagged-arrays" element={<JaggedArrays />} />
+              <Route path="/java-arrays/methods" element={<ArrayMethods />} />
+              <Route path="/java-arrays/sorting" element={<ArraySorting />} />
+              <Route path="/java-arrays/searching" element={<ArraySearching />} />
+              <Route path="/java-arrays/copy" element={<ArrayCopy />} />
 
-                  {/* Strings Routes */}
-                  <Route path="/java-strings/introduction" element={<StringIntro />} />
-                  <Route path="/java-strings/creation" element={<StringCreation />} />
-                  <Route path="/java-strings/methods" element={<StringMethods />} />
-                  <Route path="/java-strings/string-pool" element={<StringPool />} />
-                  <Route path="/java-strings/immutability" element={<StringImmutability />} />
-                  <Route path="/java-strings/comparison" element={<StringComparison />} />
-                  <Route path="/java-strings/string-buffer" element={<StringBuffer />} />
-                  <Route path="/java-strings/string-builder" element={<StringBuilder />} />
-                  <Route path="/java-strings/formatting" element={<StringFormatting />} />
-                  <Route path="/java-strings/regex" element={<RegularExpression />} />
+              {/* Strings Routes */}
+              <Route path="/java-strings/introduction" element={<StringIntro />} />
+              <Route path="/java-strings/creation" element={<StringCreation />} />
+              <Route path="/java-strings/methods" element={<StringMethods />} />
+              <Route path="/java-strings/string-pool" element={<StringPool />} />
+              <Route path="/java-strings/immutability" element={<StringImmutability />} />
+              <Route path="/java-strings/comparison" element={<StringComparison />} />
+              <Route path="/java-strings/string-buffer" element={<StringBuffer />} />
+              <Route path="/java-strings/string-builder" element={<StringBuilder />} />
+              <Route path="/java-strings/formatting" element={<StringFormatting />} />
+              <Route path="/java-strings/regex" element={<RegularExpression />} />
 
-                  {/* OOP Routes */}
-                  <Route path="/java-oop/introduction" element={<OOPIntro />} />
-                  <Route path="/java-oop/classes-objects" element={<ClassesObjects />} />
-                  <Route path="/java-oop/constructors" element={<Constructors />} />
-                  <Route path="/java-oop/access-modifiers" element={<AccessModifiers />} />
-                  <Route path="/java-oop/encapsulation" element={<Encapsulation />} />
-                  <Route path="/java-oop/inheritance" element={<Inheritance />} />
-                  <Route path="/java-oop/polymorphism" element={<Polymorphism />} />
-                  <Route path="/java-oop/abstraction" element={<Abstraction />} />
-                  <Route path="/java-oop/interfaces" element={<Interfaces />} />
-                  <Route path="/java-oop/abstract-classes" element={<AbstractClasses />} />
-                  <Route path="/java-oop/static-members" element={<StaticMembers />} />
-                  <Route path="/java-oop/final-keyword" element={<FinalKeyword />} />
-                  <Route path="/java-oop/package" element={<Package />} />
-                  <Route path="/java-oop/object-class" element={<ObjectClass />} />
+              {/* OOP Routes */}
+              <Route path="/java-oop/introduction" element={<OOPIntro />} />
+              <Route path="/java-oop/classes-objects" element={<ClassesObjects />} />
+              <Route path="/java-oop/constructors" element={<Constructors />} />
+              <Route path="/java-oop/access-modifiers" element={<AccessModifiers />} />
+              <Route path="/java-oop/encapsulation" element={<Encapsulation />} />
+              <Route path="/java-oop/inheritance" element={<Inheritance />} />
+              <Route path="/java-oop/polymorphism" element={<Polymorphism />} />
+              <Route path="/java-oop/abstraction" element={<Abstraction />} />
+              <Route path="/java-oop/interfaces" element={<Interfaces />} />
+              <Route path="/java-oop/abstract-classes" element={<AbstractClasses />} />
+              <Route path="/java-oop/static-members" element={<StaticMembers />} />
+              <Route path="/java-oop/final-keyword" element={<FinalKeyword />} />
+              <Route path="/java-oop/package" element={<Package />} />
+              <Route path="/java-oop/object-class" element={<ObjectClass />} />
 
-                  {/* Exception Handling Routes */}
-                  <Route path="/java-exceptions/introduction" element={<ExceptionIntro />} />
-                  <Route path="/java-exceptions/try-catch" element={<TryCatch />} />
-                  <Route path="/java-exceptions/multiple-catch" element={<MultipleCatch />} />
-                  <Route path="/java-exceptions/throw-throws" element={<ThrowThrows />} />
-                  <Route path="/java-exceptions/finally" element={<FinallyBlock />} />
-                  <Route path="/java-exceptions/custom-exceptions" element={<CustomExceptions />} />
-                  <Route path="/java-exceptions/types" element={<ExceptionTypes />} />
+              {/* Exception Handling Routes */}
+              <Route path="/java-exceptions/introduction" element={<ExceptionIntro />} />
+              <Route path="/java-exceptions/try-catch" element={<TryCatch />} />
+              <Route path="/java-exceptions/multiple-catch" element={<MultipleCatch />} />
+              <Route path="/java-exceptions/throw-throws" element={<ThrowThrows />} />
+              <Route path="/java-exceptions/finally" element={<FinallyBlock />} />
+              <Route path="/java-exceptions/custom-exceptions" element={<CustomExceptions />} />
+              <Route path="/java-exceptions/types" element={<ExceptionTypes />} />
 
-                  {/* Collections Routes */}
-                  <Route path="/java-collections/introduction" element={<CollectionIntro />} />
-                  <Route path="/java-collections/collection-interface" element={<CollectionInterface />} />
-                  <Route path="/java-collections/list-interface" element={<ListInterface />} />
-                  <Route path="/java-collections/array-list" element={<ArrayList />} />
-                  <Route path="/java-collections/linked-list" element={<LinkedList />} />
-                  <Route path="/java-collections/vector" element={<Vector />} />
-                  <Route path="/java-collections/stack" element={<Stack />} />
-                  <Route path="/java-collections/queue-interface" element={<QueueInterface />} />
-                  <Route path="/java-collections/priority-queue" element={<PriorityQueue />} />
-                  <Route path="/java-collections/deque-interface" element={<DequeInterface />} />
-                  <Route path="/java-collections/set-interface" element={<SetInterface />} />
-                  <Route path="/java-collections/hashset" element={<HashSet />} />
-                  <Route path="/java-collections/linked-hashset" element={<LinkedHashSet />} />
-                  <Route path="/java-collections/treeset" element={<TreeSet />} />
-                  <Route path="/java-collections/map-interface" element={<MapInterface />} />
-                  <Route path="/java-collections/hashmap" element={<HashMap />} />
-                  <Route path="/java-collections/linked-hashmap" element={<LinkedHashMap />} />
-                  <Route path="/java-collections/treemap" element={<TreeMap />} />
-                  <Route path="/java-collections/hashtable" element={<Hashtable />} />
-                  <Route path="/java-collections/comparable" element={<Comparable />} />
-                  <Route path="/java-collections/comparator" element={<Comparator />} />
-                  <Route path="/java-collections/iterator" element={<Iterator />} />
+              {/* Collections Routes */}
+              <Route path="/java-collections/introduction" element={<CollectionIntro />} />
+              <Route path="/java-collections/collection-interface" element={<CollectionInterface />} />
+              <Route path="/java-collections/list-interface" element={<ListInterface />} />
+              <Route path="/java-collections/array-list" element={<ArrayList />} />
+              <Route path="/java-collections/linked-list" element={<LinkedList />} />
+              <Route path="/java-collections/vector" element={<Vector />} />
+              <Route path="/java-collections/stack" element={<Stack />} />
+              <Route path="/java-collections/queue-interface" element={<QueueInterface />} />
+              <Route path="/java-collections/priority-queue" element={<PriorityQueue />} />
+              <Route path="/java-collections/deque-interface" element={<DequeInterface />} />
+              <Route path="/java-collections/set-interface" element={<SetInterface />} />
+              <Route path="/java-collections/hashset" element={<HashSet />} />
+              <Route path="/java-collections/linked-hashset" element={<LinkedHashSet />} />
+              <Route path="/java-collections/treeset" element={<TreeSet />} />
+              <Route path="/java-collections/map-interface" element={<MapInterface />} />
+              <Route path="/java-collections/hashmap" element={<HashMap />} />
+              <Route path="/java-collections/linked-hashmap" element={<LinkedHashMap />} />
+              <Route path="/java-collections/treemap" element={<TreeMap />} />
+              <Route path="/java-collections/hashtable" element={<Hashtable />} />
+              <Route path="/java-collections/comparable" element={<Comparable />} />
+              <Route path="/java-collections/comparator" element={<Comparator />} />
+              <Route path="/java-collections/iterator" element={<Iterator />} />
 
-                  {/* File Handling Routes */}
-                  <Route path="/java-files/introduction" element={<FileIntro />} />
-                  <Route path="/java-files/file-class" element={<FileClass />} />
-                  <Route path="/java-files/file-reader" element={<FileReader />} />
-                  <Route path="/java-files/file-writer" element={<FileWriter />} />
-                  <Route path="/java-files/buffered-reader" element={<BufferedReader />} />
-                  <Route path="/java-files/buffered-writer" element={<BufferedWriter />} />
-                  <Route path="/java-files/file-streams" element={<FileStreams />} />
+              {/* File Handling Routes */}
+              <Route path="/java-files/introduction" element={<FileIntro />} />
+              <Route path="/java-files/file-class" element={<FileClass />} />
+              <Route path="/java-files/file-reader" element={<FileReader />} />
+              <Route path="/java-files/file-writer" element={<FileWriter />} />
+              <Route path="/java-files/buffered-reader" element={<BufferedReader />} />
+              <Route path="/java-files/buffered-writer" element={<BufferedWriter />} />
+              <Route path="/java-files/file-streams" element={<FileStreams />} />
 
-                  {/* Hands-on Exercises */}
-                  <Route path="/hands-on/arrays" element={<ArraysExercises />} />
-                  <Route path="/hands-on/arrays/:exerciseId" element={<ArrayExercise />} />
-                  <Route path="/hands-on/strings" element={<StringsExercises />} />
-                  <Route path="/hands-on/strings/:exerciseId" element={<StringExercise />} />
-                  <Route path="/hands-on/collections" element={<CollectionsExercises />} />
-                  <Route path="/hands-on/collections/:exerciseId" element={<CollectionExercise />} />
-                  <Route path="/hands-on/flow-control" element={<FlowControl />} />
-                  <Route path="/hands-on/flow-control/:exerciseId" element={<FlowControlExercise />} />
-                  <Route path="/hands-on/methods" element={<MethodsExercises />} />
-                  <Route path="/hands-on/methods/:exerciseId" element={<MethodExercise />} />
-                  <Route path="/hands-on/oop" element={<OOPExercises />} />
-                  <Route path="/hands-on/oop/:exerciseId" element={<OOPExercise />} />
-                  <Route path="/hands-on/exceptions" element={<ExceptionExercises />} />
-                  <Route path="/hands-on/exceptions/:exerciseId" element={<ExceptionExercise />} />
-                  <Route path="/hands-on/files" element={<FileExercises />} />
-                  <Route path="/hands-on/files/:exerciseId" element={<FileExercise />} />
+              {/* Hands-on Exercises */}
+              <Route path="/hands-on/arrays" element={<ArraysExercises />} />
+              <Route path="/hands-on/arrays/:exerciseId" element={<ArrayExercise />} />
+              <Route path="/hands-on/strings" element={<StringsExercises />} />
+              <Route path="/hands-on/strings/:exerciseId" element={<StringExercise />} />
+              <Route path="/hands-on/collections" element={<CollectionsExercises />} />
+              <Route path="/hands-on/collections/:exerciseId" element={<CollectionExercise />} />
+              <Route path="/hands-on/flow-control" element={<FlowControl />} />
+              <Route path="/hands-on/flow-control/:exerciseId" element={<FlowControlExercise />} />
+              <Route path="/hands-on/methods" element={<MethodsExercises />} />
+              <Route path="/hands-on/methods/:exerciseId" element={<MethodExercise />} />
+              <Route path="/hands-on/oop" element={<OOPExercises />} />
+              <Route path="/hands-on/oop/:exerciseId" element={<OOPExercise />} />
+              <Route path="/hands-on/exceptions" element={<ExceptionExercises />} />
+              <Route path="/hands-on/exceptions/:exerciseId" element={<ExceptionExercise />} />
+              <Route path="/hands-on/files" element={<FileExercises />} />
+              <Route path="/hands-on/files/:exerciseId" element={<FileExercise />} />
 
-                  {/* Catch all route */}
-                  <Route path="*" element={<Navigate to="/" />} />
-                </Routes>
-              </main>
-              <Footer />
-            </div>
-          </div>
+              {/* Catch all route */}
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </main>
+          <Footer />
         </div>
       </div>
     </Router>

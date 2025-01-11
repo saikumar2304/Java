@@ -394,11 +394,11 @@ export const introductionMCQs = [
     question: "What's the output?\n```java\nSystem.out.println(10 + 20 + \"30\" + 40 + 50);\n```",
     options: [
       { text: "150", isCorrect: false },
-      { text: "304050", isCorrect: true },
+      { text: "30304050", isCorrect: true },
       { text: "102030", isCorrect: false },
       { text: "60304050", isCorrect: false }
     ],
-    explanation: "Left to right: 10+20=30, then \"30\"+\"30\"=\"3030\", then \"3030\"+40=\"303040\", finally \"303040\"+50=\"304050\"",
+    explanation: "Left to right: 10+20=30, then \"30\"+\"30\"=\"3030\", then \"3030\"+40=\"303040\", finally \"303040\"+50=\"30304050\"",
     difficulty: 'Medium',
     category: 'Operators',
     hasCode: true
@@ -548,8 +548,8 @@ export const introductionMCQs = [
     question: "What's the output?\n```java\npublic class Test {\n    public static void main(String[] args) {\n        int i = 0;\n        System.out.println(i++ + i++ + ++i + ++i + i++);\n    }\n}\n```",
     options: [
       { text: "10", isCorrect: false },
-      { text: "12", isCorrect: false },
-      { text: "8", isCorrect: true },
+      { text: "12", isCorrect: true },
+      { text: "8", isCorrect: false },
       { text: "15", isCorrect: false }
     ],
     explanation: "Let's break it down:\n1. i++ uses 0, i becomes 1\n2. i++ uses 1, i becomes 2\n3. ++i makes i 3, uses 3\n4. ++i makes i 4, uses 4\n5. i++ uses 4, i becomes 5\nSo: 0 + 1 + 3 + 4 + 4 = 12",
@@ -827,12 +827,12 @@ export const introductionMCQs = [
         id: 61,
         question: "What's the output of this code?\n```java\nint x = 10;\nx += ++x + x++;\nSystem.out.println(x);\n```",
         options: [
-          { text: "33", isCorrect: true },
-          { text: "32", isCorrect: false },
+          { text: "33", isCorrect: false },
+          { text: "32", isCorrect: true },
           { text: "31", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`++x` increments `x` to 11 and uses it, `x++` uses 11 and increments to 12. So `x = 10 + 11 + 11 = 33`.",
+        explanation: "`++x` increments `x` to 11 and uses it, `x++` uses 11 and increments to 12. So `x = 10 + 11 + 11 = 32`.",
         difficulty: 'Medium',
         category: 'Operators',
         hasCode: true
@@ -855,12 +855,12 @@ export const introductionMCQs = [
         id: 63,
         question: "What happens when you run this code?\n```java\nint x = 5;\nSystem.out.println(x++ * ++x);\n```",
         options: [
-          { text: "35", isCorrect: false },
-          { text: "42", isCorrect: true },
+          { text: "35", isCorrect: true },
+          { text: "42", isCorrect: false },
           { text: "25", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`x++` uses 5, then increments to 6. `++x` increments `x` to 7 and uses it. So, `5 * 7 = 42`.",
+        explanation: "`x++` uses 5, then increments to 6. `++x` increments `x` to 7 and uses it. So, `5 * 7 = 35`.",
         difficulty: 'Medium',
         category: 'Operators',
         hasCode: true
@@ -967,12 +967,12 @@ export const introductionMCQs = [
         id: 71,
         question: "What happens in this code?\n```java\nint x = 10;\nx = x++ + --x + x--;\nSystem.out.println(x);\n```",
         options: [
-          { text: "29", isCorrect: true },
+          { text: "29", isCorrect: false },
           { text: "28", isCorrect: false },
-          { text: "30", isCorrect: false },
+          { text: "30", isCorrect: true },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`x++` uses 10, then increments to 11. `--x` decrements `x` to 10, and `x--` uses 10 then decrements to 9. So, `10 + 10 + 10 = 29`.",
+        explanation: "`x++` uses 10, then increments to 11. `--x` decrements `x` to 10, and `x--` uses 10 then decrements to 9. So, `10 + 10 + 10 = 30`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -981,12 +981,12 @@ export const introductionMCQs = [
         id: 72,
         question: "What happens in this code?\n```java\nint a = 5;\nint b = a-- - --a;\nSystem.out.println(b);\n```",
         options: [
-          { text: "1", isCorrect: true },
+          { text: "2", isCorrect: true },
           { text: "0", isCorrect: false },
           { text: "-1", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`a--` uses 5, then decrements `a` to 4. `--a` decrements `a` to 3 and uses it. So, `b = 5 - 3 = 1`.",
+        explanation: "`a--` uses 5, then decrements `a` to 4. `--a` decrements `a` to 3 and uses it. So, `b = 5 - 3 = 2`.",
         difficulty: 'Medium',
         category: 'Operators',
         hasCode: true
@@ -1037,8 +1037,8 @@ export const introductionMCQs = [
         id: 76,
         question: "What happens here?\n```java\nint x = 1;\nx = x++ + x + ++x;\nSystem.out.println(x);\n```",
         options: [
-          { text: "5", isCorrect: true },
-          { text: "6", isCorrect: false },
+          { text: "5", isCorrect: false },
+          { text: "6", isCorrect: true },
           { text: "7", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
@@ -1065,8 +1065,8 @@ export const introductionMCQs = [
         id: 78,
         question: "What happens in this code?\n```java\nint x = 0;\nx = x++ - --x;\nSystem.out.println(x);\n```",
         options: [
-          { text: "-1", isCorrect: true },
-          { text: "0", isCorrect: false },
+          { text: "-1", isCorrect: false },
+          { text: "0", isCorrect: true },
           { text: "1", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
@@ -1093,12 +1093,12 @@ export const introductionMCQs = [
         id: 80,
         question: "What happens in this code?\n```java\nint x = 1;\nx = x + ++x * x++;\nSystem.out.println(x);\n```",
         options: [
-          { text: "5", isCorrect: false },
-          { text: "7", isCorrect: true },
+          { text: "5", isCorrect: true },
+          { text: "7", isCorrect: false },
           { text: "6", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`++x` increments `x` to 2 and uses it. `x++` uses 2, then increments to 3. So, `x = 1 + 2 * 2 = 7`.",
+        explanation: "`++x` increments `x` to 2 and uses it. `x++` uses 2, then increments to 3. So, `x = 1 + 2 * 2 = 5`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1107,12 +1107,12 @@ export const introductionMCQs = [
         id: 81,
         question: "What happens in this code?\n```java\nint a = 10;\na += a++ + ++a - --a;\nSystem.out.println(a);\n```",
         options: [
-          { text: "31", isCorrect: true },
-          { text: "32", isCorrect: false },
-          { text: "33", isCorrect: false },
+          { text: "21", isCorrect: true },
+          { text: "22", isCorrect: false },
+          { text: "23", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`a++` uses 10, then increments to 11. `++a` increments `a` to 12, `--a` decrements it back to 11. So, `a += 10 + 12 - 11 = 31`.",
+        explanation: "`a++` uses 10, then increments to 11. `++a` increments `a` to 12, `--a` decrements it back to 11. So, `a += 10 + 12 - 11 = 21`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1121,12 +1121,12 @@ export const introductionMCQs = [
         id: 82,
         question: "What happens here?\n```java\nint x = 5;\nx = x++ * x + ++x - x--;\nSystem.out.println(x);\n```",
         options: [
-          { text: "35", isCorrect: true },
-          { text: "36", isCorrect: false },
-          { text: "37", isCorrect: false },
+          { text: "30", isCorrect: true },
+          { text: "31", isCorrect: false },
+          { text: "29", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`x++` uses 5, then increments to 6. `++x` increments to 7 and uses it. `x--` uses 7, then decrements to 6. So `x = 5 * 6 + 7 - 7 = 35`.",
+        explanation: "`x++` uses 5, then increments to 6. `++x` increments to 7 and uses it. `x--` uses 7, then decrements to 6. So `x = 5 * 6 + 7 - 7 = 30`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1205,12 +1205,12 @@ export const introductionMCQs = [
         id: 88,
         question: "What happens in this code?\n```java\nint x = 1;\nx += (x++ + ++x) * (--x - x--);\nSystem.out.println(x);\n```",
         options: [
-          { text: "-1", isCorrect: true },
+          { text: "-1", isCorrect: false },
           { text: "0", isCorrect: false },
-          { text: "1", isCorrect: false },
+          { text: "1", isCorrect: true },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "Break it down: `x++` uses 1, `++x` increments to 3, `--x` decrements to 2, `x--` uses 2. Final computation gives `-1`.",
+        explanation: "Break it down: `x++` uses 1, `++x` increments to 3, `--x` decrements to 2, `x--` uses 2. Final computation gives `1`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1233,12 +1233,12 @@ export const introductionMCQs = [
         id: 90,
         question: "What happens here?\n```java\nint a = 5;\na = a++ * a-- / ++a;\nSystem.out.println(a);\n```",
         options: [
-          { text: "2", isCorrect: true },
+          { text: "2", isCorrect: false },
           { text: "1", isCorrect: false },
-          { text: "5", isCorrect: false },
+          { text: "5", isCorrect: true },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`a++` uses 5, then increments to 6. `a--` uses 6, then decrements to 5. `++a` increments to 6. The computation is `5 * 6 / 6 = 2`.",
+        explanation: "`a++` uses 5, then increments to 6. `a--` uses 6, then decrements to 5. `++a` increments to 6. The computation is `5 * 6 / 6 = 5`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1275,12 +1275,12 @@ export const introductionMCQs = [
         id: 93,
         question: "What happens in this code?\n```java\nint x = 5;\nx *= x++ + ++x;\nSystem.out.println(x);\n```",
         options: [
-          { text: "35", isCorrect: true },
+          { text: "60", isCorrect: true },
           { text: "25", isCorrect: false },
           { text: "30", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`x++` uses 5, then increments to 6. `++x` increments `x` to 7. The calculation becomes `5 * (5 + 7) = 35`.",
+        explanation: "`x++` uses 5, then increments to 6. `++x` increments `x` to 7. The calculation becomes `5 * (5 + 7) = 60`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1289,12 +1289,12 @@ export const introductionMCQs = [
         id: 94,
         question: "What happens in this code?\n```java\nint a = 2, b = 3;\na += b *= a += 1;\nSystem.out.println(a);\n```",
         options: [
-          { text: "14", isCorrect: true },
+          { text: "14", isCorrect: false },
           { text: "9", isCorrect: false },
-          { text: "11", isCorrect: false },
+          { text: "11", isCorrect: true },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "Breakdown: `a += 1` makes `a = 3`. Then `b *= 3` makes `b = 9`. Finally, `a += 9` results in `a = 14`.",
+        explanation: "Breakdown: `a += 1` makes `a = 3`. Then `b *= 3` makes `b = 9`. Finally, `a += 9` results in `a = 11`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1303,12 +1303,12 @@ export const introductionMCQs = [
         id: 95,
         question: "What happens in this code?\n```java\nint x = 1;\nint y = 2;\nx = x++ + y-- - --x + ++y;\nSystem.out.println(x);\n```",
         options: [
-          { text: "3", isCorrect: true },
-          { text: "4", isCorrect: false },
+          { text: "3", isCorrect: false },
+          { text: "4", isCorrect: true },
           { text: "5", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`x++` uses 1, `y--` uses 2, then decrements to 1. `--x` decrements to 1, `++y` increments to 2. So `x = 1 + 2 - 1 + 2 = 3`.",
+        explanation: "`x++` uses 1, `y--` uses 2, then decrements to 1. `--x` decrements to 1, `++y` increments to 2. So `x = 1 + 2 - 1 + 2 = 4`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1317,12 +1317,12 @@ export const introductionMCQs = [
         id: 96,
         question: "What happens when this code runs?\n```java\nint a = 5;\nint b = a++ + a-- - --a + ++a;\nSystem.out.println(b);\n```",
         options: [
-          { text: "6", isCorrect: true },
-          { text: "5", isCorrect: false },
-          { text: "7", isCorrect: false },
+          { text: "11", isCorrect: false },
+          { text: "12", isCorrect: true },
+          { text: "10", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`a++` uses 5, then increments to 6. `a--` uses 6, then decrements to 5. `--a` decrements to 4, `++a` increments to 5. Result: `5 + 6 - 4 + 5 = 6`.",
+        explanation: "`a++` uses 5, then increments to 6. `a--` uses 6, then decrements to 5. `--a` decrements to 4, `++a` increments to 5. Result: `5 + 6 - 4 + 5 = 12`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1331,12 +1331,12 @@ export const introductionMCQs = [
         id: 97,
         question: "What happens in this code?\n```java\nint x = 10;\nx = x++ / 2 + x-- * 2;\nSystem.out.println(x);\n```",
         options: [
-          { text: "31", isCorrect: true },
+          { text: "27", isCorrect: true },
           { text: "30", isCorrect: false },
           { text: "32", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`x++` uses 10, then increments to 11. `x--` uses 11, then decrements to 10. So `x = 10 / 2 + 11 * 2 = 31`.",
+        explanation: "`x++` uses 10, then increments to 11. `x--` uses 11, then decrements to 10. So `x = 10 / 2 + 11 * 2 = 27`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1345,12 +1345,12 @@ export const introductionMCQs = [
         id: 98,
         question: "What happens when this code runs?\n```java\nint a = 5;\nint b = 10;\na = b-- / a++ + ++b * --a;\nSystem.out.println(a);\n```",
         options: [
-          { text: "13", isCorrect: true },
-          { text: "12", isCorrect: false },
-          { text: "15", isCorrect: false },
+          { text: "52", isCorrect: true },
+          { text: "50", isCorrect: false },
+          { text: "55", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`b--` uses 10, then decrements to 9. `a++` uses 5, then increments to 6. `++b` increments to 10. `--a` decrements to 5. Result: `10 / 5 + 10 * 5 = 13`.",
+        explanation: "`b--` uses 10, then decrements to 9. `a++` uses 5, then increments to 6. `++b` increments to 10. `--a` decrements to 5. Result: `10 / 5 + 10 * 5 = 52`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1359,12 +1359,12 @@ export const introductionMCQs = [
         id: 99,
         question: "What happens in this code?\n```java\nint x = 2;\nx += x * x++ + ++x;\nSystem.out.println(x);\n```",
         options: [
-          { text: "11", isCorrect: true },
+          { text: "11", isCorrect: false },
           { text: "12", isCorrect: false },
-          { text: "10", isCorrect: false },
+          { text: "10", isCorrect: true },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`x++` uses 2, then increments to 3. `++x` increments to 4. So `x += 2 * 2 + 4`, resulting in `x = 2 + 4 + 4 = 11`.",
+        explanation: "`x++` uses 2, then increments to 3. `++x` increments to 4. So `x += 2 * 2 + 4`, resulting in `x = 2 + 4 + 4 = 10`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
@@ -1373,12 +1373,12 @@ export const introductionMCQs = [
         id: 100,
         question: "What happens in this code?\n```java\nint a = 3;\na *= a++ + --a * ++a;\nSystem.out.println(a);\n```",
         options: [
-          { text: "21", isCorrect: true },
+          { text: "45", isCorrect: true },
           { text: "20", isCorrect: false },
           { text: "19", isCorrect: false },
           { text: "Compilation error", isCorrect: false }
         ],
-        explanation: "`a++` uses 3, then increments to 4. `--a` decrements to 3, `++a` increments to 4. So `a *= 3 + 3 * 4`, resulting in `a = 3 * (3 + 12) = 21`.",
+        explanation: "`a++` uses 3, then increments to 4. `--a` decrements to 3, `++a` increments to 4. So `a *= 3 + 3 * 4`, resulting in `a = 3 * (3 + 12) = 45`.",
         difficulty: 'Hard',
         category: 'Operators',
         hasCode: true
