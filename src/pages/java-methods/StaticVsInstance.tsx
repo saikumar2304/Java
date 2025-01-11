@@ -2,305 +2,181 @@ import React from 'react';
 import CodeBlock from '../../components/CodeBlock';
 
 const StaticVsInstance = () => {
-  const comparisonExample = `
-public class Calculator {
-    // Instance variable
-    private double result;
-
-    // Instance method - can access instance variables
-    public void add(double number) {
-        result += number;  // Modifies instance state
+  const staticExample = `
+// Static method example
+public class MathUtils {
+    // Static method
+    public static int add(int a, int b) {
+        return a + b;
     }
 
-    // Instance method - uses instance state
-    public double getResult() {
-        return result;
-    }
-
-    // Static method - can't access instance variables
-    public static double square(double number) {
-        return number * number;  // Only uses parameters
-    }
-
-    // Static method - utility function
-    public static boolean isPositive(double number) {
-        return number > 0;
-    }
-}
-
-// Usage:
-Calculator calc = new Calculator();
-calc.add(5);                         // Instance method call
-double result = calc.getResult();    // Instance method call
-double squared = Calculator.square(4);  // Static method call
-boolean isPos = Calculator.isPositive(result);  // Static method call`;
-
-  const instanceExample = `
-public class Student {
-    // Instance variables
-    private String name;
-    private int age;
-    private double gpa;
-
-    // Constructor
-    public Student(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    // Instance methods - can access and modify instance state
-    public void updateGPA(double newGPA) {
-        this.gpa = newGPA;
-        System.out.println(name + "'s GPA updated to: " + gpa);
-    }
-
-    public void celebrateBirthday() {
-        this.age++;
-        System.out.println(name + " is now " + age + " years old!");
-    }
-
-    public void displayInfo() {
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("GPA: " + gpa);
+    public static void main(String[] args) {
+        // Call static method without creating an object
+        int sum = MathUtils.add(10, 20);
+        System.out.println("Sum: " + sum); // Output: Sum: 30
     }
 }`;
 
-  const staticExample = `
-public class MathUtils {
-    // Static methods - utility functions
-    public static double calculateAverage(double[] numbers) {
-        double sum = 0;
-        for (double num : numbers) {
-            sum += num;
-        }
-        return numbers.length > 0 ? sum / numbers.length : 0;
+  const instanceExample = `
+// Instance method example
+public class Greeting {
+    // Instance method
+    public void sayHello(String name) {
+        System.out.println("Hello, " + name + "!");
     }
 
-    public static int findMax(int[] array) {
-        if (array == null || array.length == 0) {
-            throw new IllegalArgumentException("Array cannot be empty");
-        }
-        
-        int max = array[0];
-        for (int num : array) {
-            if (num > max) {
-                max = num;
-            }
-        }
-        return max;
+    public static void main(String[] args) {
+        // Create an object to call an instance method
+        Greeting greeting = new Greeting();
+        greeting.sayHello("Alice"); // Output: Hello, Alice!
     }
+}`;
 
-    public static boolean isPrime(int number) {
-        if (number <= 1) return false;
-        for (int i = 2; i <= Math.sqrt(number); i++) {
-            if (number % i == 0) return false;
-        }
-        return true;
-    }
-}
-
-// Usage:
-double[] grades = {85.5, 92.0, 76.5, 88.0};
-double avg = MathUtils.calculateAverage(grades);
-int[] numbers = {5, 2, 9, 1, 7};
-int max = MathUtils.findMax(numbers);
-boolean isPrime = MathUtils.isPrime(17);`;
-
-  const dryRunExample = `
+  const combinedExample = `
+// Static vs Instance example
 public class Counter {
-    // Instance variable
-    private int count;
-    
-    // Static variable
-    private static int totalInstances = 0;
-    
-    // Constructor
-    public Counter() {
-        count = 0;
-        totalInstances++;  // Increment static counter
+    // Static variable (shared across all instances)
+    private static int globalCount = 0;
+
+    // Instance variable (unique for each object)
+    private int instanceCount = 0;
+
+    // Static method
+    public static int getGlobalCount() {
+        return globalCount;
     }
-    
+
     // Instance method
     public void increment() {
-        count++;
+        globalCount++;
+        instanceCount++;
     }
-    
-    // Static method
-    public static int getTotalInstances() {
-        return totalInstances;
+
+    // Getter for instance count
+    public int getInstanceCount() {
+        return instanceCount;
     }
-}
 
-// Dry Run:
-Counter c1 = new Counter();  // totalInstances = 1
-Counter c2 = new Counter();  // totalInstances = 2
+    public static void main(String[] args) {
+        Counter c1 = new Counter();
+        Counter c2 = new Counter();
 
-c1.increment();  // c1.count = 1
-c1.increment();  // c1.count = 2
-c2.increment();  // c2.count = 1
+        c1.increment();
+        c1.increment();
+        c2.increment();
 
-int total = Counter.getTotalInstances();  // total = 2`;
+        System.out.println("Global Count: " + Counter.getGlobalCount()); // Output: 3
+        System.out.println("c1 Instance Count: " + c1.getInstanceCount()); // Output: 2
+        System.out.println("c2 Instance Count: " + c2.getInstanceCount()); // Output: 1
+    }
+}`;
+
+  const visualRepresentation = `
+1. **Static Method**:
+   - Belongs to the class.
+   - Can be called without creating an object.
+   - Example: \`ClassName.methodName();\`
+
+2. **Instance Method**:
+   - Belongs to an object.
+   - Requires an object of the class to call.
+   - Example:
+     \`\`\`java
+     ClassName obj = new ClassName();
+     obj.methodName();
+     \`\`\`
+
+3. **Static Variable**:
+   - Shared across all instances of the class.
+   - Example: \`ClassName.staticVariable;\`
+
+4. **Instance Variable**:
+   - Unique to each object.
+   - Accessed through the object.
+   - Example: \`obj.instanceVariable;\``;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Static vs Instance Methods in Java
-              </h1>
-              <p className="text-gray-300">
-                Java provides two types of methods: static (class) methods and instance methods. Understanding 
-                the differences between them is crucial for proper object-oriented programming and code organization.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Static vs Instance in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Understanding the difference between static and instance members is crucial in Java. Static members belong to the class, while instance members belong to individual objects.
+        </p>
+      </header>
 
-            {/* Comparison Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Direct Comparison
-              </h2>
-              <CodeBlock code={comparisonExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  This example shows how static and instance methods differ in their access to class members 
-                  and how they are called.
-                </p>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Static Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Static Methods</h2>
+          <CodeBlock code={staticExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Static methods are associated with the class itself and can be called without creating an instance of the class.
+          </p>
+        </section>
 
-            {/* Instance Methods Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Instance Methods
-              </h2>
-              <CodeBlock code={instanceExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Instance methods can access and modify object state through instance variables.
-                </p>
-              </div>
-            </div>
+        {/* Instance Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Instance Methods</h2>
+          <CodeBlock code={instanceExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Instance methods are associated with individual objects and require an object to be invoked.
+          </p>
+        </section>
 
-            {/* Static Methods Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Static Methods
-              </h2>
-              <CodeBlock code={staticExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Static methods are utility functions that operate independently of object state.
-                </p>
-              </div>
-            </div>
+        {/* Combined Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Static vs Instance Members</h2>
+          <CodeBlock code={combinedExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            This example shows how static and instance variables and methods differ and interact in a class.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
-          </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Visual Representation</h2>
+          <CodeBlock code={visualRepresentation} language="markdown" />
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Accessing instance variables from static methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using this keyword in static context</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Making methods static unnecessarily</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Calling instance methods from static context</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Overusing static methods</span>
-                </li>
-              </ul>
-            </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Accessing instance methods directly from a static context.</li>
+            <li>Modifying static variables in instance methods without understanding their shared nature.</li>
+            <li>Using static methods for logic that depends on instance state.</li>
+            <li>Misusing static variables, leading to unexpected behavior in multi-threaded environments.</li>
+          </ul>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use static for utility functions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep instance methods for object behavior</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider static factory methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document static method dependencies</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use static for constants</span>
-                </li>
-              </ul>
-            </div>
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use static methods for utility functions or logic that doesn’t depend on object state.</li>
+            <li>Limit static variables to constants or shared resources.</li>
+            <li>Prefer instance methods when object state or behavior is involved.</li>
+            <li>Use clear naming conventions to distinguish static and instance members.</li>
+          </ul>
+        </section>
 
-            {/* Key Differences Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Differences
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Object state access</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Method invocation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Memory allocation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Inheritance behavior</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Usage patterns</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Leverage static blocks for initializing static variables.</li>
+            <li>Use static methods in singleton design patterns to provide global access points.</li>
+            <li>Test static members in multi-threaded scenarios to avoid race conditions.</li>
+            <li>Use instance methods for encapsulating object-specific behavior.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default StaticVsInstance; 
+export default StaticVsInstance;

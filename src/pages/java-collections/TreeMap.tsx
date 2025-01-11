@@ -1,30 +1,47 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const TreeMap: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                TreeMap in Java
-              </h1>
-              <p className="text-gray-300">
-                TreeMap is a NavigableMap implementation based on a red-black tree. The map is sorted according to the natural ordering of its keys, or by a Comparator provided at creation time. This implementation provides guaranteed log(n) time cost for containment, addition, and removal operations.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          TreeMap in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <code>TreeMap</code> class in Java is a part of the <code>java.util</code> package and implements the <code>NavigableMap</code> interface. It maintains the keys in a sorted order using a red-black tree.
+        </p>
+      </header>
 
-            {/* Creating TreeMap */}
-            <MethodCard
-              title="Creating TreeMap"
-              description="Different ways to initialize TreeMap"
-            >
-              <CodeBlock
-                code={`// Default constructor (natural ordering)
+      <main className="space-y-12">
+        {/* Introduction Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Introduction</h2>
+          <p className="text-gray-300">
+            The <code>TreeMap</code> is a Map implementation that sorts its keys according to their natural ordering or a custom comparator. It offers efficient operations for adding, retrieving, and navigating through key-value pairs.
+          </p>
+          <CodeBlock
+            code={`import java.util.TreeMap;
+
+public class Main {
+    public static void main(String[] args) {
+        TreeMap<String, Integer> map = new TreeMap<>();
+        map.put("Apple", 3);
+        map.put("Banana", 5);
+        map.put("Cherry", 2);
+
+        System.out.println("TreeMap: " + map);  // Output: {Apple=3, Banana=5, Cherry=2}
+    }
+}`}
+            language="java"
+          />
+        </section>
+
+        {/* Creating TreeMap Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Creating TreeMap</h2>
+          <CodeBlock
+            code={`// Default constructor (natural ordering)
 TreeMap<String, Integer> map1 = new TreeMap<>();
 
 // With custom Comparator
@@ -38,25 +55,17 @@ TreeMap<String, Integer> map3 = new TreeMap<>(source);
 SortedMap<String, Integer> sorted = new TreeMap<>();
 TreeMap<String, Integer> map4 = new TreeMap<>(sorted);
 
-// With case-insensitive ordering
-TreeMap<String, Integer> map5 = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+// Case-insensitive ordering
+TreeMap<String, Integer> map5 = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);`}
+            language="java"
+          />
+        </section>
 
-// Multiple criteria comparator
-Comparator<String> lengthThenNatural = Comparator
-    .comparingInt(String::length)
-    .thenComparing(Comparator.naturalOrder());
-TreeMap<String, Integer> map6 = new TreeMap<>(lengthThenNatural);`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* TreeMap Operations */}
-            <MethodCard
-              title="TreeMap Operations"
-              description="Common operations with TreeMap"
-            >
-              <CodeBlock
-                code={`TreeMap<String, Integer> map = new TreeMap<>();
+        {/* Operations Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Operations</h2>
+          <CodeBlock
+            code={`TreeMap<String, Integer> map = new TreeMap<>();
 
 // Basic operations
 map.put("B", 2);
@@ -64,51 +73,33 @@ map.put("A", 1);
 map.put("C", 3);  // Automatically sorted
 
 // Navigation operations
-String firstKey = map.firstKey();     // Returns "A"
-String lastKey = map.lastKey();       // Returns "C"
-String higher = map.higherKey("B");   // Returns "C"
-String lower = map.lowerKey("B");     // Returns "A"
-String ceiling = map.ceilingKey("B"); // Returns "B"
-String floor = map.floorKey("B");     // Returns "B"
+String firstKey = map.firstKey();     // "A"
+String lastKey = map.lastKey();       // "C"
 
-// Entry navigation
-Map.Entry<String, Integer> firstEntry = map.firstEntry();
-Map.Entry<String, Integer> lastEntry = map.lastEntry();
-Map.Entry<String, Integer> pollFirst = map.pollFirstEntry();
-Map.Entry<String, Integer> pollLast = map.pollLastEntry();
+// Range queries
+SortedMap<String, Integer> headMap = map.headMap("B");  // < "B"
+NavigableMap<String, Integer> subMap = 
+    map.subMap("A", true, "C", false);  // A to C (exclusive)
 
-// Range views
-SortedMap<String, Integer> headMap = map.headMap("B");    // < "B"
-NavigableMap<String, Integer> headMapInc = 
-    map.headMap("B", true);  // <= "B"
-SortedMap<String, Integer> tailMap = map.tailMap("B");    // >= "B"
-SortedMap<String, Integer> subMap = 
-    map.subMap("A", "C");    // >= "A" && < "C"
+// Descending view
+NavigableMap<String, Integer> descendingMap = map.descendingMap();
 
-// Descending views
-NavigableMap<String, Integer> descending = map.descendingMap();
-NavigableSet<String> descKeys = map.descendingKeySet();
-
-// Iteration (always sorted)
+// Iteration
 for (Map.Entry<String, Integer> entry : map.entrySet()) {
     System.out.println(entry.getKey() + ": " + entry.getValue());
 }`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Custom Objects in TreeMap */}
-            <MethodCard
-              title="Custom Objects in TreeMap"
-              description="Using TreeMap with custom classes"
-            >
-              <CodeBlock
-                code={`class Person implements Comparable<Person> {
+        {/* Custom Objects Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Custom Objects</h2>
+          <CodeBlock
+            code={`class Person implements Comparable<Person> {
     private String name;
     private int age;
-    
-    // Constructor, getters, setters...
-    
+
     @Override
     public int compareTo(Person other) {
         return Comparator.comparing(Person::getName)
@@ -117,154 +108,62 @@ for (Map.Entry<String, Integer> entry : map.entrySet()) {
     }
 }
 
-// Using natural ordering
-TreeMap<Person, String> map1 = new TreeMap<>();
-map1.put(new Person("John", 30), "Developer");
+// Using TreeMap with custom objects
+TreeMap<Person, String> map = new TreeMap<>();
+map.put(new Person("Alice", 25), "Developer");
+map.put(new Person("Bob", 30), "Manager");`}
+            language="java"
+          />
+        </section>
 
-// Using custom comparator
-TreeMap<Person, String> map2 = new TreeMap<>(
-    Comparator.comparingInt(Person::getAge)
-);
+        {/* Dry Run Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`TreeMap<String, Integer> map = new TreeMap<>();
+map.put("Apple", 1);
+map.put("Banana", 2);
 
-// Complex comparator
-TreeMap<Person, String> map3 = new TreeMap<>(
-    Comparator.comparing(Person::getName)
-              .thenComparingInt(Person::getAge)
-              .reversed()
-);
+// Dry run:
+System.out.println(map.firstKey());  // Output: "Apple"
+map.remove("Apple");
+System.out.println(map.firstKey());  // Output: "Banana"`}
+            language="java"
+          />
+        </section>
 
-// Range queries with custom objects
-Person start = new Person("A", 20);
-Person end = new Person("Z", 30);
-NavigableMap<Person, String> range = 
-    map1.subMap(start, true, end, false);`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use <code>TreeMap</code> when sorted order is required for keys.</li>
+            <li>Avoid using null keys; <code>TreeMap</code> does not support them.</li>
+            <li>Leverage <code>subMap()</code>, <code>headMap()</code>, and <code>tailMap()</code> for range queries.</li>
+          </ul>
+        </section>
 
-          {/* Right Sidebar */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Inconsistent comparison</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Modifying keys</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Ignoring null handling</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Wrong range queries</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Performance expectations</span>
-                </li>
-              </ul>
-            </div>
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Not providing a consistent comparator for custom keys.</li>
+            <li>Using mutable objects as keys.</li>
+            <li>Expecting insertion order to be maintained.</li>
+          </ul>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Proper comparison logic</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Immutable keys</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use navigation methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Range view efficiency</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider alternatives</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Pro Tips Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Pro Tips
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Custom comparators</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Range operations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>View optimizations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Navigation patterns</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Performance tuning</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Key Concepts Section */}
-            <div className="bg-purple-900/20 border border-purple-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-purple-200">
-                Key Concepts
-              </h2>
-              <ul className="space-y-3 text-purple-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Red-black tree</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Sorted structure</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Navigation operations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Range views</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Time complexity</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use immutable keys for consistent behavior.</li>
+            <li>Choose the appropriate comparator for sorting requirements.</li>
+            <li>Plan for performance when handling large data sets.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default TreeMap; 
+export default TreeMap;

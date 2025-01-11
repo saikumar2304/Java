@@ -2,73 +2,177 @@ import React from 'react';
 import CodeBlock from '../../components/CodeBlock';
 
 const Access: React.FC = () => {
+  const visualRepresentation = `
+1. **Accessing Array Elements**:
+   - Use the array name followed by the index in square brackets to access elements.
+     \`\`\`java
+     arrayName[index];
+     \`\`\`
+   
+2. **Bounds Checking**:
+   - Array indices are 0-based; an index of -1 or greater than or equal to the length will result in an \`ArrayIndexOutOfBoundsException\`.
+   
+3. **Iteration**:
+   - Access elements using loops like the traditional \`for\` loop or enhanced \`for\` loop.
+   
+4. **Element Modification**:
+   - Elements in an array can be modified by directly assigning a new value to the element at a specific index.
+`;
+
+  const tips = [
+    "Always check array bounds before accessing elements to avoid runtime errors.",
+    "Use the enhanced `for` loop for cleaner, more readable code when traversing arrays.",
+    "Avoid hardcoding array indices, use `array.length` for dynamic traversal."
+  ];
+
+  const proTips = [
+    "Use `Arrays.toString()` to quickly print arrays for debugging purposes.",
+    "For multi-dimensional arrays, use nested loops or `Arrays.deepToString()` for printing.",
+    "Consider `ArrayList` for dynamically sized arrays if you need frequent resizing or additions."
+  ];
+
+  const bestPractices = [
+    "Declare and initialize arrays before using them to prevent `NullPointerException`.",
+    "Always use the correct index range (0 to `array.length - 1`) to avoid accessing invalid elements.",
+    "When modifying arrays, ensure that the array’s size is adequate to handle the new data."
+  ];
+
+  const commonMistakes = [
+    "Accessing array indices outside the valid range, resulting in `ArrayIndexOutOfBoundsException`.",
+    "Not initializing an array before accessing its elements.",
+    "Confusing zero-based indices with one-based logic, especially when dealing with loops."
+  ];
+
   return (
-    <div className="p-4 bg-gray-900 text-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Accessing Array Elements in Java</h1>
-      <div className="space-y-6">
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Accessing and Modifying Array Elements in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Arrays in Java are a powerful way to store data, and understanding how to access and modify their elements is essential for efficient programming.
+        </p>
+      </header>
 
-        {/* Introduction Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">How to Access Array Elements?</h2>
-          <p>
-            Array elements in Java can be accessed using their index. The index represents the position of an element in the array, starting from 0 for the first element.
-          </p>
-        </section>
-
-        {/* Syntax Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Accessing Elements</h2>
-          <p className="mb-4">
-            To access an element in an array, use the array name followed by the index in square brackets:
-          </p>
+      <main className="space-y-12">
+        {/* Accessing Elements */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Accessing Array Elements</h2>
           <CodeBlock
-            code={`dataType value = arrayName[index];`}
+            code={`// Accessing elements in the array
+int[] numbers = {10, 20, 30, 40, 50};
+System.out.println(numbers[0]); // Output: 10
+System.out.println(numbers[2]); // Output: 30`}
             language="java"
           />
-          <p className="mt-4">
-            Here, <code>arrayName</code> is the name of the array, and <code>index</code> is the position of the element you want to access.
-          </p>
         </section>
 
-        {/* Example Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Example</h2>
-          <p className="mb-4">Here’s an example demonstrating how to access elements in an array:</p>
+        {/* Modifying Array Elements */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Modifying Array Elements</h2>
           <CodeBlock
-            code={`public class ArrayAccess {\n    public static void main(String[] args) {\n        // Declare and initialize an array\n        int[] numbers = {10, 20, 30, 40, 50};\n\n        // Access elements using their index\n        System.out.println(\"First element: \" + numbers[0]);\n        System.out.println(\"Third element: \" + numbers[2]);\n\n        // Update an element\n        numbers[1] = 25;\n        System.out.println(\"Updated second element: \" + numbers[1]);\n    }\n}`}
+            code={`// Modifying an array element
+int[] numbers = {10, 20, 30, 40, 50};
+numbers[1] = 25;  // Array becomes: [10, 25, 30, 40, 50]
+System.out.println(numbers[1]);  // Output: 25`}
             language="java"
           />
-          <p className="mt-4">
-            In this example, elements of the array <code>numbers</code> are accessed and printed using their indices. Additionally, the second element is updated, demonstrating how to modify array elements.
-          </p>
         </section>
 
-        {/* Iteration Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Accessing Elements via Iteration</h2>
-          <p className="mb-4">
-            Instead of accessing each element manually, you can use a loop to iterate through the array:
-          </p>
+        {/* Iterating Through Arrays */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Iterating Through Arrays</h2>
           <CodeBlock
-            code={`public class ArrayIteration {\n    public static void main(String[] args) {\n        int[] numbers = {1, 2, 3, 4, 5};\n\n        // Using a for loop\n        for (int i = 0; i < numbers.length; i++) {\n            System.out.println(\"Element at index \" + i + \": \" + numbers[i]);\n        }\n\n        // Using an enhanced for loop\n        for (int num : numbers) {\n            System.out.println(\"Number: \" + num);\n        }\n    }\n}`}
+            code={`// Traditional for loop
+int[] numbers = {1, 2, 3, 4, 5};
+for (int i = 0; i < numbers.length; i++) {
+    System.out.println(numbers[i]);
+}
+
+// Enhanced for loop
+for (int num : numbers) {
+    System.out.println(num);
+}`}
             language="java"
           />
-          <p className="mt-4">
-            The traditional <code>for</code> loop gives you access to the index, while the enhanced <code>for</code> loop provides direct access to each element.
-          </p>
         </section>
 
-        {/* Key Points Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Key Points</h2>
-          <ul className="list-disc pl-5 space-y-2">
-            <li>Array indices in Java start from 0 and go up to <code>array.length - 1</code>.</li>
-            <li>Accessing an index out of bounds (e.g., <code>array[-1]</code> or <code>array[array.length]</code>) will throw an <code>ArrayIndexOutOfBoundsException</code>.</li>
-            <li>Use loops to efficiently access and modify elements in an array.</li>
+        {/* Key Points */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Key Points</h2>
+          <ul className="list-disc pl-6 space-y-3 text-gray-300">
+            <li>Array indices in Java are zero-based, meaning the first element is at index 0.</li>
+            <li>Always validate array indices to prevent `ArrayIndexOutOfBoundsException`.</li>
+            <li>Array elements can be modified by accessing them via their index and assigning a new value.</li>
           </ul>
         </section>
 
-      </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run</h2>
+          <CodeBlock
+            code={`// Example with array access and modification
+int[] numbers = {10, 20, 30, 40, 50};
+
+// Step 1: Accessing and printing elements
+System.out.println(numbers[0]); // Output: 10
+System.out.println(numbers[2]); // Output: 30
+
+// Step 2: Modifying an element
+numbers[1] = 25;  // Array becomes: [10, 25, 30, 40, 50]
+
+// Step 3: Printing updated element
+System.out.println(numbers[1]); // Output: 25`}
+            language="java"
+          />
+        </section>
+
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Visual Representation</h2>
+          <CodeBlock code={visualRepresentation} language="markdown" />
+        </section>
+
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            {tips.map((tip, index) => (
+              <li key={index}>{tip}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            {proTips.map((tip, index) => (
+              <li key={index}>{tip}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            {bestPractices.map((practice, index) => (
+              <li key={index}>{practice}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            {commonMistakes.map((mistake, index) => (
+              <li key={index}>{mistake}</li>
+            ))}
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };

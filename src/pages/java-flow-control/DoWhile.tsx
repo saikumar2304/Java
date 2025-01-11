@@ -5,7 +5,7 @@ const DoWhile = () => {
   const basicExample = `
 do {
     // code block to be executed
-} while (condition);  // Note the semicolon!
+} while (condition);
 
 // Example:
 int count = 1;
@@ -38,54 +38,18 @@ do {
 
 System.out.println("Valid input received: " + number);`;
 
-  const menuExample = `
-// Menu-driven program example
-import java.util.Scanner;
-
-Scanner scanner = new Scanner(System.in);
-int choice;
-
-do {
-    System.out.println("\\nMenu:");
-    System.out.println("1. Add");
-    System.out.println("2. Subtract");
-    System.out.println("3. Multiply");
-    System.out.println("4. Exit");
-    System.out.print("Enter your choice: ");
-    
-    choice = scanner.nextInt();
-    
-    switch (choice) {
-        case 1:
-            System.out.println("Add operation selected");
-            break;
-        case 2:
-            System.out.println("Subtract operation selected");
-            break;
-        case 3:
-            System.out.println("Multiply operation selected");
-            break;
-        case 4:
-            System.out.println("Exiting...");
-            break;
-        default:
-            System.out.println("Invalid choice!");
-    }
-} while (choice != 4);`;
-
   const dryRunExample = `
 // Password validation example
-String correctPassword = "secret123";
-String userInput;
+String correctPassword = "password123";
+String input;
 boolean isValid = false;
 int attempts = 0;
 
 do {
     attempts++;
-    System.out.print("Enter password (attempt " + attempts + "): ");
-    userInput = scanner.nextLine();
-    
-    if (userInput.equals(correctPassword)) {
+    System.out.println("Enter password (Attempt " + attempts + "): ");
+    input = scanner.nextLine();
+    if (input.equals(correctPassword)) {
         isValid = true;
         System.out.println("Access granted!");
     } else {
@@ -93,175 +57,120 @@ do {
     }
 } while (!isValid && attempts < 3);
 
-// Dry Run (with incorrect passwords):
-// 1. First iteration:
-//    - attempts = 1
-//    - userInput = "wrong123"
-//    - userInput.equals(correctPassword) is false
-//    - Print "Incorrect password. Try again."
-//    - !isValid && attempts < 3 is true, continue loop
-// 2. Second iteration:
-//    - attempts = 2
-//    - userInput = "test456"
-//    - userInput.equals(correctPassword) is false
-//    - Print "Incorrect password. Try again."
-//    - !isValid && attempts < 3 is true, continue loop
-// 3. Third iteration:
-//    - attempts = 3
-//    - userInput = "wrong789"
-//    - userInput.equals(correctPassword) is false
-//    - Print "Incorrect password. Try again."
-//    - !isValid && attempts < 3 is false, exit loop`;
+// Dry Run:
+// Iteration 1: Input = "pass", isValid = false, attempts = 1
+// Iteration 2: Input = "pass123", isValid = false, attempts = 2
+// Iteration 3: Input = "password123", isValid = true, attempts = 3`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Do-While Loop in Java
-              </h1>
-              <p className="text-gray-300">
-                The do-while loop is a variant of the while loop that guarantees at least one execution of the code block. 
-                The condition is checked after the code block is executed, making it perfect for scenarios where you want 
-                to ensure the code runs at least once, such as input validation or menu-driven programs.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Do-While Loop in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <strong>do-while loop</strong> ensures that a block of code executes at least once before the condition is checked. 
+          It is particularly useful for scenarios like input validation or menu-driven programs.
+        </p>
+      </header>
 
-            {/* Basic Syntax Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Syntax and Example
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">Key differences from while loop:</p>
-                <ul className="list-disc ml-6 mt-2 text-gray-300">
-                  <li>Code block executes <span className="text-yellow-400">before</span> checking the condition</li>
-                  <li>Requires a semicolon after the while condition</li>
-                  <li>Always executes at least once</li>
-                  <li>Condition is checked at the end of the loop</li>
-                </ul>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Syntax */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Syntax
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The <strong>do-while loop</strong> executes the code block first, then evaluates the condition. This ensures the code block runs at least once.
+          </p>
+        </section>
 
-            {/* Input Validation Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Input Validation Example
-              </h2>
-              <CodeBlock code={inputValidationExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                This is a common use case for do-while loops. It ensures the user provides valid input by repeatedly 
-                asking until the input meets the required criteria.
-              </p>
-            </div>
-
-            {/* Menu Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Menu-Driven Program Example
-              </h2>
-              <CodeBlock code={menuExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                Menu-driven programs are another perfect use case for do-while loops, as you want to display 
-                the menu at least once and keep showing it until the user chooses to exit.
-              </p>
-            </div>
-
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Visual Representation
+          </h2>
+          <p className="text-gray-300">
+            The <strong>do-while loop</strong> operates as follows:
+          </p>
+          <div className="bg-gray-700 p-4 rounded-lg text-gray-200">
+            <ul className="list-decimal pl-6 space-y-3">
+              <li>Execute the code block inside the loop.</li>
+              <li>Evaluate the condition after execution.</li>
+              <li>
+                If the condition is true, repeat the loop; otherwise, exit.
+              </li>
+            </ul>
           </div>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Forgetting the semicolon after while condition</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not updating the loop control variable</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Creating unintended infinite loops</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using when a while loop would be more appropriate</span>
-                </li>
-              </ul>
-            </div>
+        {/* Input Validation Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Input Validation Example
+          </h2>
+          <CodeBlock code={inputValidationExample} language="java" />
+          <p className="mt-4 text-gray-300">
+            This is a common use case for do-while loops. The loop ensures the user provides valid input by repeatedly 
+            prompting until the input meets the required criteria.
+          </p>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use for input validation scenarios</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Include clear exit conditions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep the loop body focused</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider using while if first execution is conditional</span>
-                </li>
-              </ul>
-            </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+            Dry Run Example
+          </h2>
+          <CodeBlock code={dryRunExample} language="java" />
+        </section>
 
-            {/* When to Use Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                When to Use Do-While
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Input validation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Menu-driven programs</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Game loops requiring initial setup</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>When code must run at least once</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">
+            Common Mistakes
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Forgetting the semicolon after the <code>while</code> condition.</li>
+            <li>Creating unintended infinite loops by not modifying the loop variable.</li>
+            <li>Using when a <code>while</code> or <code>for</code> loop would be more appropriate.</li>
+          </ul>
+        </section>
+
+        {/* Tips */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Tips for Using Do-While Loops
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use for scenarios where the code must execute at least once.</li>
+            <li>Clearly define and update the loop control variable.</li>
+            <li>Combine with user input for interactive programs or validation.</li>
+          </ul>
+        </section>
+
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Pro Tips
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>
+              Document the termination condition in comments for better readability and debugging.
+            </li>
+            <li>
+              Use <code>break</code> statements to add custom exit points within the loop.
+            </li>
+            <li>
+              For repetitive tasks with known constraints, consider a <code>while</code> or <code>for</code> loop as alternatives.
+            </li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default DoWhile; 
+export default DoWhile;

@@ -3,31 +3,35 @@ import CodeBlock from '../../components/CodeBlock';
 
 const JavaSyntax: React.FC = () => {
   return (
-    <div className="p-4 bg-gray-900 text-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Java Syntax</h1>
-      
-      <div className="space-y-6">
-        {/* Basic Syntax Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Basic Syntax Structure</h2>
-          <div className="grid md:grid-cols-2 gap-4">
+    <div className="p-6 bg-gray-900 text-gray-200 min-h-screen">
+      {/* Header Section */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">Java Syntax</h1>
+        <p className="text-lg text-gray-400">
+          Master the foundational syntax of Java, from class declarations to writing clean and efficient code.
+        </p>
+      </header>
+
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Section 1: Basic Syntax Structure */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Basic Syntax Structure</h2>
+          <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <p className="mb-4">
+              <p className="text-gray-300 leading-7 mb-4">
                 Java programs are organized into classes and methods. Every Java program must have at least one class and one main method.
               </p>
-              <div className="bg-blue-900/20 p-3 rounded-lg">
-                <h3 className="font-semibold mb-2">Essential Components</h3>
-                <ul className="text-sm space-y-2">
-                  <li>• <strong>Class Declaration</strong>: Container for code</li>
-                  <li>• <strong>Main Method</strong>: Entry point of program</li>
-                  <li>• <strong>Statements</strong>: Instructions ending with semicolon</li>
-                  <li>• <strong>Blocks</strong>: Code enclosed in curly braces</li>
-                </ul>
-              </div>
+              <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                <li><strong className="text-yellow-300">Class Declaration:</strong> Container for all code.</li>
+                <li><strong className="text-yellow-300">Main Method:</strong> Entry point of the program.</li>
+                <li><strong className="text-yellow-300">Statements:</strong> Instructions ending with a semicolon.</li>
+                <li><strong className="text-yellow-300">Blocks:</strong> Code enclosed in curly braces.</li>
+              </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-blue-400 mb-2">Basic Program Structure</h3>
-              <CodeBlock 
+              <h3 className="font-semibold text-blue-300 mb-2">Example Program</h3>
+              <CodeBlock
                 code={`public class HelloWorld {
     public static void main(String[] args) {
         // This is a comment
@@ -40,78 +44,70 @@ const JavaSyntax: React.FC = () => {
           </div>
         </section>
 
-        {/* Identifiers and Keywords Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Identifiers and Keywords</h2>
-          <div className="grid md:grid-cols-2 gap-4">
+        {/* Section 2: Identifiers and Keywords */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Identifiers and Keywords</h2>
+          <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-semibold text-green-400 mb-2">Naming Rules</h3>
-              <div className="bg-green-900/20 p-3 rounded-lg">
-                <ul className="text-sm space-y-2">
-                  <li>✅ Can start with letter, $ or _</li>
-                  <li>✅ Can contain numbers</li>
-                  <li>✅ Case sensitive</li>
-                  <li>❌ Cannot start with number</li>
-                  <li>❌ Cannot use reserved keywords</li>
-                </ul>
-              </div>
+              <h3 className="font-semibold text-green-300 mb-3">Naming Rules</h3>
+              <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                <li>✅ Can start with a letter, <code>$</code>, or <code>_</code>.</li>
+                <li>✅ Can contain numbers but cannot start with them.</li>
+                <li>✅ Case sensitive.</li>
+                <li>❌ Cannot use reserved keywords.</li>
+              </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-purple-400 mb-2">Common Keywords</h3>
+              <h3 className="font-semibold text-purple-300 mb-3">Common Keywords</h3>
               <div className="grid grid-cols-3 gap-2">
-                <div className="bg-purple-900/20 p-2 rounded text-sm">public</div>
-                <div className="bg-purple-900/20 p-2 rounded text-sm">class</div>
-                <div className="bg-purple-900/20 p-2 rounded text-sm">static</div>
-                <div className="bg-purple-900/20 p-2 rounded text-sm">void</div>
-                <div className="bg-purple-900/20 p-2 rounded text-sm">int</div>
-                <div className="bg-purple-900/20 p-2 rounded text-sm">if</div>
+                {['public', 'class', 'static', 'void', 'int', 'if', 'else', 'return'].map(keyword => (
+                  <div key={keyword} className="bg-purple-900/20 p-2 rounded text-sm text-gray-300">
+                    {keyword}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Comments and Documentation */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Comments and Documentation</h2>
-          <div className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <h3 className="font-semibold text-blue-400 mb-2">Types of Comments</h3>
-                <CodeBlock 
-                  code={`// Single line comment
+        {/* Section 3: Comments and Documentation */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Comments and Documentation</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="font-semibold text-yellow-300 mb-3">Types of Comments</h3>
+              <CodeBlock
+                code={`// Single-line comment
 
 /* Multi-line comment
    spanning multiple
    lines */
 
 /** Documentation comment
- * @author Your Name
- * @version 1.0
+ * Provides detailed documentation
  */`}
-                  language="java"
-                />
-              </div>
-              <div className="bg-yellow-900/20 p-3 rounded-lg">
-                <h3 className="font-semibold mb-2">Best Practices</h3>
-                <ul className="text-sm space-y-2">
-                  <li>• Use meaningful comments</li>
-                  <li>• Document public methods</li>
-                  <li>• Explain complex logic</li>
-                  <li>• Keep comments up to date</li>
-                  <li>• Avoid obvious comments</li>
-                </ul>
-              </div>
+                language="java"
+              />
+            </div>
+            <div>
+              <h3 className="font-semibold text-yellow-300 mb-3">Best Practices</h3>
+              <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                <li>• Use meaningful comments to explain logic.</li>
+                <li>• Document public methods and classes with <code>/** */</code>.</li>
+                <li>• Avoid redundant or obvious comments.</li>
+                <li>• Keep comments updated as code evolves.</li>
+              </ul>
             </div>
           </div>
         </section>
 
-        {/* Code Blocks and Statements */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Code Blocks and Statements</h2>
-          <div className="grid md:grid-cols-2 gap-4">
+        {/* Section 4: Code Blocks and Statements */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Code Blocks and Statements</h2>
+          <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-semibold text-green-400 mb-2">Code Block Structure</h3>
-              <CodeBlock 
+              <h3 className="font-semibold text-blue-300 mb-3">Code Block Structure</h3>
+              <CodeBlock
                 code={`public class Example {
     // Class block
     {
@@ -128,30 +124,26 @@ const JavaSyntax: React.FC = () => {
                 language="java"
               />
             </div>
-            <div className="space-y-4">
-              <div className="bg-blue-900/20 p-3 rounded-lg">
-                <h3 className="font-semibold mb-2">Statement Types</h3>
-                <ul className="text-sm space-y-2">
-                  <li>• Declaration statements</li>
-                  <li>• Expression statements</li>
-                  <li>• Control flow statements</li>
-                  <li>• Method call statements</li>
-                </ul>
-              </div>
-              <div className="bg-red-900/20 p-3 rounded-lg">
-                <h3 className="font-semibold mb-2">Common Mistakes</h3>
-                <ul className="text-sm space-y-2">
-                  <li>❌ Missing semicolons</li>
-                  <li>❌ Unmatched braces</li>
-                  <li>❌ Wrong indentation</li>
-                </ul>
-              </div>
+            <div>
+              <h3 className="font-semibold text-red-300 mb-3">Common Mistakes</h3>
+              <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                <li>❌ Missing semicolons at the end of statements.</li>
+                <li>❌ Unmatched braces causing syntax errors.</li>
+                <li>❌ Improper indentation affecting readability.</li>
+              </ul>
+              <h3 className="font-semibold text-blue-300 mt-4 mb-3">Statement Types</h3>
+              <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                <li>• Declaration statements (e.g., <code>int x = 10;</code>).</li>
+                <li>• Expression statements (e.g., <code>x++;</code>).</li>
+                <li>• Control flow statements (e.g., <code>if</code>, <code>for</code>).</li>
+                <li>• Method call statements (e.g., <code>System.out.println()</code>).</li>
+              </ul>
             </div>
           </div>
         </section>
-      </div>
+      </main>
     </div>
   );
 };
 
-export default JavaSyntax; 
+export default JavaSyntax;

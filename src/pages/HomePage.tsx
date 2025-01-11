@@ -1,119 +1,99 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Code2, BookOpen, Layout, Terminal, Brain, ChevronRight } from 'lucide-react';
 
 const HomePage: React.FC = () => {
   const features = [
     {
-      icon: <BookOpen className="h-6 w-6 text-indigo-400" />,
-      title: "Comprehensive Learning",
-      description: "From basics to advanced concepts, learn Java programming step by step."
+      title: "Start Coding Today 👨‍💻",
+      description: "Begin your Java journey now with easy-to-follow lessons and hands-on practice."
     },
     {
-      icon: <Terminal className="h-6 w-6 text-indigo-400" />,
-      title: "Interactive Playground",
-      description: "Practice Java code in real-time with our built-in code editor."
+      title: "Master Java 💻",
+      description: "Learn everything from Java basics to advanced concepts with in-depth tutorials."
     },
     {
-      icon: <Brain className="h-6 w-6 text-indigo-400" />,
-      title: "MCQ Practice",
-      description: "Test your knowledge with our extensive collection of Java MCQs."
+      title: "Test Your Skills 🧠",
+      description: "Challenge yourself with numerous MCQs and coding challenges to level up your skills."
     }
   ];
 
   const topics = [
-    { title: "Java Basics", count: "12 lessons", path: "/java-basics/introduction" },
-    { title: "Control Flow", count: "11 lessons", path: "/java-flow-control/if-statement" },
-    { title: "Methods", count: "10 lessons", path: "/java-methods/intro" },
-    { title: "Arrays", count: "10 lessons", path: "/java-arrays/introduction" },
-    { title: "OOP Concepts", count: "14 lessons", path: "/java-oop/introduction" },
-    { title: "Collections", count: "22 lessons", path: "/java-collections/introduction" }
+    { title: "Introduction to Java", path: "/java-basics", count: 12 },
+    { title: "Flow Control", path: "/java-flow-control", count: 11 },
+    { title: "Methods", path: "/java-methods", count: 10 },
+    { title: "Arrays", path: "/java-arrays", count: 10 },
+    { title: "Object-Oriented Programming (OOP)", path: "/java-oop", count: 14 },
+    { title: "Practice MCQs", path: "/java-mcqs", count: 100 }
   ];
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
+
       {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
-              Master Java Programming
-            </h1>
-            <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-              Your comprehensive guide to learning Java programming from basics to advanced concepts.
-            </p>
-            <div className="flex justify-center gap-4">
-              <Link
-                to="/java-basics/introduction"
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Start Learning
-              </Link>
-              <Link
-                to="/playground"
-                className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Try Playground
-              </Link>
-            </div>
-          </div>
-        </div>
+      <div className="py-32 px-8 bg-gradient-to-r from-blue-500 to-purple-600 text-center">
+        <h1 className="text-5xl font-extrabold text-white mb-6">
+          Welcome to Java Programming 🚀
+        </h1>
+        <p className="text-xl max-w-2xl mx-auto mb-8 text-gray-200">
+          Ready to start your journey to becoming a Java expert? Dive into mastering the fundamentals of Java.
+        </p>
+        <Link
+          to="/java-basics/introduction"
+          className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 py-3 px-8 rounded-lg font-semibold transition-transform transform hover:scale-105"
+        >
+          Start Learning Java
+        </Link>
       </div>
 
       {/* Features Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="py-20 px-8">
+        <h2 className="text-3xl font-semibold text-center text-gray-100 mb-12">Why Learn Java?</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {features.map((feature, index) => (
-            <div key={index} className="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors">
-              <div className="bg-gray-700 rounded-lg w-12 h-12 flex items-center justify-center mb-4">
-                {feature.icon}
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-400">{feature.description}</p>
+            <div key={index} className="bg-gray-800 p-8 rounded-xl shadow-lg hover:bg-gray-700 transition-all transform hover:scale-105 text-center">
+              <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
+              <p className="text-gray-300">{feature.description}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Topics Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-3xl font-bold mb-8">Popular Topics</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Java Topics Section */}
+      <div className="py-20 px-8 bg-gray-800">
+        <h2 className="text-3xl font-semibold text-center text-gray-100 mb-12">Explore Java Topics 📚</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {topics.map((topic, index) => (
             <Link
               key={index}
               to={topic.path}
-              className="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors group"
+              className="bg-gray-700 p-8 rounded-xl shadow-lg hover:bg-gray-600 transition-all transform hover:scale-105"
             >
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">{topic.title}</h3>
-                  <p className="text-sm text-gray-400">{topic.count}</p>
+                  <h3 className="text-lg font-semibold text-white mb-3">{topic.title}</h3>
+                  <p className="text-sm text-gray-400">Available Topics: {topic.count}</p>
                 </div>
-                <ChevronRight className="h-5 w-5 text-gray-500 group-hover:text-indigo-400 transition-colors" />
+                <span className="text-gray-500 hover:text-yellow-400 transition-colors">➔</span>
               </div>
             </Link>
           ))}
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 md:p-12">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to Start Learning?</h2>
-            <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
-              Begin your Java programming journey today with our structured learning path.
-            </p>
-            <Link
-              to="/java-mcqs"
-              className="bg-white text-indigo-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-colors inline-block"
-            >
-              Practice MCQs
-            </Link>
-          </div>
-        </div>
+      {/* Call to Action Section */}
+      <div className="py-16 px-8 bg-gradient-to-r from-indigo-600 to-purple-600 text-center rounded-2xl mt-16">
+        <h2 className="text-3xl font-semibold text-white mb-6">Ready to Start Your Journey?</h2>
+        <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
+          Join thousands of learners and master Java. Start coding, testing, and building real-world applications.
+        </p>
+        <Link
+          to="/java-basics"
+          className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 py-3 px-8 rounded-lg font-semibold transition-transform transform hover:scale-105"
+        >
+          Start Your Journey
+        </Link>
       </div>
+
     </div>
   );
 };

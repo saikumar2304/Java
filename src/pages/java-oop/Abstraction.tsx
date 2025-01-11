@@ -1,363 +1,176 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const Abstraction: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Abstraction in Java
-              </h1>
-              <p className="text-gray-300">
-                Abstraction is a fundamental OOP concept that hides complex implementation details and shows only the necessary features of an object. Java supports abstraction through abstract classes and interfaces.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Abstraction in OOP
+        </h1>
+        <p className="text-lg text-gray-400">
+          Abstraction is the process of hiding implementation details and exposing only the essential features of an object. It simplifies complex systems by focusing on high-level functionality.
+        </p>
+      </header>
 
-            {/* Abstract Class Section */}
-            <MethodCard
-              title="Abstract Classes"
-              description="Creating and using abstract classes"
-            >
-              <CodeBlock
-                code={`// Abstract class example
-abstract class Shape {
-    protected String color;
-    
-    // Constructor
-    public Shape(String color) {
-        this.color = color;
+      <main className="space-y-12">
+        {/* What is Abstraction Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">What is Abstraction?</h2>
+          <p className="text-gray-300">
+            Abstraction is one of the key principles of Object-Oriented Programming (OOP). It allows you to define the blueprint of an object without including implementation details. This is typically achieved through abstract classes or interfaces in Java.
+          </p>
+          <CodeBlock
+            code={`// Abstract class demonstrating abstraction
+abstract class Animal {
+    protected String name;
+
+    public Animal(String name) {
+        this.name = name;
     }
-    
-    // Abstract method (no implementation)
-    abstract double calculateArea();
-    
+
+    // Abstract method (must be implemented by subclasses)
+    public abstract void makeSound();
+
     // Concrete method
-    public void displayColor() {
-        System.out.println("Color is: " + color);
+    public void eat() {
+        System.out.println(name + " is eating.");
     }
 }
 
-// Concrete class implementing abstract class
-class Circle extends Shape {
-    private double radius;
-    
-    public Circle(String color, double radius) {
-        super(color);
-        this.radius = radius;
+class Dog extends Animal {
+    public Dog(String name) {
+        super(name);
     }
-    
+
     @Override
-    double calculateArea() {
-        return Math.PI * radius * radius;
+    public void makeSound() {
+        System.out.println(name + " says Woof!");
     }
 }`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Interface Section */}
-            <MethodCard
-              title="Interfaces"
-              description="Creating and implementing interfaces"
-            >
-              <CodeBlock
-                code={`// Interface definition
-interface Drawable {
-    void draw();  // Abstract method
-    
-    // Default method (Java 8+)
-    default void display() {
-        System.out.println("Displaying shape");
+        {/* Why Use Abstraction Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Why Use Abstraction?</h2>
+          <ul className="list-disc pl-6 space-y-3 text-gray-300">
+            <li>To hide unnecessary implementation details from the user.</li>
+            <li>To enhance code readability and reduce complexity.</li>
+            <li>To promote reusability and maintainability.</li>
+            <li>To focus on the "what" rather than the "how."</li>
+          </ul>
+        </section>
+
+        {/* Example: Abstracting a Vehicle Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Example: Abstracting a Vehicle</h2>
+          <p className="text-gray-300 mb-4">
+            Here's an example of abstraction using a base class for vehicles and derived classes for specific vehicle types.
+          </p>
+          <CodeBlock
+            code={`abstract class Vehicle {
+    protected String brand;
+
+    public Vehicle(String brand) {
+        this.brand = brand;
     }
-    
-    // Static method (Java 8+)
-    static void info() {
-        System.out.println("Drawable interface");
+
+    // Abstract method
+    public abstract void drive();
+
+    // Concrete method
+    public void stop() {
+        System.out.println(brand + " has stopped.");
     }
 }
 
-// Class implementing interface
-class Rectangle extends Shape implements Drawable {
-    private double width;
-    private double height;
-    
-    public Rectangle(String color, double width, double height) {
-        super(color);
-        this.width = width;
-        this.height = height;
+class Car extends Vehicle {
+    public Car(String brand) {
+        super(brand);
     }
-    
+
     @Override
-    double calculateArea() {
-        return width * height;
+    public void drive() {
+        System.out.println(brand + " is driving on the road.");
     }
-    
+}
+
+class Boat extends Vehicle {
+    public Boat(String brand) {
+        super(brand);
+    }
+
     @Override
-    public void draw() {
-        System.out.println("Drawing rectangle");
+    public void drive() {
+        System.out.println(brand + " is sailing on the water.");
     }
 }`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Multiple Inheritance Section */}
-            <MethodCard
-              title="Multiple Inheritance with Interfaces"
-              description="Implementing multiple interfaces"
-            >
-              <CodeBlock
-                code={`interface Printable {
-    void print();
-}
+        {/* Dry Run Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`Vehicle myCar = new Car("Toyota");
+myCar.drive();  // Output: Toyota is driving on the road.
+myCar.stop();   // Output: Toyota has stopped.
 
-interface Scalable {
-    void resize(double factor);
-}
+Vehicle myBoat = new Boat("Yamaha");
+myBoat.drive(); // Output: Yamaha is sailing on the water.
+myBoat.stop();  // Output: Yamaha has stopped.`}
+            language="java"
+          />
+          <p className="text-gray-300 mt-4">
+            This dry run demonstrates how abstraction enables focusing on the behavior (drive and stop) without worrying about implementation details.
+          </p>
+        </section>
 
-// Class implementing multiple interfaces
-class Square extends Shape implements Drawable, Printable, Scalable {
-    private double side;
-    
-    @Override
-    double calculateArea() {
-        return side * side;
-    }
-    
-    @Override
-    public void draw() {
-        System.out.println("Drawing square");
-    }
-    
-    @Override
-    public void print() {
-        System.out.println("Printing square");
-    }
-    
-    @Override
-    public void resize(double factor) {
-        this.side *= factor;
-    }
-}`}
-                language="java"
-              />
-            </MethodCard>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use abstract classes for shared functionality and behavior.</li>
+            <li>Focus on the essential details relevant to the use case.</li>
+            <li>Leverage abstraction to simplify complex systems.</li>
+          </ul>
+        </section>
 
-            {/* Dry Run Example */}
-            <MethodCard
-              title="Dry Run: Abstraction Example"
-              description="Step by step execution of abstract classes and interfaces"
-            >
-              <CodeBlock
-                code={`// Step 1: Create objects
-Circle circle = new Circle("Red", 5.0);
-Rectangle rect = new Rectangle("Blue", 4.0, 6.0);
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Combine abstraction with encapsulation for better modularity.</li>
+            <li>Design abstract classes with a clear purpose to avoid unnecessary complexity.</li>
+            <li>Use abstraction to create flexible and scalable architectures.</li>
+          </ul>
+        </section>
 
-// Step 2: Call abstract method
-System.out.println(circle.calculateArea());  // 78.54
-System.out.println(rect.calculateArea());    // 24.0
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Defining too many abstract methods, leading to over-complication.</li>
+            <li>Not providing concrete implementations for shared behavior in abstract classes.</li>
+            <li>Confusing abstraction with encapsulation.</li>
+          </ul>
+        </section>
 
-// Step 3: Call concrete method
-circle.displayColor();  // Color is: Red
-rect.displayColor();    // Color is: Blue
-
-// Step 4: Call interface methods
-rect.draw();           // Drawing rectangle
-rect.display();        // Displaying shape
-Drawable.info();       // Drawable interface
-
-// Step 5: Cannot instantiate abstract class
-// Shape shape = new Shape("Green");  // Compilation error`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
-
-          {/* Right Sidebar */}
-          <div className="col-span-3 space-y-8">
-            {/* Key Points */}
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-800 dark:text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-700 dark:text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Hide implementation details</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Abstract classes vs Interfaces</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Multiple inheritance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Default methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Method overriding</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Differences Section */}
-            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-800 dark:text-green-200">
-                Abstract Class vs Interface
-              </h2>
-              <ul className="space-y-3 text-green-700 dark:text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Can have constructors vs Cannot</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Single vs Multiple inheritance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Can have state vs Cannot</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Partial vs Complete abstraction</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>IS-A vs CAN-DO relationship</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Overuse of abstraction</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Incorrect abstract method usage</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Missing method implementations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Poor interface segregation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Redundant abstract classes</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep interfaces focused</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use abstract classes wisely</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Follow ISP principle</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document abstract methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Provide default implementations</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Pro Tips Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Pro Tips
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use functional interfaces</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider sealed classes</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Leverage default methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Design for extension</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use marker interfaces</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Key Concepts Section */}
-            <div className="bg-purple-900/20 border border-purple-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-purple-200">
-                Key Concepts
-              </h2>
-              <ul className="space-y-3 text-purple-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Abstract classes</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Interfaces</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Implementation hiding</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Contract definition</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Polymorphic behavior</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use abstract classes for common functionality and behavior.</li>
+            <li>Focus on essential details to create meaningful abstraction.</li>
+            <li>Document abstract methods and classes for clarity.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Abstraction; 
+export default Abstraction;

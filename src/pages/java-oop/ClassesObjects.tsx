@@ -1,200 +1,157 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const ClassesObjects: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Classes and Objects in Java
-              </h1>
-              <p className="text-gray-300">
-                Classes are blueprints for creating objects, defining their properties and behaviors. Objects are instances of classes that contain real data and can perform actions through methods.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Classes and Objects in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          A class serves as a blueprint for creating objects, defining their properties and behaviors. Objects are instances of classes, holding actual data and performing actions via methods.
+        </p>
+      </header>
 
-            {/* Class Definition Section */}
-            <MethodCard
-              title="Class Definition"
-              description="Basic structure of a Java class"
-            >
-              <CodeBlock
-                code={`public class Student {
+      <main className="space-y-12">
+        {/* Class Definition Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Class Definition</h2>
+          <p className="text-gray-300 mb-4">
+            Classes define the structure and behavior of objects. They include fields (attributes), methods (behaviors), constructors, and sometimes static members.
+          </p>
+          <CodeBlock
+            code={`public class Student {
     // Instance Variables (Properties)
     private String name;
     private int age;
     private double gpa;
-    
+
     // Static Variable (Shared by all instances)
     private static int totalStudents = 0;
-    
+
     // Constructor
     public Student(String name, int age) {
         this.name = name;
         this.age = age;
         totalStudents++;
     }
-    
+
     // Instance Methods (Behaviors)
     public void study() {
         System.out.println(name + " is studying");
     }
-    
+
     // Static Method
     public static int getTotalStudents() {
         return totalStudents;
     }
 }`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Memory Allocation Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-semibold mb-4 text-gray-100">
-                  Stack Memory
-                </h2>
-                <p className="text-gray-300">
-                  Stores primitive variables and object references
-                </p>
-              </div>
-              <div className="bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-semibold mb-4 text-gray-100">
-                  Heap Memory
-                </h2>
-                <p className="text-gray-300">
-                  Stores actual objects and their instance variables
-                </p>
-              </div>
-            </div>
+        {/* Memory Allocation Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Memory Allocation</h2>
+          <p className="text-gray-300 mb-4">
+            Understanding memory allocation for classes and objects helps in optimizing performance.
+          </p>
+          <ul className="list-disc pl-6 space-y-3 text-gray-300">
+            <li>
+              <strong>Stack Memory:</strong> Stores primitive data types and references to objects.
+            </li>
+            <li>
+              <strong>Heap Memory:</strong> Stores objects and their instance variables.
+            </li>
+          </ul>
+        </section>
 
-            {/* Object Creation and Usage */}
-            <MethodCard
-              title="Object Creation and Usage"
-              description="Different ways to create and use objects"
-            >
-              <CodeBlock
-                code={`// Creating objects
-Student student1 = new Student("John", 20);  // Using constructor
-Student student2 = new Student("Alice", 21); // Another instance
+        {/* Object Creation and Usage Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Object Creation and Usage</h2>
+          <p className="text-gray-300 mb-4">
+            Objects are created using constructors and are used to access class properties and methods.
+          </p>
+          <CodeBlock
+            code={`// Creating objects
+Student student1 = new Student("John", 20);
+Student student2 = new Student("Alice", 21);
 
 // Using objects
-student1.study();  // John is studying
-student2.study();  // Alice is studying
+student1.study();  // Output: John is studying
+student2.study();  // Output: Alice is studying
 
-// Static method call (through class)
-int total = Student.getTotalStudents();  // Returns 2
+// Accessing static members
+int total = Student.getTotalStudents();  // Returns total number of students`}
+            language="java"
+          />
+        </section>
 
-// Object state
-System.out.println(student1.getName());  // "John"
-student1.setAge(21);  // Modifying object state
+        {/* Dry Run Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`// Object lifecycle example
+Student student1 = new Student("John", 20);
+// Memory is allocated in the heap for 'student1'
 
-// Object comparison
-Student student3 = student1;  // Reference copy
-System.out.println(student1 == student3);      // true (same reference)
-System.out.println(student1.equals(student2)); // false (different objects)`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Dry Run Example */}
-            <MethodCard
-              title="Dry Run: Object Lifecycle"
-              description="Step by step object creation and usage"
-            >
-              <CodeBlock
-                code={`// Step 1: Class loading
-// Student class is loaded into memory
-
-// Step 2: Object creation
-Student s1 = new Student("John", 20);
-// - Memory allocated in heap
-// - Constructor called
-// - Instance variables initialized
-// - totalStudents incremented to 1
-
-// Step 3: Object usage
-s1.study();
+// Accessing instance methods
+student1.study();
 // Output: John is studying
 
-// Step 4: State modification
-s1.setGpa(3.5);
-// Object state updated in heap
+// Changing the state of the object
+student1.setGpa(3.8);  // GPA updated for 'student1'
 
-// Step 5: Object eligible for GC
-s1 = null;
-// Original object becomes eligible for garbage collection`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
+// Making the object eligible for garbage collection
+student1 = null;
+// Original 'student1' object is now eligible for GC`}
+            language="java"
+          />
+        </section>
 
-          {/* Right Sidebar */}
-          <div className="col-span-3 space-y-8">
-            {/* Key Points */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Objects are instances of classes</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Instance vs Static members</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Memory allocation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Object lifecycle</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use constructors to initialize objects with default or specified values.</li>
+            <li>Differentiate between instance and static variables for better organization.</li>
+            <li>Encapsulate fields and expose them via getter and setter methods.</li>
+          </ul>
+        </section>
 
-            {/* Object Concepts */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Object Concepts
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>State and behavior</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Object references</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Garbage collection</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Object comparison</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Object creation</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use the <code>this</code> keyword to avoid variable shadowing.</li>
+            <li>Leverage static members for data that is common to all objects of a class.</li>
+            <li>Implement the <code>equals()</code> and <code>hashCode()</code> methods for better object comparison.</li>
+          </ul>
+        </section>
+
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Failing to initialize variables in the constructor, leading to null or default values.</li>
+            <li>Using static variables for instance-specific data.</li>
+            <li>Overusing constructors instead of setters for optional properties.</li>
+          </ul>
+        </section>
+
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Follow proper naming conventions for class names, methods, and variables.</li>
+            <li>Make use of encapsulation to protect the internal state of objects.</li>
+            <li>Use static methods for utility functions that do not depend on object state.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default ClassesObjects; 
+export default ClassesObjects;

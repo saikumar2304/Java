@@ -122,165 +122,119 @@ public class RecursiveDryRun {
 
 // Final result: 8`;
 
+  const visualRepresentation = `
+1. **Recursive Function Flow**:
+   - Start with the base case. If it's satisfied, return a result.
+   - If not, proceed to the recursive case.
+   - Each recursive call pushes a new frame onto the call stack.
+
+2. **Key Steps**:
+   - Identify a problem that can be divided into smaller subproblems.
+   - Define a base case to terminate recursion.
+   - Define a recursive case to divide the problem further.
+
+3. **Call Stack Management**:
+   - Each recursive call is stored on the call stack.
+   - Unwind the stack as base cases are reached, returning results to previous calls.
+`;
+
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Recursion in Java
-              </h1>
-              <p className="text-gray-300">
-                Recursion is a programming technique where a method calls itself to solve a problem by 
-                breaking it down into smaller subproblems. It consists of a base case that stops the 
-                recursion and a recursive case that continues it.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Recursion in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Recursion is a programming technique where a method calls itself to solve a problem by breaking it down into smaller subproblems. It consists of a base case that stops the recursion and a recursive case that continues it.
+        </p>
+      </header>
 
-            {/* Basic Examples Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Recursion Examples
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Classic examples of recursion include factorial calculation and Fibonacci sequence.
-                </p>
-              </div>
-            </div>
+      <main className="space-y-12">
+        {/* Basic Examples Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Basic Examples
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Examples include calculating factorials and generating Fibonacci sequences.
+          </p>
+        </section>
 
-            {/* Practical Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Practical Recursion Example
-              </h2>
-              <CodeBlock code={practicalExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Real-world example of using recursion to traverse directory structures.
-                </p>
-              </div>
-            </div>
+        {/* Practical Example Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Practical Example
+          </h2>
+          <CodeBlock code={practicalExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Real-world use case: Traversing directory structures with recursion.
+          </p>
+        </section>
 
-            {/* Tail Recursion Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Tail Recursion
-              </h2>
-              <CodeBlock code={tailRecursionExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Tail recursion is an optimization technique where the recursive call is the last operation.
-                </p>
-              </div>
-            </div>
+        {/* Tail Recursion Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Tail Recursion</h2>
+          <CodeBlock code={tailRecursionExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Tail recursion optimizes recursive calls by eliminating stack overhead when possible.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
-          </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run</h2>
+          <CodeBlock code={dryRunExample} language="java" />
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Missing base case</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Infinite recursion</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Stack overflow</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Inefficient recursive solutions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not considering iterative alternatives</span>
-                </li>
-              </ul>
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Visual Representation</h2>
+          <CodeBlock code={visualRepresentation} language="markdown" />
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Always include base case</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use tail recursion when possible</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider memory limitations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Test with boundary cases</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document recursive logic</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Start with a clear base case to avoid infinite recursion.</li>
+            <li>Break problems into smaller, independent subproblems.</li>
+            <li>Test with small inputs before scaling up.</li>
+          </ul>
+        </section>
 
-            {/* Key Concepts Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Concepts
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Base case</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Recursive case</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Call stack</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Tail recursion</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Recursive depth</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use memoization to optimize recursive calls by caching results.</li>
+            <li>Consider iterative solutions for shallow recursion to save memory.</li>
+            <li>Document the recursion logic for better maintainability.</li>
+          </ul>
+        </section>
+
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Forgetting to define a base case.</li>
+            <li>Creating infinite recursion loops.</li>
+            <li>Ignoring stack overflow risks for deep recursion.</li>
+          </ul>
+        </section>
+
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use recursion only when it simplifies the problem.</li>
+            <li>Prefer tail recursion for better optimization.</li>
+            <li>Optimize recursive depth with a clear termination condition.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Recursion; 
+export default Recursion;

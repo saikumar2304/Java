@@ -100,6 +100,11 @@ public class Student {
         Student s2 = new Student("John");              // Uses second constructor
         Student s3 = new Student("Alice", 20);         // Uses third constructor
         Student s4 = new Student("Bob", 22, "Java");   // Uses fourth constructor
+
+        s1.displayInfo();
+        s2.displayInfo();
+        s3.displayInfo();
+        s4.displayInfo();
     }
 }`;
 
@@ -127,187 +132,121 @@ public class StringUtil {
 }
 
 // Dry Run:
-String text = "hello hello world";
-char ch = 'l';
-String substr = "hello";
+// String text = "hello hello world";
+// char ch = 'l';
+// String substr = "hello";
 
-int result1 = StringUtil.count(text, ch);     // Calls first method
-// count = 0
-// Loop through "hello hello world"
-// 'h' != 'l', count = 0
-// 'e' != 'l', count = 0
-// 'l' == 'l', count = 1
-// 'l' == 'l', count = 2
-// 'o' != 'l', count = 2
-// ... and so on
-// Final count = 4
+// Result 1: StringUtil.count(text, ch) -> Counts 'l' in the text (returns 4).
+// Result 2: StringUtil.count(text, substr) -> Counts occurrences of "hello" (returns 2).
+`;
 
-int result2 = StringUtil.count(text, substr); // Calls second method
-// count = 0
-// First "hello" found at index 0, count = 1
-// Second "hello" found at index 6, count = 2
-// No more occurrences
-// Final count = 2`;
+  const visualRepresentation = `
+1. **How Method Overloading Works:**
+   - Methods have the same name but differ in:
+     - Number of parameters.
+     - Types of parameters.
+     - Order of parameters.
+
+2. **Call Resolution:**
+   - At compile time, the most specific method matching the arguments is chosen.
+
+3. **Constructor Overloading:**
+   - Overloaded constructors allow creating objects in multiple ways.
+
+4. **Type Promotion in Overloading:**
+   - Java automatically promotes smaller types to larger compatible types during method calls.
+`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Method Overloading in Java
-              </h1>
-              <p className="text-gray-300">
-                Method overloading allows you to define multiple methods with the same name but different 
-                parameters. This provides flexibility in how methods can be called and makes your code 
-                more intuitive to use.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Method Overloading in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Method overloading allows defining multiple methods with the same name but different parameters, enabling flexibility and intuitive method usage.
+        </p>
+      </header>
 
-            {/* Basic Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Method Overloading
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Methods can be overloaded by changing the number or types of parameters.
-                </p>
-              </div>
-            </div>
+      <main className="space-y-12">
+        {/* Basic Usage */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Basic Example</h2>
+          <CodeBlock code={basicExample} language="java" />
+        </section>
 
-            {/* Type Promotion Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Type Promotion in Overloading
-              </h2>
-              <CodeBlock code={typePromotionExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Java automatically promotes primitive types when matching overloaded methods.
-                </p>
-              </div>
-            </div>
+        {/* Type Promotion */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Type Promotion in Overloading
+          </h2>
+          <CodeBlock code={typePromotionExample} language="java" />
+        </section>
 
-            {/* Constructor Overloading Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Constructor Overloading
-              </h2>
-              <CodeBlock code={constructorOverloadingExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Constructors can also be overloaded to provide different ways of creating objects.
-                </p>
-              </div>
-            </div>
+        {/* Constructor Overloading */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Constructor Overloading
+          </h2>
+          <CodeBlock code={constructorOverloadingExample} language="java" />
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
-          </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run</h2>
+          <CodeBlock code={dryRunExample} language="java" />
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Overloading based on return type</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Ambiguous method calls</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Ignoring type promotion</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Confusing overloading with overriding</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Too many overloaded versions</span>
-                </li>
-              </ul>
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Visual Representation
+          </h2>
+          <CodeBlock code={visualRepresentation} language="markdown" />
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep parameter lists consistent</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use meaningful parameter names</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document each overloaded version</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider using varargs instead</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Maintain logical parameter order</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Keep overloaded methods logically consistent.</li>
+            <li>Document each version of the overloaded method.</li>
+            <li>Use overloading sparingly to avoid confusion.</li>
+          </ul>
+        </section>
 
-            {/* Key Points Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Same name, different parameters</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Return type can differ</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Compile-time polymorphism</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Type promotion rules</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Constructor overloading</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use constructor overloading to simplify object creation.</li>
+            <li>Leverage varargs when the number of parameters varies.</li>
+            <li>Avoid excessive overloading; it can lead to ambiguity.</li>
+          </ul>
+        </section>
+
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Overloading only by return type (not allowed).</li>
+            <li>Confusing method overloading with overriding.</li>
+            <li>Ambiguous calls due to improper argument matching.</li>
+          </ul>
+        </section>
+
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use meaningful and consistent parameter names.</li>
+            <li>Limit the number of overloaded methods for readability.</li>
+            <li>Always test overloaded methods for edge cases.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default MethodOverloading; 
+export default MethodOverloading;

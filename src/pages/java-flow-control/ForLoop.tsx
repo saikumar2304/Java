@@ -53,201 +53,139 @@ System.out.println("Final sum: " + sum);
 //    - sum = 1 + 2 = 3
 //    - Print: "After adding 2, sum is: 3"
 //    - i++ (i becomes 3)
-// ... and so on until i becomes 6
-// Output:
-// After adding 1, sum is: 1
-// After adding 2, sum is: 3
-// After adding 3, sum is: 6
-// After adding 4, sum is: 10
-// After adding 5, sum is: 15
-// Final sum: 15`;
-
-  const multipleVariablesExample = `
-// Using multiple variables in for loop
-for (int i = 1, j = 10; i <= 5; i++, j--) {
-    System.out.println("i = " + i + ", j = " + j);
-}
-// Output:
-// i = 1, j = 10
-// i = 2, j = 9
-// i = 3, j = 8
-// i = 4, j = 7
-// i = 5, j = 6`;
-
-  const nestedLoopExample = `
-// Nested for loop example - Multiplication table
-for (int i = 1; i <= 3; i++) {
-    for (int j = 1; j <= 3; j++) {
-        System.out.print(i * j + "\\t");
-    }
-    System.out.println();  // New line after each row
-}
-// Output:
-// 1    2    3
-// 2    4    6
-// 3    6    9`;
+// ... and so on until i becomes 6`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                For Loop in Java
-              </h1>
-              <p className="text-gray-300">
-                The for loop is one of the most commonly used loop structures in Java. It provides a concise way to write a loop 
-                that needs to execute a specific number of times. The for loop includes initialization, condition, and increment/decrement 
-                expressions in a single line.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          For Loop in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <strong>for loop</strong> is a fundamental control structure in Java, used to repeat a block of code a specific number of times. 
+          It combines initialization, condition-checking, and updating in a single line.
+        </p>
+      </header>
 
-            {/* Basic Syntax Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Syntax and Example
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">Components of a for loop:</p>
-                <ul className="list-disc ml-6 mt-2 text-gray-300">
-                  <li><span className="text-yellow-400">Initialization:</span> Executed once before the loop starts</li>
-                  <li><span className="text-yellow-400">Condition:</span> Checked before each iteration</li>
-                  <li><span className="text-yellow-400">Increment/Decrement:</span> Executed after each iteration</li>
-                </ul>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Basic Syntax */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Basic Syntax
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The <strong>for loop</strong> structure includes three parts:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
+            <li>
+              <span className="text-yellow-400">Initialization:</span> A variable is initialized once before the loop starts.
+            </li>
+            <li>
+              <span className="text-yellow-400">Condition:</span> The loop continues as long as this evaluates to <strong>true</strong>.
+            </li>
+            <li>
+              <span className="text-yellow-400">Increment/Decrement:</span> Updates the loop variable after each iteration.
+            </li>
+          </ul>
+        </section>
 
-            {/* Array Iteration Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Array Iteration
-              </h2>
-              <CodeBlock code={arrayExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                For loops are commonly used to iterate through arrays. The loop counter serves as the array index.
-              </p>
-            </div>
-
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
-
-            {/* Multiple Variables Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Multiple Variables
-              </h2>
-              <CodeBlock code={multipleVariablesExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                You can use multiple variables in a for loop by separating them with commas.
-              </p>
-            </div>
-
-            {/* Nested Loops Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Nested For Loops
-              </h2>
-              <CodeBlock code={nestedLoopExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                Nested loops are useful for working with 2D arrays or creating patterns.
-              </p>
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Visual Representation
+          </h2>
+          <p className="text-gray-300">
+            The <strong>for loop</strong> processes as follows:
+          </p>
+          <div className="bg-gray-700 p-4 rounded-lg text-gray-200">
+            <ul className="list-decimal pl-6 space-y-3">
+              <li>Initialize a loop variable (e.g., <code>int i = 1</code>).</li>
+              <li>Check the condition (e.g., <code>i &lt;= 5</code>). If true, execute the code block. If false, exit the loop.</li>
+              <li>Execute the code block inside the loop.</li>
+              <li>Update the loop variable (e.g., <code>i++</code>).</li>
+              <li>Repeat steps 2-4 until the condition becomes false.</li>
+            </ul>
           </div>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using wrong comparison operator in condition</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Infinite loops due to incorrect increment/decrement</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Off-by-one errors in array iteration</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Modifying loop variable inside the loop</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Forgetting to update the loop variable</span>
-                </li>
-              </ul>
-            </div>
+        {/* Array Iteration */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Iterating Through Arrays
+          </h2>
+          <CodeBlock code={arrayExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            For loops are commonly used to iterate through arrays. The loop variable serves as the array index, allowing you to access each element in turn.
+          </p>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use meaningful variable names (not just i, j, k)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep loop bodies simple and focused</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider using enhanced for loop for arrays</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Avoid deep nesting of loops</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Initialize variables close to their usage</span>
-                </li>
-              </ul>
-            </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+            Dry Run Example
+          </h2>
+          <CodeBlock code={dryRunExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The dry run shows step-by-step how the loop variables change and how the final result is calculated.
+          </p>
+        </section>
 
-            {/* Performance Tips Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Performance Tips
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Cache array length in a variable for iteration</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Minimize operations in the loop condition</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use break when appropriate to exit early</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">
+            Common Mistakes
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Using the wrong comparison operator in the condition.</li>
+            <li>Forgetting to update the loop variable, leading to infinite loops.</li>
+            <li>Off-by-one errors when iterating over arrays.</li>
+            <li>Modifying the loop variable inside the loop body unnecessarily.</li>
+          </ul>
+        </section>
+
+        {/* Tips */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Tips for Using For Loops
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use meaningful variable names instead of generic ones like <code>i</code> or <code>j</code>.</li>
+            <li>Keep the loop body simple and focused on one task.</li>
+            <li>Cache the array length in a variable for better performance when iterating.</li>
+            <li>Avoid deeply nested loops to improve readability and performance.</li>
+          </ul>
+        </section>
+
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Pro Tips
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>
+              Use enhanced for loops (also known as "for-each" loops) for cleaner syntax when iterating over arrays:
+              <CodeBlock
+                code={`int[] numbers = {1, 2, 3, 4, 5};
+for (int number : numbers) {
+    System.out.println("Number: " + number);
+}`}
+                language="java"
+              />
+            </li>
+            <li>
+              Break complex logic into separate functions and call them inside the loop for better organization.
+            </li>
+            <li>
+              Use the <code>break</code> statement to exit a loop early when a specific condition is met.
+            </li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default ForLoop; 
+export default ForLoop;

@@ -10,6 +10,7 @@ interface Exercise {
 }
 
 const stringExercises: Exercise[] = [
+  // Easy Problems
   {
     id: 'string-reverse',
     title: 'Reverse String',
@@ -26,6 +27,114 @@ const stringExercises: Exercise[] = [
     id: 'palindrome',
     title: 'Check Palindrome',
     description: 'Check if a given string is a palindrome.',
+    difficulty: 'Easy'
+  },
+  {
+    id: 'count-words',
+    title: 'Count Words',
+    description: 'Count the number of words in a given string.',
+    difficulty: 'Easy'
+  },
+  {
+    id: 'remove-whitespace',
+    title: 'Remove Whitespace',
+    description: 'Remove all whitespace characters from a string.',
+    difficulty: 'Easy'
+  },
+
+  // Medium Problems
+  {
+    id: 'longest-word',
+    title: 'Longest Word',
+    description: 'Find the longest word in a given sentence.',
+    difficulty: 'Medium'
+  },
+  {
+    id: 'character-frequency',
+    title: 'Character Frequency',
+    description: 'Find the frequency of each character in a string.',
+    difficulty: 'Medium'
+  },
+  {
+    id: 'first-non-repeating',
+    title: 'First Non-Repeating Character',
+    description: 'Find the first non-repeating character in a string.',
+    difficulty: 'Medium'
+  },
+  {
+    id: 'remove-duplicates',
+    title: 'Remove Duplicates',
+    description: 'Remove duplicate characters from a string.',
+    difficulty: 'Medium'
+  },
+  {
+    id: 'isomorphic-strings',
+    title: 'Isomorphic Strings',
+    description: 'Check if two strings are isomorphic.',
+    difficulty: 'Medium'
+  },
+
+  // Hard Problems
+  {
+    id: 'longest-palindromic-substring',
+    title: 'Longest Palindromic Substring',
+    description: 'Find the longest palindromic substring in a string.',
+    difficulty: 'Hard'
+  },
+  {
+    id: 'substring-anagrams',
+    title: 'Substring Anagrams',
+    description: 'Find all substrings of a string that are anagrams of another string.',
+    difficulty: 'Hard'
+  },
+  {
+    id: 'wildcard-matching',
+    title: 'Wildcard Matching',
+    description: 'Implement wildcard matching with ? and *.',
+    difficulty: 'Hard'
+  },
+  {
+    id: 'edit-distance',
+    title: 'Edit Distance',
+    description: 'Calculate the minimum edit distance between two strings.',
+    difficulty: 'Hard'
+  },
+  {
+    id: 'decode-ways',
+    title: 'Decode Ways',
+    description: 'Decode a numeric string into letters using a given encoding scheme.',
+    difficulty: 'Hard'
+  },
+
+  // Additional Problems
+  {
+    id: 'reverse-words',
+    title: 'Reverse Words',
+    description: 'Reverse the order of words in a string.',
+    difficulty: 'Medium'
+  },
+  {
+    id: 'validate-ip',
+    title: 'Validate IP Address',
+    description: 'Check if a string is a valid IPv4 or IPv6 address.',
+    difficulty: 'Hard'
+  },
+  {
+    id: 'string-compression',
+    title: 'String Compression',
+    description: 'Compress a string by replacing sequences of the same character with that character followed by the count.',
+    difficulty: 'Medium'
+  },
+  {
+    id: 'generate-parentheses',
+    title: 'Generate Parentheses',
+    description: 'Generate all valid combinations of n pairs of parentheses.',
+    difficulty: 'Hard'
+  },
+  {
+    id: 'group-anagrams',
+    title: 'Group Anagrams',
+    description: 'Group an array of strings into anagrams.',
     difficulty: 'Medium'
   }
 ];
@@ -48,7 +157,6 @@ const StringsExercises: React.FC = () => {
               to={`/hands-on/strings/${exercise.id}`}
               className="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors group"
             >
-              {/* Same card structure as ArraysExercises */}
               <div className="flex justify-between items-start">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
@@ -74,4 +182,4 @@ const StringsExercises: React.FC = () => {
   );
 };
 
-export default StringsExercises; 
+export default StringsExercises;

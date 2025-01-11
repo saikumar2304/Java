@@ -1,252 +1,116 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
-const StringBuffer: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                StringBuffer in Java
-              </h1>
-              <p className="text-gray-300">
-                StringBuffer provides a mutable sequence of characters and is thread-safe. It's designed for string manipulations in multi-threaded environments where synchronization is required.
-              </p>
-            </div>
-
-            {/* Creation and Initialization Section */}
-            <MethodCard
-              title="Creating StringBuffer"
-              description="Different ways to initialize StringBuffer"
-            >
-              <CodeBlock
-                code={`// Empty buffer with default capacity (16)
-StringBuffer sb1 = new StringBuffer();
-
-// With initial capacity
-StringBuffer sb2 = new StringBuffer(32);
-
-// With initial string
-StringBuffer sb3 = new StringBuffer("Hello");
-
-// Copy constructor
-StringBuffer sb4 = new StringBuffer(sb3);
-
-// Check capacity and length
-System.out.println(sb3.capacity());  // 21 (16 + "Hello".length())
-System.out.println(sb3.length());    // 5`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Basic Operations Section */}
-            <MethodCard
-              title="Basic Operations"
-              description="Common StringBuffer operations"
-            >
-              <CodeBlock
-                code={`StringBuffer sb = new StringBuffer("Hello");
-
-// Append operations
-sb.append(" ");           // Hello 
-sb.append("World");       // Hello World
-sb.append(123);          // Hello World123
-sb.append(true);         // Hello World123true
-
-// Insert operations
-sb.insert(5, "!");       // Hello! World123true
-sb.insert(0, "Say ");    // Say Hello! World123true
-
-// Delete operations
-sb.delete(0, 4);         // Hello! World123true
-sb.deleteCharAt(5);      // Hello World123true
-
-// Replace operations
-sb.replace(6, 11, "Java");  // Hello Java123true`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* String Manipulation Section */}
-            <MethodCard
-              title="String Manipulation"
-              description="Advanced string operations with StringBuffer"
-            >
-              <CodeBlock
-                code={`StringBuffer sb = new StringBuffer("Hello World");
-
-// Reverse the string
-sb.reverse();  // dlroW olleH
-sb.reverse();  // Hello World
-
-// Substring operations
-String sub = sb.substring(6);     // "World"
-String sub2 = sb.substring(0, 5); // "Hello"
-
-// Character operations
-sb.setCharAt(0, 'h');            // hello World
-char ch = sb.charAt(0);          // 'h'
-
-// Change length
-sb.setLength(5);                 // "hello"`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Thread Safety Section */}
-            <MethodCard
-              title="Thread Safety Example"
-              description="Demonstrating thread-safe operations"
-            >
-              <CodeBlock
-                code={`class SharedBuffer {
-    private StringBuffer buffer = new StringBuffer();
+const StringBufferExample: React.FC = () => {
+  const stringBufferExample = `
+    // Creating a StringBuffer
+    StringBuffer sb1 = new StringBuffer("Hello");
+    System.out.println(sb1);  // Output: Hello
     
-    public void appendThread(String text) {
-        synchronized(this) {
-            buffer.append(text);
-            buffer.append("\\n");
-        }
-    }
-}
+    // Append a string
+    sb1.append(" World!");
+    System.out.println(sb1);  // Output: Hello World!
+    
+    // Insert a string at a specific position
+    sb1.insert(6, "Java ");
+    System.out.println(sb1);  // Output: Hello Java World!
+    
+    // Reverse the string
+    sb1.reverse();
+    System.out.println(sb1);  // Output: !dlroW avaJ olleH
+  `;
 
-// Usage in multiple threads
-SharedBuffer shared = new SharedBuffer();
-Thread t1 = new Thread(() -> shared.appendThread("Thread 1"));
-Thread t2 = new Thread(() -> shared.appendThread("Thread 2"));
-t1.start();
-t2.start();`}
-                language="java"
-              />
-            </MethodCard>
+  const stringBufferVsStringExample = `
+    // StringBuffer is mutable, while String is immutable
+    String str = "Hello";
+    StringBuffer sb = new StringBuffer("Hello");
 
-            {/* Performance Considerations Section */}
-            <MethodCard
-              title="Performance Optimization"
-              description="Tips for optimal StringBuffer usage"
-            >
-              <CodeBlock
-                code={`// Set initial capacity to avoid resizing
-int expectedSize = 100;
-StringBuffer sb = new StringBuffer(expectedSize);
+    str = str + " World!";  // Creates a new String object
+    sb.append(" World!");  // Modifies the existing StringBuffer object
 
-// Chaining operations
-StringBuffer result = new StringBuffer()
-    .append("Hello")
-    .append(" ")
-    .append("World")
-    .append("!")
-    .append("\\n");
+    System.out.println(str);  // Output: Hello World!
+    System.out.println(sb);  // Output: Hello World!
+  `;
 
-// Ensure capacity before large operations
-StringBuffer large = new StringBuffer();
-large.ensureCapacity(1000);  // Pre-allocate space
+  return (
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          StringBuffer in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Learn about the StringBuffer class, which provides mutable strings and allows efficient string manipulation.
+        </p>
+      </header>
 
-// Trim to size after operations
-large.trimToSize();  // Release unused memory`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
+      <main className="space-y-12">
+        {/* StringBuffer Basic Operations Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">StringBuffer Operations</h2>
+          <CodeBlock code={stringBufferExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The <code>StringBuffer</code> class is mutable, allowing modification of the string content without creating new objects.
+            Operations like <code>append()</code>, <code>insert()</code>, and <code>reverse()</code> can modify the original StringBuffer.
+          </p>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not setting initial capacity</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Unnecessary synchronization</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Memory leaks in loops</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Ignoring return values</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using when StringBuilder fits</span>
-                </li>
-              </ul>
-            </div>
+        {/* StringBuffer vs String Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">StringBuffer vs String</h2>
+          <CodeBlock code={stringBufferVsStringExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            StringBuffer objects are mutable, meaning that they can be modified in place. In contrast, strings in Java are immutable, so any modification results in a new object.
+            This example compares how both types behave when manipulating content.
+          </p>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Set appropriate capacity</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use for thread-safe ops</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Chain method calls</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Release unused memory</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Check buffer overflow</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use <code>StringBuffer</code> when you need to modify a string frequently to avoid unnecessary object creation.</li>
+            <li>For thread-safe operations, use <code>StringBuffer</code> instead of <code>StringBuilder</code>.</li>
+            <li>When performing a lot of string concatenation or modifications, <code>StringBuffer</code> provides better performance compared to using <code>String</code> directly.</li>
+          </ul>
+        </section>
 
-            {/* Key Points Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Thread-safe implementation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Mutable string operations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Dynamic capacity growth</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Synchronized methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Performance overhead</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Using <code>StringBuffer</code> unnecessarily when <code>String</code> suffices, leading to unnecessary memory overhead.</li>
+            <li>Assuming that <code>StringBuffer</code> objects are immutable like strings—remember that <code>StringBuffer</code> is mutable!</li>
+            <li>Not using <code>StringBuilder</code> when thread safety is not a concern, which may lead to inefficiency.</li>
+          </ul>
+        </section>
+
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use <code>StringBuffer</code> for mutable strings when you need to modify the string in place.</li>
+            <li>For thread-safe operations, use <code>StringBuffer</code> instead of <code>StringBuilder</code>.</li>
+            <li>Prefer <code>StringBuilder</code> when thread safety is not a concern and you're looking for better performance.</li>
+          </ul>
+        </section>
+
+        {/* Dry Run Example Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`// StringBuffer append operation
+StringBuffer sb = new StringBuffer("Java");
+sb.append(" Programming");
+System.out.println(sb);  // Output: Java Programming`}
+            language="java"
+          />
+          <p className="text-gray-300 mt-4">
+            This dry run shows how <code>StringBuffer</code> modifies the original object without creating new ones. The <code>append()</code> method efficiently adds content to the existing StringBuffer.
+          </p>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default StringBuffer; 
+export default StringBufferExample;

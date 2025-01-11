@@ -3,31 +3,37 @@ import CodeBlock from '../../components/CodeBlock';
 
 const Variables: React.FC = () => {
   return (
-    <div className="p-4 bg-gray-900 text-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Java Variables</h1>
-      
-      <div className="space-y-6">
-        {/* Introduction Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">What are Variables?</h2>
-          <div className="grid md:grid-cols-2 gap-4">
+    <div className="p-6 bg-gray-900 text-gray-200 min-h-screen">
+      {/* Header Section */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">Java Variables</h1>
+        <p className="text-lg text-gray-400">
+          Learn how to declare, initialize, and use variables in Java, and understand their scope and types.
+        </p>
+      </header>
+
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Section 1: What are Variables? */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">What are Variables?</h2>
+          <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <p className="mb-4">
-                Variables are containers for storing data values. In Java, variables must be declared with a specific type
-                before they can be used. Each variable has a type, name, and value.
+              <p className="text-gray-300 leading-7 mb-4">
+                Variables are containers for storing data values. In Java, variables must be declared with a specific type before they can be used. Each variable has a type, name, and value.
               </p>
-              <div className="bg-blue-900/20 p-3 rounded-lg">
-                <h3 className="font-semibold mb-2">Variable Components</h3>
-                <ul className="text-sm space-y-2">
-                  <li>• <strong>Type:</strong> Defines what kind of data can be stored</li>
-                  <li>• <strong>Name:</strong> Identifier used to reference the variable</li>
-                  <li>• <strong>Value:</strong> The actual data stored in the variable</li>
+              <div className="bg-blue-900/20 p-4 rounded-lg">
+                <h3 className="font-semibold text-blue-300 mb-2">Variable Components</h3>
+                <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                  <li><strong>Type:</strong> Defines what kind of data can be stored.</li>
+                  <li><strong>Name:</strong> Identifier used to reference the variable.</li>
+                  <li><strong>Value:</strong> The actual data stored in the variable.</li>
                 </ul>
               </div>
             </div>
-            <div className="bg-gray-700/50 p-3 rounded-lg">
+            <div>
               <h3 className="font-semibold text-green-400 mb-2">Basic Syntax</h3>
-              <CodeBlock 
+              <CodeBlock
                 code={`// Declaration
 int number;
 
@@ -45,133 +51,119 @@ final double PI = 3.14159;`}
           </div>
         </section>
 
-        {/* Types of Variables Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Types of Variables</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-purple-900/20 p-3 rounded-lg">
+        {/* Section 2: Types of Variables */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Types of Variables</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-purple-900/20 p-4 rounded-lg">
               <h3 className="font-semibold mb-2">Instance Variables</h3>
-              <CodeBlock 
+              <CodeBlock
                 code={`class Student {
     String name;     // instance variable
     int age;        // instance variable
-    double gpa;     // instance variable
 }`}
                 language="java"
               />
-              <p className="mt-2 text-sm text-gray-300">Declared inside class but outside methods</p>
+              <p className="mt-2 text-sm text-gray-300">Declared inside a class but outside methods.</p>
             </div>
-            <div className="bg-blue-900/20 p-3 rounded-lg">
+            <div className="bg-blue-900/20 p-4 rounded-lg">
               <h3 className="font-semibold mb-2">Static Variables</h3>
-              <CodeBlock 
+              <CodeBlock
                 code={`class School {
     static int studentCount;  // static
-    static final int MAX_CAPACITY = 500;
 }`}
                 language="java"
               />
-              <p className="mt-2 text-sm text-gray-300">Shared across all instances of a class</p>
+              <p className="mt-2 text-sm text-gray-300">Shared across all instances of a class.</p>
             </div>
-            <div className="bg-green-900/20 p-3 rounded-lg">
+            <div className="bg-green-900/20 p-4 rounded-lg">
               <h3 className="font-semibold mb-2">Local Variables</h3>
-              <CodeBlock 
+              <CodeBlock
                 code={`void calculateArea() {
     int width = 5;   // local
     int height = 10; // local
-    int area = width * height;
 }`}
                 language="java"
               />
-              <p className="mt-2 text-sm text-gray-300">Declared inside methods</p>
+              <p className="mt-2 text-sm text-gray-300">Declared inside methods and accessible only within them.</p>
             </div>
           </div>
         </section>
 
-        {/* Variable Naming Rules */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Naming Rules</h2>
-          <div className="grid md:grid-cols-2 gap-4">
+        {/* Section 3: Naming Rules */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Naming Rules</h2>
+          <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <div className="bg-green-900/20 p-3 rounded-lg mb-4">
+              <div className="bg-green-900/20 p-4 rounded-lg mb-4">
                 <h3 className="font-semibold mb-2">Valid Names</h3>
-                <ul className="text-sm space-y-1">
-                  <li>✅ Start with letter, $ or _</li>
+                <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                  <li>✅ Start with a letter, $ or _</li>
                   <li>✅ Can contain numbers</li>
                   <li>✅ Use camelCase for variables</li>
                   <li>✅ Use UPPER_CASE for constants</li>
                 </ul>
               </div>
-              <div className="bg-red-900/20 p-3 rounded-lg">
+              <div className="bg-red-900/20 p-4 rounded-lg">
                 <h3 className="font-semibold mb-2">Invalid Names</h3>
-                <ul className="text-sm space-y-1">
-                  <li>❌ Start with number</li>
+                <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                  <li>❌ Start with a number</li>
                   <li>❌ Use reserved keywords</li>
                   <li>❌ Include spaces</li>
                   <li>❌ Use special characters</li>
                 </ul>
               </div>
             </div>
-            <div className="bg-gray-700/50 p-3 rounded-lg">
+            <div>
               <h3 className="font-semibold text-blue-400 mb-2">Examples</h3>
-              <CodeBlock 
-                code={`// Valid variable names
+              <CodeBlock
+                code={`// Valid names
 int age;
 String firstName;
-double _value;
 boolean isActive;
-final int MAX_SIZE = 100;
 
-// Invalid variable names
-int 1number;     // starts with number
-int my name;     // contains space
-int class;       // reserved keyword
-int #count;      // special character`}
+// Invalid names
+int 1number;   // starts with a number
+int my name;   // contains space
+int class;     // reserved keyword`}
                 language="java"
               />
             </div>
           </div>
         </section>
 
-        {/* Variable Initialization */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Variable Initialization</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-yellow-900/20 p-3 rounded-lg">
-              <h3 className="font-semibold mb-2">Default Values</h3>
-              <ul className="text-sm space-y-2">
-                <li>• <strong>numbers:</strong> 0 (or 0.0)</li>
-                <li>• <strong>boolean:</strong> false</li>
-                <li>• <strong>char:</strong> '\u0000'</li>
-                <li>• <strong>object references:</strong> null</li>
-              </ul>
-              <p className="mt-2 text-xs text-gray-400">Note: Local variables must be initialized before use</p>
-            </div>
-            <div className="bg-gray-700/50 p-3 rounded-lg">
-              <h3 className="font-semibold text-green-400 mb-2">Initialization Examples</h3>
-              <CodeBlock 
-                code={`// Direct initialization
-int count = 0;
-String name = "John";
-
-// Initialization blocks
-{
-    // Instance initialization block
-    count = 1;
-    name = "Default";
-}
-
-static {
-    // Static initialization block
-    MAX_COUNT = 100;
-}`}
-                language="java"
-              />
-            </div>
-          </div>
+        {/* Section 4: Common Mistakes */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-gray-300">
+            <li>❌ Forgetting to initialize variables before use (especially local variables).</li>
+            <li>❌ Using reserved keywords as variable names (e.g., <code>int class;</code>).</li>
+            <li>❌ Declaring variables without specifying their type.</li>
+          </ul>
         </section>
-      </div>
+
+        {/* Section 5: Tips */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Tips for Using Variables</h2>
+          <ul className="list-disc pl-6 space-y-3 text-gray-300">
+            <li>✅ Use meaningful names to improve code readability.</li>
+            <li>✅ Declare variables as <code>final</code> if their value won’t change.</li>
+            <li>✅ Group related variables together for better organization.</li>
+          </ul>
+        </section>
+
+        {/* Section 6: Pro Tips */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-gray-300">
+            <li>💡 Use static variables for shared data across instances (e.g., counters).</li>
+            <li>💡 Leverage instance variables for unique data specific to objects.</li>
+            <li>💡 Always initialize local variables to avoid compilation errors.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Variables; 
+export default Variables;

@@ -3,194 +3,147 @@ import CodeBlock from '../../components/CodeBlock';
 
 const Introduction: React.FC = () => {
   return (
-    <div className="p-4 bg-gray-900 text-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Introduction to Java</h1>
-      
-      <div className="space-y-6">
-        {/* What is Java Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">What is Java?</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <p className="mb-4">
-                Java is a versatile, high-level programming language that prioritizes readability, maintainability, and scalability. Designed to be platform-independent, it adheres to the principle of <strong>"Write Once, Run Anywhere" (WORA)</strong>. 
-                Developed by <strong>James Gosling</strong> at Sun Microsystems in 1995, Java has become an essential tool for modern software development.
-              </p>
-              <div className="bg-blue-900/20 p-3 rounded-lg">
-                <h3 className="font-semibold mb-2">Did You Know?</h3>
-                <ul className="list-disc pl-4 space-y-1 text-sm">
-                  <li>Java was initially named <strong>"Oak"</strong> after an oak tree outside Gosling's office.</li>
-                  <li>The name "Java" is inspired by Java coffee, reflected in its iconic coffee cup logo.</li>
-                  <li>Java runs on over 3 billion devices, from mobile phones to supercomputers.</li>
-                </ul>
-              </div>
-            </div>
-            <div className="space-y-3">
-              <h3 className="font-semibold">Popular Uses</h3>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="bg-green-900/20 p-2 rounded">
-                  <span className="font-medium">📱 Android Apps</span>
-                </div>
-                <div className="bg-purple-900/20 p-2 rounded">
-                  <span className="font-medium">🌐 Web Applications</span>
-                </div>
-                <div className="bg-yellow-900/20 p-2 rounded">
-                  <span className="font-medium">💼 Enterprise Systems</span>
-                </div>
-                <div className="bg-red-900/20 p-2 rounded">
-                  <span className="font-medium">🎮 Game Development</span>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="p-6 bg-gray-900 text-gray-200 min-h-screen">
+      {/* Header Section */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">Welcome to Java Programming</h1>
+        <p className="text-lg text-gray-400">
+          Embark on your journey to mastering one of the most versatile programming languages in the world.
+        </p>
+      </header>
+
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Section 1: What is Java? */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">What is Java?</h2>
+          <p className="text-gray-300 leading-7 mb-4">
+            Java is a high-level, object-oriented programming language known for its simplicity, platform independence, and extensive use in enterprise applications, Android development, and more.
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
+            <li>Adheres to the principle of <strong className="text-yellow-300">"Write Once, Run Anywhere (WORA)"</strong>.</li>
+            <li>Runs on more than <strong className="text-green-400">3 billion devices</strong>, from smartphones to supercomputers.</li>
+            <li>It is designed to have as few implementation dependencies as possible.</li>
+            <li>Features garbage collection to manage memory automatically.</li>
+          </ul>
         </section>
 
-        {/* Key Features Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Key Features of Java</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-gray-700/50 p-4 rounded-lg">
-              <h3 className="font-semibold text-blue-400 mb-2">Object-Oriented</h3>
-              <CodeBlock 
-                code={`class Car {
-    private String model;
+        {/* Section 2: History of Java */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">History of Java</h2>
+          <p className="text-gray-300 leading-7">
+            Java was developed by James Gosling and his team at Sun Microsystems in 1995. Initially named "Oak," it was later renamed Java after the Java coffee. It has since become one of the most popular programming languages worldwide.
+          </p>
+          <p className="text-gray-300 leading-7 mt-4">
+            The primary goal of Java was to create a platform-independent language that could be used across diverse devices, from small handheld gadgets to large servers.
+          </p>
+        </section>
 
-    public void start() {
-        System.out.println("Starting " + model);
-    }
-}`} 
-                language="java"
+        {/* Section 3: Features of Java */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Features of Java</h2>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
+            <li><strong>Object-Oriented:</strong> Everything in Java revolves around objects and classes.</li>
+            <li><strong>Platform Independent:</strong> Bytecode can run on any platform with a JVM.</li>
+            <li><strong>Robust:</strong> Java handles memory management and exceptions effectively.</li>
+            <li><strong>Secure:</strong> Provides built-in security features like cryptography and bytecode verification.</li>
+            <li><strong>Multithreaded:</strong> Supports concurrent programming with multiple threads.</li>
+            <li><strong>Dynamic:</strong> Code is adaptable to changes, ensuring flexibility and scalability.</li>
+          </ul>
+        </section>
+
+        {/* Section 4: How to Download and Install Java */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">How to Download and Install Java?</h2>
+          <ol className="list-decimal pl-6 space-y-3 text-gray-300">
+            <li>
+              Visit the official Oracle website or OpenJDK website.
+              <a href="https://www.oracle.com/java/technologies/javase-downloads.html" className="text-blue-400 underline ml-1">
+                (Oracle Java SE Downloads)
+              </a>
+            </li>
+            <li>Download the latest version of the Java Development Kit (JDK) suitable for your operating system.</li>
+            <li>Run the installer and follow the on-screen instructions.</li>
+            <li>Ensure you configure your environment variables correctly after installation.</li>
+          </ol>
+        </section>
+
+        {/* Section 5: Setting Up the Environment */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Setting Up the Environment</h2>
+          <p className="text-gray-300 leading-7 mb-4">
+            After installing Java, you need to set up the environment variables for smooth functioning.
+          </p>
+          <ol className="list-decimal pl-6 space-y-3 text-gray-300">
+            <li>Go to the System Settings or Control Panel (for Windows).</li>
+            <li>Navigate to Environment Variables in the System Properties.</li>
+            <li>Add a new variable:
+              <CodeBlock
+                code={`Variable name: JAVA_HOME
+Variable value: C:\\Program Files\\Java\\jdk<version>`}
+                language="text"
               />
-              <p className="mt-2 text-sm text-gray-300">
-                Java's object-oriented paradigm enables developers to design modular, reusable, and maintainable code, mimicking real-world objects.
-              </p>
-            </div>
-
-            <div className="bg-gray-700/50 p-4 rounded-lg">
-              <h3 className="font-semibold text-green-400 mb-2">Platform Independent</h3>
-              <div className="flex items-center justify-center p-4 space-x-3">
-                <div className="text-center">
-                  <div className="text-2xl">📝</div>
-                  <div className="text-xs mt-1">Java Code</div>
-                </div>
-                <div className="text-xl">→</div>
-                <div className="text-center">
-                  <div className="text-2xl">⚙️</div>
-                  <div className="text-xs mt-1">Bytecode</div>
-                </div>
-                <div className="text-xl">→</div>
-                <div className="text-center">
-                  <div className="text-2xl">🖥️</div>
-                  <div className="text-xs mt-1">Any Platform</div>
-                </div>
-              </div>
-              <p className="mt-2 text-sm text-gray-300">
-                Java code is compiled into <strong>bytecode</strong>, which can run on any device equipped with a Java Virtual Machine (JVM), ensuring cross-platform compatibility.
-              </p>
-            </div>
-
-            <div className="bg-gray-700/50 p-4 rounded-lg">
-              <h3 className="font-semibold text-purple-400 mb-2">Rich Standard Library</h3>
-              <CodeBlock 
-                code={`// Built-in collections
-ArrayList<String> list = new ArrayList<>();
-HashMap<String, Integer> map = new HashMap<>();
-
-// File handling
-File file = new File("data.txt");
-
-// Networking
-URL url = new URL("https://example.com");`}
-                language="java"
-              />
-              <p className="mt-2 text-sm text-gray-300">
-                Java offers a vast collection of built-in libraries for tasks such as data manipulation, networking, and file handling, reducing development time.
-              </p>
-            </div>
-          </div>
+            </li>
+            <li>Edit the PATH variable to include <code>%JAVA_HOME%\\bin</code>.</li>
+            <li>Verify the setup by running <code>java -version</code> in the terminal.</li>
+          </ol>
         </section>
 
-        {/* Getting Started Section */}
-        <section className="bg-gray-800 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Getting Started with Java</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <h3 className="font-semibold mb-2">Development Tools Needed</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="bg-blue-900/40 p-2 rounded mr-2">1️⃣</span>
-                  <div>
-                    <strong>JDK (Java Development Kit)</strong>
-                    <p className="text-sm">A comprehensive toolkit including the compiler, JVM, and essential libraries.</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-green-900/40 p-2 rounded mr-2">2️⃣</span>
-                  <div>
-                    <strong>IDE (Integrated Development Environment)</strong>
-                    <p className="text-sm">Streamline development with tools like IntelliJ IDEA, Eclipse, or VS Code.</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-purple-900/40 p-2 rounded mr-2">3️⃣</span>
-                  <div>
-                    <strong>Text Editor</strong>
-                    <p className="text-sm">Simpler tools like Notepad++ or Sublime Text are ideal for basic projects.</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">Installation Steps</h3>
-              <div className="bg-gray-900 p-3 rounded-lg">
-                <ol className="space-y-2 ml-4">
-                  <li>1. Download the JDK from the official Oracle website.</li>
-                  <li>2. Run the installer to set up Java on your system.</li>
-                  <li>3. Configure the <strong>JAVA_HOME</strong> environment variable.</li>
-                  <li>4. Add Java to your system's PATH variable.</li>
-                  <li>5. Verify installation by running:
-                    <CodeBlock 
-                      code={`java -version`}
-                      language="bash"
-                    />
-                  </li>
-                </ol>
-              </div>
-            </div>
-          </div>
+        {/* Section 6: Java Virtual Machine (JVM) */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Java Virtual Machine (JVM)</h2>
+          <p className="text-gray-300 leading-7 mb-4">
+            The JVM is the heart of Java's "Write Once, Run Anywhere" principle. It is responsible for running Java bytecode on any platform.
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
+            <li>Converts bytecode into machine-specific instructions.</li>
+            <li>Provides runtime features like garbage collection and security checks.</li>
+          </ul>
         </section>
 
-        {/* Why Learn Java Section */}
-        <section className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-3">Why Learn Java?</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-gray-800 p-3 rounded-lg">
-              <h3 className="font-semibold text-blue-400 mb-2">🌟 Career Opportunities</h3>
-              <ul className="text-sm space-y-1">
-                <li>In-demand programming skills for software engineering roles.</li>
-                <li>Opens doors to high-paying jobs in diverse industries.</li>
-                <li>Supports various career paths, from app development to data analysis.</li>
-              </ul>
-            </div>
-            <div className="bg-gray-800 p-3 rounded-lg">
-              <h3 className="font-semibold text-green-400 mb-2">📚 Learning Curve</h3>
-              <ul className="text-sm space-y-1">
-                <li>Clear and intuitive syntax makes it beginner-friendly.</li>
-                <li>Extensive resources and documentation aid learning.</li>
-                <li>Large community for support and collaboration.</li>
-              </ul>
-            </div>
-            <div className="bg-gray-800 p-3 rounded-lg">
-              <h3 className="font-semibold text-purple-400 mb-2">🛠️ Versatility</h3>
-              <ul className="text-sm space-y-1">
-                <li>Widely used in Android, web, and enterprise development.</li>
-                <li>Scalable for both small and large-scale projects.</li>
-                <li>Adaptable for emerging technologies like IoT and AI.</li>
-              </ul>
-            </div>
-          </div>
+        {/* Section 7: Java Development Kit (JDK) */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Java Development Kit (JDK)</h2>
+          <p className="text-gray-300 leading-7 mb-4">
+            The JDK is a software development kit (SDK) for developing Java applications. It includes tools like the compiler (<code>javac</code>), runtime environment, and libraries.
+          </p>
+          <CodeBlock
+            code={`// Compile a Java program
+javac MyProgram.java
+
+// Run the compiled program
+java MyProgram`}
+            language="bash"
+          />
         </section>
-      </div>
+
+        {/* Section 8: JDK vs JRE vs JVM */}
+        <section className="bg-gray-800 p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">JDK vs JRE vs JVM</h2>
+          <table className="w-full text-sm">
+            <thead className="bg-gray-700">
+              <tr>
+                <th className="px-4 py-2">Component</th>
+                <th className="px-4 py-2">Description</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-700">
+              <tr>
+                <td className="px-4 py-2">JDK</td>
+                <td className="px-4 py-2">Includes tools for developing and running Java applications (e.g., compiler, debugger).</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">JRE</td>
+                <td className="px-4 py-2">Includes the JVM and libraries required to run Java applications but not the development tools.</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">JVM</td>
+                <td className="px-4 py-2">A virtual machine that executes Java bytecode on the host machine.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
     </div>
   );
 };

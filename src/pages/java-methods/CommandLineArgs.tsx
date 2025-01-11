@@ -71,240 +71,110 @@ public class Calculator {
 // java Calculator 10 + 5
 // Output: 10.0 + 5.0 = 15.0`;
 
-  const flagsExample = `
-public class ProgramOptions {
-    public static void main(String[] args) {
-        boolean verbose = false;
-        String inputFile = null;
-        String outputFile = null;
-        
-        // Process command line flags
-        for (int i = 0; i < args.length; i++) {
-            switch (args[i]) {
-                case "-v":
-                case "--verbose":
-                    verbose = true;
-                    break;
-                case "-i":
-                case "--input":
-                    if (i + 1 < args.length) {
-                        inputFile = args[++i];
-                    }
-                    break;
-                case "-o":
-                case "--output":
-                    if (i + 1 < args.length) {
-                        outputFile = args[++i];
-                    }
-                    break;
-                default:
-                    System.out.println("Unknown option: " + args[i]);
-                    break;
-            }
-        }
-        
-        // Print configuration
-        if (verbose) {
-            System.out.println("Configuration:");
-            System.out.println("Input file: " + inputFile);
-            System.out.println("Output file: " + outputFile);
-        }
-    }
-}
+  const visualRepresentation = `
+1. **Command Line Arguments Flow:**
+   - User enters command line arguments when running the program.
+   - Example: \`java Program arg1 arg2 arg3\`.
+   - \`arg1\`, \`arg2\`, and \`arg3\` are stored in the \`String[] args\` array.
 
-// Running the program:
-// java ProgramOptions -v --input data.txt --output result.txt
-// Output:
-// Configuration:
-// Input file: data.txt
-// Output file: result.txt`;
+2. **Accessing Arguments:**
+   - Arguments are accessed using zero-based indexing, e.g., \`args[0]\` for the first argument.
+   - Arguments are always treated as \`String\` values and need conversion if required.
 
-  const dryRunExample = `
-public class ArgParser {
-    public static void main(String[] args) {
-        // args = ["-name", "John", "-age", "25"]
-        
-        String name = null;
-        int age = 0;
-        
-        for (int i = 0; i < args.length; i++) {
-            switch (args[i]) {
-                case "-name":
-                    if (i + 1 < args.length) {
-                        name = args[++i];  // i becomes 1, name = "John"
-                    }
-                    break;
-                case "-age":
-                    if (i + 1 < args.length) {
-                        age = Integer.parseInt(args[++i]);  // i becomes 3, age = 25
-                    }
-                    break;
-            }
-        }
-        
-        System.out.println("Name: " + name);  // Output: Name: John
-        System.out.println("Age: " + age);    // Output: Age: 25
-    }
-}`;
+3. **Validation and Parsing:**
+   - Validate the arguments to ensure proper input and avoid runtime errors.
+   - Example: Ensure correct number of arguments before processing.
+`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Command Line Arguments in Java
-              </h1>
-              <p className="text-gray-300">
-                Command line arguments allow you to pass input to your Java program when it starts. 
-                They provide a flexible way to configure program behavior without modifying the code.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Command Line Arguments in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Command line arguments allow you to pass input to your Java program when it starts. They provide a flexible way to configure program behavior without modifying the code.
+        </p>
+      </header>
 
-            {/* Basic Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Usage
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Arguments are passed to the main method as an array of strings.
-                </p>
-              </div>
-            </div>
+      <main className="space-y-12">
+        {/* Basic Usage */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Basic Usage
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Arguments are passed to the main method as an array of strings. This allows flexible input handling.
+          </p>
+        </section>
 
-            {/* Argument Parsing Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Argument Parsing
-              </h2>
-              <CodeBlock code={argumentParsingExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Shows how to parse and validate command line arguments.
-                </p>
-              </div>
-            </div>
+        {/* Argument Parsing */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Argument Parsing
+          </h2>
+          <CodeBlock code={argumentParsingExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Shows how to parse and validate command line arguments effectively.
+          </p>
+        </section>
 
-            {/* Flags Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Command Line Flags
-              </h2>
-              <CodeBlock code={flagsExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Demonstrates handling command line flags and options.
-                </p>
-              </div>
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Visual Representation
+          </h2>
+          <CodeBlock code={visualRepresentation} language="markdown" />
+          <p className="text-gray-300 mt-4">
+            A structured explanation of how command line arguments flow through a Java program.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
-          </div>
+        {/* Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Always validate the number and type of arguments passed to your program.</li>
+            <li>Provide meaningful error messages when arguments are incorrect.</li>
+            <li>Use comments to document the purpose of each argument.</li>
+          </ul>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not validating arguments</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Assuming argument types</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Missing error handling</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Array index out of bounds</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Poor argument documentation</span>
-                </li>
-              </ul>
-            </div>
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use flags like <code>-h</code> or <code>--help</code> to display usage instructions.</li>
+            <li>Encapsulate argument processing into a separate method or class for cleaner code.</li>
+            <li>Handle optional arguments with default values to make your program more flexible.</li>
+          </ul>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Validate all inputs</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Provide usage instructions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Handle errors gracefully</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use meaningful argument names</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Support help flag (-h, --help)</span>
-                </li>
-              </ul>
-            </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Not validating input arguments, leading to runtime errors.</li>
+            <li>Assuming all arguments are always present.</li>
+            <li>Using hardcoded argument indices without checks.</li>
+            <li>Ignoring argument types and failing to parse them correctly.</li>
+          </ul>
+        </section>
 
-            {/* Key Points Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>args[] is String array</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Zero-based indexing</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Space-separated values</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Type conversion needed</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Arguments are optional</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Validate all input arguments before processing.</li>
+            <li>Provide detailed usage instructions for users.</li>
+            <li>Use meaningful variable names for arguments.</li>
+            <li>Always handle edge cases like missing or incorrect arguments gracefully.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default CommandLineArgs; 
+export default CommandLineArgs;

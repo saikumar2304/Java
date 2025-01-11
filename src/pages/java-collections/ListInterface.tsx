@@ -1,30 +1,43 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const ListInterface: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                List Interface in Java
-              </h1>
-              <p className="text-gray-300">
-                The List interface extends Collection and represents an ordered sequence of elements. Lists maintain insertion order and allow duplicate elements, providing positional access and search operations.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          List Interface in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <code>List</code> interface in Java extends the <code>Collection</code> interface and represents an ordered sequence of elements. It allows duplicate elements and provides positional access to elements.
+        </p>
+      </header>
 
-            {/* Basic List Operations */}
-            <MethodCard
-              title="Basic List Operations"
-              description="Core methods specific to List interface"
-            >
-              <CodeBlock
-                code={`List<String> list = new ArrayList<>();
+      <main className="space-y-12">
+        {/* Introduction Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Introduction</h2>
+          <p className="text-gray-300">
+            A <code>List</code> in Java maintains the order of insertion and allows indexed access to elements. Common implementations include <code>ArrayList</code>, <code>LinkedList</code>, and <code>Vector</code>.
+          </p>
+          <CodeBlock
+            code={`import java.util.*;
+
+List<String> list = new ArrayList<>();
+list.add("Apple");
+list.add("Banana");
+list.add("Orange");
+
+System.out.println(list);  // Output: [Apple, Banana, Orange]`}
+            language="java"
+          />
+        </section>
+
+        {/* Basic List Operations */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Basic List Operations</h2>
+          <CodeBlock
+            code={`List<String> list = new ArrayList<>();
 
 // Adding elements
 list.add("First");                  // Adds at end
@@ -45,17 +58,15 @@ list.replaceAll(String::toUpperCase); // Replace all elements
 list.remove(0);                    // Remove by index
 list.remove("A");                  // Remove by object
 list.subList(1, 3).clear();        // Remove range`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* List Views and Sublists */}
-            <MethodCard
-              title="List Views and Sublists"
-              description="Working with list views and sublists"
-            >
-              <CodeBlock
-                code={`List<Integer> numbers = new ArrayList<>(
+        {/* List Views and Sublists */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">List Views and Sublists</h2>
+          <CodeBlock
+            code={`List<Integer> numbers = new ArrayList<>(
     Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 );
 
@@ -78,17 +89,15 @@ Collections.sort(numbers, Collections.reverseOrder()); // Reverse
 // Binary search (list must be sorted)
 Collections.sort(numbers);
 int pos = Collections.binarySearch(numbers, 5);`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* List Iteration */}
-            <MethodCard
-              title="List Iteration"
-              description="Different ways to iterate over lists"
-            >
-              <CodeBlock
-                code={`List<String> fruits = Arrays.asList("Apple", "Banana", "Orange");
+        {/* List Iteration */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">List Iteration</h2>
+          <CodeBlock
+            code={`List<String> fruits = Arrays.asList("Apple", "Banana", "Orange");
 
 // Using for-each loop
 for (String fruit : fruits) {
@@ -103,8 +112,7 @@ while (iterator.hasNext()) {
 
 // Backward iteration
 while (iterator.hasPrevious()) {
-    System.out.println(iterator.previousIndex() + ": " + 
-        iterator.previous());
+    System.out.println(iterator.previousIndex() + ": " + iterator.previous());
 }
 
 // Using streams
@@ -115,133 +123,68 @@ fruits.stream()
 
 // Using forEach method
 fruits.forEach(System.out::println);`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
+            language="java"
+          />
+        </section>
 
-          {/* Right Sidebar */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Index out of bounds</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Sublist modification</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Concurrent modification</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Wrong remove method</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Unchecked type casting</span>
-                </li>
-              </ul>
-            </div>
+        {/* Dry Run Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`List<Integer> numbers = Arrays.asList(10, 20, 30);
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Check bounds first</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use proper implementation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider thread safety</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use type parameters</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Handle null values</span>
-                </li>
-              </ul>
-            </div>
+// Dry run:
+int sum = 0;
+for (int num : numbers) {
+    sum += num;
+}
+System.out.println("Sum: " + sum);  // Output: Sum: 60`}
+            language="java"
+          />
+        </section>
 
-            {/* Pro Tips Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Pro Tips
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use factory methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Leverage ListIterator</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use subList wisely</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider immutability</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use stream operations</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use <code>ArrayList</code> for dynamic arrays.</li>
+            <li>Use <code>LinkedList</code> for frequent insertions and deletions.</li>
+            <li>Always prefer interface types (<code>List</code>) for flexibility.</li>
+          </ul>
+        </section>
 
-            {/* Key Concepts Section */}
-            <div className="bg-purple-900/20 border border-purple-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-purple-200">
-                Key Concepts
-              </h2>
-              <ul className="space-y-3 text-purple-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Ordered collection</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Index-based access</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Positional insertion</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>List views</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Bidirectional iteration</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Leverage <code>subList()</code> for efficient list partitions.</li>
+            <li>Use <code>Collections.synchronizedList()</code> for thread safety.</li>
+            <li>Stream operations can simplify list manipulations.</li>
+          </ul>
+        </section>
+
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Modifying a list while iterating without using an iterator.</li>
+            <li>Not handling <code>IndexOutOfBoundsException</code> for index-based operations.</li>
+            <li>Using sublists without understanding their impact on the original list.</li>
+          </ul>
+        </section>
+
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Choose the right implementation based on your needs.</li>
+            <li>Always validate indices before accessing or modifying lists.</li>
+            <li>Use immutable lists for read-only data.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default ListInterface; 
+export default ListInterface;

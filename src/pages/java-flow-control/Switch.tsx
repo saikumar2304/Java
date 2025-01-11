@@ -14,41 +14,32 @@ switch (expression) {
         // code block if no case matches
 }`;
 
-  const gradeExample = `
-// Grade calculator using switch
+  const practicalExample = `
+// Determine the grade based on score
 char grade = 'B';
 
 switch (grade) {
     case 'A':
         System.out.println("Excellent performance!");
-        System.out.println("Score range: 90-100");
         break;
     case 'B':
         System.out.println("Good performance!");
-        System.out.println("Score range: 80-89");
         break;
     case 'C':
         System.out.println("Average performance.");
-        System.out.println("Score range: 70-79");
         break;
     case 'D':
-        System.out.println("Need improvement.");
-        System.out.println("Score range: 60-69");
+        System.out.println("Below average performance.");
         break;
     case 'F':
-        System.out.println("Failed. Please seek help.");
-        System.out.println("Score range: Below 60");
+        System.out.println("Failed. Please improve.");
         break;
     default:
         System.out.println("Invalid grade entered.");
-}
-
-// Output:
-// Good performance!
-// Score range: 80-89`;
+}`;
 
   const dryRunExample = `
-// Day of week example
+// Example of determining the day of the week
 int day = 3;
 
 switch (day) {
@@ -61,164 +52,155 @@ switch (day) {
     case 3:
         System.out.println("Wednesday");
         break;
-    case 4:
-        System.out.println("Thursday");
-        break;
-    case 5:
-        System.out.println("Friday");
-        break;
     default:
-        System.out.println("Weekend");
+        System.out.println("Invalid day");
 }
 
 // Dry Run:
-// 1. day = 3 is initialized
-// 2. Switch evaluates day value
-// 3. Matches case 3
-// 4. Executes case 3 block
-// 5. Break statement exits switch
-// Output: Wednesday`;
+// 1. day = 3 is initialized.
+// 2. Switch evaluates the expression day.
+// 3. Matches case 3, prints "Wednesday".
+// 4. Break exits the switch statement.`;
 
-  const fallThroughExample = `
-// Example of fall-through behavior
-String command = "save";
-
-switch (command) {
-    case "save":
-        System.out.println("Saving data...");
-        // No break, falls through to next case
-    case "backup":
-        System.out.println("Creating backup...");
-        break;
-    case "exit":
-        System.out.println("Exiting program...");
-        break;
-    default:
-        System.out.println("Unknown command");
-}
-
-// Output:
-// Saving data...
-// Creating backup...`;
+  const enhancedSwitchExample = `
+// Enhanced switch expression (Java 14+)
+String result = switch (grade) {
+    case 'A' -> "Excellent performance!";
+    case 'B' -> "Good performance!";
+    case 'C' -> "Average performance.";
+    case 'D' -> "Below average performance.";
+    case 'F' -> "Failed. Please improve.";
+    default -> "Invalid grade entered.";
+};
+System.out.println(result);`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Switch Statement in Java
-              </h1>
-              <p className="text-gray-300">
-                The switch statement is a control flow statement that allows you to execute different code blocks based on the value of an expression.
-                It provides a more elegant way to handle multiple conditions compared to long if-else-if chains.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Switch Statement in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <strong>switch statement</strong> evaluates an expression and matches it against multiple cases. It provides a cleaner alternative to nested <code>if-else if</code> conditions.
+        </p>
+      </header>
 
-            {/* Basic Syntax Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Syntax
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">Key components:</p>
-                <ul className="list-disc ml-6 mt-2 text-gray-300">
-                  <li>Expression (must evaluate to char, byte, short, int, String, or enum)</li>
-                  <li>Case values (must be constants or literals)</li>
-                  <li>Break statements (to prevent fall-through)</li>
-                  <li>Optional default case (handles unmatched values)</li>
-                </ul>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Basic Syntax */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Basic Syntax
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            A <code>switch</code> statement starts by evaluating the expression. It then matches the result with the case labels. The <code>break</code> statement ensures that execution stops after the matching case block is executed.
+          </p>
+        </section>
 
-            {/* Grade Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Grade Example
-              </h2>
-              <CodeBlock code={gradeExample} language="java" />
-            </div>
+        {/* Practical Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Practical Example
+          </h2>
+          <CodeBlock code={practicalExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            This example demonstrates how to determine grades based on scores using a <code>switch</code> statement. Each grade corresponds to a specific case.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
-
-            {/* Fall-through Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Fall-through Behavior
-              </h2>
-              <CodeBlock code={fallThroughExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                When a break statement is omitted, execution continues into the next case, known as "fall-through" behavior.
-              </p>
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Visual Representation
+          </h2>
+          <p className="text-gray-300">
+            The <strong>switch</strong> statement processes as follows:
+          </p>
+          <div className="bg-gray-700 p-4 rounded-lg text-gray-200">
+            <ul className="list-decimal pl-6 space-y-3">
+              <li>Evaluate the expression (e.g., <code>switch (day)</code>).</li>
+              <li>Compare the expression's result to each case.</li>
+              <li>
+                If a case matches, execute its code block and stop with <code>break</code>.
+              </li>
+              <li>
+                If no cases match, execute the <code>default</code> block (if provided).
+              </li>
+            </ul>
           </div>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Forgetting break statements</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using non-constant case values</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Missing default case</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Duplicate case values</span>
-                </li>
-              </ul>
-            </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+            Dry Run
+          </h2>
+          <CodeBlock code={dryRunExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The dry run explains step-by-step how the <strong>switch</strong> statement evaluates and executes the matching block.
+          </p>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Always include a default case</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use break statements consistently</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Comment intentional fall-throughs</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Group related cases together</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Enhanced Switch */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Enhanced Switch Expression (Java 14+)
+          </h2>
+          <CodeBlock code={enhancedSwitchExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Enhanced <strong>switch expressions</strong>, introduced in Java 14, provide a cleaner syntax. 
+            The arrow operator (<code>-&gt;</code>) replaces colon and break keywords, and the result can be directly assigned to a variable.
+          </p>
+        </section>
+
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">
+            Common Mistakes
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Forgetting <code>break</code> statements, causing unintended fall-through behavior.</li>
+            <li>Using data types not supported in <code>switch</code> (e.g., float).</li>
+            <li>Overlapping or duplicate case values.</li>
+            <li>Missing <code>default</code> case to handle unexpected inputs.</li>
+          </ul>
+        </section>
+
+        {/* Tips */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Tips for Using Switch Statements
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Always include a <code>default</code> case to handle unmatched inputs.</li>
+            <li>Use <code>break</code> to prevent unintended execution of subsequent cases.</li>
+            <li>Group related cases together to simplify the logic.</li>
+            <li>Prefer enhanced <code>switch</code> for better readability in Java 14+.</li>
+          </ul>
+        </section>
+
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Pro Tips
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>
+              Use enums for predefined values in <code>switch</code>, improving clarity and reducing errors.
+            </li>
+            <li>
+              Document complex logic inside cases for maintainability.
+            </li>
+            <li>
+              When possible, replace nested <code>if-else</code> chains with <code>switch</code> for cleaner code.
+            </li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Switch; 
+export default Switch;
