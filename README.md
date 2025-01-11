@@ -1,49 +1,35 @@
 # Java Programming Guide
 
-Welcome to the Java Programming Guide! This comprehensive guide will walk you through everything you need to know about Java programming, from basic concepts to advanced implementations.
+Welcome to the **Java Programming Guide** repository! This project is a comprehensive learning platform for mastering Java programming, covering everything from the basics to advanced topics. Whether you're a beginner or an experienced developer, this guide has something for everyone.
 
 ![Java Logo](images/java-logo.png)
 
-## Table of Contents
-- [Introduction to Java](#introduction-to-java)
+---
+
+## **Features**
+- **Comprehensive Topics**: Covers Java basics, object-oriented programming (OOP), collections, file handling, and more.
+- **Hands-On Practice**: Includes over 50+ exercises categorized by difficulty levels (Easy, Medium, Hard).
+- **Interactive Learning**:
+  - Real-time code examples and visual explanations.
+  - Dry runs to understand code execution step-by-step.
+- **Beginner to Advanced**: Progresses from basic Java syntax to advanced concepts like multithreading and stream APIs.
+- **Dark Theme Design**: Aesthetic and user-friendly interface for comfortable learning.
+
+---
+
+## **Table of Contents**
 - [Getting Started](#getting-started)
-- [Basic Concepts](#basic-concepts)
-- [Object-Oriented Programming](#object-oriented-programming)
-- [Advanced Topics](#advanced-topics)
+  - [Installation](#installation)
+  - [Requirements](#requirements)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Introduction to Java
+---
 
-Java is a class-based, object-oriented programming language designed to be platform-independent. Created by James Gosling at Sun Microsystems in 1995, Java follows the principle of "Write Once, Run Anywhere" (WORA).
+## **Getting Started**
 
-![Java Architecture](images/java-architecture.png)
-
-### Key Features of Java
-- **Platform Independence**: Java code can run on any device with a Java Virtual Machine (JVM)
-- **Object-Oriented**: Everything in Java is an object
-- **Rich Standard Library**: Comes with a comprehensive set of built-in libraries
-- **Security**: Built-in security features and sandbox execution environment
-- **Automatic Memory Management**: Includes garbage collection
-
-## Getting Started
-
-### 1. Setting Up Your Development Environment
-
-First, you'll need to install the Java Development Kit (JDK) and an Integrated Development Environment (IDE).
-
-![Development Setup](images/java-setup.png)
-
-#### Installing JDK
-1. Visit the [Oracle website](https://www.oracle.com/java/technologies/downloads/)
-2. Download the appropriate JDK for your operating system
-3. Follow the installation instructions
-
-#### Recommended IDEs
-- IntelliJ IDEA
-- Eclipse
-- Visual Studio Code with Java extensions
-
-![Popular IDEs](images/java-ides.png)
-
-### 2. Your First Java Program
-
-Here's a simple Hello World program:
+### **Installation**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/java-programming-guide.git
