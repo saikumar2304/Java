@@ -1,201 +1,200 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
-const OOPIntroduction: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Object-Oriented Programming in Java
-              </h1>
-              <p className="text-gray-300">
-                Object-Oriented Programming (OOP) is a programming paradigm that organizes code into objects, which are instances of classes. Java is a pure object-oriented programming language that implements all the fundamental concepts of OOP.
-              </p>
-            </div>
+const OopIntroduction: React.FC = () => {
+  const encapsulationExample = `
+    public class BankAccount {
+        private double balance;  // Private attribute
+        
+        public void deposit(double amount) {  // Public method
+            if (amount > 0) {
+                balance += amount;
+            }
+        }
 
-            {/* Basic Concepts Section */}
-            <MethodCard
-              title="Basic OOP Concepts"
-              description="Core principles of Object-Oriented Programming"
-            >
-              <CodeBlock
-                code={`// Class definition
-public class Car {
-    // Attributes (instance variables)
-    private String brand;
-    private String model;
-    private int year;
-
-    // Constructor
-    public Car(String brand, String model, int year) {
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-    }
-
-    // Methods
-    public void startEngine() {
-        System.out.println("Engine started!");
-    }
-
-    public void drive() {
-        System.out.println(brand + " " + model + " is driving.");
-    }
-}
-
-// Creating and using objects
-Car myCar = new Car("Toyota", "Camry", 2022);
-myCar.startEngine();
-myCar.drive();`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Four Pillars Section */}
-            <MethodCard
-              title="Four Pillars of OOP"
-              description="Main principles of Object-Oriented Programming"
-            >
-              <CodeBlock
-                code={`// 1. Encapsulation
-public class BankAccount {
-    private double balance;  // Private data
-    
-    public void deposit(double amount) {  // Public interface
-        if (amount > 0) {
-            balance += amount;
+        public double getBalance() {
+            return balance;
         }
     }
-}
+  `;
 
-// 2. Inheritance
-public class ElectricCar extends Car {
-    private int batteryLevel;
-    
-    @Override
-    public void startEngine() {
-        System.out.println("Starting electric motor!");
+  const inheritanceExample = `
+    // Parent Class
+    public class Vehicle {
+        protected String brand = "Vehicle";
+
+        public void start() {
+            System.out.println(brand + " is starting.");
+        }
     }
-}
 
-// 3. Polymorphism
-Car car1 = new Car("Toyota", "Camry", 2022);
-Car car2 = new ElectricCar("Tesla", "Model 3", 2023);
-car1.startEngine();  // "Engine started!"
-car2.startEngine();  // "Starting electric motor!"
+    // Child Class
+    public class Car extends Vehicle {
+        private String model;
 
-// 4. Abstraction
-public abstract class Vehicle {
-    public abstract void move();
-    
-    public void showInfo() {
-        System.out.println("This is a vehicle.");
+        public Car(String model) {
+            this.model = model;
+            this.brand = "Car";
+        }
+
+        @Override
+        public void start() {
+            System.out.println(brand + " " + model + " is starting.");
+        }
     }
-}`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
+  `;
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Poor encapsulation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Deep inheritance hierarchies</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Overuse of inheritance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Breaking encapsulation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Ignoring SOLID principles</span>
-                </li>
-              </ul>
-            </div>
+  const polymorphismExample = `
+    public class Animal {
+        public void sound() {
+            System.out.println("Animal makes a sound.");
+        }
+    }
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Follow SOLID principles</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Favor composition over inheritance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep classes focused and small</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use interfaces appropriately</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Implement proper encapsulation</span>
-                </li>
-              </ul>
-            </div>
+    public class Dog extends Animal {
+        @Override
+        public void sound() {
+            System.out.println("Dog barks.");
+        }
+    }
 
-            {/* Pro Tips Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Pro Tips
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Design before coding</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use design patterns</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Write clean, readable code</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document your classes well</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider future maintenance</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+    public class Main {
+        public static void main(String[] args) {
+            Animal myAnimal = new Animal();
+            Animal myDog = new Dog();
+
+            myAnimal.sound();  // Output: Animal makes a sound.
+            myDog.sound();     // Output: Dog barks.
+        }
+    }
+  `;
+
+  const abstractionExample = `
+    public abstract class Shape {
+        public abstract double calculateArea();
+
+        public void display() {
+            System.out.println("This is a shape.");
+        }
+    }
+
+    public class Circle extends Shape {
+        private double radius;
+
+        public Circle(double radius) {
+            this.radius = radius;
+        }
+
+        @Override
+        public double calculateArea() {
+            return Math.PI * radius * radius;
+        }
+    }
+  `;
+
+  return (
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Four Pillars of Object-Oriented Programming
+        </h1>
+        <p className="text-lg text-gray-400">
+          The four fundamental principles of Object-Oriented Programming (OOP) are Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles form the foundation of OOP and enable developers to create modular, reusable, and scalable code.
+        </p>
+      </header>
+
+      <main className="space-y-12">
+        {/* Encapsulation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Encapsulation</h2>
+          <p className="text-gray-300">
+            Encapsulation hides the internal state of an object and only exposes the necessary methods to interact with it. This ensures better control over the data and reduces the risk of unintended modifications.
+          </p>
+          <CodeBlock code={encapsulationExample} language="java" />
+        </section>
+
+        {/* Inheritance */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Inheritance</h2>
+          <p className="text-gray-300">
+            Inheritance allows a class (child class) to inherit fields and methods from another class (parent class). It promotes code reuse and establishes a parent-child relationship.
+          </p>
+          <CodeBlock code={inheritanceExample} language="java" />
+        </section>
+
+        {/* Polymorphism */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Polymorphism</h2>
+          <p className="text-gray-300">
+            Polymorphism allows a single interface or method to represent different behaviors. It enables method overriding and dynamic method dispatch.
+          </p>
+          <CodeBlock code={polymorphismExample} language="java" />
+        </section>
+
+        {/* Abstraction */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Abstraction</h2>
+          <p className="text-gray-300">
+            Abstraction hides the implementation details and only exposes the essential features of an object. It can be achieved through abstract classes or interfaces.
+          </p>
+          <CodeBlock code={abstractionExample} language="java" />
+        </section>
+
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Encapsulation improves security by limiting direct access to sensitive data.</li>
+            <li>Use inheritance to promote code reuse, but avoid deep inheritance hierarchies.</li>
+            <li>Polymorphism allows flexible and dynamic behavior at runtime.</li>
+          </ul>
+        </section>
+
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use composition over inheritance when possible for greater flexibility.</li>
+            <li>Abstract classes are perfect for shared behavior, while interfaces are ideal for defining contracts.</li>
+          </ul>
+        </section>
+
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Overusing inheritance can lead to tightly coupled code that's difficult to maintain.</li>
+            <li>Not using encapsulation effectively, which can expose sensitive data.</li>
+            <li>Misusing polymorphism, leading to unexpected behavior during runtime.</li>
+          </ul>
+        </section>
+
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Leverage encapsulation to create robust and secure code.</li>
+            <li>Keep inheritance hierarchies shallow to maintain flexibility.</li>
+            <li>Ensure abstract classes and interfaces have a clear purpose and role in the design.</li>
+          </ul>
+        </section>
+
+        {/* Dry Run Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`// Creating and using objects
+Car myCar = new Car("Tesla", "Model S");
+myCar.start();  // Output: Car Tesla Model S is starting.`}
+            language="java"
+          />
+          <p className="text-gray-300 mt-4">
+            This dry run shows how encapsulation, inheritance, and polymorphism work together to create dynamic and reusable code.
+          </p>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default OOPIntroduction; 
+export default OopIntroduction;

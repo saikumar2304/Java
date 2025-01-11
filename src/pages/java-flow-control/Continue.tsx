@@ -84,147 +84,108 @@ for (int i = 1; i <= 3; i++) {
 }`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Continue Statement in Java
-              </h1>
-              <p className="text-gray-300">
-                The continue statement skips the rest of the current iteration in a loop and moves to the next iteration. 
-                It's useful when you want to skip specific iterations without terminating the entire loop.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Continue Statement in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <strong>continue statement</strong> skips the remaining part of the loop for the current iteration and 
+          moves to the next iteration. It's useful when you want to skip specific iterations without breaking out of the loop.
+        </p>
+      </header>
 
-            {/* Basic Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Example
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  In this example, the continue statement skips printing when i is 3, but the loop continues with the next iteration.
-                </p>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Syntax and Basic Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Syntax and Basic Example
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The <strong>continue statement</strong> is ideal for skipping iterations based on certain conditions while keeping the loop running.
+          </p>
+        </section>
 
-            {/* Even Numbers Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Filtering Example
-              </h2>
-              <CodeBlock code={evenNumbersExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                Continue is often used for filtering, like printing only even numbers in this example.
-              </p>
-            </div>
+        {/* Even Numbers Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Filtering Example
+          </h2>
+          <CodeBlock code={evenNumbersExample} language="java" />
+          <p className="mt-4 text-gray-300">
+            This example demonstrates filtering logic by skipping odd numbers and processing only even numbers.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+            Dry Run Example
+          </h2>
+          <CodeBlock code={dryRunExample} language="java" />
+          <p className="mt-4 text-gray-300">
+            The dry run explains step-by-step how the continue statement skips certain iterations and processes only valid grades.
+          </p>
+        </section>
 
-            {/* Nested Loops Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Continue in Nested Loops
-              </h2>
-              <CodeBlock code={nestedLoopExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                Like break, continue affects only the innermost loop containing it.
-              </p>
-            </div>
-          </div>
+        {/* Nested Loops */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Continue in Nested Loops
+          </h2>
+          <CodeBlock code={nestedLoopExample} language="java" />
+          <p className="mt-4 text-gray-300">
+            In nested loops, the continue statement affects only the innermost loop containing it.
+          </p>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using continue outside a loop</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Infinite loops due to incorrect continue placement</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Missing important code after continue</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Overusing continue statements</span>
-                </li>
-              </ul>
-            </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">
+            Common Mistakes
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Using continue outside of a loop, which results in a syntax error.</li>
+            <li>Skipping necessary logic after the continue statement.</li>
+            <li>Overusing continue, making the code harder to read and debug.</li>
+          </ul>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use continue for filtering unwanted iterations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep the logic simple and clear</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider using if/else for better readability</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document complex continue conditions</span>
-                </li>
-              </ul>
-            </div>
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Best Practices
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use continue for skipping iterations only when necessary.</li>
+            <li>Clearly document the logic for the continue statement in comments.</li>
+            <li>Ensure the loop variables are updated correctly to avoid infinite loops.</li>
+          </ul>
+        </section>
 
-            {/* When to Use Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                When to Use Continue
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Filtering data</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Skipping unwanted iterations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Processing specific conditions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Avoiding nested if statements</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Pro Tips
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>
+              Use continue in combination with filtering logic for cleaner and more efficient loops.
+            </li>
+            <li>
+              Avoid deeply nested loops with continue; consider refactoring the logic into smaller methods.
+            </li>
+            <li>
+              Test edge cases where the continue statement skips iterations to ensure proper behavior.
+            </li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Continue; 
+export default Continue;

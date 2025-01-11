@@ -87,204 +87,110 @@ outerLoop: for (int i = 1; i <= 3; i++) {
 // i = 2, j = 1
 // Breaking to outer loop`;
 
-  const dryRunExample = `
-// Dry run of break in while loop
-int sum = 0;
-int num = 1;
-
-while (true) {  // Infinite loop
-    sum += num;
-    
-    if (sum > 10) {
-        break;  // Exit when sum exceeds 10
-    }
-    num++;
-}
-
-System.out.println("Final sum: " + sum);
-System.out.println("Last number added: " + num);
-
-// Dry Run:
-// 1. Initialize: sum = 0, num = 1
-// 2. First iteration:
-//    - sum = 0 + 1 = 1
-//    - 1 > 10? false
-//    - num++ (num becomes 2)
-// 3. Second iteration:
-//    - sum = 1 + 2 = 3
-//    - 3 > 10? false
-//    - num++ (num becomes 3)
-// 4. Third iteration:
-//    - sum = 3 + 3 = 6
-//    - 6 > 10? false
-//    - num++ (num becomes 4)
-// 5. Fourth iteration:
-//    - sum = 6 + 4 = 10
-//    - 10 > 10? false
-//    - num++ (num becomes 5)
-// 6. Fifth iteration:
-//    - sum = 10 + 5 = 15
-//    - 15 > 10? true
-//    - break executed
-// Output:
-// Final sum: 15
-// Last number added: 5`;
-
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Break Statement in Java
-              </h1>
-              <p className="text-gray-300">
-                The break statement is used to terminate a loop or switch statement prematurely. It provides a way to exit 
-                a loop immediately when certain conditions are met, without waiting for the loop's condition to become false.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Break Statement in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <strong>break statement</strong> is used to terminate loops or switch statements prematurely. 
+          It provides an efficient way to exit a loop or switch when a specific condition is met.
+        </p>
+      </header>
 
-            {/* Basic Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Example
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  In this example, the break statement exits the loop when i equals 5, preventing the remaining iterations 
-                  from executing.
-                </p>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Syntax and Basic Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Syntax and Basic Example
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The break statement immediately terminates the loop, skipping the remaining iterations and continuing with the next statement after the loop.
+          </p>
+        </section>
 
-            {/* Search Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Practical Search Example
-              </h2>
-              <CodeBlock code={searchExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                Using break to exit a loop once a search condition is met is a common and efficient practice, as it avoids 
-                unnecessary iterations.
-              </p>
-            </div>
+        {/* Practical Search Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Practical Search Example
+          </h2>
+          <CodeBlock code={searchExample} language="java" />
+          <p className="mt-4 text-gray-300">
+            This example demonstrates how the break statement can be used to stop searching once the desired value is found.
+          </p>
+        </section>
 
-            {/* Nested Loops Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Break in Nested Loops
-              </h2>
-              <CodeBlock code={nestedLoopExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                By default, break only exits the innermost loop containing it. Sometimes this is exactly what you want.
-              </p>
-            </div>
+        {/* Nested Loops */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Break in Nested Loops
+          </h2>
+          <CodeBlock code={nestedLoopExample} language="java" />
+          <p className="mt-4 text-gray-300">
+            By default, the break statement exits only the innermost loop. This behavior is useful in multi-level loops where inner logic needs to be terminated.
+          </p>
+        </section>
 
-            {/* Labeled Break Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Labeled Break
-              </h2>
-              <CodeBlock code={labeledBreakExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                Labeled break allows you to break out of a specific outer loop when working with nested loops.
-              </p>
-            </div>
+        {/* Labeled Break */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Labeled Break Example
+          </h2>
+          <CodeBlock code={labeledBreakExample} language="java" />
+          <p className="mt-4 text-gray-300">
+            Labeled break allows you to exit specific outer loops in nested structures. This is useful for breaking out of multiple levels of loops.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
-          </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">
+            Common Mistakes
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Using break outside a loop or switch block.</li>
+            <li>Not using labeled break for exiting outer loops, causing unexpected behavior.</li>
+            <li>Leaving unreachable code after a break statement.</li>
+            <li>Overusing break, which can make code harder to read.</li>
+          </ul>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using break outside a loop or switch</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Breaking wrong loop in nested structures</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Unreachable code after break</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Overusing break statements</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Tips for Using Break
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use break sparingly to ensure code readability.</li>
+            <li>Combine break with clear comments to explain why it's used.</li>
+            <li>Use labeled break judiciously to handle complex nested loops.</li>
+          </ul>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use break for early loop termination</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider using labeled break for nested loops</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document break conditions clearly</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use break to simplify complex loop logic</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* When to Use Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                When to Use Break
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Search operations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Early loop termination</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Switch statements</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Error handling scenarios</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Pro Tips
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>
+              Use break with error handling to gracefully exit loops when encountering unexpected data.
+            </li>
+            <li>
+              Minimize nested loops with break by refactoring logic into smaller functions or methods.
+            </li>
+            <li>
+              Avoid using break excessively in switch cases; ensure all cases are handled properly.
+            </li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Break; 
+export default Break;

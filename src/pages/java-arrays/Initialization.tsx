@@ -1,67 +1,102 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const Initialization: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Array Initialization in Java
-              </h1>
-              <p className="text-gray-300">
-                Java provides several ways to initialize arrays. Understanding these methods helps in writing more efficient code and managing memory effectively.
-              </p>
-            </div>
+  const visualRepresentation = `
+1. **Array Initialization Approaches**:
+   - Declaration and memory allocation.
+   - Declaration and direct initialization.
+   - Anonymous arrays for inline use.
 
-            {/* Array Initialization Methods */}
-            <MethodCard
-              title="Array Initialization Methods"
-              description="Different ways to initialize arrays in Java"
-            >
-              <CodeBlock
-                code={`// 1. Declaration and memory allocation
+2. **Memory Allocation**:
+   - Memory is allocated when using \`new\` or array literals.
+
+3. **Default Values**:
+   - Numeric types: 0.
+   - Boolean: \`false\`.
+   - Objects: \`null\`.
+
+4. **Mutability**:
+   - Final arrays can have their elements modified but cannot be reassigned.
+`;
+
+  const tips = [
+    "Use array literals (`{}`) for small, predefined arrays.",
+    "Combine declaration and initialization for concise code.",
+    "Ensure arrays are initialized before accessing elements."
+  ];
+
+  const proTips = [
+    "Use `Arrays.fill()` to quickly set all elements to a specific value.",
+    "Anonymous arrays are useful for temporary operations.",
+    "Utilize `System.arraycopy()` for efficient array copying."
+  ];
+
+  const bestPractices = [
+    "Choose appropriate default values for clarity and consistency.",
+    "Consider memory implications for large arrays.",
+    "Use `final` to prevent accidental reassignment of arrays."
+  ];
+
+  const commonMistakes = [
+    "Accessing uninitialized arrays, leading to a `NullPointerException`.",
+    "Reassigning final arrays, which results in a compilation error.",
+    "Assuming arrays are initialized with non-default values."
+  ];
+
+  return (
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Array Initialization in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Arrays in Java can be initialized in various ways to suit different use cases. Understanding initialization methods is crucial for efficient and error-free programming.
+        </p>
+      </header>
+
+      <main className="space-y-12">
+        {/* Initialization Methods */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Array Initialization Methods
+          </h2>
+          <CodeBlock
+            code={`// 1. Declaration and memory allocation
 int[] arr = new int[5];
 
 // 2. Declaration and initialization
 int[] arr = {1, 2, 3, 4, 5};
 
-// 3. Declaration, memory allocation and initialization
+// 3. Declaration, memory allocation, and initialization
 int[] arr = new int[]{1, 2, 3, 4, 5};
 
 // 4. Anonymous array
 printArray(new int[]{1, 2, 3, 4, 5});`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Default Values Section */}
-            <MethodCard
-              title="Default Values"
-              description="Arrays are initialized with default values if not explicitly initialized"
-            >
-              <CodeBlock
-                code={`int[] numbers = new int[5];     // All elements are 0
+        {/* Default Values */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Default Values in Arrays
+          </h2>
+          <CodeBlock
+            code={`int[] numbers = new int[5];     // All elements are 0
 boolean[] flags = new boolean[5]; // All elements are false
 String[] names = new String[5];   // All elements are null
-char[] chars = new char[5];       // All elements are '\u0000'
+char[] chars = new char[5];       // All elements are '\\u0000'
 double[] doubles = new double[5]; // All elements are 0.0`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Final Arrays Section */}
-            <MethodCard
-              title="Final Arrays"
-              description="Arrays declared as final can't be reassigned but elements can be modified"
-            >
-              <CodeBlock
-                code={`// Creating a final array
+        {/* Final Arrays */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Final Arrays</h2>
+          <CodeBlock
+            code={`// Creating a final array
 final int[] NUMBERS = {1, 2, 3, 4, 5};
 
 // Valid: modifying elements
@@ -74,104 +109,84 @@ NUMBERS[0] = 10;  // Array becomes: [10, 2, 3, 4, 5]
 final String[] NAMES = {"John", "Jane"};
 NAMES[0] = "Jim";  // Valid: modifying element
 // NAMES = new String[]{"Bob", "Alice"}; // Invalid: reassigning array`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
+            language="java"
+          />
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Forgetting new keyword with array size</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Mixing declaration styles</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Reassigning final arrays</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using variable size with array initializer</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Assuming non-default values</span>
-                </li>
-              </ul>
-            </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run</h2>
+          <CodeBlock
+            code={`// Declare and initialize array
+int[] numbers = {10, 20, 30, 40, 50};
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use array literals for known values</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Initialize arrays at declaration</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use final for constant arrays</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider memory requirements</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use appropriate default values</span>
-                </li>
-              </ul>
-            </div>
+// Step 1: Access and modify elements
+numbers[0] = 100;  // Array becomes: [100, 20, 30, 40, 50]
 
-            {/* Key Points Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Multiple initialization methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Default values are type-specific</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Final arrays are still mutable</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Size must be positive</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Memory allocated at creation</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+// Step 2: Traverse and calculate sum
+int sum = 0;
+for (int num : numbers) {
+    sum += num;  // sum: 0 -> 100 -> 120 -> 150 -> 190 -> 240
+}
+System.out.println("Sum: " + sum);  // Output: 240`}
+            language="java"
+          />
+        </section>
+
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Visual Representation
+          </h2>
+          <CodeBlock code={visualRepresentation} language="markdown" />
+        </section>
+
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            {tips.map((tip, index) => (
+              <li key={index}>{tip}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            {proTips.map((tip, index) => (
+              <li key={index}>{tip}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Best Practices
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            {bestPractices.map((practice, index) => (
+              <li key={index}>{practice}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">
+            Common Mistakes
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            {commonMistakes.map((mistake, index) => (
+              <li key={index}>{mistake}</li>
+            ))}
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Initialization; 
+export default Initialization;

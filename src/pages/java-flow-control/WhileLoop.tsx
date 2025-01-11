@@ -100,160 +100,118 @@ while (!hasWon) {
 }`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                While Loop in Java
-              </h1>
-              <p className="text-gray-300">
-                The while loop is a fundamental control structure that repeatedly executes a block of code as long as a given condition 
-                is true. Unlike for loops, while loops are typically used when the number of iterations is not known in advance.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          While Loop in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <strong>while loop</strong> repeatedly executes a block of code as long as a given condition is true. It is especially useful when the number of iterations is not known in advance.
+        </p>
+      </header>
 
-            {/* Basic Syntax Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Syntax and Example
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">Key components:</p>
-                <ul className="list-disc ml-6 mt-2 text-gray-300">
-                  <li>The <span className="text-yellow-400">while</span> keyword</li>
-                  <li>A <span className="text-yellow-400">condition</span> that evaluates to boolean</li>
-                  <li>A code block that executes while the condition is true</li>
-                  <li>A way to eventually make the condition false (to avoid infinite loops)</li>
-                </ul>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Basic Syntax */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Basic Syntax
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Key components of the <code>while</code> loop:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
+            <li>
+              <span className="text-yellow-400">Condition:</span> A boolean expression evaluated before each iteration.
+            </li>
+            <li>
+              <span className="text-yellow-400">Code block:</span> Executes repeatedly while the condition is true.
+            </li>
+            <li>
+              <span className="text-yellow-400">Termination:</span> Ensure the loop eventually stops to avoid infinite loops.
+            </li>
+          </ul>
+        </section>
 
-            {/* User Input Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                User Input Example
-              </h2>
-              <CodeBlock code={userInputExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                While loops are perfect for handling user input as you often don't know how many inputs the user will provide.
-              </p>
-            </div>
-
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
-
-            {/* Game Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Interactive Game Example
-              </h2>
-              <CodeBlock code={gameExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                This example shows how while loops can be used in interactive programs where the loop continues until a specific 
-                condition is met (in this case, guessing the correct number).
-              </p>
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Visual Representation
+          </h2>
+          <p className="text-gray-300">
+            The <strong>while loop</strong> works as follows:
+          </p>
+          <div className="bg-gray-700 p-4 rounded-lg text-gray-200">
+            <ul className="list-decimal pl-6 space-y-3">
+              <li>Evaluate the condition (e.g., <code>count &lt;= 5</code>).</li>
+              <li>If true, execute the code block inside the loop.</li>
+              <li>After execution, re-evaluate the condition.</li>
+              <li>Repeat until the condition becomes false.</li>
+              <li>Exit the loop and continue with the next part of the program.</li>
+            </ul>
           </div>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Forgetting to update the loop condition</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Creating infinite loops</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using = instead of == in condition</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not initializing variables before the loop</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Wrong condition causing loop to never execute</span>
-                </li>
-              </ul>
-            </div>
+        {/* User Input Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            User Input Example
+          </h2>
+          <CodeBlock code={userInputExample} language="java" />
+          <p className="mt-4 text-gray-300">
+            While loops are particularly useful for processing user input, as the number of iterations depends on the user's input.
+          </p>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Always have a clear exit condition</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Initialize variables before the loop</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use for loop if number of iterations is known</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep the loop body simple and focused</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider using do-while for input validation</span>
-                </li>
-              </ul>
-            </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+            Dry Run Example
+          </h2>
+          <CodeBlock code={dryRunExample} language="java" />
+        </section>
 
-            {/* When to Use Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                When to Use While Loop
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Processing user input</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Reading file contents</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Game loops</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Unknown number of iterations</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Game Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Interactive Game Example
+          </h2>
+          <CodeBlock code={gameExample} language="java" />
+          <p className="mt-4 text-gray-300">
+            This example demonstrates how while loops are used in interactive applications, such as a number guessing game.
+          </p>
+        </section>
+
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">
+            Common Mistakes
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Forgetting to update the loop variable, leading to infinite loops.</li>
+            <li>Using <code>=</code> instead of <code>==</code> in the condition.</li>
+            <li>Not initializing variables before the loop starts.</li>
+            <li>Setting a condition that is always false, causing the loop to never execute.</li>
+          </ul>
+        </section>
+
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Best Practices
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Always ensure there is a clear exit condition.</li>
+            <li>Use meaningful variable names for better readability.</li>
+            <li>Avoid modifying the loop condition inside the loop unnecessarily.</li>
+            <li>Consider using a <code>do-while</code> loop for scenarios requiring at least one iteration.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default WhileLoop; 
+export default WhileLoop;

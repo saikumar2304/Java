@@ -32,7 +32,6 @@ public class ReturnTypes {
     // Void return type
     public void printHello() {
         System.out.println("Hello");
-        // No return statement needed
     }
 
     // Primitive return type
@@ -114,164 +113,121 @@ calc.add(3);       // result = 5 + 3 = 8
 int value = calc.getResult();  // value = 8`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Method Declaration in Java
-              </h1>
-              <p className="text-gray-300">
-                Method declaration defines the structure and behavior of a method. It includes the method's 
-                signature, return type, access modifiers, and implementation. A well-declared method clearly 
-                communicates its purpose and usage to other developers.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Method Declaration in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <strong>method declaration</strong> in Java defines the structure, behavior, and functionality of a method. It specifies the access level, return type, method name, parameters, and body implementation.
+        </p>
+      </header>
 
-            {/* Basic Syntax Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Syntax
-              </h2>
-              <CodeBlock code={basicSyntaxExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  The method declaration includes several components that define its characteristics and behavior.
-                </p>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Basic Syntax */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Basic Syntax</h2>
+          <CodeBlock code={basicSyntaxExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            A method declaration consists of a method signature (name, parameters, and return type) and the method body, which defines the functionality.
+          </p>
+        </section>
 
-            {/* Return Types Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Return Types
-              </h2>
-              <CodeBlock code={returnTypesExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Methods can return different types of values, from simple primitives to complex objects.
-                </p>
-              </div>
-            </div>
+        {/* Return Types */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Return Types</h2>
+          <CodeBlock code={returnTypesExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Methods can return various types of values, from primitive types to objects or arrays, based on the method's purpose.
+          </p>
+        </section>
 
-            {/* Modifiers Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Access Modifiers and Other Modifiers
-              </h2>
-              <CodeBlock code={modifiersExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Different modifiers control the visibility and behavior of methods.
-                </p>
-              </div>
-            </div>
+        {/* Modifiers */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Access Modifiers and Other Modifiers
+          </h2>
+          <CodeBlock code={modifiersExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Access modifiers determine the visibility of methods, while other modifiers like <code>static</code>, <code>final</code>, and <code>abstract</code> provide additional characteristics.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Visual Representation
+          </h2>
+          <p className="text-gray-300">
+            Here's how the method declaration works step-by-step:
+          </p>
+          <div className="bg-gray-700 p-4 rounded-lg text-gray-200 mt-4">
+            <ol className="list-decimal pl-6 space-y-3">
+              <li>
+                The method name and parameters define what inputs the method expects and its purpose.
+              </li>
+              <li>
+                The return type specifies the type of data the method will return to the caller (if any).
+              </li>
+              <li>
+                The access modifier determines the visibility of the method (e.g., <code>public</code>, <code>private</code>).
+              </li>
+              <li>
+                The method body contains the instructions to perform the method's task.
+              </li>
+              <li>
+                When the method is called, it executes its body and optionally returns a value.
+              </li>
+            </ol>
           </div>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Missing return statement in non-void methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Incorrect access modifier usage</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Declaring methods as static unnecessarily</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using wrong return type</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Inconsistent naming conventions</span>
-                </li>
-              </ul>
-            </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run</h2>
+          <CodeBlock code={dryRunExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The dry run shows step-by-step execution of a sample program, demonstrating how methods are called and how their state is maintained.
+          </p>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use meaningful method names</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Choose appropriate access modifiers</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep methods focused and small</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use proper JavaDoc comments</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Follow return type conventions</span>
-                </li>
-              </ul>
-            </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Missing return statements in non-void methods.</li>
+            <li>Using incorrect access modifiers or return types.</li>
+            <li>Improper method naming that reduces readability.</li>
+            <li>Declaring methods as static unnecessarily.</li>
+          </ul>
+        </section>
 
-            {/* Key Points Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Method signature components</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Access level implications</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Return type selection</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Static vs non-static context</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Method visibility scope</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use meaningful method names that indicate the purpose.</li>
+            <li>Keep methods small and focused on a single task.</li>
+            <li>Choose appropriate access modifiers to enforce encapsulation.</li>
+            <li>Use JavaDoc comments for documentation.</li>
+          </ul>
+        </section>
+
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Leverage method overloading for flexibility with parameter variations.</li>
+            <li>Break down long methods into smaller helper methods for better readability.</li>
+            <li>Use static methods for utility functions that don’t depend on the instance state.</li>
+            <li>Test methods thoroughly to ensure all edge cases are handled.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default MethodDeclaration; 
+export default MethodDeclaration;

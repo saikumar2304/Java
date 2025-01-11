@@ -1,239 +1,117 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const StringComparison: React.FC = () => {
+  const comparisonExample = `
+    // Using '==' operator
+    String str1 = "Java";
+    String str2 = "Java";
+    System.out.println(str1 == str2);  // true, both point to the same object in the string pool
+    
+    // Using 'equals()' method
+    String str3 = new String("Java");
+    String str4 = new String("Java");
+    System.out.println(str3.equals(str4));  // true, checks the value of the strings
+    
+    // Using '==' with new objects
+    System.out.println(str3 == str4);  // false, different references in memory
+  `;
+
+  const stringBufferComparison = `
+    // Comparing StringBuffer objects
+    StringBuffer sb1 = new StringBuffer("Hello");
+    StringBuffer sb2 = new StringBuffer("Hello");
+    
+    // Using '==' compares references
+    System.out.println(sb1 == sb2);  // false, different references
+    
+    // Using 'equals()' compares the reference, not the content
+    System.out.println(sb1.equals(sb2));  // false, StringBuffer does not override equals()
+  `;
+
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                String vs StringBuffer vs StringBuilder
-              </h1>
-              <p className="text-gray-300">
-                Java provides three main classes for string manipulation: String, StringBuffer, and StringBuilder. Each has its own characteristics and use cases. Understanding their differences is crucial for writing efficient Java applications.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          String Comparison in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Understand how to compare strings in Java using <code>==</code> and <code>equals()</code> and learn the nuances of reference vs value comparison.
+        </p>
+      </header>
 
-            {/* Feature Comparison Section */}
-            <MethodCard
-              title="Feature Comparison"
-              description="Key differences between String, StringBuffer, and StringBuilder"
-            >
-              <CodeBlock
-                code={`// String: Immutable
-String str = "Hello";
-str = str + " World";  // Creates new object
+      <main className="space-y-12">
+        {/* String Comparison Example Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">String Comparison Example</h2>
+          <CodeBlock code={comparisonExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The <code>==</code> operator compares object references, while <code>equals()</code> compares the values of the strings.
+            This example demonstrates both methods of comparison and highlights the differences.
+          </p>
+        </section>
 
-// StringBuffer: Mutable, Thread-safe
-StringBuffer sbuf = new StringBuffer("Hello");
-sbuf.append(" World");  // Modifies same object, synchronized
+        {/* StringBuffer Comparison Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">StringBuffer Comparison</h2>
+          <CodeBlock code={stringBufferComparison} language="java" />
+          <p className="text-gray-300 mt-4">
+            The <code>StringBuffer</code> class does not override the <code>equals()</code> method, so using it on two <code>StringBuffer</code> objects compares references, not content.
+            This example shows how comparison works with <code>StringBuffer</code>.
+          </p>
+        </section>
 
-// StringBuilder: Mutable, Not Thread-safe
-StringBuilder sbld = new StringBuilder("Hello");
-sbld.append(" World");  // Modifies same object, not synchronized
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Always use <code>equals()</code> to compare the content of two strings, not <code>==</code>.</li>
+            <li>Strings in Java are immutable, so even if two string variables have the same content, they might not refer to the same object in memory unless they are interned.</li>
+            <li>If you're comparing <code>StringBuffer</code> or <code>StringBuilder</code>, remember that <code>equals()</code> does not compare the contents by default.</li>
+          </ul>
+        </section>
 
-// Performance comparison (approximate)
-long startTime = System.nanoTime();
-// StringBuilder: Fastest
-// StringBuffer: ~10-15% slower than StringBuilder
-// String concatenation: Much slower for multiple operations`}
-                language="java"
-              />
-            </MethodCard>
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Using <code>==</code> to compare string content, which can lead to incorrect results when comparing string values.</li>
+            <li>Assuming that <code>==</code> works the same for all objects in Java, but it only checks object references, not the actual content.</li>
+            <li>Not considering the difference in behavior between <code>String</code> and other objects like <code>StringBuffer</code>, which do not override <code>equals()</code> by default.</li>
+          </ul>
+        </section>
 
-            {/* Memory Usage Section */}
-            <MethodCard
-              title="Memory Usage Patterns"
-              description="How each class manages memory"
-            >
-              <CodeBlock
-                code={`// String: Creates new object for each operation
-String s = "";
-for(int i = 0; i < 5; i++) {
-    s += i;  // Creates 5 new String objects
-}
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Always use <code>equals()</code> to compare the actual content of strings.</li>
+            <li>For string pooling, use <code>intern()</code> to ensure that strings with the same value are pointing to the same object in memory.</li>
+            <li>Consider using <code>StringBuilder</code> for mutable string manipulation to avoid unnecessary object creation.</li>
+          </ul>
+        </section>
 
-// StringBuffer: Reuses same object
-StringBuffer sb = new StringBuffer(16);  // Initial capacity
-for(int i = 0; i < 5; i++) {
-    sb.append(i);  // Modifies same object
-}
+        {/* Dry Run Example Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`// Example of comparing strings using '==' and 'equals()'
+String str1 = "Java";
+String str2 = "Java";
+String str3 = new String("Java");
 
-// StringBuilder: Similar to StringBuffer but without synchronization
-StringBuilder sb = new StringBuilder(16);
-for(int i = 0; i < 5; i++) {
-    sb.append(i);  // Most memory efficient for single thread`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Use Case Examples Section */}
-            <MethodCard
-              title="Use Case Examples"
-              description="When to use each class"
-            >
-              <CodeBlock
-                code={`// Use String for:
-String name = "John";  // Simple string values
-String constant = "PI";  // Constants
-String immutable = "Cannot change";  // When immutability is needed
-
-// Use StringBuffer for:
-StringBuffer threadSafe = new StringBuffer();
-// In multi-threaded environment
-synchronized void appendLog(String log) {
-    threadSafe.append(log).append("\\n");
-}
-
-// Use StringBuilder for:
-StringBuilder query = new StringBuilder();
-// Single-threaded, performance-critical code
-for(String field : fields) {
-    query.append(field).append(",");
-}`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Performance Benchmarks Section */}
-            <MethodCard
-              title="Performance Comparison"
-              description="Benchmarking different string operations"
-            >
-              <CodeBlock
-                code={`// Concatenation Performance Test
-public class StringPerformance {
-    public static void main(String[] args) {
-        int iterations = 100000;
-        
-        // String concatenation
-        long start = System.currentTimeMillis();
-        String s = "";
-        for(int i = 0; i < iterations; i++) {
-            s += "a";
-        }
-        System.out.println("String: " + (System.currentTimeMillis() - start) + "ms");
-        
-        // StringBuffer
-        start = System.currentTimeMillis();
-        StringBuffer sbuf = new StringBuffer();
-        for(int i = 0; i < iterations; i++) {
-            sbuf.append("a");
-        }
-        System.out.println("StringBuffer: " + (System.currentTimeMillis() - start) + "ms");
-        
-        // StringBuilder
-        start = System.currentTimeMillis();
-        StringBuilder sbld = new StringBuilder();
-        for(int i = 0; i < iterations; i++) {
-            sbld.append("a");
-        }
-        System.out.println("StringBuilder: " + (System.currentTimeMillis() - start) + "ms");
-    }
-}`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
-
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* String Characteristics */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                String
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Immutable</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Thread-safe</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>String pool support</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Best for constants</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Memory intensive for changes</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* StringBuffer Characteristics */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                StringBuffer
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Mutable</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Thread-safe</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Synchronized methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Good for multi-threading</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Slower than StringBuilder</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* StringBuilder Characteristics */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                StringBuilder
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Mutable</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not thread-safe</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Best performance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>No synchronization</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Single-thread use</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+System.out.println(str1 == str2);  // true, both point to the same reference in the string pool
+System.out.println(str1 == str3);  // false, str3 is a new object
+System.out.println(str1.equals(str3));  // true, compares the values of the strings`}
+            language="java"
+          />
+          <p className="text-gray-300 mt-4">
+            This dry run shows how the <code>==</code> operator checks for reference equality, while <code>equals()</code> compares the actual string values.
+          </p>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default StringComparison; 
+export default StringComparison;

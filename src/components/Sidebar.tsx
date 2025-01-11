@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
     oop: false,
     exceptions: false,
     collections: false,
-    files: false
+    files: false,
   });
 
   const toggleSection = (section: keyof typeof openSections) => {
@@ -37,12 +37,13 @@ const Sidebar: React.FC = () => {
   );
 
   return (
-    <div className="fixed top-[64px] left-0 h-[calc(100vh-64px)] w-64 bg-gray-900 text-gray-100 overflow-y-auto border-r border-gray-800">
-      <nav className="py-4 space-y-2">
-        <div className="pt-10">
+    <div className="fixed top-[64px] left-0 h-[calc(100vh-64px)] w-64 bg-gray-800 text-gray-100 overflow-y-auto border-r border-gray-700">
+      <nav className="py-14 space-y-4">
+        {/* Java Basics Section */}
+        <div>
           <button
             onClick={() => toggleSection('basics')}
-            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-800"
+            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-700"
           >
             <span>Java Basics</span>
             {openSections.basics ? (
@@ -69,11 +70,11 @@ const Sidebar: React.FC = () => {
           )}
         </div>
 
-        {/* Flow Control */}
+        {/* Flow Control Section */}
         <div>
           <button
             onClick={() => toggleSection('flowControl')}
-            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-800 mt-2"
+            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-700 mt-2"
           >
             <span>Flow Control</span>
             {openSections.flowControl ? (
@@ -99,11 +100,11 @@ const Sidebar: React.FC = () => {
           )}
         </div>
 
-        {/* Methods */}
+        {/* Methods Section */}
         <div>
           <button
             onClick={() => toggleSection('methods')}
-            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-800 mt-2"
+            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-700 mt-2"
           >
             <span>Methods</span>
             {openSections.methods ? (
@@ -124,16 +125,15 @@ const Sidebar: React.FC = () => {
               {renderLink('/java-methods/varargs', 'Varargs')}
               {renderLink('/java-methods/overloading', 'Method Overloading')}
               {renderLink('/java-methods/recursion', 'Recursion')}
-              {renderLink('/java-methods/pass-by-value', 'Pass By Value')}
             </div>
           )}
         </div>
 
-        {/* Arrays */}
+        {/* Arrays Section */}
         <div>
           <button
             onClick={() => toggleSection('arrays')}
-            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-800 mt-2"
+            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-700 mt-2"
           >
             <span>Arrays</span>
             {openSections.arrays ? (
@@ -153,16 +153,15 @@ const Sidebar: React.FC = () => {
               {renderLink('/java-arrays/methods', 'Array Methods')}
               {renderLink('/java-arrays/sorting', 'Sorting')}
               {renderLink('/java-arrays/searching', 'Searching')}
-              {renderLink('/java-arrays/copy', 'Array Copy')}
             </div>
           )}
         </div>
 
-        {/* Strings */}
+        {/* Strings Section */}
         <div>
           <button
             onClick={() => toggleSection('strings')}
-            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-800 mt-2"
+            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-700 mt-2"
           >
             <span>Strings</span>
             {openSections.strings ? (
@@ -181,17 +180,15 @@ const Sidebar: React.FC = () => {
               {renderLink('/java-strings/comparison', 'String Comparison')}
               {renderLink('/java-strings/string-buffer', 'StringBuffer')}
               {renderLink('/java-strings/string-builder', 'StringBuilder')}
-              {renderLink('/java-strings/formatting', 'String Formatting')}
-              {renderLink('/java-strings/regex', 'Regular Expressions')}
             </div>
           )}
         </div>
 
-        {/* OOP Concepts */}
+        {/* OOP Concepts Section */}
         <div>
           <button
             onClick={() => toggleSection('oop')}
-            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-800 mt-2"
+            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-700 mt-2"
           >
             <span>OOP Concepts</span>
             {openSections.oop ? (
@@ -205,26 +202,21 @@ const Sidebar: React.FC = () => {
               {renderLink('/java-oop/introduction', 'Introduction')}
               {renderLink('/java-oop/classes-objects', 'Classes & Objects')}
               {renderLink('/java-oop/constructors', 'Constructors')}
-              {renderLink('/java-oop/access-modifiers', 'Access Modifiers')}
-              {renderLink('/java-oop/encapsulation', 'Encapsulation')}
               {renderLink('/java-oop/inheritance', 'Inheritance')}
               {renderLink('/java-oop/polymorphism', 'Polymorphism')}
               {renderLink('/java-oop/abstraction', 'Abstraction')}
+              {renderLink('/java-oop/encapsulation', 'Encapsulation')}
+              {renderLink('/java-oop/abstract-classes', 'Abstract')}
               {renderLink('/java-oop/interfaces', 'Interfaces')}
-              {renderLink('/java-oop/abstract-classes', 'Abstract Classes')}
-              {renderLink('/java-oop/static-members', 'Static Members')}
-              {renderLink('/java-oop/final-keyword', 'Final Keyword')}
-              {renderLink('/java-oop/package', 'Packages')}
-              {renderLink('/java-oop/object-class', 'Object Class')}
             </div>
           )}
         </div>
 
-        {/* Exception Handling */}
+        {/* Exception Handling Section */}
         <div>
           <button
             onClick={() => toggleSection('exceptions')}
-            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-800 mt-2"
+            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-700 mt-2"
           >
             <span>Exception Handling</span>
             {openSections.exceptions ? (
@@ -241,16 +233,15 @@ const Sidebar: React.FC = () => {
               {renderLink('/java-exceptions/throw-throws', 'Throw & Throws')}
               {renderLink('/java-exceptions/finally', 'Finally Block')}
               {renderLink('/java-exceptions/custom-exceptions', 'Custom Exceptions')}
-              {renderLink('/java-exceptions/types', 'Exception Types')}
             </div>
           )}
         </div>
 
-        {/* Collections */}
+        {/* Collections Section */}
         <div>
           <button
             onClick={() => toggleSection('collections')}
-            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-800 mt-2"
+            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-700 mt-2"
           >
             <span>Collections</span>
             {openSections.collections ? (
@@ -266,32 +257,19 @@ const Sidebar: React.FC = () => {
               {renderLink('/java-collections/list-interface', 'List Interface')}
               {renderLink('/java-collections/array-list', 'ArrayList')}
               {renderLink('/java-collections/linked-list', 'LinkedList')}
-              {renderLink('/java-collections/vector', 'Vector')}
-              {renderLink('/java-collections/stack', 'Stack')}
-              {renderLink('/java-collections/queue-interface', 'Queue Interface')}
-              {renderLink('/java-collections/priority-queue', 'PriorityQueue')}
-              {renderLink('/java-collections/deque-interface', 'Deque Interface')}
-              {renderLink('/java-collections/set-interface', 'Set Interface')}
               {renderLink('/java-collections/hashset', 'HashSet')}
-              {renderLink('/java-collections/linked-hashset', 'LinkedHashSet')}
               {renderLink('/java-collections/treeset', 'TreeSet')}
-              {renderLink('/java-collections/map-interface', 'Map Interface')}
               {renderLink('/java-collections/hashmap', 'HashMap')}
-              {renderLink('/java-collections/linked-hashmap', 'LinkedHashMap')}
               {renderLink('/java-collections/treemap', 'TreeMap')}
-              {renderLink('/java-collections/hashtable', 'Hashtable')}
-              {renderLink('/java-collections/comparable', 'Comparable')}
-              {renderLink('/java-collections/comparator', 'Comparator')}
-              {renderLink('/java-collections/iterator', 'Iterator')}
             </div>
           )}
         </div>
 
-        {/* File Handling */}
+        {/* Files Section */}
         <div>
           <button
             onClick={() => toggleSection('files')}
-            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-800 mt-2"
+            className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold hover:bg-gray-700 mt-2"
           >
             <span>File Handling</span>
             {openSections.files ? (
@@ -306,9 +284,6 @@ const Sidebar: React.FC = () => {
               {renderLink('/java-files/file-class', 'File Class')}
               {renderLink('/java-files/file-reader', 'FileReader')}
               {renderLink('/java-files/file-writer', 'FileWriter')}
-              {renderLink('/java-files/buffered-reader', 'BufferedReader')}
-              {renderLink('/java-files/buffered-writer', 'BufferedWriter')}
-              {renderLink('/java-files/file-streams', 'File Streams')}
             </div>
           )}
         </div>

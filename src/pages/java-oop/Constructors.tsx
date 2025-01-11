@@ -1,344 +1,181 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const Constructors: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Constructors in Java
-              </h1>
-              <p className="text-gray-300">
-                Constructors are special methods used to initialize objects. They are called automatically when an object is created and ensure proper initialization of class fields.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Constructors in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Constructors are special methods used to initialize objects. They are called automatically when an object is created and ensure proper initialization of class fields.
+        </p>
+      </header>
 
-            {/* Types of Constructors Section */}
-            <MethodCard
-              title="Types of Constructors"
-              description="Different types of constructors in Java"
-            >
-              <CodeBlock
-                code={`// 1. Default Constructor
-class Car {
+      <main className="space-y-12">
+        {/* Introduction Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">What Are Constructors?</h2>
+          <p className="text-gray-300">
+            A constructor is a special method that has the same name as the class and no return type. It initializes an object when it is created.
+          </p>
+          <CodeBlock
+            code={`class Car {
     private String brand;
     private int year;
-    
+
+    // Constructor
+    public Car(String brand, int year) {
+        this.brand = brand;
+        this.year = year;
+    }
+}`}
+            language="java"
+          />
+        </section>
+
+        {/* Types of Constructors Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Types of Constructors</h2>
+          <p className="text-gray-300">
+            Constructors can be categorized into the following types:
+          </p>
+          <CodeBlock
+            code={`// Default Constructor
+class Car {
+    private String brand;
+
     // Default constructor
     public Car() {
         this.brand = "Unknown";
-        this.year = 0;
     }
 }
 
-// 2. Parameterized Constructor
+// Parameterized Constructor
 class Car {
     private String brand;
-    private int year;
-    
+
     // Parameterized constructor
-    public Car(String brand, int year) {
+    public Car(String brand) {
         this.brand = brand;
-        this.year = year;
     }
 }
 
-// 3. Copy Constructor
+// Copy Constructor
 class Car {
     private String brand;
-    private int year;
-    
+
     // Copy constructor
     public Car(Car other) {
         this.brand = other.brand;
-        this.year = other.year;
     }
 }`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Constructor Chaining Section */}
-            <MethodCard
-              title="Constructor Chaining"
-              description="Calling one constructor from another"
-            >
-              <CodeBlock
-                code={`class Car {
+        {/* Constructor Chaining Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Constructor Chaining</h2>
+          <p className="text-gray-300">
+            Constructor chaining allows one constructor to call another within the same class or in a parent class using <code>this()</code> or <code>super()</code>.
+          </p>
+          <CodeBlock
+            code={`class Car {
     private String brand;
-    private int year;
-    
+
     // Default constructor
     public Car() {
-        this("Unknown", 0);  // Calls parameterized constructor
+        this("Unknown");  // Calls the parameterized constructor
     }
-    
+
     // Parameterized constructor
-    public Car(String brand, int year) {
+    public Car(String brand) {
         this.brand = brand;
-        this.year = year;
-    }
-    
-    // Copy constructor
-    public Car(Car other) {
-        this(other.brand, other.year);  // Calls parameterized constructor
     }
 }`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Memory Allocation During Construction */}
-            <MethodCard
-              title="Memory Allocation During Construction"
-              description="How memory is allocated during object construction"
-            >
-              <CodeBlock
-                code={`// Object creation and constructor call
-Car car1 = new Car("Toyota", 2020);
+        {/* Memory Allocation During Construction */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Memory Allocation During Construction</h2>
+          <p className="text-gray-300">
+            Memory is allocated in the heap during object creation, and the constructor initializes instance variables.
+          </p>
+          <CodeBlock
+            code={`Car car1 = new Car("Toyota");
+// Memory allocated in heap
+// Constructor initializes instance variables`}
+            language="java"
+          />
+        </section>
+
+        {/* Dry Run Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`// Step 1: Object creation
+Car car1 = new Car("Toyota");
+
+// Step 2: Constructor call
 // - Memory allocated in heap
-// - Constructor initializes instance variables
+// - Constructor initializes fields
 
-Car car2 = new Car(car1);
-// - New memory allocated in heap
-// - Copy constructor copies values from car1
+// Step 3: Accessing fields
+System.out.println(car1.getBrand());
+// Output: Toyota`}
+            language="java"
+          />
+          <p className="text-gray-300 mt-4">
+            This dry run explains how constructors are executed step by step during object creation.
+          </p>
+        </section>
 
-// Constructor chaining
-Car car3 = new Car();
-// - Default constructor calls parameterized constructor
-// - Memory allocated and initialized in heap`}
-                language="java"
-              />
-              <div className="mt-4 p-6 bg-gray-800 rounded-lg border border-gray-700">
-                <h3 className="text-lg font-semibold mb-4 text-gray-100">Memory Layout:</h3>
-                <div className="font-mono text-sm">
-                  <div className="grid grid-cols-2 gap-8">
-                    {/* Stack Section */}
-                    <div>
-                      <div className="text-blue-300 mb-2">Stack:</div>
-                      <div className="bg-gray-900 p-4 rounded border border-gray-700">
-                        <div className="flex items-center mb-2">
-                          <div className="text-purple-300 mr-2">car1</div>
-                          <div className="text-gray-400">──▶</div>
-                        </div>
-                        <div className="flex items-center mb-2">
-                          <div className="text-purple-300 mr-2">car2</div>
-                          <div className="text-gray-400">──▶</div>
-                        </div>
-                        <div className="flex items-center">
-                          <div className="text-purple-300 mr-2">car3</div>
-                          <div className="text-gray-400">──▶</div>
-                        </div>
-                      </div>
-                    </div>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use parameterized constructors to initialize objects with specific values.</li>
+            <li>Keep constructors simple and avoid complex logic.</li>
+            <li>Always call the parent class constructor explicitly if needed.</li>
+          </ul>
+        </section>
 
-                    {/* Heap Section */}
-                    <div>
-                      <div className="text-green-300 mb-2">Heap:</div>
-                      <div className="space-y-4">
-                        <div className="bg-gray-900 p-4 rounded border border-gray-700">
-                          <div className="text-yellow-300 mb-2">Car Object 1</div>
-                          <div className="text-gray-300">brand: "Toyota"</div>
-                          <div className="text-gray-300">year: 2020</div>
-                        </div>
-                        
-                        <div className="bg-gray-900 p-4 rounded border border-gray-700">
-                          <div className="text-yellow-300 mb-2">Car Object 2</div>
-                          <div className="text-gray-300">brand: "Toyota"</div>
-                          <div className="text-gray-300">year: 2020</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </MethodCard>
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use constructor chaining to simplify code and reduce duplication.</li>
+            <li>Consider using immutable objects for better safety when initializing fields.</li>
+            <li>Implement copy constructors for custom object duplication logic.</li>
+          </ul>
+        </section>
 
-            {/* Dry Run Example */}
-            <MethodCard
-              title="Dry Run: Constructor Execution"
-              description="Step by step execution of constructors"
-            >
-              <CodeBlock
-                code={`// Step 1: Class loading
-// Car class is loaded into memory
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Forgetting to initialize fields in constructors.</li>
+            <li>Overloading constructors without clear purpose.</li>
+            <li>Calling <code>this()</code> and <code>super()</code> incorrectly, leading to runtime errors.</li>
+          </ul>
+        </section>
 
-// Step 2: Object creation
-Car car1 = new Car("Toyota", 2020);
-// - Memory allocated in heap
-// - Parameterized constructor called
-// - Instance variables initialized
-
-// Step 3: Copy constructor
-Car car2 = new Car(car1);
-// - New memory allocated in heap
-// - Copy constructor copies values
-
-// Step 4: Constructor chaining
-Car car3 = new Car();
-// - Default constructor calls parameterized constructor
-// - Memory allocated and initialized in heap`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
-
-          {/* Right Sidebar */}
-          <div className="col-span-3 space-y-8">
-            {/* Key Points */}
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-800 dark:text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-700 dark:text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Constructors initialize objects</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>No return type</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Constructor chaining</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Memory allocation in heap</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Copy constructors</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Constructor Concepts */}
-            <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-purple-800 dark:text-purple-200">
-                Constructor Concepts
-              </h2>
-              <ul className="space-y-3 text-purple-700 dark:text-purple-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Default vs Parameterized</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Copy constructors</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Chaining with this()</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Overloading constructors</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Initialization order</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Forgetting super() call</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Recursive constructor calls</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not handling null parameters</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Complex logic in constructors</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Missing validation checks</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep constructors simple</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Validate input parameters</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use constructor chaining</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Initialize all fields</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document constructors well</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Pro Tips Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Pro Tips
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider builder pattern</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use static factory methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Implement copy constructors</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider immutability</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use dependency injection</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Always initialize all fields to avoid inconsistent object states.</li>
+            <li>Use default constructors for generic initialization.</li>
+            <li>Document your constructors to explain their purpose and behavior.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Constructors; 
+export default Constructors;

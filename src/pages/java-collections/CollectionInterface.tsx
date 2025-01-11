@@ -1,30 +1,44 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const CollectionInterface: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Collection Interface in Java
-              </h1>
-              <p className="text-gray-300">
-                The Collection interface is the root interface of the collection hierarchy. It provides the basic operations for working with groups of objects and defines the methods that all collections will have.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Collection Interface in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <code>Collection</code> interface is the root interface of the Java Collections Framework. It provides the foundational methods to manipulate groups of objects efficiently.
+        </p>
+      </header>
 
-            {/* Basic Methods */}
-            <MethodCard
-              title="Basic Collection Methods"
-              description="Core methods of the Collection interface"
-            >
-              <CodeBlock
-                code={`Collection<String> collection = new ArrayList<>();
+      <main className="space-y-12">
+        {/* Introduction Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Introduction</h2>
+          <p className="text-gray-300">
+            The <code>Collection</code> interface defines the basic structure and behavior of all collections in Java. It provides methods for adding, removing, and querying elements, supporting flexible and efficient data manipulation.
+          </p>
+          <CodeBlock
+            code={`import java.util.*;
+
+// Example: Basic Collection usage
+Collection<String> collection = new ArrayList<>();
+collection.add("One");
+collection.add("Two");
+collection.add("Three");
+
+System.out.println(collection); // Output: [One, Two, Three]`}
+            language="java"
+          />
+        </section>
+
+        {/* Common Methods of Collection Interface */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Common Methods</h2>
+          <CodeBlock
+            code={`Collection<String> collection = new ArrayList<>();
 
 // Adding elements
 collection.add("One");              // Add single element
@@ -32,213 +46,126 @@ collection.addAll(Arrays.asList("Two", "Three")); // Add multiple elements
 
 // Removing elements
 collection.remove("One");           // Remove specific element
-collection.removeAll(Arrays.asList("Two", "Three")); // Remove multiple
 collection.clear();                 // Remove all elements
 
 // Querying collection
 int size = collection.size();       // Number of elements
 boolean isEmpty = collection.isEmpty(); // Check if empty
-boolean contains = collection.contains("One"); // Check for element
+boolean contains = collection.contains("Two"); // Check for element`}
+            language="java"
+          />
+        </section>
 
-// Converting to array
-Object[] array = collection.toArray();     // Convert to Object array
-String[] strArray = collection.toArray(new String[0]); // Type-safe array`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Bulk Operations */}
-            <MethodCard
-              title="Bulk Operations"
-              description="Operations that work on multiple elements"
-            >
-              <CodeBlock
-                code={`Collection<String> c1 = new ArrayList<>();
+        {/* Bulk Operations Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Bulk Operations</h2>
+          <CodeBlock
+            code={`Collection<String> c1 = new ArrayList<>();
 Collection<String> c2 = new ArrayList<>();
 
-// Adding elements
 c1.addAll(Arrays.asList("A", "B", "C"));
 c2.addAll(Arrays.asList("B", "C", "D"));
 
 // Bulk operations
-c1.containsAll(c2);    // Check if c1 contains all elements of c2
-c1.addAll(c2);        // Add all elements from c2 to c1
-c1.retainAll(c2);     // Keep only elements that are in both c1 and c2
-c1.removeAll(c2);     // Remove all elements that are in c2 from c1
+c1.retainAll(c2);  // Keep only elements that are common
+c1.removeAll(c2);  // Remove all elements present in c2`}
+            language="java"
+          />
+        </section>
 
-// Stream operations
-c1.stream()
-  .filter(s -> s.startsWith("A"))
-  .forEach(System.out::println);
-
-// Parallel operations
-c1.parallelStream()
-  .map(String::toUpperCase)
-  .collect(Collectors.toList());`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Iterator Usage */}
-            <MethodCard
-              title="Iterator Methods"
-              description="Using iterators with collections"
-            >
-              <CodeBlock
-                code={`Collection<Integer> numbers = new ArrayList<>();
+        {/* Iterator Methods */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Iterator Methods</h2>
+          <CodeBlock
+            code={`Collection<Integer> numbers = new ArrayList<>();
 numbers.addAll(Arrays.asList(1, 2, 3, 4, 5));
 
-// Basic iteration
+// Using iterator
 Iterator<Integer> iterator = numbers.iterator();
 while (iterator.hasNext()) {
-    Integer number = iterator.next();
-    System.out.println(number);
+    Integer num = iterator.next();
+    System.out.println(num);
 }
 
-// Removing elements during iteration
-Iterator<Integer> removeIterator = numbers.iterator();
-while (removeIterator.hasNext()) {
-    Integer number = removeIterator.next();
-    if (number % 2 == 0) {
-        removeIterator.remove(); // Safe way to remove during iteration
+// Removing elements safely
+iterator = numbers.iterator();
+while (iterator.hasNext()) {
+    Integer num = iterator.next();
+    if (num % 2 == 0) {
+        iterator.remove();
     }
+}`}
+            language="java"
+          />
+        </section>
+
+        {/* Dry Run Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`Collection<String> fruits = new ArrayList<>();
+fruits.add("Apple");
+fruits.add("Banana");
+fruits.add("Orange");
+
+// Dry run:
+for (String fruit : fruits) {
+    System.out.println(fruit);
 }
 
-// For-each loop (syntactic sugar for Iterator)
-for (Integer number : numbers) {
-    System.out.println(number);
-}
+// Output:
+// Apple
+// Banana
+// Orange`}
+            language="java"
+          />
+          <p className="text-gray-300 mt-4">
+            This dry run demonstrates adding elements to a collection and iterating over them.
+          </p>
+        </section>
 
-// Spliterator for parallel iteration
-Spliterator<Integer> spliterator = numbers.spliterator();
-spliterator.forEachRemaining(System.out::println);`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use <code>addAll()</code> for bulk additions instead of multiple <code>add()</code> calls.</li>
+            <li>Check the size of the collection before accessing elements.</li>
+            <li>Always prefer interface types (<code>Collection</code>) for flexibility.</li>
+          </ul>
+        </section>
 
-          {/* Right Sidebar */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Modifying during iteration</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not using generics</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Ignoring return values</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Null element handling</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Concurrent modification</span>
-                </li>
-              </ul>
-            </div>
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Combine <code>stream()</code> with collections for efficient processing.</li>
+            <li>Use <code>retainAll()</code> and <code>removeAll()</code> for efficient set operations.</li>
+            <li>Choose <code>LinkedList</code> over <code>ArrayList</code> for frequent insertions and deletions.</li>
+          </ul>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use interface types</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Check return values</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use proper iteration</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Handle exceptions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider immutability</span>
-                </li>
-              </ul>
-            </div>
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Not using generics, leading to <code>ClassCastException</code>.</li>
+            <li>Modifying collections directly during iteration.</li>
+            <li>Not handling null values properly in collections.</li>
+          </ul>
+        </section>
 
-            {/* Pro Tips Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Pro Tips
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use stream API</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Leverage bulk operations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider parallel streams</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use factory methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Implement custom collections</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Key Concepts Section */}
-            <div className="bg-purple-900/20 border border-purple-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-purple-200">
-                Key Concepts
-              </h2>
-              <ul className="space-y-3 text-purple-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Collection hierarchy</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Iterator pattern</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Bulk operations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Optional returns</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Method contracts</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Always initialize collections with appropriate types for better performance.</li>
+            <li>Prefer immutable collections for read-only operations.</li>
+            <li>Use <code>Collections.unmodifiableCollection()</code> for safety.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default CollectionInterface; 
+export default CollectionInterface;

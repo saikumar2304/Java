@@ -1,30 +1,47 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const HashMap: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                HashMap in Java
-              </h1>
-              <p className="text-gray-300">
-                HashMap is the most commonly used Map implementation that stores key-value pairs in a hash table. It provides constant-time performance for basic operations (get and put) assuming the hash function disperses elements properly among the buckets.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          HashMap in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          HashMap is a part of the Java Collections Framework that stores key-value pairs in a hash table. It offers constant-time performance for basic operations like adding, removing, and retrieving elements.
+        </p>
+      </header>
 
-            {/* Creating HashMap */}
-            <MethodCard
-              title="Creating HashMap"
-              description="Different ways to initialize HashMap"
-            >
-              <CodeBlock
-                code={`// Default constructor
+      <main className="space-y-12">
+        {/* Introduction Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Introduction</h2>
+          <p className="text-gray-300">
+            HashMap is an implementation of the <code>Map</code> interface and is widely used for its efficiency. It does not maintain any order for its entries but allows one null key and multiple null values.
+          </p>
+          <CodeBlock
+            code={`import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("One", 1);
+        map.put("Two", 2);
+        map.put("Three", 3);
+
+        System.out.println("HashMap: " + map); // Output: {One=1, Two=2, Three=3}
+    }
+}`}
+            language="java"
+          />
+        </section>
+
+        {/* Creating HashMap */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Creating HashMap</h2>
+          <CodeBlock
+            code={`// Default constructor
 HashMap<String, Integer> map1 = new HashMap<>();
 
 // With initial capacity
@@ -48,73 +65,60 @@ Map<String, Integer> map6 = Map.ofEntries(
     Map.entry("One", 1),
     Map.entry("Two", 2)
 );`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* HashMap Operations */}
-            <MethodCard
-              title="HashMap Operations"
-              description="Common operations with HashMap"
-            >
-              <CodeBlock
-                code={`HashMap<String, Integer> map = new HashMap<>();
+        {/* Operations Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">HashMap Operations</h2>
+          <CodeBlock
+            code={`HashMap<String, Integer> map = new HashMap<>();
 
-// Basic operations
-map.put("One", 1);                // Add or update
-map.putIfAbsent("Two", 2);        // Add if key absent
-Integer value = map.get("One");    // Get value
-value = map.getOrDefault("Three", 0); // Get with default
+// Adding and retrieving elements
+map.put("One", 1);
+map.put("Two", 2);
+Integer value = map.get("One");
+
+// Conditional operations
+map.putIfAbsent("Three", 3);
+map.compute("Two", (k, v) -> v + 10);
+map.merge("One", 5, Integer::sum);
 
 // Removal operations
-map.remove("Two");                // Remove by key
-map.remove("One", 1);             // Remove if value matches
-
-// Bulk operations
-map.putAll(otherMap);             // Add all from another map
-map.clear();                      // Remove all entries
-
-// Functional operations
-map.compute("One", (k, v) -> v == null ? 1 : v + 1);
-map.computeIfAbsent("Two", k -> 2);
-map.computeIfPresent("One", (k, v) -> v + 1);
-map.merge("One", 1, Integer::sum);
+map.remove("One");
+map.clear();
 
 // Iteration
 for (Map.Entry<String, Integer> entry : map.entrySet()) {
     System.out.println(entry.getKey() + ": " + entry.getValue());
-}
+} 
 
 // Stream operations
 map.entrySet().stream()
-   .filter(e -> e.getValue() > 1)
-   .map(Map.Entry::getKey)
-   .forEach(System.out::println);`}
-                language="java"
-              />
-            </MethodCard>
+    .filter(e -> e.getValue() > 1)
+    .map(Map.Entry::getKey)
+    .forEach(System.out::println);`}
+            language="java"
+          />
+        </section>
 
-            {/* Custom Objects in HashMap */}
-            <MethodCard
-              title="Custom Objects in HashMap"
-              description="Using HashMap with custom classes"
-            >
-              <CodeBlock
-                code={`class Person {
+        {/* Custom Objects Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Using Custom Objects</h2>
+          <CodeBlock
+            code={`class Person {
     private String name;
     private int age;
-    
-    // Constructor, getters, setters...
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return age == person.age && 
-               Objects.equals(name, person.name);
+        return age == person.age && name.equals(person.name);
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hash(name, age);
@@ -122,158 +126,70 @@ map.entrySet().stream()
 }
 
 // Using Person as key
-HashMap<Person, String> personMap = new HashMap<>();
-Person john = new Person("John", 30);
-personMap.put(john, "Developer");
+HashMap<Person, String> map = new HashMap<>();
+map.put(new Person("John", 30), "Developer");`}
+            language="java"
+          />
+        </section>
 
-// Using Person as value
-HashMap<String, Person> nameMap = new HashMap<>();
-nameMap.put("John", new Person("John", 30));
+        {/* Dry Run Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`HashMap<String, Integer> map = new HashMap<>();
+map.put("A", 1);
+map.put("B", 2);
 
-// Using composite key
-class CompositeKey {
-    private final String part1;
-    private final String part2;
-    
-    // Constructor...
-    
-    @Override
-    public boolean equals(Object o) {
-        // Implement equals
-    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(part1, part2);
-    }
-}`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
+// Dry run:
+System.out.println(map.get("A")); // Output: 1
+map.put("A", 5);
+System.out.println(map.get("A")); // Output: 5`}
+            language="java"
+          />
+        </section>
 
-          {/* Right Sidebar */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Poor hashCode implementation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Mutable keys</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Ignoring load factor</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Concurrent modification</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Missing null checks</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use <code>getOrDefault()</code> for safe value retrieval.</li>
+            <li>Combine <code>compute()</code> and <code>merge()</code> for efficient updates.</li>
+            <li>Leverage <code>putIfAbsent()</code> to avoid overwriting existing values.</li>
+          </ul>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Proper equals/hashCode</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Initial capacity planning</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Immutable keys</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use functional methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider thread safety</span>
-                </li>
-              </ul>
-            </div>
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Optimize initial capacity for large data sets.</li>
+            <li>Use immutable keys for consistency.</li>
+            <li>Combine with <code>Stream API</code> for advanced filtering and transformations.</li>
+          </ul>
+        </section>
 
-            {/* Pro Tips Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Pro Tips
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use compute methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Optimize capacity</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Stream operations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Bulk operations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Performance tuning</span>
-                </li>
-              </ul>
-            </div>
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Forgetting to override <code>hashCode()</code> and <code>equals()</code>.</li>
+            <li>Using mutable objects as keys.</li>
+            <li>Not considering thread safety for concurrent operations.</li>
+          </ul>
+        </section>
 
-            {/* Key Concepts Section */}
-            <div className="bg-purple-900/20 border border-purple-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-purple-200">
-                Key Concepts
-              </h2>
-              <ul className="space-y-3 text-purple-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Hash table structure</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Load factor</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Hash collisions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Bucket management</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Time complexity</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Plan capacity and load factor for large maps.</li>
+            <li>Use immutable objects as keys to avoid bugs.</li>
+            <li>Validate inputs to avoid null values.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default HashMap; 
+export default HashMap;

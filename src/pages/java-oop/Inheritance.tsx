@@ -1,295 +1,183 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const Inheritance: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Inheritance in Java
-              </h1>
-              <p className="text-gray-300">
-                Inheritance is a mechanism that allows a class to inherit properties and methods from another class. It promotes code reuse and establishes a relationship between parent and child classes.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Inheritance in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Inheritance is a core concept of object-oriented programming that allows one class to inherit the fields and methods of another class. It promotes code reuse and establishes a hierarchical relationship between classes.
+        </p>
+      </header>
 
-            {/* Single Inheritance Section */}
-            <MethodCard
-              title="Single Inheritance"
-              description="Basic inheritance between two classes"
-            >
-              <CodeBlock
-                code={`// Parent class (Superclass)
+      <main className="space-y-12">
+        {/* Introduction Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Introduction</h2>
+          <p className="text-gray-300 mb-4">
+            Inheritance enables a child class (subclass) to reuse fields and methods of a parent class (superclass). The <code>extends</code> keyword is used to create inheritance relationships.
+          </p>
+          <CodeBlock
+            code={`// Parent class
 class Animal {
     protected String name;
-    protected int age;
-    
-    public Animal(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-    
-    public void makeSound() {
-        System.out.println("Some sound");
+
+    public void eat() {
+        System.out.println(name + " is eating");
     }
 }
 
-// Child class (Subclass)
+// Child class
 class Dog extends Animal {
-    private String breed;
-    
-    public Dog(String name, int age, String breed) {
-        super(name, age);  // Call parent constructor
-        this.breed = breed;
+    public void bark() {
+        System.out.println(name + " is barking");
     }
-    
-    @Override
-    public void makeSound() {
-        System.out.println("Woof!");
-    }
-    
-    public void fetch() {
-        System.out.println(name + " is fetching");
-    }
-}`}
-                language="java"
-              />
-            </MethodCard>
+}
 
-            {/* Multilevel Inheritance Section */}
-            <MethodCard
-              title="Multilevel Inheritance"
-              description="Chain of inheritance with multiple levels"
-            >
-              <CodeBlock
-                code={`class Vehicle {
-    protected String brand;
-    
+// Usage
+Dog dog = new Dog();
+dog.name = "Buddy";
+dog.eat();  // Buddy is eating
+dog.bark(); // Buddy is barking`}
+            language="java"
+          />
+        </section>
+
+        {/* Types of Inheritance */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Types of Inheritance</h2>
+          <ul className="list-disc pl-6 space-y-3 text-gray-300">
+            <li><strong>Single Inheritance:</strong> A subclass inherits from one superclass.</li>
+            <li><strong>Multilevel Inheritance:</strong> A chain of inheritance with multiple levels.</li>
+            <li><strong>Hierarchical Inheritance:</strong> Multiple subclasses inherit from a single superclass.</li>
+          </ul>
+        </section>
+
+        {/* Examples Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Examples</h2>
+
+          {/* Single Inheritance */}
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold text-blue-400 mb-2">Single Inheritance</h3>
+            <CodeBlock
+              code={`// Parent class
+class Animal {
+    public void eat() {
+        System.out.println("This animal eats food.");
+    }
+}
+
+// Child class
+class Dog extends Animal {
+    public void bark() {
+        System.out.println("This dog barks.");
+    }
+}
+
+// Usage
+Dog dog = new Dog();
+dog.eat();  // Output: This animal eats food.
+dog.bark(); // Output: This dog barks.`}
+              language="java"
+            />
+          </div>
+
+          {/* Multilevel Inheritance */}
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold text-blue-400 mb-2">Multilevel Inheritance</h3>
+            <CodeBlock
+              code={`class Vehicle {
     public void start() {
         System.out.println("Vehicle starting");
     }
 }
 
 class Car extends Vehicle {
-    private int doors;
-    
-    @Override
-    public void start() {
-        System.out.println("Car starting");
-    }
-    
     public void drive() {
         System.out.println("Car driving");
     }
 }
 
 class ElectricCar extends Car {
-    private int batteryCapacity;
-    
-    @Override
-    public void start() {
-        System.out.println("Electric car starting silently");
-    }
-    
     public void charge() {
         System.out.println("Charging battery");
     }
-}`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Super Keyword Section */}
-            <MethodCard
-              title="Using super Keyword"
-              description="Accessing parent class members"
-            >
-              <CodeBlock
-                code={`class Parent {
-    protected String name = "Parent";
-    
-    public void display() {
-        System.out.println("Parent display");
-    }
 }
 
-class Child extends Parent {
-    private String name = "Child";
-    
-    public void showNames() {
-        System.out.println(name);         // Child's name
-        System.out.println(super.name);   // Parent's name
-    }
-    
-    @Override
-    public void display() {
-        super.display();  // Call parent's display
-        System.out.println("Child display");
-    }
-    
-    public void test() {
-        super.display();     // Call parent's method
-        this.display();      // Call current class method
-        display();           // Same as this.display()
-    }
-}`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Dry Run Example */}
-            <MethodCard
-              title="Dry Run: Inheritance Example"
-              description="Step by step execution of inheritance"
-            >
-              <CodeBlock
-                code={`// Step 1: Create objects
-Dog dog = new Dog("Buddy", 3, "Labrador");
-
-// Step 2: Call inherited method
-dog.makeSound();  // Output: Woof! (Overridden method)
-
-// Step 3: Access inherited fields
-System.out.println(dog.name);  // Output: Buddy
-
-// Step 4: Call child-specific method
-dog.fetch();  // Output: Buddy is fetching
-
-// Step 5: Polymorphic reference
-Animal animal = new Dog("Max", 2, "Poodle");
-animal.makeSound();  // Output: Woof! (Runtime polymorphism)`}
-                language="java"
-              />
-            </MethodCard>
+// Usage
+ElectricCar tesla = new ElectricCar();
+tesla.start();  // Vehicle starting
+tesla.drive();  // Car driving
+tesla.charge(); // Charging battery`}
+              language="java"
+            />
           </div>
+        </section>
 
-          {/* Right Sidebar */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Deep inheritance hierarchies</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Breaking LSP principle</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Forgetting super() calls</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Overuse of inheritance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Tight coupling</span>
-                </li>
-              </ul>
-            </div>
+        {/* Dry Run Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`// Object creation
+Dog dog = new Dog();
+dog.name = "Buddy";
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Favor composition</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use interfaces wisely</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Follow LSP</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document inheritance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Design for inheritance</span>
-                </li>
-              </ul>
-            </div>
+// Method calls
+dog.eat();  // Buddy is eating
+dog.bark(); // Buddy is barking`}
+            language="java"
+          />
+          <p className="text-gray-300 mt-4">
+            The dry run demonstrates how inherited methods and fields are used in the child class.
+          </p>
+        </section>
 
-            {/* Pro Tips Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Pro Tips
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use sealed classes</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider abstract classes</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Implement marker interfaces</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use @Override annotation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Plan class hierarchies</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use inheritance to reuse common functionality across multiple classes.</li>
+            <li>Avoid deep inheritance hierarchies for better maintainability.</li>
+            <li>Favor composition over inheritance when relationships are not strictly hierarchical.</li>
+          </ul>
+        </section>
 
-            {/* Key Concepts Section */}
-            <div className="bg-purple-900/20 border border-purple-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-purple-200">
-                Key Concepts
-              </h2>
-              <ul className="space-y-3 text-purple-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Single inheritance</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Method overriding</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>super keyword</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>IS-A relationship</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Type inheritance</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use the <code>super</code> keyword to access parent class methods or constructors.</li>
+            <li>Override only those methods that need different behavior in the child class.</li>
+            <li>Implement abstract classes for common functionality and contracts.</li>
+          </ul>
+        </section>
+
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Overusing inheritance, leading to tightly coupled code.</li>
+            <li>Neglecting to call <code>super()</code> in the child class constructor.</li>
+            <li>Breaking encapsulation by directly accessing parent class fields.</li>
+          </ul>
+        </section>
+
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use inheritance only when there is a clear IS-A relationship.</li>
+            <li>Follow the Liskov Substitution Principle (LSP).</li>
+            <li>Document the inheritance hierarchy for clarity and maintainability.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Inheritance; 
+export default Inheritance;

@@ -1,31 +1,61 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const JaggedArrays: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Jagged Arrays in Java
-              </h1>
-              <p className="text-gray-300">
-                A jagged array is an array of arrays where each array can have a different length. This creates a structure where each row can have a varying number of columns, making it useful for irregular data structures.
-              </p>
-            </div>
+  const visualRepresentation = `
+1. **Jagged Arrays**:
+   - Jagged arrays are arrays of arrays where each array can have a different length.
+   - Useful for representing irregular data, such as variable-sized lists.
 
-            {/* Jagged Array Creation Section */}
-            <MethodCard
-              title="Jagged Array Creation"
-              description="Creating arrays with different row lengths"
-            >
-              <CodeBlock
-                code={`// Declare jagged array
+2. **Memory Layout**:
+   - Each row in a jagged array can have a different number of columns.
+   - This creates a non-rectangular structure where each row can be accessed independently.
+
+3. **Accessing Elements**:
+   - To access an element, specify the row and column indices, i.e., \`jaggedArray[row][column]\`.
+`;
+
+  const tips = [
+    "Always ensure each sub-array is initialized before accessing its elements.",
+    "Use the enhanced `for` loop to traverse jagged arrays for cleaner code.",
+    "When working with jagged arrays, ensure the row sizes are consistent where applicable."
+  ];
+
+  const proTips = [
+    "Jagged arrays provide flexibility for managing uneven datasets, but can lead to memory overhead if not used wisely.",
+    "Use `Arrays.toString()` to print jagged arrays for debugging, as they are not directly printable.",
+    "Consider using `ArrayList` for dynamic arrays when working with varying data sizes."
+  ];
+
+  const bestPractices = [
+    "Always check the dimensions of sub-arrays before accessing their elements.",
+    "When creating jagged arrays, document their intended use to avoid confusion about array lengths.",
+    "If the data structure is more complex, consider switching to more specialized data types like `ArrayList`."
+  ];
+
+  const commonMistakes = [
+    "Assuming all sub-arrays have the same size, leading to `ArrayIndexOutOfBoundsException`.",
+    "Not initializing sub-arrays before usage, causing `NullPointerException`.",
+    "Attempting to print jagged arrays directly without handling nested arrays."
+  ];
+
+  return (
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Jagged Arrays in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          A jagged array is an array of arrays where each array can have a different length. This creates a structure where each row can have a varying number of columns, making it useful for irregular data structures.
+        </p>
+      </header>
+
+      <main className="space-y-12">
+        {/* Jagged Array Creation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Jagged Array Creation</h2>
+          <CodeBlock
+            code={`// Declare jagged array
 int[][] jaggedArray = new int[3][];
 
 // Initialize sub-arrays with different lengths
@@ -39,17 +69,15 @@ int[][] jaggedArray = {
     {4, 5, 6, 7, 8},
     {9, 10}
 };`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Accessing Elements Section */}
-            <MethodCard
-              title="Accessing Jagged Arrays"
-              description="Working with jagged array elements"
-            >
-              <CodeBlock
-                code={`// Access elements
+        {/* Accessing Jagged Arrays */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Accessing Jagged Arrays</h2>
+          <CodeBlock
+            code={`// Access elements
 System.out.println(jaggedArray[0][0]); // First element of first row
 System.out.println(jaggedArray[1][2]); // Third element of second row
 
@@ -60,17 +88,15 @@ for(int i = 0; i < jaggedArray.length; i++) {
     }
     System.out.println();
 }`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Practical Example Section */}
-            <MethodCard
-              title="Practical Example"
-              description="Real-world application of jagged arrays"
-            >
-              <CodeBlock
-                code={`// Example: Storing student scores for different subjects
+        {/* Practical Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Practical Example</h2>
+          <CodeBlock
+            code={`// Example: Storing student scores for different subjects
 int[][] studentScores = {
     {85, 92, 78},      // Student 1: 3 subjects
     {95, 88},          // Student 2: 2 subjects
@@ -86,17 +112,15 @@ for(int i = 0; i < studentScores.length; i++) {
     double average = (double)sum / studentScores[i].length;
     System.out.println("Student " + (i+1) + " average: " + average);
 }`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Dry Run: Student Grades Management Section */}
-            <MethodCard
-              title="Dry Run: Student Grades Management"
-              description="Step by step jagged array manipulation for student grades"
-            >
-              <CodeBlock
-                code={`// Step 1: Create jagged array for 3 students with different subjects
+        {/* Dry Run: Student Grades Management */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run: Student Grades Management</h2>
+          <CodeBlock
+            code={`// Step 1: Create jagged array for 3 students with different subjects
 int[][] grades = new int[3][];  // Creates: [null, null, null]
 
 // Step 2: Initialize each student's subjects array
@@ -132,104 +156,58 @@ for(int i = 0; i < grades.length; i++) {
     averages[i] = (double)sum / grades[i].length;
     // averages becomes: [85.75, 90.0, 88.8]
 }`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
+            language="java"
+          />
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Assuming fixed column length</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not initializing sub-arrays</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Array index out of bounds</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Incorrect iteration logic</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Memory management issues</span>
-                </li>
-              </ul>
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Visual Representation</h2>
+          <CodeBlock code={visualRepresentation} language="markdown" />
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Check array lengths before access</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use for-each when possible</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document array structure</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Initialize all sub-arrays</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider using ArrayList</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            {tips.map((tip, index) => (
+              <li key={index}>{tip}</li>
+            ))}
+          </ul>
+        </section>
 
-            {/* Key Points Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Variable length sub-arrays</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Two-step initialization</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Memory efficient</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Flexible data structure</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Dynamic row lengths</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            {proTips.map((tip, index) => (
+              <li key={index}>{tip}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            {bestPractices.map((practice, index) => (
+              <li key={index}>{practice}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            {commonMistakes.map((mistake, index) => (
+              <li key={index}>{mistake}</li>
+            ))}
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default JaggedArrays; 
+export default JaggedArrays;

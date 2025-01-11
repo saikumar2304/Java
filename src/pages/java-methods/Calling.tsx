@@ -56,37 +56,6 @@ student.displayInfo();     // Calls displayInfo method
 student.updateAge(21);     // Calls updateAge method
 student.displayInfo();     // Calls displayInfo again`;
 
-  const dryRunExample = `
-public class Calculator {
-    private int result;
-
-    public void add(int num) {
-        result += num;
-        System.out.println("After adding " + num + ": " + result);
-    }
-
-    public void subtract(int num) {
-        result -= num;
-        System.out.println("After subtracting " + num + ": " + result);
-    }
-
-    public void clear() {
-        result = 0;
-        System.out.println("Calculator cleared");
-    }
-}
-
-// Dry Run:
-Calculator calc = new Calculator();
-calc.clear();         // Output: Calculator cleared
-                     // result = 0
-calc.add(5);         // Output: After adding 5: 5
-                     // result = 5
-calc.subtract(2);    // Output: After subtracting 2: 3
-                     // result = 3
-calc.add(10);        // Output: After adding 10: 13
-                     // result = 13`;
-
   const methodChainingExample = `
 public class TextBuilder {
     private StringBuilder text = new StringBuilder();
@@ -118,165 +87,108 @@ String result = builder.append("Hello ")
 // Hello World!
 // How are you?`;
 
+  const visualRepresentation = `
+1. **Static Method Call**:
+   - Can be called directly using the class name.
+   - Example: \`ClassName.methodName(arguments);\`
+
+2. **Instance Method Call**:
+   - Requires an object of the class.
+   - Example:
+     \`\`\`java
+     ClassName obj = new ClassName();
+     obj.methodName(arguments);
+     \`\`\`
+
+3. **Method Chaining**:
+   - Allows multiple method calls on the same object.
+   - Example:
+     \`\`\`java
+     obj.method1().method2().method3();
+     \`\`\``;
+
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Method Calling in Java
-              </h1>
-              <p className="text-gray-300">
-                Method calling is how you execute methods in Java. Understanding proper method invocation 
-                is essential for working with objects and classes effectively. Methods can be called on 
-                objects (instance methods) or directly on classes (static methods).
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Method Calling in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Methods can be called in Java either on objects (instance methods) or directly on classes (static methods). 
+          Understanding how to invoke methods effectively is essential for mastering Java programming.
+        </p>
+      </header>
 
-            {/* Basic Examples Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Method Calls
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Methods can be called in different ways depending on whether they are instance or static methods.
-                </p>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Basic Examples */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Basic Method Calls</h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Static methods can be called directly using the class name, while instance methods require an object of the class.
+          </p>
+        </section>
 
-            {/* Object Methods Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Object Method Calls
-              </h2>
-              <CodeBlock code={objectMethodExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Instance methods are called on objects and can access the object's fields.
-                </p>
-              </div>
-            </div>
+        {/* Object Method Calls */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Object Method Calls</h2>
+          <CodeBlock code={objectMethodExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Instance methods operate on objects, allowing them to modify object state or access its fields.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
+        {/* Method Chaining */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Method Chaining</h2>
+          <CodeBlock code={methodChainingExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Method chaining improves code readability by enabling sequential calls on the same object.
+          </p>
+        </section>
 
-            {/* Method Chaining Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Method Chaining
-              </h2>
-              <CodeBlock code={methodChainingExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Method chaining allows you to call multiple methods in sequence on the same object.
-                </p>
-              </div>
-            </div>
-          </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Visual Representation</h2>
+          <CodeBlock code={visualRepresentation} language="markdown" />
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Calling instance methods statically</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not handling null objects</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Wrong number of arguments</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Incorrect argument types</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Ignoring return values</span>
-                </li>
-              </ul>
-            </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Calling instance methods statically.</li>
+            <li>Not handling null objects before method calls.</li>
+            <li>Passing the wrong number or type of arguments.</li>
+            <li>Ignoring return values of methods.</li>
+          </ul>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Check for null before calling</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use appropriate access level</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Handle exceptions properly</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use method chaining appropriately</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider method visibility</span>
-                </li>
-              </ul>
-            </div>
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Always check for null before calling instance methods.</li>
+            <li>Use appropriate access modifiers to enforce encapsulation.</li>
+            <li>Handle exceptions properly when invoking methods.</li>
+            <li>Document the purpose and usage of methods using JavaDoc.</li>
+          </ul>
+        </section>
 
-            {/* Key Concepts Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Concepts
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Instance vs Static calls</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Method chaining</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Return values</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Parameter passing</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Method overloading</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Prefer static imports for commonly used static methods.</li>
+            <li>Leverage method chaining for concise and fluent interfaces.</li>
+            <li>Use meaningful names for objects and methods to enhance readability.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default MethodCalling; 
+export default MethodCalling;

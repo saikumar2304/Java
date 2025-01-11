@@ -109,28 +109,24 @@ class AccessDemo {
 }`;
 
   const dryRunExample = `
-// In package 'banking'
 public class BankAccount {
-    private double balance;  // Private field
-    
+    private double balance;
+
     public BankAccount(double initialBalance) {
         this.balance = initialBalance;
     }
-    
-    // Public method
+
     public void deposit(double amount) {
         if (amount > 0) {
             updateBalance(amount);  // Calls private method
         }
     }
-    
-    // Private helper method
+
     private void updateBalance(double amount) {
         balance += amount;
         logTransaction(amount);  // Calls protected method
     }
-    
-    // Protected method
+
     protected void logTransaction(double amount) {
         System.out.println("Transaction: " + amount);
         System.out.println("New balance: " + balance);
@@ -145,159 +141,93 @@ account.deposit(500);  // Public method calls private, then protected
 // New balance: 1500`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Access Modifiers in Java
-              </h1>
-              <p className="text-gray-300">
-                Access modifiers control the visibility and accessibility of classes, methods, and fields. 
-                They are fundamental to encapsulation and help maintain proper object-oriented design.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Access Modifiers in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Access modifiers in Java determine the visibility and accessibility of classes, methods, and fields. They are fundamental to encapsulation and are essential for maintaining proper object-oriented design.
+        </p>
+      </header>
 
-            {/* Basic Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Access Modifiers
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  This example shows the four access levels available in Java.
-                </p>
-              </div>
-            </div>
+      <main className="space-y-12">
+        {/* Basic Example Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Basic Access Modifiers
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            This example demonstrates the four access levels available in Java: <code>private</code>, <code>default</code>, <code>protected</code>, and <code>public</code>.
+          </p>
+        </section>
 
-            {/* Inheritance Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Access Modifiers with Inheritance
-              </h2>
-              <CodeBlock code={inheritanceExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Shows how access modifiers work with inheritance and different packages.
-                </p>
-              </div>
-            </div>
+        {/* Inheritance Example Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Access Modifiers with Inheritance
+          </h2>
+          <CodeBlock code={inheritanceExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Demonstrates how access modifiers work with inheritance across different packages.
+          </p>
+        </section>
 
-            {/* Access Levels Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Access Levels Demonstration
-              </h2>
-              <CodeBlock code={accessLevelsExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Demonstrates the hierarchy and relationships between different access levels.
-                </p>
-              </div>
-            </div>
+        {/* Access Levels Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Access Levels Demonstration
+          </h2>
+          <CodeBlock code={accessLevelsExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Shows the hierarchy and relationships between access levels and their visibility in different contexts.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
-          </div>
+        {/* Dry Run Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+            Dry Run Example
+          </h2>
+          <CodeBlock code={dryRunExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The dry run demonstrates step-by-step execution of access modifiers in practice, showcasing interactions between public, private, and protected methods.
+          </p>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Making fields public</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Using default access unintentionally</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Overusing protected access</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not considering package structure</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Breaking encapsulation</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Always start with the most restrictive access level and loosen restrictions only when necessary.</li>
+            <li>Use <code>private</code> for fields and methods unless they need to be accessed externally.</li>
+            <li>Document the purpose of each access level choice for better code maintainability.</li>
+          </ul>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use private for fields</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Provide public getters/setters</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use protected carefully</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Plan package structure</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document access decisions</span>
-                </li>
-              </ul>
-            </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Overusing <code>public</code> fields, breaking encapsulation.</li>
+            <li>Not considering package structure when using default access.</li>
+            <li>Overusing <code>protected</code> access, reducing security.</li>
+          </ul>
+        </section>
 
-            {/* Access Levels Summary */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Access Levels
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>private: class only</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>default: package only</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>protected: package + subclasses</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>public: everywhere</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use <code>private</code> for fields and provide getters/setters as needed.</li>
+            <li>Plan package structure carefully for proper use of default access.</li>
+            <li>Document access decisions for maintainability.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default AccessModifiers; 
+export default AccessModifiers;

@@ -2,61 +2,78 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Code2, ChevronRight } from 'lucide-react';
 
+// Dynamic counts for exercises
+const getExerciseCounts = () => {
+  return {
+    basics: 10, // Replace with a dynamic count based on files
+    flowControl: 8,
+    methods: 6,
+    arrays: 12,
+    strings: 10,
+    oop: 15,
+    exceptions: 8,
+    collections: 12,
+    files: 6
+  };
+};
+
 const HandsOnPage: React.FC = () => {
+  const exerciseCounts = getExerciseCounts();
+
   const sections = [
     {
       title: "Java Basics",
       description: "Practice basic Java programming concepts",
       path: "/hands-on/basics",
-      count: "10 exercises"
+      count: `${exerciseCounts.basics} exercises`
     },
     {
       title: "Flow Control",
       description: "Hands-on with loops and conditions",
       path: "/hands-on/flow-control",
-      count: "8 exercises"
+      count: `${exerciseCounts.flowControl} exercises`
     },
     {
       title: "Methods",
       description: "Practice method creation and usage",
       path: "/hands-on/methods",
-      count: "6 exercises"
+      count: `${exerciseCounts.methods} exercises`
     },
     {
       title: "Arrays",
       description: "Array manipulation exercises",
       path: "/hands-on/arrays",
-      count: "12 exercises"
+      count: `${exerciseCounts.arrays} exercises`
     },
     {
       title: "Strings",
       description: "String handling practice problems",
       path: "/hands-on/strings",
-      count: "10 exercises"
+      count: `${exerciseCounts.strings} exercises`
     },
     {
       title: "OOP Concepts",
       description: "Object-oriented programming exercises",
       path: "/hands-on/oop",
-      count: "15 exercises"
+      count: `${exerciseCounts.oop} exercises`
     },
     {
       title: "Exception Handling",
       description: "Practice exception handling scenarios",
       path: "/hands-on/exceptions",
-      count: "8 exercises"
+      count: `${exerciseCounts.exceptions} exercises`
     },
     {
       title: "Collections",
       description: "Work with Java collections framework",
       path: "/hands-on/collections",
-      count: "12 exercises"
+      count: `${exerciseCounts.collections} exercises`
     },
     {
       title: "File Handling",
       description: "File operations practice problems",
       path: "/hands-on/files",
-      count: "6 exercises"
+      count: `${exerciseCounts.files} exercises`
     }
   ];
 
@@ -97,4 +114,4 @@ const HandsOnPage: React.FC = () => {
   );
 };
 
-export default HandsOnPage; 
+export default HandsOnPage;

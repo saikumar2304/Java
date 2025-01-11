@@ -116,164 +116,126 @@ public class UserService {
 }`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Method Parameters in Java
-              </h1>
-              <p className="text-gray-300">
-                Method parameters allow you to pass data to methods for processing. They act as variables 
-                that hold the values passed to the method when it's called. Understanding parameter passing 
-                is crucial for writing effective Java methods.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Method Parameters in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Method parameters allow you to pass data to methods for processing. They act as variables that hold the values passed 
+          to the method when it’s called. Understanding parameter passing is crucial for writing effective Java methods.
+        </p>
+      </header>
 
-            {/* Basic Examples Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Parameter Types and Examples
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Methods can accept different types and numbers of parameters to suit various needs.
-                </p>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Basic Examples */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Basic Examples
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Methods can accept different types and numbers of parameters to suit various needs.
+          </p>
+        </section>
 
-            {/* Parameter Passing Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Parameter Passing Mechanisms
-              </h2>
-              <CodeBlock code={parameterPassingExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Java uses pass-by-value for all parameters, but the behavior differs between primitives and objects.
-                </p>
-              </div>
-            </div>
+        {/* Parameter Passing */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Parameter Passing Mechanisms
+          </h2>
+          <CodeBlock code={parameterPassingExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Java uses pass-by-value for all parameters, but the behavior differs between primitives and objects.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
-
-            {/* Parameter Validation Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Parameter Validation
-              </h2>
-              <CodeBlock code={parameterValidationExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Always validate parameters to ensure your methods receive valid input.
-                </p>
-              </div>
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Visual Representation
+          </h2>
+          <p className="text-gray-300">
+            The lifecycle of a method parameter:
+          </p>
+          <div className="bg-gray-700 p-4 rounded-lg text-gray-200 mt-4">
+            <ol className="list-decimal pl-6 space-y-3">
+              <li>
+                A method is declared with parameters to accept specific inputs.
+              </li>
+              <li>
+                When the method is called, the values provided (arguments) are assigned to these parameters.
+              </li>
+              <li>
+                The method processes the data using these parameter values.
+              </li>
+              <li>
+                If objects are passed, their state may be altered if the method modifies them.
+              </li>
+              <li>
+                After execution, the method ends, and the parameters go out of scope.
+              </li>
+            </ol>
           </div>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not validating parameters</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Too many parameters (more than 4-5)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Confusing parameter order</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Modifying parameters unnecessarily</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not handling null parameters</span>
-                </li>
-              </ul>
-            </div>
+        {/* Dry Run Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+            Dry Run Example
+          </h2>
+          <CodeBlock code={dryRunExample} language="java" />
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use descriptive parameter names</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Validate all input parameters</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep parameter count low</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use parameter objects for many parameters</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document parameters with JavaDoc</span>
-                </li>
-              </ul>
-            </div>
+        {/* Parameter Validation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Parameter Validation
+          </h2>
+          <CodeBlock code={parameterValidationExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Always validate parameters to ensure your methods receive valid input.
+          </p>
+        </section>
 
-            {/* Key Concepts Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Concepts
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Pass by value vs reference</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Parameter validation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Parameter types</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Optional parameters</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Parameter scope</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Not validating parameters.</li>
+            <li>Using too many parameters (more than 4-5).</li>
+            <li>Confusing parameter order.</li>
+            <li>Modifying parameters unnecessarily.</li>
+            <li>Not handling null parameters.</li>
+          </ul>
+        </section>
+
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use descriptive parameter names.</li>
+            <li>Validate all input parameters.</li>
+            <li>Keep parameter count low.</li>
+            <li>Use parameter objects for methods with many parameters.</li>
+            <li>Document parameters using JavaDoc.</li>
+          </ul>
+        </section>
+
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>For optional parameters, use method overloading or builder patterns.</li>
+            <li>Use final keywords for parameters that shouldn’t be reassigned.</li>
+            <li>Combine parameter validation with exception handling for robustness.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default MethodParameters; 
+export default MethodParameters;

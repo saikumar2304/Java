@@ -1,31 +1,61 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
 const Multidimensional: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Multidimensional Arrays in Java
-              </h1>
-              <p className="text-gray-300">
-                Multidimensional arrays are arrays of arrays with each element of the array holding the reference of other arrays. They are useful for representing tables, matrices, and complex data structures.
-              </p>
-            </div>
+  const visualRepresentation = `
+1. **Multidimensional Arrays**:
+   - Arrays of arrays, useful for representing matrices and tables.
+   - Indices are two or more dimensions: \`matrix[row][column]\`.
 
-            {/* 2D Array Declaration Section */}
-            <MethodCard
-              title="2D Array Declaration"
-              description="Creating and using two-dimensional arrays"
-            >
-              <CodeBlock
-                code={`// Declaration
+2. **Memory Layout**:
+   - Multidimensional arrays in Java are stored as an array of arrays.
+   - For example, a 2D array is essentially an array of 1D arrays.
+
+3. **Row-major Order**:
+   - Arrays are stored row-wise in memory, so accessing the first index of a row is faster than accessing distant columns.
+`;
+
+  const tips = [
+    "Always validate row and column indices before accessing elements.",
+    "Use the enhanced `for` loop to iterate through multidimensional arrays for cleaner code.",
+    "When using large multidimensional arrays, be mindful of memory usage and performance."
+  ];
+
+  const proTips = [
+    "For jagged arrays (arrays of arrays with different column sizes), ensure consistency when accessing elements.",
+    "Consider using `Arrays.deepToString()` for printing arrays of multiple dimensions.",
+    "Use multi-dimensional arrays when the structure requires consistent and organized data, like matrices or grids."
+  ];
+
+  const bestPractices = [
+    "Initialize arrays before using them to avoid `NullPointerException`.",
+    "Use descriptive names for rows, columns, and arrays to improve code readability.",
+    "Ensure the dimensions of arrays are documented properly to avoid confusion."
+  ];
+
+  const commonMistakes = [
+    "Confusing row and column indices when accessing elements.",
+    "Assuming rectangular arrays when using jagged arrays (arrays with rows of different lengths).",
+    "Not checking array bounds, leading to `ArrayIndexOutOfBoundsException`."
+  ];
+
+  return (
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Multidimensional Arrays in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Multidimensional arrays are arrays of arrays, with each element of the array holding the reference of other arrays. They are useful for representing tables, matrices, and complex data structures.
+        </p>
+      </header>
+
+      <main className="space-y-12">
+        {/* 2D Array Declaration Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">2D Array Declaration</h2>
+          <CodeBlock
+            code={`// Declaration
 int[][] matrix = new int[3][3];
 
 // Declaration and initialization
@@ -38,17 +68,15 @@ int[][] matrix = {
 // Accessing elements
 System.out.println(matrix[0][0]); // Output: 1
 System.out.println(matrix[1][1]); // Output: 5`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* Iterating 2D Arrays Section */}
-            <MethodCard
-              title="Iterating 2D Arrays"
-              description="Using nested loops to iterate through 2D arrays"
-            >
-              <CodeBlock
-                code={`int[][] matrix = {
+        {/* Iterating 2D Arrays Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Iterating 2D Arrays</h2>
+          <CodeBlock
+            code={`int[][] matrix = {
     {1, 2, 3},
     {4, 5, 6},
     {7, 8, 9}
@@ -69,17 +97,15 @@ for(int[] row : matrix) {
     }
     System.out.println();
 }`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            {/* 3D Arrays Section */}
-            <MethodCard
-              title="3D Arrays"
-              description="Creating and using three-dimensional arrays"
-            >
-              <CodeBlock
-                code={`// Declaration
+        {/* 3D Arrays Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">3D Arrays</h2>
+          <CodeBlock
+            code={`// Declaration
 int[][][] threeDArray = new int[3][3][3];
 
 // Declaration and initialization
@@ -91,16 +117,15 @@ int[][][] threeDArray = {
 // Accessing elements
 System.out.println(threeDArray[0][0][0]); // Access first element
 System.out.println(threeDArray[1][1][1]); // Access last element`}
-                language="java"
-              />
-            </MethodCard>
+            language="java"
+          />
+        </section>
 
-            <MethodCard
-              title="Dry Run: Matrix Operations"
-              description="Step by step matrix manipulation example"
-            >
-              <CodeBlock
-                code={`// Step 1: Create a 3x3 matrix
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run: Matrix Operations</h2>
+          <CodeBlock
+            code={`// Step 1: Create a 3x3 matrix
 int[][] matrix = new int[3][3];  // Creates: [[0,0,0], [0,0,0], [0,0,0]]
 
 // Step 2: Initialize values row by row
@@ -128,104 +153,58 @@ int diagonalSum = 0;
 for(int i = 0; i < 3; i++) {
     diagonalSum += matrix[i][i];  // 1 + 5 + 9 = 15
 }`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
+            language="java"
+          />
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="space-y-3 text-red-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Confusing row and column indices</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Assuming rectangular arrays</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not checking array bounds</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Incorrect array dimensions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Memory inefficient initialization</span>
-                </li>
-              </ul>
-            </div>
+        {/* Visual Representation */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Visual Representation</h2>
+          <CodeBlock code={visualRepresentation} language="markdown" />
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use meaningful variable names</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Initialize arrays appropriately</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use enhanced for-loop when possible</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider memory limitations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document array dimensions</span>
-                </li>
-              </ul>
-            </div>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            {tips.map((tip, index) => (
+              <li key={index}>{tip}</li>
+            ))}
+          </ul>
+        </section>
 
-            {/* Key Points Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Arrays of arrays structure</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Row-major ordering</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Flexible dimensions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Nested iteration required</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Memory usage increases exponentially</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Pro Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            {proTips.map((tip, index) => (
+              <li key={index}>{tip}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            {bestPractices.map((practice, index) => (
+              <li key={index}>{practice}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            {commonMistakes.map((mistake, index) => (
+              <li key={index}>{mistake}</li>
+            ))}
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Multidimensional; 
+export default Multidimensional;

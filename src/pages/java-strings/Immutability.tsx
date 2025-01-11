@@ -1,204 +1,120 @@
 import React from 'react';
-import MethodCard from '../../components/MethodCard';
 import CodeBlock from '../../components/CodeBlock';
 
-const StringImmutability: React.FC = () => {
+const Immutability: React.FC = () => {
+  const stringImmutabilityExample = `
+    // String is immutable in Java
+    String str = "Hello";
+    
+    // Modify the string (this creates a new object)
+    str = str + " World!";
+    
+    System.out.println(str);  // Output: "Hello World!"
+    
+    // Original string "Hello" remains unchanged in memory, and a new string is created
+  `;
+
+  const customClassImmutabilityExample = `
+    // Example of an immutable class
+    public final class Person {
+        private final String name;
+        
+        public Person(String name) {
+            this.name = name;
+        }
+        
+        public String getName() {
+            return this.name;
+        }
+    }
+    
+    public class Main {
+        public static void main(String[] args) {
+            Person p = new Person("John");
+            // p.name = "Jane";  // Error: name cannot be modified since it's final
+        }
+    }
+  `;
+
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                String Immutability in Java
-              </h1>
-              <p className="text-gray-300">
-                In Java, strings are immutable, which means once a String object is created, its content cannot be changed. Any operation that appears to modify a string actually creates a new string object.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Immutability in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          Learn about immutability in Java and how it ensures that objects cannot be modified once created.
+        </p>
+      </header>
 
-            {/* Immutability Example Section */}
-            <MethodCard
-              title="String Immutability Example"
-              description="Understanding how string operations create new objects"
-            >
-              <CodeBlock
-                code={`String str = "Hello";
-System.out.println(str.hashCode());  // Print original hash
+      <main className="space-y-12">
+        {/* String Immutability Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">String Immutability</h2>
+          <CodeBlock code={stringImmutabilityExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Strings in Java are immutable. This means that when you perform operations like concatenation or modification, a new string object is created, leaving the original string unchanged.
+          </p>
+        </section>
 
-str = str + " World";  // Creates new string object
-System.out.println(str.hashCode());  // Different hash
+        {/* Custom Class Immutability Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Immutability in Custom Classes</h2>
+          <CodeBlock code={customClassImmutabilityExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            You can make your custom classes immutable by declaring them <code>final</code> and making all fields <code>final</code> as well. This ensures that the state of an object cannot be changed after it is created.
+          </p>
+        </section>
 
-// Original "Hello" object remains unchanged in memory
-// New "Hello World" object is created
-// Old "Hello" object becomes eligible for garbage collection`}
-                language="java"
-              />
-            </MethodCard>
+        {/* Tips Section */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Tips</h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Immutability is crucial for thread safety since immutable objects cannot be modified by multiple threads.</li>
+            <li>String is a great example of immutability in Java. Use immutable objects wherever possible to avoid side effects and bugs.</li>
+            <li>For custom classes, make fields <code>final</code> and provide no setters to enforce immutability.</li>
+          </ul>
+        </section>
 
-            {/* String Pool Benefits Section */}
-            <MethodCard
-              title="String Pool Benefits"
-              description="How immutability enables string pooling"
-            >
-              <CodeBlock
-                code={`String str1 = "Hello";
-String str2 = "Hello";  // Reuses same object
-String str3 = new String("Hello");  // Creates new object
+        {/* Common Mistakes Section */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Common Mistakes</h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Forgetting to make the class <code>final</code> and exposing setters that modify internal state.</li>
+            <li>Assuming that strings are mutable, leading to inefficient code where new strings are constantly created.</li>
+            <li>Not understanding that even though an object is immutable, its references can be changed unless the object itself is final.</li>
+          </ul>
+        </section>
 
-System.out.println(str1 == str2);  // true (same object)
-System.out.println(str1 == str3);  // false (different objects)
-System.out.println(str1.equals(str3));  // true (same content)`}
-                language="java"
-              />
-            </MethodCard>
+        {/* Best Practices Section */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">Best Practices</h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Make your classes <code>final</code> if they should be immutable, and use only <code>final</code> fields.</li>
+            <li>For strings, use string literals and avoid using the <code>new</code> keyword unnecessarily to reduce memory usage.</li>
+            <li>Be mindful of memory usage when working with large strings. Avoid holding references to unused strings that may affect garbage collection.</li>
+          </ul>
+        </section>
 
-            {/* Memory Impact Section */}
-            <MethodCard
-              title="Memory Impact"
-              description="Understanding memory implications of string operations"
-            >
-              <CodeBlock
-                code={`// Bad practice: Creates many string objects
-String result = "";
-for(int i = 0; i < 5; i++) {
-    result += i;  // Creates new string each time
-}
+        {/* Dry Run Example Section */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">Dry Run Example</h2>
+          <CodeBlock
+            code={`// Example of string immutability
+String str = "Immutable";
+str = str.concat(" String!");  // Creates a new string
+System.out.println(str);  // Output: Immutable String!
 
-// Better practice: Use StringBuilder
-StringBuilder sb = new StringBuilder();
-for(int i = 0; i < 5; i++) {
-    sb.append(i);  // Modifies same object
-}
-String result = sb.toString();`}
-                language="java"
-              />
-            </MethodCard>
-
-            {/* Security Benefits Section */}
-            <MethodCard
-              title="Security Benefits"
-              description="How immutability helps in security"
-            >
-              <CodeBlock
-                code={`public class UserCredentials {
-    private final String username;
-    private final String password;
-    
-    public UserCredentials(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-    
-    // Strings being immutable means these values can't be modified
-    public String getUsername() {
-        return username;
-    }
-    
-    public String getPassword() {
-        return password;
-    }
-}`}
-                language="java"
-              />
-            </MethodCard>
-          </div>
-
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>String concatenation in loops</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Unnecessary string objects</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Modifying shared strings</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Ignoring memory implications</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Not using StringBuilder</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use StringBuilder for concatenation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Leverage string pool</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Consider memory usage</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use intern() for duplicates</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Understand object creation</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Key Points Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                Key Points
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Cannot modify after creation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Thread-safe by default</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Enables string pooling</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Secure for sensitive data</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Hashcode caching</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+// The original string "Immutable" is unchanged. A new string is created with the updated value.`}
+            language="java"
+          />
+          <p className="text-gray-300 mt-4">
+            This dry run shows that the string "Immutable" is not modified in-place. Instead, a new string object is created when the <code>concat()</code> method is called, demonstrating string immutability.
+          </p>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default StringImmutability; 
+export default Immutability;

@@ -83,147 +83,104 @@ public String validateUser(String username, String password) {
 }`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Content Area (9 columns) */}
-          <div className="col-span-9 space-y-8">
-            {/* Introduction Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-100">
-                Return Statement in Java
-              </h1>
-              <p className="text-gray-300">
-                The return statement is used to exit a method, optionally returning a value to the caller. 
-                It can be used for early method termination or to provide the result of a method's computation.
-              </p>
-            </div>
+    <div className="p-6 bg-gray-900 text-gray-100 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-4">
+          Return Statement in Java
+        </h1>
+        <p className="text-lg text-gray-400">
+          The <strong>return statement</strong> is used to exit a method, optionally returning a value to the caller. 
+          It can be used for early method termination or to provide the result of a method's computation.
+        </p>
+      </header>
 
-            {/* Basic Example Section */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Basic Examples
-              </h2>
-              <CodeBlock code={basicExample} language="java" />
-              <div className="mt-4">
-                <p className="text-gray-300">
-                  Return statements can either return a value (in non-void methods) or simply exit the method (in void methods).
-                </p>
-              </div>
-            </div>
+      {/* Main Content */}
+      <main className="space-y-12">
+        {/* Basic Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Basic Examples
+          </h2>
+          <CodeBlock code={basicExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The <strong>return statement</strong> is essential for exiting methods and providing results in non-void methods.
+          </p>
+        </section>
 
-            {/* Multiple Returns Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Multiple Return Statements
-              </h2>
-              <CodeBlock code={multipleReturnsExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                Multiple return statements can make code more readable when handling different conditions.
-              </p>
-            </div>
+        {/* Multiple Return Statements */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Multiple Return Statements
+          </h2>
+          <CodeBlock code={multipleReturnsExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Using multiple return statements can simplify logic and improve readability by handling each condition directly.
+          </p>
+        </section>
 
-            {/* Dry Run Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Dry Run Example
-              </h2>
-              <CodeBlock code={dryRunExample} language="java" />
-            </div>
+        {/* Dry Run */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+            Dry Run Example
+          </h2>
+          <CodeBlock code={dryRunExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            The dry run demonstrates how early return points simplify error handling and ensure only valid results are processed.
+          </p>
+        </section>
 
-            {/* Complex Example */}
-            <div className="bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-100">
-                Complex Example with Early Returns
-              </h2>
-              <CodeBlock code={complexExample} language="java" />
-              <p className="mt-4 text-gray-300">
-                Early returns can simplify validation logic and avoid deeply nested conditions.
-              </p>
-            </div>
-          </div>
+        {/* Complex Example */}
+        <section className="bg-gray-800 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Complex Example with Early Returns
+          </h2>
+          <CodeBlock code={complexExample} language="java" />
+          <p className="text-gray-300 mt-4">
+            Early returns avoid deeply nested conditions, making the code easier to read and maintain.
+          </p>
+        </section>
 
-          {/* Right Sidebar (3 columns) */}
-          <div className="col-span-3 space-y-8">
-            {/* Common Mistakes Section */}
-            <div className="bg-red-900/20 border border-red-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-red-200">
-                Common Mistakes to Avoid
-              </h2>
-              <ul className="list-disc ml-6 mt-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Missing return statements in non-void methods</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Returning wrong data types</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Unreachable code after return</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Inconsistent return types in different paths</span>
-                </li>
-              </ul>
-            </div>
+        {/* Common Mistakes */}
+        <section className="bg-red-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">
+            Common Mistakes
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-red-300">
+            <li>Missing return statements in non-void methods.</li>
+            <li>Returning incorrect or null values without handling errors.</li>
+            <li>Leaving unreachable code after the return statement.</li>
+            <li>Inconsistent return types in different branches of a method.</li>
+          </ul>
+        </section>
 
-            {/* Best Practices Section */}
-            <div className="bg-green-900/20 border border-green-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-green-200">
-                Best Practices
-              </h2>
-              <ul className="space-y-3 text-green-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Use early returns for validation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Keep methods focused and small</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Document return values clearly</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Be consistent with return types</span>
-                </li>
-              </ul>
-            </div>
+        {/* Best Practices */}
+        <section className="bg-green-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-green-400 mb-4">
+            Best Practices
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-green-300">
+            <li>Use early returns for validation checks to avoid nested logic.</li>
+            <li>Ensure methods return consistent types across all branches.</li>
+            <li>Clearly document the purpose and return value of methods.</li>
+            <li>Keep methods focused on a single responsibility.</li>
+          </ul>
+        </section>
 
-            {/* When to Use Section */}
-            <div className="bg-blue-900/20 border border-blue-900/30 rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-blue-200">
-                When to Use Return
-              </h2>
-              <ul className="space-y-3 text-blue-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Method completion</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Early validation exits</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Error handling</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Simplifying complex logic</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Pro Tips */}
+        <section className="bg-blue-900/20 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">
+            Pro Tips
+          </h2>
+          <ul className="list-disc pl-6 space-y-3 text-blue-300">
+            <li>Use descriptive variable names for return values to improve readability.</li>
+            <li>Leverage optional types for better null safety in modern Java versions.</li>
+            <li>Break complex methods into smaller ones, each with a single return point.</li>
+          </ul>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default Return; 
+export default Return;
