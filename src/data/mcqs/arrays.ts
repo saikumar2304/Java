@@ -1,4 +1,16 @@
+function shuffleOptions(mcqs: any[]) {
+    mcqs.forEach(mcq => {
+      // Fisher-Yates shuffle algorithm
+      const options = mcq.options;
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+      }
+    });
+}
+
 export const arrayMCQs = [
+
   {
     id: 1,
     question: "What's the output?\n```java\nint[] arr = new int[3];\narr[1] = 1;\nSystem.out.println(arr[0] + \",\" + arr[1] + \",\" + arr[2]);\n```",
@@ -71,7 +83,7 @@ export const arrayMCQs = [
   },
   {
     id: 6,
-    question: "What's the output?\n```java\nint[][] arr = new int[2][];\narr[0] = new int[]{1, 2, 3};\nSystem.out.println(arr[1][0]);\n```",
+    question: "What's the a?\n```java\nint[][] arr = new int[2][];\narr[0] = new int[]{1, 2, 3};\nSystem.out.println(arr[1][0]);\n```",
     options: [
       { text: "0", isCorrect: false },
       { text: "Runtime error", isCorrect: true },
@@ -1403,3 +1415,4 @@ export const arrayMCQs = [
 
 
 
+shuffleOptions(arrayMCQs);

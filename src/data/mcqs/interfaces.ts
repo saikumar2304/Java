@@ -1,3 +1,14 @@
+function shuffleOptions(mcqs: any[]) {
+    mcqs.forEach(mcq => {
+      // Fisher-Yates shuffle algorithm
+      const options = mcq.options;
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+      }
+    });
+}
+
 export const interfaceMCQs = [
   {
     id: 1,
@@ -1402,3 +1413,4 @@ export const interfaceMCQs = [
 ];
 
 
+shuffleOptions(interfaceMCQs);
