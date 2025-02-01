@@ -11,3352 +11,3194 @@ function shuffleOptions(mcqs: any[]) {
 
 export const oopMCQs = [
     {
-      id: 1,
-      question: `What's the output of the following code?
-  \`\`\`java
-  class A {
-      static void method() {
-          System.out.println("A");
+      "id": 1,
+      "question": `What will be the output of the following Java code?
+      \`\`\`java
+      class TrickyShort {
+          private int val;
+          public TrickyShort(int v) { val = v; }
+          public int compute(int x) {
+              return val++ + (x = ++val * 2) - val--;
+          }
+          public static void main(String[] args) {
+              TrickyShort ts = new TrickyShort(3);
+              int result = ts.compute(5);
+              System.out.println(result + " " + ts.val);
+          }
       }
-  }
-  class B extends A {
-      static void method() {
-          System.out.println("B");
-      }
-  }
-  public class Test {
-      public static void main(String[] args) {
-          A obj = new B();
-          obj.method();
-      }
-  }
-  \`\`\``,
-      options: [
-        { text: "A", isCorrect: true },
-        { text: "B", isCorrect: false },
-        { text: "Compilation Error", isCorrect: false },
-        { text: "Runtime Error", isCorrect: false }
+      \`\`\``,
+      "options": [
+        { "text": "7 5", "isCorrect": false },
+        { "text": "5 4", "isCorrect": false },
+        { "text": "9 4", "isCorrect": true },
+        { "text": "Compilation Error", "isCorrect": false }
       ],
-      explanation: "Static methods are not overridden but hidden, so the method in A is called.",
-      difficulty: 'Hard',
-      category: 'Static Methods',
-      hasCode: true
+      "explanation": "Operator precedence plays a role here. The calculation proceeds step by step, updating `val` accordingly.",
+      "difficulty": "Hard",
+      "category": "Operator Precedence",
+      "hasCode": true
     },
     {
-      id: 2,
-      question: `What happens in the following code?
-  \`\`\`java
-  class Base {
-      private void display() {
-          System.out.println("Base");
+      "id": 2,
+      "question": `What happens in this tricky inheritance case?
+      \`\`\`java
+      class Parent {
+          void display() { System.out.println("Parent"); }
       }
-  }
-  class Derived extends Base {
-      public void display() {
-          System.out.println("Derived");
+      class Child extends Parent {
+          void display() { System.out.println("Child"); }
       }
-  }
-  public class Test {
-      public static void main(String[] args) {
-          Base obj = new Derived();
-          obj.display();
+      class GrandChild extends Child {
+          void display() { super.super.display(); }
       }
-  }
-  \`\`\``,
-      options: [
-        { text: "Base", isCorrect: false },
-        { text: "Derived", isCorrect: false },
-        { text: "Compilation Error", isCorrect: true },
-        { text: "Runtime Error", isCorrect: false }
+      public class Test {
+          public static void main(String[] args) {
+              GrandChild obj = new GrandChild();
+              obj.display();
+          }
+      }
+      \`\`\``,
+      "options": [
+        { "text": "Parent", "isCorrect": false },
+        { "text": "Child", "isCorrect": false },
+        { "text": "Compilation Error", "isCorrect": true },
+        { "text": "Runtime Error", "isCorrect": false }
       ],
-      explanation: "Private methods in the base class are not visible in the derived class, so the method in Derived is unrelated and causes a compilation error.",
-      difficulty: 'Hard',
-      category: 'Private Methods',
-      hasCode: true
+      "explanation": "Java does not support `super.super`, which would access the grandparent class. This results in a compilation error.",
+      "difficulty": "Hard",
+      "category": "Inheritance",
+      "hasCode": true
     },
     {
-      id: 3,
-      question: `Identify the problem with the following code:
-  \`\`\`java
-  abstract class Animal {
-      abstract void sound();
-  }
-  class Dog extends Animal {
-      void sound() {
-          System.out.println("Bark");
+      "id": 3,
+      "question": `What is the issue with the following Java code?
+      \`\`\`java
+      class InvitationPrintRequest {
+          private int noOfCopies;
+          private int noOfPages;
+          private double price;
+  
+          public InvitationPrintRequest(int noOfCopies, int noOfPages) {
+              this.noOfCopies = noOfCopies;
+              this.noOfPages = noOfPages;
+          }
+  
+          public void calculatePrice() {
+              double basicPrice = this.noOfPages * 2;
+              double finalPrice = basicPrice * 50;
+              double discount = this.calculateDiscount(finalPrice);
+              this.setPrice(finalPrice - discount);
+          }
+  
+          public double calculateDiscount(double finalPrice) {
+              double baseDiscount;
+              if (this.noOfCopies >= 25 && this.noOfPages > 15) {
+                  baseDiscount = finalPrice * 0.20;
+              } else {
+                  baseDiscount = finalPrice * 0.10;
+              }
+              return baseDiscount;
+          }
+  
+          public void setPrice(double price) {
+              this.price = price;
+          }
+  
+          public double getPrice() {
+              return this.price;
+          }
+  
+          public static void main(String[] args) {
+              InvitationPrintRequest invitationObj = new InvitationPrintRequest(20, 20);
+              invitationObj.calculatePrice();
+              System.out.println(invitationObj.getPrice());
+          }
       }
-  }
-  class Test {
-      public static void main(String[] args) {
-          Animal a = new Animal();
-      }
-  }
-  \`\`\``,
-      options: [
-        { text: "Nothing is wrong", isCorrect: false },
-        { text: "Cannot instantiate abstract class", isCorrect: true },
-        { text: "Missing implementation of sound()", isCorrect: false },
-        { text: "Compilation Error in Dog", isCorrect: false }
+      \`\`\``,
+      "options": [
+        { "text": "Syntax Error", "isCorrect": false },
+        { "text": "Logic Error", "isCorrect": true },
+        { "text": "Compilation Error", "isCorrect": false },
+        { "text": "Runtime Error", "isCorrect": false }
       ],
-      explanation: "You cannot instantiate an abstract class directly. Only subclasses can be instantiated.",
-      difficulty: 'Medium',
-      category: 'Abstract Classes',
-      hasCode: true
+      "explanation": "There's a logic error: if `noOfCopies` is 20 and `noOfPages` is 20, the discount applied will be only 10%, whereas the expected discount should be 20%. This is because `noOfCopies >= 25` condition is false.",
+      "difficulty": "Hard",
+      "category": "Logic Errors",
+      "hasCode": true
     },
     {
-      id: 4,
-      question: `What is the result of the following code?
-  \`\`\`java
-  interface I {
-      default void display() {
-          System.out.println("Interface");
+      "id": 4,
+      "question": `What will be the output of this floating-point precision case?
+      \`\`\`java
+      public class Test {
+          public static void main(String[] args) {
+              double x = 0.1 + 0.2;
+              System.out.println(x == 0.3);
+          }
       }
-  }
-  class A {
-      public void display() {
-          System.out.println("Class A");
-      }
-  }
-  class B extends A implements I {
-      public static void main(String[] args) {
-          B obj = new B();
-          obj.display();
-      }
-  }
-  \`\`\``,
-      options: [
-        { text: "Interface", isCorrect: false },
-        { text: "Class A", isCorrect: true },
-        { text: "Compilation Error", isCorrect: false },
-        { text: "Runtime Error", isCorrect: false }
+      \`\`\``,
+      "options": [
+        { "text": "true", "isCorrect": false },
+        { "text": "false", "isCorrect": true },
+        { "text": "Compilation Error", "isCorrect": false },
+        { "text": "Runtime Error", "isCorrect": false }
       ],
-      explanation: "Class methods take precedence over default interface methods if both are present.",
-      difficulty: 'Hard',
-      category: 'Default Methods',
-      hasCode: true
+      "explanation": "Floating-point arithmetic precision makes `0.1 + 0.2` slightly different from `0.3`, leading to `false`.",
+      "difficulty": "Hard",
+      "category": "Floating-Point Precision",
+      "hasCode": true
     },
     {
-      id: 5,
-      question: `What does the following code output?
-  \`\`\`java
-  class Parent {
-      void print() throws IOException {
-          System.out.println("Parent");
+      "id": 5,
+      "question": `What is the output of the following tricky constructor chaining?
+      \`\`\`java
+      class A {
+          A() { System.out.println("A constructor"); }
       }
-  }
-  class Child extends Parent {
-      void print() throws Exception {
-          System.out.println("Child");
+      class B extends A {
+          B() { System.out.println("B constructor"); }
       }
-  }
-  public class Test {
-      public static void main(String[] args) {
-          Parent obj = new Child();
-          obj.print();
+      class C extends B {
+          C() { System.out.println("C constructor"); }
       }
-  }
-  \`\`\``,
-      options: [
-        { text: "Parent", isCorrect: false },
-        { text: "Child", isCorrect: false },
-        { text: "Compilation Error", isCorrect: true },
-        { text: "Runtime Error", isCorrect: false }
+      public class Test {
+          public static void main(String[] args) {
+              C obj = new C();
+          }
+      }
+      \`\`\``,
+      "options": [
+        { "text": "C constructor", "isCorrect": false },
+        { "text": "A constructor B constructor C constructor", "isCorrect": true },
+        { "text": "Compilation Error", "isCorrect": false },
+        { "text": "Runtime Error", "isCorrect": false }
       ],
-      explanation: "The overridden method in Child cannot throw a broader checked exception than the method in Parent.",
-      difficulty: 'Very Hard',
-      category: 'Exception Handling',
-      hasCode: true
+      "explanation": "Constructor chaining ensures that parent class constructors are called first, leading to `A constructor B constructor C constructor`.",
+      "difficulty": "Hard",
+      "category": "Constructor Chaining",
+      "hasCode": true
     },
     {
-      id: 6,
-      question: `What is the result of the following code?
-  \`\`\`java
-  class X {
-      final void display() {
-          System.out.println("Final Method");
-      }
-  }
-  class Y extends X {
-      void display() {
-          System.out.println("Overridden Method");
-      }
-  }
-  public class Test {
-      public static void main(String[] args) {
-          Y obj = new Y();
-          obj.display();
-      }
-  }
-  \`\`\``,
-      options: [
-        { text: "Final Method", isCorrect: false },
-        { text: "Overridden Method", isCorrect: false },
-        { text: "Compilation Error", isCorrect: true },
-        { text: "Runtime Error", isCorrect: false }
-      ],
-      explanation: "A final method cannot be overridden in a subclass, causing a compilation error.",
-      difficulty: 'Hard',
-      category: 'Final Methods',
-      hasCode: true
-    },
-    {
-      id: 7,
-      question: `What's the output of the following code?
-  \`\`\`java
-  class A {
-      public void show() {
-          System.out.println("A");
-      }
-  }
-  class B extends A {
-      public void show() {
-          System.out.println("B");
-      }
-  }
-  class C extends B {
-      public void show() {
-          System.out.println("C");
-      }
-  }
-  public class Test {
-      public static void main(String[] args) {
-          A obj = new C();
-          obj.show();
-      }
-  }
-  \`\`\``,
-      options: [
-        { text: "A", isCorrect: false },
-        { text: "B", isCorrect: false },
-        { text: "C", isCorrect: true },
-        { text: "Compilation Error", isCorrect: false }
-      ],
-      explanation: "Dynamic method dispatch ensures that the overridden method in the most derived class is called.",
-      difficulty: 'Medium',
-      category: 'Polymorphism',
-      hasCode: true
-    },
-    {
-      id: 8,
-      question: `What happens in the following scenario?
-  \`\`\`java
-  class Test {
-      public static void main(String[] args) {
-          Object obj = "Hello";
-          Integer num = (Integer) obj;
-          System.out.println(num);
-      }
-  }
-  \`\`\``,
-      options: [
-        { text: "Hello", isCorrect: false },
-        { text: "null", isCorrect: false },
-        { text: "Runtime Error", isCorrect: true },
-        { text: "Compilation Error", isCorrect: false }
-      ],
-      explanation: "A ClassCastException occurs at runtime because obj is not an instance of Integer.",
-      difficulty: 'Hard',
-      category: 'Type Casting',
-      hasCode: true
-    },
-    {
-        id: 9,
-        question: `What will the following code output?
-    \`\`\`java
-    interface A {
-        int value = 10; // public, static, final by default
-    }
-    class Test implements A {
-        public static void main(String[] args) {
-            System.out.println(value);
-            value = 20;
-        }
-    }
-    \`\`\``,
-        options: [
-          { text: "10", isCorrect: false },
-          { text: "Compilation Error", isCorrect: true },
-          { text: "20", isCorrect: false },
-          { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "Interface fields are implicitly public, static, and final. Attempting to modify `value` causes a compilation error.",
-        difficulty: 'Medium',
-        category: 'Interfaces',
-        hasCode: true
-    },
-    {
-        id: 10,
-        question: `What happens when the following code is executed?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            String str = null;
-            System.out.println(str.length());
-        }
-    }
-    \`\`\``,
-        options: [
-          { text: "null", isCorrect: false },
-          { text: "Compilation Error", isCorrect: false },
-          { text: "Runtime Error", isCorrect: true },
-          { text: "0", isCorrect: false }
-        ],
-        explanation: "A NullPointerException occurs at runtime because `str` is null and does not reference an object.",
-        difficulty: 'Easy',
-        category: 'NullPointerException',
-        hasCode: true
-    },
-    {
-        id: 11,
-        question: `What does the following code print?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            System.out.println(10 + 20 + "Hello" + 10 + 20);
-        }
-    }
-    \`\`\``,
-        options: [
-          { text: "30Hello1020", isCorrect: true },
-          { text: "1020Hello1020", isCorrect: false },
-          { text: "30Hello30", isCorrect: false },
-          { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "When a string is encountered during addition, concatenation occurs instead of arithmetic. Hence, `10 + 20` is evaluated first, resulting in `30Hello1020`.",
-        difficulty: 'Easy',
-        category: 'String Concatenation',
-        hasCode: true
-    },
-    {
-        id: 12,
-        question: `What is the output of this program?
-    \`\`\`java
-    class Base {
-        void method() {
-            System.out.println("Base");
-        }
-    }
-    class Derived extends Base {
-        void method() {
-            super.method();
-            System.out.println("Derived");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Base obj = new Derived();
-            obj.method();
-        }
-    }
-    \`\`\``,
-        options: [
-          { text: "Base", isCorrect: true },
-          { text: "Base\nDerived", isCorrect: false },
-          { text: "Derived", isCorrect: false },
-          { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "Although `Derived` overrides `method`, `Base`'s method is never called because `obj` references a `Base` type.",
-        difficulty: 'Hard',
-        category: 'Method Overriding',
-        hasCode: true
-    },
-    {
-        id: 13,
-        question: `What does the following code print?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            int x = 0;
-            int y = 10 / x;
-            System.out.println(y);
-        }
-    }
-    \`\`\``,
-        options: [
-          { text: "0", isCorrect: false },
-          { text: "Infinity", isCorrect: false },
-          { text: "Runtime Error", isCorrect: true },
-          { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "Division by zero causes an ArithmeticException at runtime.",
-        difficulty: 'Easy',
-        category: 'ArithmeticException',
-        hasCode: true
-    },
-    {
-        id: 14,
-        question: `What is the result of the following program?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            String s1 = "Hello";
-            String s2 = new String("Hello");
-            System.out.println(s1 == s2);
-        }
-    }
-    \`\`\``,
-        options: [
-          { text: "true", isCorrect: false },
-          { text: "false", isCorrect: true },
-          { text: "Compilation Error", isCorrect: false },
-          { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "`s1` and `s2` are not the same object in memory, so `==` returns false. Use `.equals()` to compare values.",
-        difficulty: 'Medium',
-        category: 'String Comparison',
-        hasCode: true
-    },
-    {
-        id: 15,
-        question: `What happens in the following code?
-    \`\`\`java
-    class Parent {
-        Parent() {
-            System.out.println("Parent Constructor");
-        }
-    }
-    class Child extends Parent {
-        Child() {
-            System.out.println("Child Constructor");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Child obj = new Child();
-        }
-    }
-    \`\`\``,
-        options: [
-          { text: "Child Constructor", isCorrect: false },
-          { text: "Parent Constructor\nChild Constructor", isCorrect: true },
-          { text: "Compilation Error", isCorrect: false },
-          { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "The parent class constructor is always called before the child class constructor.",
-        difficulty: 'Easy',
-        category: 'Constructors',
-        hasCode: true
-    },
-    {
-        id: 16,
-        question: `What will happen in the following code?
-    \`\`\`java
-    class A {
-        A() {
-            System.out.println("A");
-        }
-    }
-    class B extends A {
-        B() {
-            super();
-            System.out.println("B");
-        }
-    }
-    class C extends B {
-        C() {
-            System.out.println("C");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            C obj = new C();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "C", isCorrect: false },
-            { text: "A\nB\nC", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "Constructors of superclasses are invoked in order starting from the topmost superclass.",
-        difficulty: 'Medium',
-        category: 'Inheritance',
-        hasCode: true
-    },
-    {
-        id: 17,
-        question: `What is the result of this program?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            try {
-                System.out.println("A");
-                int x = 1 / 0;
-                System.out.println("B");
-            } catch (ArithmeticException e) {
-                System.out.println("C");
-            } finally {
-                System.out.println("D");
+        "id": 6,
+        "question": `What will be the output of the following Java code?
+        \`\`\`java
+        class Test {
+            static int x = 5;
+            public static void main(String[] args) {
+                int y = x++ + ++x * 2 - x--;
+                System.out.println(y + " " + x);
             }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "A\nB\nD", isCorrect: false },
-            { text: "A\nC\nD", isCorrect: true },
-            { text: "A\nC", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "14 6", "isCorrect": false },
+            { "text": "16 6", "isCorrect": false },
+            { "text": "15 6", "isCorrect": true },
+            { "text": "Compilation Error", "isCorrect": false }
         ],
-        explanation: "An ArithmeticException is caught in the `catch` block, and the `finally` block always executes.",
-        difficulty: 'Medium',
-        category: 'Exception Handling',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        1. \`x = 5\`
+        2. \`x++\` → Post-increment: Returns 5, then \`x = 6\`
+        3. \`++x\` → Pre-increment: \`x = 7\`, returns 7
+        4. \`7 * 2 = 14\`
+        5. Expression: \`5 + 14 - 7\`
+        6. Result: \`15\`
+        7. \`x--\` → Post-decrement: \`x = 6\`
+        `,
+        "difficulty": "Hard",
+        "category": "Operator Precedence",
+        "hasCode": true
     },
     {
-        id: 18,
-        question: `What is the output of the following code?
-    \`\`\`java
-    class A {
-        static void print() {
-            System.out.println("A");
-        }
-    }
-    class B extends A {
-        static void print() {
-            System.out.println("B");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            A obj = new B();
-            obj.print();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "A", isCorrect: true },
-            { text: "B", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "Static methods are not polymorphic and are called based on the reference type, not the object type.",
-        difficulty: 'Hard',
-        category: 'Static Methods',
-        hasCode: true
-    },
-    {
-        id: 19,
-        question: `What will the following program print?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            String str1 = "Hello";
-            String str2 = "Hello";
-            System.out.println(str1 == str2);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "true", isCorrect: true },
-            { text: "false", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "String literals are interned in Java, so `str1` and `str2` point to the same memory location.",
-        difficulty: 'Easy',
-        category: 'String Pool',
-        hasCode: true
-    },
-    {
-        id: 20,
-        question: `What is the output of this code?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            int x = 5;
-            int y = 0;
-            if (y != 0 && x / y > 1) {
-                System.out.println("Condition met");
-            } else {
-                System.out.println("Condition not met");
+        "id": 7,
+        "question": `What will be the output of the following Java program?
+        \`\`\`java
+        class MathTrick {
+            public static void main(String[] args) {
+                int a = 10, b = 5, c = 2;
+                int result = a / b * c + a % b - b++ * --c;
+                System.out.println(result + " " + b + " " + c);
             }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "Condition met", isCorrect: false },
-            { text: "Condition not met", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "1 6 1", "isCorrect": true },
+            { "text": "2 6 1", "isCorrect": false },
+            { "text": "0 5 2", "isCorrect": false },
+            { "text": "Compilation Error", "isCorrect": false }
         ],
-        explanation: "The `&&` operator short-circuits, so `x / y` is not evaluated when `y != 0` is false, avoiding a runtime exception.",
-        difficulty: 'Medium',
-        category: 'Short-Circuit Evaluation',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        1. \`a = 10\`, \`b = 5\`, \`c = 2\`
+        2. \`a / b = 10 / 5 = 2\`
+        3. \`2 * c = 2 * 2 = 4\`
+        4. \`a % b = 10 % 5 = 0\`
+        5. \`b++ * --c = 5 * 1 = 5\`, \`b = 6\`, \`c = 1\`
+        6. Expression: \`4 + 0 - 5 = 1\`
+        `,
+        "difficulty": "Hard",
+        "category": "Arithmetic Expressions",
+        "hasCode": true
     },
     {
-        id: 21,
-        question: `What happens in the following code?
-    \`\`\`java
-    interface A {
-        void display();
-    }
-    class Test implements A {
-        public void display() {
-            System.out.println("Hello");
-        }
-        public static void main(String[] args) {
-            Test obj = new Test();
-            obj.display();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Hello", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false },
-            { text: "No Output", isCorrect: false }
-        ],
-        explanation: "The `display` method is implemented in the `Test` class, so it prints `Hello`.",
-        difficulty: 'Easy',
-        category: 'Interfaces',
-        hasCode: true
-    },
-    {
-        id: 22,
-        question: `What does the following code do?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            int x = 10;
-            int y = x++;
-            System.out.println(x + ", " + y);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "10, 10", isCorrect: false },
-            { text: "11, 10", isCorrect: true },
-            { text: "10, 11", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "The `x++` operator increments `x` after its current value is assigned to `y`.",
-        difficulty: 'Easy',
-        category: 'Post-Increment',
-        hasCode: true
-    },
-    {
-        id: 23,
-        question: `What happens when the following code is executed?
-    \`\`\`java
-    class A {
-        public static void main(String[] args) {
-            int x = 5;
-            int y = 10;
-            System.out.println(x > y ? x : y);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "5", isCorrect: false },
-            { text: "10", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "The ternary operator evaluates the condition `x > y`, which is false, so it returns `y`.",
-        difficulty: 'Easy',
-        category: 'Ternary Operator',
-        hasCode: true
-    },
-    {
-        id: 24,
-        question: `What will the following program print?
-    \`\`\`java
-    class Test {
-        static int x = 10;
-        static {
-            x += 5;
-        }
-        public static void main(String[] args) {
-            System.out.println(x);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "10", isCorrect: false },
-            { text: "15", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "The static block is executed when the class is loaded, adding 5 to the static variable `x`.",
-        difficulty: 'Medium',
-        category: 'Static Blocks',
-        hasCode: true
-    },
-    {
-        id: 25,
-        question: `What is the result of the following code?
-    \`\`\`java
-    class A {
-        int x = 10;
-        static int y = 20;
-    }
-    class Test {
-        public static void main(String[] args) {
-            A obj1 = new A();
-            A obj2 = new A();
-            obj1.x += 5;
-            obj2.y += 10;
-            System.out.println(obj1.x + ", " + obj2.y);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "15, 30", isCorrect: true },
-            { text: "15, 20", isCorrect: false },
-            { text: "10, 30", isCorrect: false },
-            { text: "10, 20", isCorrect: false }
-        ],
-        explanation: "Instance variables are unique for each object, but static variables are shared across all instances.",
-        difficulty: 'Medium',
-        category: 'Static and Instance Variables',
-        hasCode: true
-    },
-    {
-        id: 26,
-        question: `What is the result of the following code?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            int x = 5;
-            int y = 0;
-            try {
-                int z = x / y;
-            } catch (ArithmeticException e) {
-                System.out.println("Caught an Exception");
-            } finally {
-                System.out.println("Finally Block Executed");
+        "id": 8,
+        "question": `What will be the output of the following Java code?
+        \`\`\`java
+        class FinalTest {
+            final int a = 10;
+            public static void main(String[] args) {
+                FinalTest obj = new FinalTest();
+                obj.a = 20;
+                System.out.println(obj.a);
             }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "Caught an Exception", isCorrect: false },
-            { text: "Caught an Exception\nFinally Block Executed", isCorrect: true },
-            { text: "Finally Block Executed", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "10", "isCorrect": false },
+            { "text": "20", "isCorrect": false },
+            { "text": "Compilation Error", "isCorrect": true },
+            { "text": "Runtime Error", "isCorrect": false }
         ],
-        explanation: "The exception is caught, and the finally block is always executed after the catch block.",
-        difficulty: 'Easy',
-        category: 'Exception Handling',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        1. \`final int a = 10\` means \`a\` cannot be modified.
+        2. Trying to assign \`a = 20\` causes a **compilation error**.
+        `,
+        "difficulty": "Hard",
+        "category": "Final Keyword",
+        "hasCode": true
     },
     {
-        id: 27,
-        question: `What happens in the following code?
-    \`\`\`java
-    interface A {
-        void display();
-        default void show() {
-            System.out.println("Interface Default Method");
-        }
-    }
-    class Test implements A {
-        public void display() {
-            System.out.println("Implemented Display");
-        }
-        public static void main(String[] args) {
-            A obj = new Test();
-            obj.display();
-            obj.show();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Implemented Display", isCorrect: false },
-            { text: "Implemented Display\nInterface Default Method", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "Default methods in interfaces can be directly invoked by implementing classes if not overridden.",
-        difficulty: 'Medium',
-        category: 'Interfaces and Default Methods',
-        hasCode: true
-    },
-    {
-        id: 28,
-        question: `What is the output of the following program?
-    \`\`\`java
-    class A {
-        static void method() {
-            System.out.println("Static Method in A");
-        }
-    }
-    class B extends A {
-        static void method() {
-            System.out.println("Static Method in B");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            A obj = new B();
-            obj.method();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Static Method in A", isCorrect: true },
-            { text: "Static Method in B", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "Static methods are resolved at compile-time based on the reference type, not the runtime object.",
-        difficulty: 'Hard',
-        category: 'Static Methods',
-        hasCode: true
-    },
-    {
-        id: 29,
-        question: `What will the following code print?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            System.out.println("5" + 5 + 5);
-            System.out.println(5 + 5 + "5");
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "555 and 105", isCorrect: true },
-            { text: "555 and 55", isCorrect: false },
-            { text: "105 and 555", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "Concatenation occurs when a string is encountered, causing different behaviors for `\"5\" + 5` vs `5 + \"5\"`.",
-        difficulty: 'Easy',
-        category: 'String Concatenation',
-        hasCode: true
-    },
-    {
-        id: 30,
-        question: `What is the result of the following program?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            int x = 5;
-            x = x++ + ++x;
-            System.out.println(x);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "11", isCorrect: true },
-            { text: "10", isCorrect: false },
-            { text: "12", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "The post-increment `x++` adds the value of `x` before incrementing, while `++x` increments first, resulting in `5 + 6 = 11`.",
-        difficulty: 'Hard',
-        category: 'Increment Operators',
-        hasCode: true
-    },
-    {
-        id: 31,
-        question: `What happens with this code?
-    \`\`\`java
-    class A {
-        public static void main(String[] args) {
-            Integer x = 1000;
-            Integer y = 1000;
-            System.out.println(x == y);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "true", isCorrect: false },
-            { text: "false", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "Objects are compared using `==`, which checks reference equality. Since `x` and `y` are different objects, it returns `false`.",
-        difficulty: 'Medium',
-        category: 'Autoboxing',
-        hasCode: true
-    },
-    {
-        id: 32,
-        question: `What is the output of the following code?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            String s = "Java";
-            s.concat(" Programming");
-            System.out.println(s);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Java Programming", isCorrect: false },
-            { text: "Java", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "Strings in Java are immutable. The `concat` method creates a new string, but it is not assigned to `s`.",
-        difficulty: 'Easy',
-        category: 'Strings',
-        hasCode: true
-    },
-    {
-        id: 33,
-        question: `What happens when this code is executed?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            String s1 = "Java";
-            String s2 = new String("Java");
-            System.out.println(s1.equals(s2));
-            System.out.println(s1 == s2);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "true\nfalse", isCorrect: true },
-            { text: "false\nfalse", isCorrect: false },
-            { text: "true\ntrue", isCorrect: false },
-            { text: "false\ntrue", isCorrect: false }
-        ],
-        explanation: "`equals` checks value equality, while `==` checks reference equality. The two references point to different objects.",
-        difficulty: 'Medium',
-        category: 'String Comparison',
-        hasCode: true
-    },
-    {
-        id: 34,
-        question: `What will this program output?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            int x = 10;
-            try {
-                int y = x / 0;
-            } catch (Exception e) {
-                System.out.println("Exception caught");
-            } finally {
-                System.out.println("Finally executed");
+        "id": 9,
+        "question": `What will be the output of the following Java program?
+        \`\`\`java
+        class Test {
+            static int x = 3;
+            public static void main(String[] args) {
+                x += x++ + ++x;
+                System.out.println(x);
             }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "Exception caught", isCorrect: false },
-            { text: "Exception caught\nFinally executed", isCorrect: true },
-            { text: "Finally executed", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "9", "isCorrect": false },
+            { "text": "11", "isCorrect": false },
+            { "text": "10", "isCorrect": true },
+            { "text": "Compilation Error", "isCorrect": false }
         ],
-        explanation: "Division by zero causes an ArithmeticException, which is caught, and then the finally block executes.",
-        difficulty: 'Easy',
-        category: 'Exception Handling',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        1. \`x = 3\`
+        2. \`x++\` → Returns \`3\`, then \`x = 4\`
+        3. \`++x\` → \`x = 5\`, returns \`5\`
+        4. \`x += 3 + 5\` → \`x = 3 + 8 = 10\`
+        `,
+        "difficulty": "Hard",
+        "category": "Operator Precedence",
+        "hasCode": true
     },
     {
-        id: 35,
-        question: `What happens in the following code?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            int x = 5;
-            int y = ++x + x++ + --x;
-            System.out.println(y);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "18", isCorrect: true },
-            { text: "15", isCorrect: false },
-            { text: "16", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "The expression evaluates as `6 + 6 + 5 = 18` due to a combination of pre- and post-increments.",
-        difficulty: 'Hard',
-        category: 'Operators',
-        hasCode: true
-    },
-    {
-        id: 36,
-        question: `What is the output of the following code?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            int x = 0;
-            int y = 0;
-            System.out.println(x++ == ++y);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "true", isCorrect: false },
-            { text: "false", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "`x++` evaluates as 0 (then increments), while `++y` evaluates as 1 (after incrementing). The comparison returns false.",
-        difficulty: 'Medium',
-        category: 'Operators',
-        hasCode: true
-    },
-    {
-        id: 37,
-        question: `What does this code do?
-    \`\`\`java
-    class Test {
-        static void method() throws Exception {
-            throw new Exception("Error");
-        }
-        public static void main(String[] args) {
-            try {
-                method();
-            } catch (Exception e) {
-                System.out.println("Caught: " + e.getMessage());
+        "id": 10,
+        "question": `What will be the output of the following Java code?
+        \`\`\`java
+        class Test {
+            static int x = 7;
+            public static void main(String[] args) {
+                int y = x-- - --x + x++ + ++x;
+                System.out.println(y + " " + x);
             }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "Caught: Error", isCorrect: true },
-            { text: "Error", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "7 7", "isCorrect": false },
+            { "text": "6 7", "isCorrect": false },
+            { "text": "5 7", "isCorrect": true },
+            { "text": "Compilation Error", "isCorrect": false }
         ],
-        explanation: "The `method` throws an exception, which is caught in the `catch` block, printing the message.",
-        difficulty: 'Medium',
-        category: 'Exception Handling',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        1. \`x = 7\`
+        2. \`x--\` → Returns \`7\`, then \`x = 6\`
+        3. \`--x\` → \`x = 5\`, returns \`5\`
+        4. \`x++\` → Returns \`5\`, then \`x = 6\`
+        5. \`++x\` → \`x = 7\`, returns \`7\`
+        6. Expression: \`7 - 5 + 5 + 7 = 5\`
+        `,
+        "difficulty": "Hard",
+        "category": "Operator Precedence",
+        "hasCode": true
     },
     {
-        id: 38,
-        question: `What happens in this case?
-    \`\`\`java
-    class A {
-        void display() {
-            System.out.println("A");
+        "id": 11,
+        "question": `A hospital charges a base fee of $500 per day for a patient's stay. Additionally:
+        - Each test costs $200.
+        - Medication cost is calculated as $50 per dose.
+        - If a patient stays more than 5 days, they receive a 10% discount on the total bill.
+        What will be the final bill for a patient who stays 6 days, undergoes 3 tests, and takes 5 doses of medication?
+    
+        \`\`\`java
+        class HospitalBill {
+            public static void main(String[] args) {
+                int days = 6;
+                int tests = 3;
+                int doses = 5;
+    
+                double baseCost = days * 500;
+                double testCost = tests * 200;
+                double medCost = doses * 50;
+                double total = baseCost + testCost + medCost;
+    
+                if (days > 5) {
+                    total *= 0.90; // 10% discount
+                }
+    
+                System.out.println(total);
+            }
         }
-    }
-    class B extends A {
-        void display() {
-            System.out.println("B");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            A obj = new B();
-            obj.display();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "A", isCorrect: false },
-            { text: "B", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "$3500", "isCorrect": false },
+            { "text": "$3420", "isCorrect": false },
+            { "text": "$3330", "isCorrect": true },
+            { "text": "$3600", "isCorrect": false }
         ],
-        explanation: "Dynamic method dispatch ensures that the overridden method in the subclass (`B`) is called.",
-        difficulty: 'Easy',
-        category: 'Polymorphism',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base cost calculation:**
+           - \`days = 6\`
+           - \`baseCost = 6 * 500 = 3000\`
+        
+        2. **Test cost calculation:**
+           - \`tests = 3\`
+           - \`testCost = 3 * 200 = 600\`
+        
+        3. **Medication cost calculation:**
+           - \`doses = 5\`
+           - \`medCost = 5 * 50 = 250\`
+        
+        4. **Total before discount:**
+           - \`total = 3000 + 600 + 250 = 3850\`
+        
+        5. **Applying discount (10%) because stay > 5 days:**
+           - \`total = 3850 * 0.90 = 3330\`
+        
+        6. **Final Output:**
+           - **\`3330\`**
+        `,
+        "difficulty": "Hard",
+        "category": "Real-World Calculations",
+        "hasCode": true
     },
     {
-        id: 39,
-        question: `What will this output?
-    \`\`\`java
-    class Test {
-        public static void main(String[] args) {
-            System.out.println("Hello " + null);
+        "id": 12,
+        "question": `A mobile store applies a 12% tax on the base price of phones. Additionally:
+        - A discount of 5% is applied if the price is above $1000.
+        - What will be the final price of a phone priced at $1200 before tax?
+        
+        \`\`\`java
+        class MobileStore {
+            public static void main(String[] args) {
+                double basePrice = 1200;
+                double tax = basePrice * 0.12;
+                double priceAfterTax = basePrice + tax;
+    
+                if (basePrice > 1000) {
+                    priceAfterTax *= 0.95; // 5% discount
+                }
+    
+                System.out.println(priceAfterTax);
+            }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "Hello null", isCorrect: true },
-            { text: "null", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "$1344", "isCorrect": false },
+            { "text": "$1296", "isCorrect": true },
+            { "text": "$1320", "isCorrect": false },
+            { "text": "$1260", "isCorrect": false }
         ],
-        explanation: "Concatenating a string with `null` results in `Hello null`.",
-        difficulty: 'Easy',
-        category: 'String Concatenation',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base price:** \`1200\`
+        
+        2. **Tax calculation (12% of base price):**
+           - \`tax = 1200 * 0.12 = 144\`
+           - \`priceAfterTax = 1200 + 144 = 1344\`
+        
+        3. **Discount check:**
+           - Since base price is above \`1000\`, a 5% discount applies.
+           - \`discount = 1344 * 0.05 = 67.2\`
+        
+        4. **Final price after discount:**
+           - \`1344 - 67.2 = 1296\`
+        
+        5. **Final Output:**
+           - **\`1296\`**
+        `,
+        "difficulty": "Hard",
+        "category": "Tax & Discount Calculation",
+        "hasCode": true
     },
     {
-        id: 40,
-        question: `What type of relationship is demonstrated in the following code?
-    \`\`\`java
-    class Engine {
-        void start() {
-            System.out.println("Engine starts");
+        "id": 13,
+        "question": `A shopping mall has a billing system where:
+        - A customer gets a 10% discount if the bill is above $500.
+        - If they use a membership card, an additional 5% discount is applied.
+        - A customer spends $600 and uses a membership card. What will be the final bill amount?
+        
+        \`\`\`java
+        class MallBill {
+            public static void main(String[] args) {
+                double bill = 600;
+                boolean hasMembership = true;
+    
+                if (bill > 500) {
+                    bill *= 0.90; // 10% discount
+                }
+    
+                if (hasMembership) {
+                    bill *= 0.95; // Additional 5% discount
+                }
+    
+                System.out.println(bill);
+            }
         }
-    }
-    class Car {
-        private Engine engine;
-        Car(Engine engine) {
-            this.engine = engine;
-        }
-        void drive() {
-            engine.start();
-            System.out.println("Car is driving");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Engine engine = new Engine();
-            Car car = new Car(engine);
-            car.drive();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Association", isCorrect: true },
-            { text: "Aggregation", isCorrect: false },
-            { text: "Inheritance", isCorrect: false },
-            { text: "Composition", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "$510", "isCorrect": false },
+            { "text": "$513", "isCorrect": true },
+            { "text": "$540", "isCorrect": false },
+            { "text": "$570", "isCorrect": false }
         ],
-        explanation: "The `Car` class has an `Engine` object passed to it, demonstrating a loose association between the two classes.",
-        difficulty: 'Medium',
-        category: 'Association',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Initial bill amount:** \`600\`
+        
+        2. **Applying first discount (10% for bills > $500):**
+           - \`600 * 0.90 = 540\`
+        
+        3. **Checking for membership discount:**
+           - Since the customer has a membership card, apply 5% discount.
+           - \`540 * 0.95 = 513\`
+        
+        4. **Final Output:**
+           - **\`513\`**
+        `,
+        "difficulty": "Hard",
+        "category": "Billing System",
+        "hasCode": true
     },
     {
-        id: 41,
-        question: `What type of relationship does the following code represent?
-    \`\`\`java
-    class Book {
-        private String title;
-        public Book(String title) {
-            this.title = title;
+        "id": 14,
+        "question": `A bank offers an annual interest rate of 6% for deposits above $5000, otherwise, it provides 4% interest. Calculate the final amount after 2 years for a deposit of $7000.
+    
+        \`\`\`java
+        class BankInterest {
+            static double calculateInterest(double amount, int years) {
+                double rate = (amount > 5000) ? 0.06 : 0.04;
+                return amount * Math.pow(1 + rate, years);
+            }
+    
+            public static void main(String[] args) {
+                double deposit = 7000;
+                int years = 2;
+                double finalAmount = calculateInterest(deposit, years);
+                System.out.println(finalAmount);
+            }
         }
-        public String getTitle() {
-            return title;
-        }
-    }
-    class Library {
-        private List<Book> books;
-        Library() {
-            books = new ArrayList<>();
-        }
-        void addBook(Book book) {
-            books.add(book);
-        }
-        List<Book> getBooks() {
-            return books;
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Library library = new Library();
-            library.addBook(new Book("Java Programming"));
-            System.out.println(library.getBooks().get(0).getTitle());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Aggregation", isCorrect: true },
-            { text: "Composition", isCorrect: false },
-            { text: "Association", isCorrect: false },
-            { text: "Inheritance", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "$7852.00", "isCorrect": false },
+            { "text": "$7868.00", "isCorrect": true },
+            { "text": "$7700.00", "isCorrect": false },
+            { "text": "$7800.00", "isCorrect": false }
         ],
-        explanation: "The `Library` class holds a list of `Book` objects but does not control their lifecycle, representing aggregation.",
-        difficulty: 'Medium',
-        category: 'Aggregation',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Deposit Amount:** $7000
+        2. **Interest Rate:** Since deposit > 5000, rate = 6% (0.06)
+        3. **Formula:** \`A = P(1 + r)^t\`
+           - \`A = 7000 * (1.06)^2\`
+        4. **Calculation:**
+           - \`7000 * 1.1236 = 7868.00\`
+        5. **Final Output:** \`7868.00\`
+        `,
+        "difficulty": "Hard",
+        "category": "Banking & Interest",
+        "hasCode": true
     },
     {
-        id: 42,
-        question: `What is encapsulated in the following class?
-    \`\`\`java
-    class Account {
-        private double balance;
-        public double getBalance() {
-            return balance;
+        "id": 15,
+        "question": `An employee's salary consists of:
+        - Base salary of $3000.
+        - Bonus of 5% if experience > 5 years.
+        - Tax of 10% applied on total salary.
+        Calculate final salary for an employee with 6 years of experience.
+    
+        \`\`\`java
+        class SalaryCalculator {
+            static double calculateSalary(int experience) {
+                double baseSalary = 3000;
+                double bonus = (experience > 5) ? baseSalary * 0.05 : 0;
+                double totalSalary = baseSalary + bonus;
+                double tax = totalSalary * 0.10;
+                return totalSalary - tax;
+            }
+    
+            public static void main(String[] args) {
+                int experience = 6;
+                System.out.println(calculateSalary(experience));
+            }
         }
-        public void deposit(double amount) {
-            if (amount > 0) {
+        \`\`\``,
+        "options": [
+            { "text": "$3150", "isCorrect": false },
+            { "text": "$2970", "isCorrect": true },
+            { "text": "$3000", "isCorrect": false },
+            { "text": "$3200", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Base Salary:** $3000
+        2. **Bonus Calculation:**
+           - Since experience > 5 years, bonus = 5% of 3000 = $150
+        3. **Total Salary Before Tax:** $3000 + $150 = $3150
+        4. **Tax Calculation:** 10% of 3150 = $315
+        5. **Final Salary:** 3150 - 315 = **$2970**
+        `,
+        "difficulty": "Hard",
+        "category": "Salary Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 16,
+        "question": `A power company charges electricity bills as follows:
+        - $0.15 per unit for usage ≤ 100 units.
+        - $0.20 per unit for usage between 101-300 units.
+        - $0.25 per unit for usage above 300 units.
+        Calculate bill for 250 units.
+    
+        \`\`\`java
+        class ElectricityBill {
+            static double calculateBill(int units) {
+                if (units <= 100) return units * 0.15;
+                else if (units <= 300) return 100 * 0.15 + (units - 100) * 0.20;
+                else return 100 * 0.15 + 200 * 0.20 + (units - 300) * 0.25;
+            }
+    
+            public static void main(String[] args) {
+                int units = 250;
+                System.out.println(calculateBill(units));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$40.00", "isCorrect": false },
+            { "text": "$47.50", "isCorrect": true },
+            { "text": "$50.00", "isCorrect": false },
+            { "text": "$55.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **First 100 units:** $0.15 per unit → $15
+        2. **Next 150 units:** $0.20 per unit → $30
+        3. **Total Bill:** $15 + $30 = **$47.50**
+        `,
+        "difficulty": "Hard",
+        "category": "Electricity Billing",
+        "hasCode": true
+    },
+    {
+        "id": 17,
+        "question": `A car rental service charges a base fee of $50 per day. Additional charges:
+        - If rental days > 5, apply a 10% discount.
+        - Insurance costs $15 per day.
+        - Calculate total bill for 7 days with insurance.
+    
+        \`\`\`java
+        class CarRental {
+            static double calculateRental(int days, boolean insurance) {
+                double baseCost = days * 50;
+                double insuranceCost = insurance ? days * 15 : 0;
+                double total = baseCost + insuranceCost;
+    
+                if (days > 5) {
+                    total *= 0.90; // 10% discount
+                }
+                return total;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateRental(7, true));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$472.50", "isCorrect": true },
+            { "text": "$500", "isCorrect": false },
+            { "text": "$455", "isCorrect": false },
+            { "text": "$525", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base cost calculation:** $50 per day → \`7 * 50 = 350\`
+        2. **Insurance calculation:** $15 per day → \`7 * 15 = 105\`
+        3. **Total before discount:** \`350 + 105 = 455\`
+        4. **Applying discount (10% for >5 days):** \`455 * 0.90 = 472.50\`
+        5. **Final Output:** \`472.50\`
+        `,
+        "difficulty": "Hard",
+        "category": "Car Rental Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 18,
+        "question": `A mobile service provider offers:
+        - $30 base fee.
+        - $0.10 per call.
+        - If calls > 100, an additional 10% discount is applied.
+        - Calculate the final bill for 120 calls.
+    
+        \`\`\`java
+        class MobileBill {
+            static double calculateBill(int calls) {
+                double total = 30 + calls * 0.10;
+                if (calls > 100) {
+                    total *= 0.90;
+                }
+                return total;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateBill(120));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$38.70", "isCorrect": true },
+            { "text": "$39.00", "isCorrect": false },
+            { "text": "$42.00", "isCorrect": false },
+            { "text": "$37.50", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base fee:** $30
+        2. **Call charge calculation:** 120 calls → \`120 * 0.10 = 12\`
+        3. **Total before discount:** \`30 + 12 = 42\`
+        4. **Discount (10% for calls >100):** \`42 * 0.90 = 38.70\`
+        5. **Final Output:** \`38.70\`
+        `,
+        "difficulty": "Hard",
+        "category": "Mobile Bill Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 19,
+        "question": `A loan system calculates monthly EMI based on:
+        - Principal: $5000
+        - Interest Rate: 5% per year.
+        - Tenure: 12 months.
+        - Formula: EMI = (P × r × (1 + r)^n) / ((1 + r)^n - 1).
+        - Compute EMI.
+    
+        \`\`\`java
+        class LoanEMI {
+            static double calculateEMI(double principal, double rate, int months) {
+                rate = rate / (12 * 100); // Convert annual rate to monthly
+                double emi = (principal * rate * Math.pow(1 + rate, months)) / 
+                             (Math.pow(1 + rate, months) - 1);
+                return emi;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateEMI(5000, 5, 12));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$427.50", "isCorrect": false },
+            { "text": "$428.04", "isCorrect": true },
+            { "text": "$430.00", "isCorrect": false },
+            { "text": "$420.50", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Convert annual interest to monthly rate:** \`5 / 12 / 100 = 0.004167\`
+        2. **Formula Calculation:**
+           - **Numerator:** \`5000 × 0.004167 × (1.004167)^12\`
+           - **Denominator:** \`(1.004167)^12 - 1\`
+        3. **Final EMI Calculation:** \`428.04\`
+        4. **Final Output:** \`428.04\`
+        `,
+        "difficulty": "Hard",
+        "category": "Loan EMI Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 20,
+        "question": `A shopping mall has a membership system:
+        - Regular discount: 10%.
+        - Extra 5% for premium members.
+        - Calculate final bill for a premium member spending $700.
+    
+        \`\`\`java
+        class ShoppingMall {
+            static double calculateBill(double bill, boolean isPremium) {
+                bill *= 0.90; // 10% discount
+                if (isPremium) {
+                    bill *= 0.95; // Additional 5% discount
+                }
+                return bill;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateBill(700, true));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$598.50", "isCorrect": true },
+            { "text": "$630.00", "isCorrect": false },
+            { "text": "$665.00", "isCorrect": false },
+            { "text": "$700.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Regular discount:** \`700 * 0.90 = 630\`
+        2. **Premium discount:** \`630 * 0.95 = 598.50\`
+        3. **Final Output:** \`598.50\`
+        `,
+        "difficulty": "Hard",
+        "category": "Shopping Mall Discounts",
+        "hasCode": true
+    },
+    {
+        "id": 21,
+        "question": `A car showroom offers a financing scheme:
+        - Base price: $25,000
+        - Interest: 7% per year
+        - Loan term: 3 years
+        - Down payment: 10% of base price
+        - Monthly EMI = (P × r × (1 + r)^n) / ((1 + r)^n - 1)
+        - Compute monthly EMI.
+        
+        \`\`\`java
+        class CarFinance {
+            static double calculateEMI(double basePrice, double rate, int years) {
+                double downPayment = basePrice * 0.10;
+                double principal = basePrice - downPayment;
+                rate = rate / (12 * 100);
+                int months = years * 12;
+                double emi = (principal * rate * Math.pow(1 + rate, months)) /
+                             (Math.pow(1 + rate, months) - 1);
+                return emi;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateEMI(25000, 7, 3));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$695.20", "isCorrect": true },
+            { "text": "$705.50", "isCorrect": false },
+            { "text": "$720.00", "isCorrect": false },
+            { "text": "$680.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Calculate Down Payment:** \`25000 * 0.10 = 2500\`
+        2. **Loan Amount:** \`25000 - 2500 = 22500\`
+        3. **Convert Interest Rate:** \`7% per year → 0.07 / 12 = 0.005833\`
+        4. **Number of Months:** \`3 * 12 = 36\`
+        5. **Apply EMI Formula:** 
+           - **Numerator:** \`22500 × 0.005833 × (1.005833)^36\`
+           - **Denominator:** \`(1.005833)^36 - 1\`
+        6. **Final EMI Calculation:** \`$695.20\`
+        7. **Final Output:** \`695.20\`
+        `,
+        "difficulty": "Hard",
+        "category": "Car Financing",
+        "hasCode": true
+    },
+    {
+        "id": 22,
+        "question": `A warehouse tracks inventory and updates quantities based on sales.
+        - Initial quantity: 150
+        - Each sale decreases stock by 1.
+        - If stock drops below 10, restock 50 units.
+        - Compute stock after 147 sales.
+        
+        \`\`\`java
+        class Warehouse {
+            int stock = 150;
+    
+            void sellItem() {
+                stock--;
+                if (stock < 10) {
+                    stock += 50;
+                }
+            }
+    
+            public static void main(String[] args) {
+                Warehouse wh = new Warehouse();
+                for (int i = 0; i < 147; i++) {
+                    wh.sellItem();
+                }
+                System.out.println(wh.stock);
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "53", "isCorrect": true },
+            { "text": "3", "isCorrect": false },
+            { "text": "50", "isCorrect": false },
+            { "text": "10", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Initial Stock:** 150
+        2. **After 140 Sales:** \`150 - 140 = 10\`
+        3. **Selling 141st Item:** \`10 - 1 = 9\` → **Restock 50** → **Stock = 59**
+        4. **Sales Continue:** \`59 - 6 = 53\`
+        5. **Final Stock:** **53**
+        `,
+        "difficulty": "Hard",
+        "category": "Inventory Management",
+        "hasCode": true
+    },
+    {
+        "id": 23,
+        "question": `A mobile plan offers:
+        - Base price: $40
+        - $0.20 per SMS
+        - Free calls up to 100 minutes, after that $0.30 per minute
+        - Compute the final bill for 120 minutes & 30 SMS.
+        
+        \`\`\`java
+        class MobilePlan {
+            static double calculateBill(int minutes, int sms) {
+                double bill = 40;
+                if (minutes > 100) {
+                    bill += (minutes - 100) * 0.30;
+                }
+                bill += sms * 0.20;
+                return bill;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateBill(120, 30));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$49", "isCorrect": true },
+            { "text": "$50", "isCorrect": false },
+            { "text": "$45", "isCorrect": false },
+            { "text": "$55", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Base price:** \`$40\`
+        2. **Extra Call Charges:** \`(120 - 100) * 0.30 = 6\`
+        3. **SMS Charges:** \`30 * 0.20 = 6\`
+        4. **Total Bill:** \`40 + 6 + 3 = 49\`
+        5. **Final Output:** \`49\`
+        `,
+        "difficulty": "Hard",
+        "category": "Mobile Billing",
+        "hasCode": true
+    },
+    {
+        "id": 24,
+        "question": `A bakery produces cakes and tracks sales:
+        - Each cake costs $15 to make.
+        - Sold for $25.
+        - If 50 cakes are made and 30 are sold, calculate profit.
+        
+        \`\`\`java
+        class Bakery {
+            static double calculateProfit(int made, int sold) {
+                double cost = made * 15;
+                double revenue = sold * 25;
+                return revenue - cost;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateProfit(50, 30));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "-$300", "isCorrect": true },
+            { "text": "$500", "isCorrect": false },
+            { "text": "$750", "isCorrect": false },
+            { "text": "$200", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Cost Calculation:** \`50 * 15 = 750\`
+        2. **Revenue Calculation:** \`30 * 25 = 750\`
+        3. **Profit Calculation:** \`750 - 750 = -300\`
+        4. **Final Output:** \`-300\`
+        `,
+        "difficulty": "Hard",
+        "category": "Business Profit Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 25,
+        "question": `A bank offers a recurring deposit scheme:
+        - Monthly deposit: $500
+        - Interest rate: 5% per annum
+        - Tenure: 12 months
+        - Interest formula: A = P × (1 + r/n)^(n*t)
+        - Compute the maturity amount.
+        
+        \`\`\`java
+        class RecurringDeposit {
+            static double calculateMaturity(double monthlyDeposit, double rate, int months) {
+                rate = rate / (12 * 100);
+                double total = 0;
+                for (int i = 0; i < months; i++) {
+                    total += monthlyDeposit * Math.pow(1 + rate, months - i);
+                }
+                return total;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateMaturity(500, 5, 12));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$6183.30", "isCorrect": true },
+            { "text": "$6100.50", "isCorrect": false },
+            { "text": "$6000.00", "isCorrect": false },
+            { "text": "$6250.75", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Interest Rate Conversion:** \`5% per year → 0.05/12 = 0.004167\`
+        2. **Iterate for each deposit:** 
+           - Month 1: \`500 × (1.004167)^12\`
+           - Month 2: \`500 × (1.004167)^11\`
+           - ...
+           - Month 12: \`500 × (1.004167)^1\`
+        3. **Summing all values gives the final maturity amount** \`$6183.30\`
+        `,
+        "difficulty": "Hard",
+        "category": "Banking & Investments",
+        "hasCode": true
+    },
+    {
+        "id": 26,
+        "question": `A telecom provider offers:
+        - Monthly base fee: $30
+        - Data charges: $10 per GB
+        - Calls: Free for first 500 minutes, then $0.05 per minute.
+        - Compute bill for 650 minutes & 5GB data.
+        
+        \`\`\`java
+        class TelecomBill {
+            static double calculateBill(int minutes, int gb) {
+                double bill = 30 + gb * 10;
+                if (minutes > 500) {
+                    bill += (minutes - 500) * 0.05;
+                }
+                return bill;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateBill(650, 5));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$85", "isCorrect": true },
+            { "text": "$90", "isCorrect": false },
+            { "text": "$82.50", "isCorrect": false },
+            { "text": "$95", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base Charge:** \`$30\`
+        2. **Data Charges:** \`5GB * 10 = $50\`
+        3. **Call Charges:** \`(650 - 500) * 0.05 = 7.50\`
+        4. **Total Bill:** \`30 + 50 + 7.50 = 85\`
+        5. **Final Output:** \`85\`
+        `,
+        "difficulty": "Hard",
+        "category": "Telecom Billing",
+        "hasCode": true
+    },
+    {
+        "id": 27,
+        "question": `A gym offers membership plans:
+        - Monthly fee: $40
+        - Discount: 10% for annual membership
+        - Special: If total bill > $400, an extra 5% discount.
+        - Compute the final bill for an annual member.
+        
+        \`\`\`java
+        class GymMembership {
+            static double calculateFee(int months) {
+                double fee = months * 40;
+                if (months == 12) {
+                    fee *= 0.90;
+                }
+                if (fee > 400) {
+                    fee *= 0.95;
+                }
+                return fee;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateFee(12));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$410.40", "isCorrect": true },
+            { "text": "$432.00", "isCorrect": false },
+            { "text": "$384.00", "isCorrect": false },
+            { "text": "$450.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base Fee:** \`12 * 40 = 480\`
+        2. **Annual Discount (10%):** \`480 * 0.90 = 432\`
+        3. **Additional Discount (5% for bills > 400):** \`432 * 0.95 = 410.40\`
+        4. **Final Output:** \`410.40\`
+        `,
+        "difficulty": "Hard",
+        "category": "Membership Plans",
+        "hasCode": true
+    },
+    {
+        "id": 28,
+        "question": `A furniture store calculates the total cost of furniture pieces.
+        - Base price varies per item.
+        - Additional assembly fee: $50 if the item is not pre-assembled.
+        - Discount of 5% applies for orders above $1000.
+        - Compute total cost for 3 chairs ($200 each, pre-assembled) and 2 tables ($400 each, not pre-assembled).
+        
+        \`\`\`java
+        class Furniture {
+            double price;
+            boolean isAssembled;
+        
+            Furniture(double price, boolean isAssembled) {
+                this.price = price;
+                this.isAssembled = isAssembled;
+            }
+        
+            double getTotalCost() {
+                return price + (isAssembled ? 0 : 50);
+            }
+        }
+        
+        public class Store {
+            public static void main(String[] args) {
+                Furniture chair1 = new Furniture(200, true);
+                Furniture chair2 = new Furniture(200, true);
+                Furniture chair3 = new Furniture(200, true);
+                Furniture table1 = new Furniture(400, false);
+                Furniture table2 = new Furniture(400, false);
+        
+                double total = chair1.getTotalCost() + chair2.getTotalCost() + chair3.getTotalCost() +
+                               table1.getTotalCost() + table2.getTotalCost();
+        
+                if (total > 1000) total *= 0.95;
+        
+                System.out.println(total);
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$1350", "isCorrect": false },
+            { "text": "$1235", "isCorrect": true },
+            { "text": "$1250", "isCorrect": false },
+            { "text": "$1400", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Chair Costs:** $200 each (pre-assembled) → \`200 * 3 = 600\`
+        2. **Table Costs:** $400 each (not pre-assembled) + $50 assembly fee → \`(400+50) * 2 = 900\`
+        3. **Total Before Discount:** \`600 + 900 = 1500\`
+        4. **Applying 5% Discount:** \`1500 * 0.95 = 1235\`
+        5. **Final Output:** \`1235\`
+        `,
+        "difficulty": "Hard",
+        "category": "Object-Oriented Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 29,
+        "question": `An airline company offers:
+        - Base ticket price: $200
+        - Additional luggage fee: $30 per extra kg above 10kg
+        - First-class passengers get a 10% discount on total.
+        - Compute total price for a passenger in first-class carrying 15kg luggage.
+        
+        \`\`\`java
+        class Ticket {
+            double basePrice;
+            int extraLuggage;
+            boolean isFirstClass;
+        
+            Ticket(double basePrice, int luggage, boolean isFirstClass) {
+                this.basePrice = basePrice;
+                this.extraLuggage = Math.max(0, luggage - 10);
+                this.isFirstClass = isFirstClass;
+            }
+        
+            double computeTotal() {
+                double total = basePrice + extraLuggage * 30;
+                if (isFirstClass) total *= 0.90;
+                return total;
+            }
+        }
+        
+        public class Airline {
+            public static void main(String[] args) {
+                Ticket passenger = new Ticket(200, 15, true);
+                System.out.println(passenger.computeTotal());
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$275", "isCorrect": true },
+            { "text": "$300", "isCorrect": false },
+            { "text": "$250", "isCorrect": false },
+            { "text": "$290", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base Price:** \`$200\`
+        2. **Extra Luggage Fee:** \`(15 - 10) * 30 = 150\`
+        3. **Total Before Discount:** \`200 + 150 = 350\`
+        4. **Applying First-Class Discount (10% off):** \`350 * 0.90 = 275\`
+        5. **Final Output:** \`275\`
+        `,
+        "difficulty": "Hard",
+        "category": "Airline Ticket Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 30,
+        "question": `A company manages employee salaries with:
+        - Base Salary: $5000
+        - Bonus: 10% for employees with 5+ years of experience.
+        - Tax deduction: 15% on total salary.
+        - Compute final salary for an employee with 6 years of experience.
+        
+        \`\`\`java
+        class Employee {
+            double baseSalary;
+            int experience;
+        
+            Employee(double baseSalary, int experience) {
+                this.baseSalary = baseSalary;
+                this.experience = experience;
+            }
+        
+            double calculateSalary() {
+                double bonus = (experience >= 5) ? baseSalary * 0.10 : 0;
+                double total = baseSalary + bonus;
+                total *= 0.85; // 15% tax deduction
+                return total;
+            }
+        }
+        
+        public class Company {
+            public static void main(String[] args) {
+                Employee emp = new Employee(5000, 6);
+                System.out.println(emp.calculateSalary());
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$4675", "isCorrect": true },
+            { "text": "$4500", "isCorrect": false },
+            { "text": "$5000", "isCorrect": false },
+            { "text": "$4750", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base Salary:** \`$5000\`
+        2. **Bonus Calculation (10% for 5+ years):** \`5000 * 0.10 = 500\`
+        3. **Total Before Tax:** \`5000 + 500 = 5500\`
+        4. **Tax Deduction (15%):** \`5500 * 0.85 = 4675\`
+        5. **Final Output:** \`4675\`
+        `,
+        "difficulty": "Hard",
+        "category": "Salary Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 31,
+        "question": `A hotel calculates the total bill based on:
+        - Room charge: $100 per night
+        - Food charge: $25 per meal
+        - Service tax: 12% on total bill
+        - A discount of 10% if the total exceeds $500
+        - Compute the final bill for a stay of 5 nights with 12 meals.
+        
+        \`\`\`java
+        class HotelBill {
+            static double calculateBill(int nights, int meals) {
+                double roomCost = nights * 100;
+                double foodCost = meals * 25;
+                double total = roomCost + foodCost;
+                total *= 1.12; // 12% service tax
+                if (total > 500) {
+                    total *= 0.90; // 10% discount
+                }
+                return total;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateBill(5, 12));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$508.32", "isCorrect": true },
+            { "text": "$520.00", "isCorrect": false },
+            { "text": "$550.00", "isCorrect": false },
+            { "text": "$490.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Room Cost:** 5 nights × $100 = $500
+        2. **Food Cost:** 12 meals × $25 = $300
+        3. **Subtotal:** $500 + $300 = $800
+        4. **Adding 12% service tax:** $800 × 1.12 = $896
+        5. **Applying 10% discount:** $896 × 0.90 = **$508.32**
+        `,
+        "difficulty": "Hard",
+        "category": "Hotel Billing System",
+        "hasCode": true
+    },
+    {
+        "id": 32,
+        "question": `A retail store calculates final billing:
+        - Price per item: $20
+        - Bulk discount: 5% for purchases over 20 items
+        - Tax: 10% on total
+        - Compute the final bill for purchasing 25 items.
+        
+        \`\`\`java
+        class RetailStore {
+            static double calculateBill(int quantity) {
+                double cost = quantity * 20;
+                if (quantity > 20) {
+                    cost *= 0.95; // 5% bulk discount
+                }
+                cost *= 1.10; // 10% tax
+                return cost;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateBill(25));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$522.50", "isCorrect": true },
+            { "text": "$500.00", "isCorrect": false },
+            { "text": "$540.00", "isCorrect": false },
+            { "text": "$550.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Cost Before Discount:** 25 × $20 = $500
+        2. **Applying 5% Bulk Discount:** $500 × 0.95 = $475
+        3. **Adding 10% Tax:** $475 × 1.10 = **$522.50**
+        `,
+        "difficulty": "Hard",
+        "category": "Retail Billing System",
+        "hasCode": true
+    },
+    {
+        "id": 33,
+        "question": `An online course provider offers:
+        - Base fee: $300
+        - Extra material cost: $20 per additional module
+        - 15% discount if total fee exceeds $500
+        - Compute final cost for a student enrolling in 12 modules.
+        
+        \`\`\`java
+        class CourseFee {
+            static double calculateFee(int modules) {
+                double cost = 300 + (modules - 5) * 20;
+                if (cost > 500) {
+                    cost *= 0.85;
+                }
+                return cost;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateFee(12));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$442.00", "isCorrect": true },
+            { "text": "$500.00", "isCorrect": false },
+            { "text": "$525.00", "isCorrect": false },
+            { "text": "$490.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base Fee:** $300
+        2. **Extra Modules (above 5):** 12 - 5 = 7
+        3. **Extra Cost:** 7 × $20 = $140
+        4. **Total Before Discount:** $300 + $140 = $440
+        5. **Applying 15% Discount:** $440 × 0.85 = **$442.00**
+        `,
+        "difficulty": "Hard",
+        "category": "Education Fees Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 34,
+        "question": `A ride-sharing company calculates fare:
+        - Base fare: $5
+        - Per mile charge: $1.50
+        - Peak hour surcharge: 20% extra
+        - Compute total fare for 12 miles during peak hours.
+        
+        \`\`\`java
+        class RideShare {
+            static double calculateFare(int miles, boolean isPeakHour) {
+                double cost = 5 + miles * 1.50;
+                if (isPeakHour) {
+                    cost *= 1.20; // 20% peak surcharge
+                }
+                return cost;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateFare(12, true));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$21.00", "isCorrect": false },
+            { "text": "$21.60", "isCorrect": true },
+            { "text": "$20.00", "isCorrect": false },
+            { "text": "$22.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base Fare:** $5
+        2. **Mileage Cost:** 12 × $1.50 = $18
+        3. **Total Before Surcharge:** $5 + $18 = $23
+        4. **Applying Peak Hour Surcharge:** $23 × 1.20 = **$21.60**
+        `,
+        "difficulty": "Hard",
+        "category": "Ride-Sharing Fare Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 35,
+        "question": `A flight company calculates ticket costs:
+        - Base fare: $200
+        - Taxes: 15%
+        - Additional fee for extra baggage: $30 per kg over 10kg.
+        - A first-class passenger gets a 10% discount on total.
+        - Compute ticket price for a passenger with 12kg baggage in first-class.
+        
+        \`\`\`java
+        class Flight {
+            static double computeTicketPrice(boolean isFirstClass, int baggageWeight) {
+                double baseFare = 200;
+                int extraBaggage = Math.max(0, baggageWeight - 10);
+                double total = baseFare + (extraBaggage * 30);
+                total *= 1.15; // 15% tax
+                if (isFirstClass) {
+                    total *= 0.90; // 10% discount
+                }
+                return total;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(computeTicketPrice(true, 12));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$248.40", "isCorrect": true },
+            { "text": "$260.00", "isCorrect": false },
+            { "text": "$255.00", "isCorrect": false },
+            { "text": "$240.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        1. **Base Fare:** $200
+        2. **Extra baggage charge:** (12 - 10) × 30 = $60
+        3. **Subtotal:** $200 + $60 = $260
+        4. **Adding 15% Tax:** $260 × 1.15 = $299
+        5. **Applying 10% First-Class Discount:** $299 × 0.90 = **$248.40**
+        `,
+        "difficulty": "Hard",
+        "category": "Flight Ticket Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 36,
+        "question": `A warehouse tracks inventory for multiple products.
+        - Each product has a stock count.
+        - Sales decrease stock, and if stock < 10, restock by 50.
+        - Compute stock for two products after multiple sales.
+        
+        \`\`\`java
+        class Product {
+            String name;
+            int stock;
+        
+            Product(String name, int stock) {
+                this.name = name;
+                this.stock = stock;
+            }
+        
+            void sell(int quantity) {
+                stock -= quantity;
+                if (stock < 10) {
+                    stock += 50; // Restock if stock goes below 10
+                }
+            }
+        }
+        
+        public class Warehouse {
+            public static void main(String[] args) {
+                Product product1 = new Product("Laptops", 100);
+                Product product2 = new Product("Monitors", 50);
+        
+                product1.sell(95);
+                product2.sell(45);
+        
+                System.out.println(product1.stock + " " + product2.stock);
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "55 55", "isCorrect": true },
+            { "text": "5 5", "isCorrect": false },
+            { "text": "45 45", "isCorrect": false },
+            { "text": "60 60", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        **Product 1 (Laptops)**
+        - Initial stock: 100
+        - Sales: 95 → Remaining: **5**
+        - Stock < 10 → Restock **50** → New Stock: **55**
+        
+        **Product 2 (Monitors)**
+        - Initial stock: 50
+        - Sales: 45 → Remaining: **5**
+        - Stock < 10 → Restock **50** → New Stock: **55**
+        
+        **Final Output: 55 55**
+        `,
+        "difficulty": "Hard",
+        "category": "Inventory Management",
+        "hasCode": true
+    },
+    {
+        "id": 37,
+        "question": `A telecom company calculates monthly bills:
+        - Base fee: $40
+        - $0.15 per call over 100 calls
+        - $10 per GB data
+        - Compute final bill for 120 calls and 5GB data.
+        
+        \`\`\`java
+        class Telecom {
+            static double calculateBill(int calls, int dataGB) {
+                double bill = 40;
+                if (calls > 100) {
+                    bill += (calls - 100) * 0.15;
+                }
+                bill += dataGB * 10;
+                return bill;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(calculateBill(120, 5));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$62", "isCorrect": true },
+            { "text": "$65", "isCorrect": false },
+            { "text": "$58", "isCorrect": false },
+            { "text": "$70", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        1. **Base Fee:** $40
+        2. **Extra Call Charges:** (120 - 100) × 0.15 = $3
+        3. **Data Charges:** 5 × $10 = $50
+        4. **Total Bill:** 40 + 3 + 50 = **$62**
+        `,
+        "difficulty": "Hard",
+        "category": "Telecom Billing",
+        "hasCode": true
+    },
+    {
+        "id": 38,
+        "question": `A company has different salary structures:
+        - Base Salary: $4000
+        - If department is "IT", 10% extra bonus.
+        - If department is "HR", $500 extra.
+        - A 12% tax deduction applies to all.
+        - Compute final salary for an IT employee.
+        
+        \`\`\`java
+        class Employee {
+            static double computeSalary(String department) {
+                double base = 4000;
+                if (department.equals("IT")) {
+                    base *= 1.10;
+                } else if (department.equals("HR")) {
+                    base += 500;
+                }
+                return base * 0.88; // 12% tax deduction
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(computeSalary("IT"));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$3960", "isCorrect": true },
+            { "text": "$4000", "isCorrect": false },
+            { "text": "$4200", "isCorrect": false },
+            { "text": "$3800", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        1. **Base Salary:** $4000
+        2. **IT Bonus (10% increase):** $4000 * 1.10 = $4400
+        3. **Tax Deduction (12%):** $4400 * 0.88 = **$3960**
+        `,
+        "difficulty": "Hard",
+        "category": "Salary Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 39,
+        "question": `A shopping cart system calculates final price:
+        - Each item has a price and quantity.
+        - If total > $500, apply a 10% discount.
+        - If a premium member, apply another 5% discount.
+        - Compute final price for:
+            - 2 Phones ($250 each)
+            - 3 Headphones ($50 each)
+            - Premium membership enabled
+        
+        \`\`\`java
+        class Item {
+            double price;
+            int quantity;
+    
+            Item(double price, int quantity) {
+                this.price = price;
+                this.quantity = quantity;
+            }
+    
+            double getTotal() {
+                return price * quantity;
+            }
+        }
+    
+        public class ShoppingCart {
+            public static void main(String[] args) {
+                Item phone = new Item(250, 2);
+                Item headphone = new Item(50, 3);
+    
+                double total = phone.getTotal() + headphone.getTotal();
+                if (total > 500) total *= 0.90;
+                boolean isPremium = true;
+                if (isPremium) total *= 0.95;
+    
+                System.out.println(total);
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$450", "isCorrect": false },
+            { "text": "$465.75", "isCorrect": true },
+            { "text": "$470", "isCorrect": false },
+            { "text": "$500", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        1. **Phones Cost:** 2 * $250 = $500
+        2. **Headphones Cost:** 3 * $50 = $150
+        3. **Subtotal:** $500 + $150 = $650
+        4. **Applying 10% Discount:** $650 * 0.90 = $585
+        5. **Premium Discount (5% more):** $585 * 0.95 = **$465.75**
+        `,
+        "difficulty": "Hard",
+        "category": "E-commerce Pricing",
+        "hasCode": true
+    },
+    {
+        "id": 39,
+        "question": `A shopping cart system calculates final price:
+        - Each item has a price and quantity.
+        - If total > $500, apply a 10% discount.
+        - If a premium member, apply another 5% discount.
+        - Compute final price for:
+            - 2 Phones ($250 each)
+            - 3 Headphones ($50 each)
+            - Premium membership enabled
+        
+        \`\`\`java
+        class Item {
+            double price;
+            int quantity;
+    
+            Item(double price, int quantity) {
+                this.price = price;
+                this.quantity = quantity;
+            }
+    
+            double getTotal() {
+                return price * quantity;
+            }
+        }
+    
+        public class ShoppingCart {
+            public static void main(String[] args) {
+                Item phone = new Item(250, 2);
+                Item headphone = new Item(50, 3);
+    
+                double total = phone.getTotal() + headphone.getTotal();
+                if (total > 500) total *= 0.90;
+                boolean isPremium = true;
+                if (isPremium) total *= 0.95;
+    
+                System.out.println(total);
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$450", "isCorrect": false },
+            { "text": "$465.75", "isCorrect": true },
+            { "text": "$470", "isCorrect": false },
+            { "text": "$500", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        1. **Phones Cost:** 2 * $250 = $500
+        2. **Headphones Cost:** 3 * $50 = $150
+        3. **Subtotal:** $500 + $150 = $650
+        4. **Applying 10% Discount:** $650 * 0.90 = $585
+        5. **Premium Discount (5% more):** $585 * 0.95 = **$465.75**
+        `,
+        "difficulty": "Hard",
+        "category": "E-commerce Pricing",
+        "hasCode": true
+    },
+    {
+        "id": 40,
+        "question": `A bank offers loans with:
+        - Base interest rate: 5% annually
+        - If loan > $10,000, apply 0.5% extra
+        - Compute EMI for a $12,000 loan over 24 months.
+        
+        \`\`\`java
+        class Loan {
+            static double computeEMI(double amount, int months) {
+                double rate = 5;
+                if (amount > 10000) rate += 0.5;
+                rate /= (12 * 100);
+                return (amount * rate * Math.pow(1 + rate, months)) / 
+                       (Math.pow(1 + rate, months) - 1);
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(computeEMI(12000, 24));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$527.50", "isCorrect": false },
+            { "text": "$529.80", "isCorrect": true },
+            { "text": "$500.00", "isCorrect": false },
+            { "text": "$515.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        1. **Loan Amount:** $12,000
+        2. **Interest Rate Adjustment:** Since loan > $10,000 → 5.5%
+        3. **Convert to Monthly Rate:** 5.5% / 12 = 0.004583
+        4. **Apply EMI Formula:** (A × r × (1+r)^n) / ((1+r)^n - 1)
+        5. **Final EMI:** **$529.80**
+        `,
+        "difficulty": "Hard",
+        "category": "Loan EMI",
+        "hasCode": true
+    },
+    {
+        "id": 41,
+        "question": `An insurance company calculates premium as follows:
+        - Base premium: $500
+        - Age factor: If age > 50, add 20% extra.
+        - If the person is a smoker, add another 15%.
+        - If they have a health condition, add 10%.
+        - Calculate the final premium for a 55-year-old smoker with a health condition.
+        
+        \`\`\`java
+        class Insurance {
+            static double computePremium(int age, boolean isSmoker, boolean hasCondition) {
+                double premium = 500;
+                if (age > 50) premium *= 1.20;
+                if (isSmoker) premium *= 1.15;
+                if (hasCondition) premium *= 1.10;
+                return premium;
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(computePremium(55, true, true));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$759.00", "isCorrect": true },
+            { "text": "$750.00", "isCorrect": false },
+            { "text": "$780.00", "isCorrect": false },
+            { "text": "$800.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        1. **Base Premium:** $500
+        2. **Age Factor (20% increase for age > 50):** $500 * 1.20 = $600
+        3. **Smoker Factor (15% increase):** $600 * 1.15 = $690
+        4. **Health Condition (10% increase):** $690 * 1.10 = **$759**
+        `,
+        "difficulty": "Hard",
+        "category": "Insurance Premium Calculation",
+        "hasCode": true
+    },
+    {
+        "id": 42,
+        "question": `A banking system tracks transactions and account details.
+        - Accounts have an initial balance.
+        - Deposit increases balance.
+        - Withdraw decreases balance but must not exceed available funds.
+        - Interest is added monthly.
+        - Compute the final balance after a deposit of $500, withdrawal of $300, and monthly interest of 5%.
+    
+        \`\`\`java
+        interface Account {
+            void deposit(double amount);
+            void withdraw(double amount);
+            void addInterest();
+            double getBalance();
+        }
+    
+        class SavingsAccount implements Account {
+            private double balance;
+    
+            SavingsAccount(double balance) {
+                this.balance = balance;
+            }
+    
+            public void deposit(double amount) {
                 balance += amount;
             }
-        }
-        public void withdraw(double amount) {
-            if (amount > 0 && amount <= balance) {
-                balance -= amount;
+    
+            public void withdraw(double amount) {
+                if (balance >= amount) {
+                    balance -= amount;
+                }
+            }
+    
+            public void addInterest() {
+                balance *= 1.05;
+            }
+    
+            public double getBalance() {
+                return balance;
             }
         }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Account account = new Account();
-            account.deposit(500);
-            account.withdraw(200);
-            System.out.println(account.getBalance());
+    
+        public class Bank {
+            public static void main(String[] args) {
+                Account acc = new SavingsAccount(1000);
+                acc.deposit(500);
+                acc.withdraw(300);
+                acc.addInterest();
+                System.out.println(acc.getBalance());
+            }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "The balance variable", isCorrect: true },
-            { text: "The deposit and withdraw methods", isCorrect: false },
-            { text: "Encapsulation is not used", isCorrect: false },
-            { text: "Account class lifecycle", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "$1260", "isCorrect": false },
+            { "text": "$1265", "isCorrect": false },
+            { "text": "$1260.00", "isCorrect": true },
+            { "text": "$1270.00", "isCorrect": false }
         ],
-        explanation: "The `balance` variable is encapsulated by making it private and accessing it through public getter and setter methods.",
-        difficulty: 'Easy',
-        category: 'Encapsulation',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Initial Balance:** $1000
+        2. **Deposit $500:** New Balance = $1500
+        3. **Withdraw $300:** New Balance = $1200
+        4. **Apply Interest (5%):** $1200 * 1.05 = **$1260**
+        `,
+        "difficulty": "Very Hard",
+        "category": "Interfaces & Transactions",
+        "hasCode": true
     },
     {
-        id: 43,
-        question: `What will the following program print?
-    \`\`\`java
-    abstract class Shape {
-        abstract void draw();
-    }
-    class Circle extends Shape {
-        void draw() {
-            System.out.println("Drawing Circle");
+        "id": 43,
+        "question": `A warehouse system tracks inventory for multiple products.
+        - Each product has a stock quantity.
+        - A sale decreases stock.
+        - If stock falls below 10, restock 50 units.
+        - Compute final stock after multiple sales.
+    
+        \`\`\`java
+        class Warehouse {
+            static int totalStock;
+            int stock;
+    
+            static {
+                totalStock = 1000;
+            }
+    
+            Warehouse(int stock) {
+                this.stock = stock;
+            }
+    
+            void sell(int quantity) {
+                stock -= quantity;
+                if (stock < 10) {
+                    stock += 50;
+                }
+                totalStock -= quantity;
+            }
+    
+            static void showTotalStock() {
+                System.out.println(totalStock);
+            }
         }
-    }
-    class Rectangle extends Shape {
-        void draw() {
-            System.out.println("Drawing Rectangle");
+    
+        public class Inventory {
+            public static void main(String[] args) {
+                Warehouse w1 = new Warehouse(50);
+                Warehouse w2 = new Warehouse(80);
+                w1.sell(45);
+                w2.sell(75);
+                w1.sell(5);
+                w2.sell(10);
+                Warehouse.showTotalStock();
+                System.out.println(w1.stock + " " + w2.stock);
+            }
         }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Shape shape = new Circle();
-            shape.draw();
-            shape = new Rectangle();
-            shape.draw();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Drawing Circle\nDrawing Rectangle", isCorrect: true },
-            { text: "Drawing Circle", isCorrect: false },
-            { text: "Drawing Rectangle", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "865 50 50", "isCorrect": true },
+            { "text": "880 55 55", "isCorrect": false },
+            { "text": "900 40 40", "isCorrect": false },
+            { "text": "850 60 60", "isCorrect": false }
         ],
-        explanation: "This demonstrates polymorphism where the `draw` method is dynamically resolved at runtime based on the object type.",
-        difficulty: 'Medium',
-        category: 'Polymorphism',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Static Block:** Initializes total stock as 1000.
+        2. **Two objects created:** w1 (50 stock), w2 (80 stock).
+        3. **w1 sells 45:** Remaining = 5 → Restocks to **55**.
+        4. **w2 sells 75:** Remaining = 5 → Restocks to **55**.
+        5. **w1 sells 5:** Remaining = **50**.
+        6. **w2 sells 10:** Remaining = **50**.
+        7. **Total Stock Calculation:** 1000 - (45 + 75 + 5 + 10) = **865**.
+        `,
+        "difficulty": "Very Hard",
+        "category": "Static Blocks & Inventory",
+        "hasCode": true
     },
     {
-        id: 44,
-        question: `What type of relationship is shown here?
-    \`\`\`java
-    class Keyboard {
-        void type() {
-            System.out.println("Typing...");
+        "id": 44,
+        "question": `A ride-sharing company handles fare calculation dynamically:
+        - Base fare: $5
+        - Per-mile charge: $1.50
+        - Peak-hour surcharge: 20% extra
+        - Compute the total fare for 12 miles during peak hours.
+    
+        \`\`\`java
+        class Ride {
+            double fare;
+    
+            Ride() {
+                fare = 5;
+            }
+    
+            Ride(int miles) {
+                this();
+                fare += miles * 1.50;
+            }
+    
+            Ride(int miles, boolean peakHour) {
+                this(miles);
+                if (peakHour) {
+                    fare *= 1.20;
+                }
+            }
+    
+            void showFare() {
+                System.out.println(fare);
+            }
         }
-    }
-    class Computer {
-        private Keyboard keyboard = new Keyboard();
-        void work() {
-            keyboard.type();
-            System.out.println("Processing...");
+    
+        public class RideShare {
+            public static void main(String[] args) {
+                Ride r = new Ride(12, true);
+                r.showFare();
+            }
         }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Computer computer = new Computer();
-            computer.work();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Composition", isCorrect: true },
-            { text: "Aggregation", isCorrect: false },
-            { text: "Association", isCorrect: false },
-            { text: "Inheritance", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "$21.60", "isCorrect": true },
+            { "text": "$20.00", "isCorrect": false },
+            { "text": "$23.00", "isCorrect": false },
+            { "text": "$22.50", "isCorrect": false }
         ],
-        explanation: "The `Computer` class owns and controls the lifecycle of the `Keyboard` object, representing composition.",
-        difficulty: 'Medium',
-        category: 'Composition',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Constructor Chaining:**
+           - Default constructor sets \`fare = 5\`.
+           - Second constructor adds \`12 * 1.50 = 18\`, making \`fare = 23\`.
+           - Third constructor applies 20% peak-hour charge: \`23 * 1.20 = 21.60\`.
+        2. **Final Output:** \`21.60\`.
+        `,
+        "difficulty": "Extreme",
+        "category": "Constructor Overloading & Fare Calculation",
+        "hasCode": true
     },
     {
-        id: 45,
-        question: `What happens in the following inheritance scenario?
-    \`\`\`java
-    class Animal {
-        void sound() {
-            System.out.println("Animal sound");
-        }
-    }
-    class Dog extends Animal {
-        void sound() {
-            System.out.println("Bark");
-        }
-    }
-    class Cat extends Animal {
-        void sound() {
-            System.out.println("Meow");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Animal animal = new Dog();
-            animal.sound();
-            animal = new Cat();
-            animal.sound();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Bark\nMeow", isCorrect: true },
-            { text: "Animal sound\nAnimal sound", isCorrect: false },
-            { text: "Animal sound\nMeow", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "Polymorphism allows dynamic method dispatch, resolving the `sound` method at runtime based on the object type.",
-        difficulty: 'Medium',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 46,
-        question: `What will be the output?
-    \`\`\`java
-    abstract class Vehicle {
-        abstract void run();
-        void stop() {
-            System.out.println("Vehicle stopped");
-        }
-    }
-    class Bike extends Vehicle {
-        void run() {
-            System.out.println("Bike is running");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Vehicle vehicle = new Bike();
-            vehicle.run();
-            vehicle.stop();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Bike is running\nVehicle stopped", isCorrect: true },
-            { text: "Vehicle stopped", isCorrect: false },
-            { text: "Bike is running", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "The abstract method `run` is implemented in `Bike`, and the `stop` method is directly used from the `Vehicle` class.",
-        difficulty: 'Medium',
-        category: 'Abstraction',
-        hasCode: true
-    },
-    {
-        id: 47,
-        question: `What is the purpose of the following code?
-    \`\`\`java
-    abstract class Employee {
-        abstract double calculateSalary();
-    }
-    class FullTimeEmployee extends Employee {
-        double calculateSalary() {
-            return 50000;
-        }
-    }
-    class PartTimeEmployee extends Employee {
-        double calculateSalary() {
-            return 20000;
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Employee emp1 = new FullTimeEmployee();
-            Employee emp2 = new PartTimeEmployee();
-            System.out.println(emp1.calculateSalary());
-            System.out.println(emp2.calculateSalary());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "50000\n20000", isCorrect: true },
-            { text: "50000\nCompilation Error", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates abstraction and polymorphism by providing a common interface to calculate salaries.",
-        difficulty: 'Medium',
-        category: 'Abstraction',
-        hasCode: true
-    },
-    {
-        id: 48,
-        question: `What is the result of the following code?
-    \`\`\`java
-    class Person {
-        private String name;
-        private Address address;
-        Person(String name, Address address) {
-            this.name = name;
-            this.address = address;
-        }
-        Address getAddress() {
-            return address;
-        }
-    }
-    class Address {
-        private String city;
-        Address(String city) {
-            this.city = city;
-        }
-        String getCity() {
-            return city;
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Address address = new Address("New York");
-            Person person = new Person("John", address);
-            System.out.println(person.getAddress().getCity());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "New York", isCorrect: true },
-            { text: "John", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates aggregation, where the `Person` class has a reference to the `Address` class.",
-        difficulty: 'Medium',
-        category: 'Aggregation',
-        hasCode: true
-    },
-    {
-        id: 49,
-        question: `What will the following code output?
-    \`\`\`java
-    class Parent {
-        final void show() {
-            System.out.println("Parent");
-        }
-    }
-    class Child extends Parent {
-        void show() {
-            System.out.println("Child");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Parent obj = new Child();
-            obj.show();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Compilation Error", isCorrect: true },
-            { text: "Child", isCorrect: false },
-            { text: "Parent", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "A `final` method in the parent class cannot be overridden in the child class.",
-        difficulty: 'Hard',
-        category: 'Inheritance',
-        hasCode: true
-    },
-    {
-        id: 50,
-        question: `What happens in the following code?
-    \`\`\`java
-    interface Vehicle {
-        void start();
-    }
-    class Car implements Vehicle {
-        public void start() {
-            System.out.println("Car starts");
-        }
-    }
-    class Bike implements Vehicle {
-        public void start() {
-            System.out.println("Bike starts");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Vehicle vehicle = new Car();
-            vehicle.start();
-            vehicle = new Bike();
-            vehicle.start();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Car starts\nBike starts", isCorrect: true },
-            { text: "Car starts", isCorrect: false },
-            { text: "Bike starts", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates polymorphism using interfaces, where the method implementation depends on the runtime object type.",
-        difficulty: 'Medium',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 51,
-        question: `What type of relationship is demonstrated in the code below?
-    \`\`\`java
-    class Department {
-        private String name;
-        Department(String name) {
-            this.name = name;
-        }
-        String getName() {
-            return name;
-        }
-    }
-    class University {
-        private List<Department> departments;
-        University() {
-            departments = new ArrayList<>();
-        }
-        void addDepartment(Department dept) {
-            departments.add(dept);
-        }
-        List<Department> getDepartments() {
-            return departments;
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            University uni = new University();
-            uni.addDepartment(new Department("Computer Science"));
-            System.out.println(uni.getDepartments().get(0).getName());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Aggregation", isCorrect: true },
-            { text: "Composition", isCorrect: false },
-            { text: "Inheritance", isCorrect: false },
-            { text: "Polymorphism", isCorrect: false }
-        ],
-        explanation: "The `University` class has a list of `Department` objects, demonstrating aggregation.",
-        difficulty: 'Medium',
-        category: 'Aggregation',
-        hasCode: true
-    },
-    {
-        id: 52,
-        question: `What will happen if the following code is executed?
-    \`\`\`java
-    class Parent {
-        private void display() {
-            System.out.println("Parent");
-        }
-    }
-    class Child extends Parent {
-        public void display() {
-            System.out.println("Child");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Parent obj = new Child();
-            obj.display();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Compilation Error", isCorrect: true },
-            { text: "Parent", isCorrect: false },
-            { text: "Child", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "Private methods in the parent class are not visible to the child class, so the `display` method in `Child` does not override it.",
-        difficulty: 'Hard',
-        category: 'Inheritance',
-        hasCode: true
-    },
-    {
-        id: 53,
-        question: `What type of inheritance is demonstrated below?
-    \`\`\`java
-    class Animal {
-        void eat() {
-            System.out.println("Animal eats");
-        }
-    }
-    class Mammal extends Animal {
-        void walk() {
-            System.out.println("Mammal walks");
-        }
-    }
-    class Dog extends Mammal {
-        void bark() {
-            System.out.println("Dog barks");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Dog dog = new Dog();
-            dog.eat();
-            dog.walk();
-            dog.bark();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Multilevel Inheritance", isCorrect: true },
-            { text: "Single Inheritance", isCorrect: false },
-            { text: "Multiple Inheritance", isCorrect: false },
-            { text: "Composition", isCorrect: false }
-        ],
-        explanation: "This is multilevel inheritance where `Dog` inherits from `Mammal`, which in turn inherits from `Animal`.",
-        difficulty: 'Medium',
-        category: 'Inheritance',
-        hasCode: true
-    },
-    {
-        id: 54,
-        question: `What happens in the following composition scenario?
-    \`\`\`java
-    class Processor {
-        void process() {
-            System.out.println("Processing data...");
-        }
-    }
-    class Computer {
-        private Processor processor = new Processor();
-        void compute() {
-            processor.process();
-            System.out.println("Computing tasks...");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Computer computer = new Computer();
-            computer.compute();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Processing data...\nComputing tasks...", isCorrect: true },
-            { text: "Computing tasks...", isCorrect: false },
-            { text: "Processing data...", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "The `Computer` class owns and controls the lifecycle of the `Processor` class, demonstrating composition.",
-        difficulty: 'Medium',
-        category: 'Composition',
-        hasCode: true
-    },
-    {
-        id: 55,
-        question: `What type of abstraction is shown here?
-    \`\`\`java
-    interface Shape {
-        void draw();
-    }
-    class Circle implements Shape {
-        public void draw() {
-            System.out.println("Drawing Circle");
-        }
-    }
-    class Square implements Shape {
-        public void draw() {
-            System.out.println("Drawing Square");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Shape shape = new Circle();
-            shape.draw();
-            shape = new Square();
-            shape.draw();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Interface Abstraction", isCorrect: true },
-            { text: "Class Abstraction", isCorrect: false },
-            { text: "Composition", isCorrect: false },
-            { text: "Inheritance", isCorrect: false }
-        ],
-        explanation: "This demonstrates abstraction through an interface, where the implementation of `draw` depends on the concrete class.",
-        difficulty: 'Medium',
-        category: 'Abstraction',
-        hasCode: true
-    },
-    {
-        id: 56,
-        question: `What happens in the following composition code?
-    \`\`\`java
-    class Battery {
-        void charge() {
-            System.out.println("Charging...");
-        }
-    }
-    class Smartphone {
-        private Battery battery = new Battery();
-        void use() {
-            battery.charge();
-            System.out.println("Using smartphone...");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Smartphone phone = new Smartphone();
-            phone.use();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Charging...\nUsing smartphone...", isCorrect: true },
-            { text: "Using smartphone...", isCorrect: false },
-            { text: "Charging...", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "The `Smartphone` class owns and controls the `Battery` object, demonstrating composition.",
-        difficulty: 'Medium',
-        category: 'Composition',
-        hasCode: true
-    },
-    {
-        id: 57,
-        question: `What is the result of the following polymorphism scenario?
-    \`\`\`java
-    abstract class Animal {
-        abstract void sound();
-    }
-    class Dog extends Animal {
-        void sound() {
-            System.out.println("Bark");
-        }
-    }
-    class Cat extends Animal {
-        void sound() {
-            System.out.println("Meow");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Animal animal = new Dog();
-            animal.sound();
-            animal = new Cat();
-            animal.sound();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Bark\nMeow", isCorrect: true },
-            { text: "Meow\nBark", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates polymorphism where the method `sound` is resolved dynamically based on the object type at runtime.",
-        difficulty: 'Medium',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 58,
-        question: `What is the output of this inheritance example?
-    \`\`\`java
-    class Parent {
-        Parent() {
-            System.out.println("Parent Constructor");
-        }
-    }
-    class Child extends Parent {
-        Child() {
-            System.out.println("Child Constructor");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Child obj = new Child();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Parent Constructor\nChild Constructor", isCorrect: true },
-            { text: "Child Constructor", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "The constructor of the parent class is always called first when creating an object of a derived class.",
-        difficulty: 'Easy',
-        category: 'Inheritance',
-        hasCode: true
-    },
-    {
-        id: 59,
-        question: `What type of relationship is demonstrated here?
-    \`\`\`java
-    class Engine {
-        void start() {
-            System.out.println("Engine starts");
-        }
-    }
-    class Car {
-        private Engine engine;
-        Car(Engine engine) {
-            this.engine = engine;
-        }
-        void drive() {
-            engine.start();
-            System.out.println("Car is driving");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Engine engine = new Engine();
-            Car car = new Car(engine);
-            car.drive();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Aggregation", isCorrect: true },
-            { text: "Composition", isCorrect: false },
-            { text: "Inheritance", isCorrect: false },
-            { text: "Polymorphism", isCorrect: false }
-        ],
-        explanation: "The `Car` class uses an `Engine` object without controlling its lifecycle, representing aggregation.",
-        difficulty: 'Medium',
-        category: 'Aggregation',
-        hasCode: true
-    },
-    {
-        id: 60,
-        question: `What happens in this encapsulation scenario?
-    \`\`\`java
-    class BankAccount {
-        private double balance;
-        public double getBalance() {
-            return balance;
-        }
-        public void deposit(double amount) {
-            if (amount > 0) {
+        "id": 45,
+        "question": `A banking system tracks multiple accounts with different interest rates.
+        - A savings account has a 5% interest rate.
+        - A checking account has no interest.
+        - Transfers between accounts must be handled properly.
+        - Compute the final balance after various transactions.
+    
+        \`\`\`java
+        abstract class Account {
+            protected double balance;
+    
+            Account(double balance) {
+                this.balance = balance;
+            }
+    
+            abstract void applyInterest();
+    
+            void deposit(double amount) {
                 balance += amount;
             }
-        }
-        public void withdraw(double amount) {
-            if (amount > 0 && amount <= balance) {
-                balance -= amount;
+    
+            void withdraw(double amount) {
+                if (balance >= amount) {
+                    balance -= amount;
+                }
+            }
+    
+            double getBalance() {
+                return balance;
             }
         }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            BankAccount account = new BankAccount();
-            account.deposit(1000);
-            account.withdraw(500);
-            System.out.println(account.getBalance());
+    
+        class SavingsAccount extends Account {
+            SavingsAccount(double balance) {
+                super(balance);
+            }
+    
+            void applyInterest() {
+                balance *= 1.05;
+            }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "500.0", isCorrect: true },
-            { text: "1000.0", isCorrect: false },
-            { text: "0.0", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
+    
+        class CheckingAccount extends Account {
+            CheckingAccount(double balance) {
+                super(balance);
+            }
+    
+            void applyInterest() {
+                // No interest for Checking Account
+            }
+        }
+    
+        public class Bank {
+            public static void main(String[] args) {
+                SavingsAccount savings = new SavingsAccount(1000);
+                CheckingAccount checking = new CheckingAccount(500);
+    
+                savings.deposit(200);
+                checking.withdraw(100);
+                savings.applyInterest();
+    
+                System.out.println(savings.getBalance() + " " + checking.getBalance());
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$1260 $400", "isCorrect": true },
+            { "text": "$1200 $400", "isCorrect": false },
+            { "text": "$1100 $500", "isCorrect": false },
+            { "text": "$1250 $400", "isCorrect": false }
         ],
-        explanation: "The balance is encapsulated by making it private, and only controlled access is provided via public methods.",
-        difficulty: 'Medium',
-        category: 'Encapsulation',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Savings Account:** Initial balance = $1000.
+        2. **Deposit $200:** New balance = $1200.
+        3. **Checking Account:** Initial balance = $500.
+        4. **Withdraw $100:** New balance = $400.
+        5. **Apply Interest (5% on savings):** $1200 * 1.05 = $1260.
+        6. **Final Output:** $1260 $400.
+        `,
+        "difficulty": "Very Hard",
+        "category": "Banking & Transactions",
+        "hasCode": true
     },
     {
-        id: 61,
-        question: `What is demonstrated in the following code?
-    \`\`\`java
-    abstract class Employee {
-        abstract double calculateSalary();
-    }
-    class Manager extends Employee {
-        double calculateSalary() {
-            return 80000;
+        "id": 46,
+        "question": `A warehouse tracks products with restocking rules.
+        - Each product has its own inventory count.
+        - If stock drops below 10, restock 50 units.
+        - Compute final stock after multiple sales.
+    
+        \`\`\`java
+        class Warehouse {
+            static int totalStock = 1000;
+            int stock;
+    
+            Warehouse(int stock) {
+                this.stock = stock;
+            }
+    
+            void sell(int quantity) {
+                stock -= quantity;
+                if (stock < 10) {
+                    stock += 50;
+                }
+                totalStock -= quantity;
+            }
+    
+            static void showTotalStock() {
+                System.out.println(totalStock);
+            }
         }
-    }
-    class Intern extends Employee {
-        double calculateSalary() {
-            return 20000;
+    
+        public class Inventory {
+            public static void main(String[] args) {
+                Warehouse w1 = new Warehouse(60);
+                Warehouse w2 = new Warehouse(80);
+    
+                w1.sell(55);
+                w2.sell(75);
+                w1.sell(5);
+                w2.sell(5);
+    
+                Warehouse.showTotalStock();
+                System.out.println(w1.stock + " " + w2.stock);
+            }
         }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Employee emp = new Manager();
-            System.out.println(emp.calculateSalary());
-            emp = new Intern();
-            System.out.println(emp.calculateSalary());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "80000\n20000", isCorrect: true },
-            { text: "20000\n80000", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "865 50 50", "isCorrect": true },
+            { "text": "880 55 55", "isCorrect": false },
+            { "text": "900 40 40", "isCorrect": false },
+            { "text": "850 60 60", "isCorrect": false }
         ],
-        explanation: "This demonstrates polymorphism and abstraction, where the implementation of `calculateSalary` depends on the runtime object type.",
-        difficulty: 'Medium',
-        category: 'Abstraction',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Static Variable:** Initializes total stock = 1000.
+        2. **Warehouse 1:** Initial stock = 60.
+        3. **Warehouse 2:** Initial stock = 80.
+        4. **w1 sells 55:** Remaining stock = 5 → Restock to 55.
+        5. **w2 sells 75:** Remaining stock = 5 → Restock to 55.
+        6. **w1 sells 5:** Remaining stock = 50.
+        7. **w2 sells 5:** Remaining stock = 50.
+        8. **Total Stock:** 1000 - (55 + 75 + 5 + 5) = 865.
+        `,
+        "difficulty": "Very Hard",
+        "category": "Static Variables & Inventory",
+        "hasCode": true
     },
     {
-        id: 62,
-        question: `What type of polymorphism is demonstrated in the following code?
-    \`\`\`java
-    class Calculator {
-        int add(int a, int b) {
-            return a + b;
+        "id": 47,
+        "question": `A company provides different salary structures:
+        - Base salary: **$5000**
+        - Bonus: **8%** for senior employees.
+        - Tax deduction: **12%** on total salary.
+        - **Static final TAX_RATE = 0.12**
+        - Compute final salary for a senior employee.
+    
+        \`\`\`java
+        abstract class Employee {
+            static final double TAX_RATE = 0.12;
+            double baseSalary;
+    
+            Employee(double baseSalary) {
+                this.baseSalary = baseSalary;
+            }
+    
+            abstract double calculateSalary();
         }
-        double add(double a, double b) {
-            return a + b;
+    
+        class SeniorEmployee extends Employee {
+            SeniorEmployee(double baseSalary) {
+                super(baseSalary);
+            }
+    
+            double calculateSalary() {
+                double bonus = baseSalary * 0.08;
+                double grossSalary = baseSalary + bonus;
+                return grossSalary * (1 - TAX_RATE);
+            }
         }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Calculator calc = new Calculator();
-            System.out.println(calc.add(5, 10));
-            System.out.println(calc.add(5.5, 10.5));
+    
+        public class Payroll {
+            public static void main(String[] args) {
+                Employee emp = new SeniorEmployee(5000);
+                System.out.println(emp.calculateSalary());
+            }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "Compile-time Polymorphism", isCorrect: true },
-            { text: "Runtime Polymorphism", isCorrect: false },
-            { text: "Inheritance", isCorrect: false },
-            { text: "Encapsulation", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "$4400", "isCorrect": false },
+            { "text": "$4480", "isCorrect": true },
+            { "text": "$4500", "isCorrect": false },
+            { "text": "$4600", "isCorrect": false }
         ],
-        explanation: "This demonstrates method overloading, a form of compile-time polymorphism where multiple methods share the same name but differ in parameter types.",
-        difficulty: 'Medium',
-        category: 'Polymorphism',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Base Salary:** **$5000**
+        2. **Bonus Calculation (8%):** **$5000 * 0.08 = $400**
+        3. **Gross Salary:** **$5000 + $400 = $5400**
+        4. **Tax Deduction (12%):** **$5400 * 0.12 = $648**
+        5. **Final Salary:** **$5400 - $648 = $4480**
+        `,
+        "difficulty": "Very Hard",
+        "category": "Abstract Classes & Static Final Variables",
+        "hasCode": true
     },
     {
-        id: 63,
-        question: `What type of inheritance is demonstrated in this code?
-    \`\`\`java
-    class Animal {
-        void eat() {
-            System.out.println("Animal eats");
+        "id": 48,
+        "question": `A warehouse system uses multiple interfaces for inventory tracking:
+        - **Stock Management**: Adjusts stock when sales happen.
+        - **Reporting**: Generates reports on stock levels.
+        - Implement both interfaces and compute the final stock.
+    
+        \`\`\`java
+        interface StockManagement {
+            void sell(int quantity);
+            void restock(int quantity);
         }
-    }
-    class Mammal extends Animal {
-        void walk() {
-            System.out.println("Mammal walks");
+    
+        interface Reporting {
+            void generateReport();
         }
-    }
-    class Dog extends Mammal {
-        void bark() {
-            System.out.println("Dog barks");
+    
+        class Warehouse implements StockManagement, Reporting {
+            private int stock;
+    
+            Warehouse(int stock) {
+                this.stock = stock;
+            }
+    
+            public void sell(int quantity) {
+                stock -= quantity;
+                if (stock < 10) {
+                    restock(50);
+                }
+            }
+    
+            public void restock(int quantity) {
+                stock += quantity;
+            }
+    
+            public void generateReport() {
+                System.out.println("Current Stock: " + stock);
+            }
         }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Dog dog = new Dog();
-            dog.eat();
-            dog.walk();
-            dog.bark();
+    
+        public class InventorySystem {
+            public static void main(String[] args) {
+                Warehouse warehouse = new Warehouse(60);
+                warehouse.sell(55);
+                warehouse.sell(5);
+                warehouse.generateReport();
+            }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "Multilevel Inheritance", isCorrect: true },
-            { text: "Hierarchical Inheritance", isCorrect: false },
-            { text: "Single Inheritance", isCorrect: false },
-            { text: "Composition", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "50", "isCorrect": true },
+            { "text": "5", "isCorrect": false },
+            { "text": "10", "isCorrect": false },
+            { "text": "60", "isCorrect": false }
         ],
-        explanation: "This demonstrates multilevel inheritance where `Dog` inherits from `Mammal`, and `Mammal` inherits from `Animal`.",
-        difficulty: 'Medium',
-        category: 'Inheritance',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Initial Stock:** **60**
+        2. **First Sale of 55:** 
+           - Remaining Stock = **5**
+           - Since stock < 10 → **Restock 50** → New Stock = **55**
+        3. **Second Sale of 5:** 
+           - Remaining Stock = **50**
+        4. **Final Output:** **50**
+        `,
+        "difficulty": "Very Hard",
+        "category": "Multiple Interfaces & Inventory Management",
+        "hasCode": true
     },
     {
-        id: 64,
-        question: `What is the output of the following code?
-    \`\`\`java
-    class Parent {
-        void display() {
-            System.out.println("Parent display");
+        "id": 49,
+        "question": `A payment processing system uses:
+        - **Abstract class** for basic transactions.
+        - **Interface** for additional functionalities.
+        - A discount is applied for VIP customers.
+        - Compute the final price after applying all conditions.
+    
+        \`\`\`java
+        abstract class Transaction {
+            static final double TAX_RATE = 0.05;
+            double amount;
+    
+            Transaction(double amount) {
+                this.amount = amount;
+            }
+    
+            abstract double processPayment();
         }
-    }
-    class Child extends Parent {
-        void display() {
-            System.out.println("Child display");
+    
+        interface Discount {
+            double applyDiscount(double amount);
         }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Parent obj = new Child();
-            obj.display();
+    
+        class CreditCardTransaction extends Transaction implements Discount {
+            CreditCardTransaction(double amount) {
+                super(amount);
+            }
+    
+            public double applyDiscount(double amount) {
+                return amount * 0.90; // 10% discount for VIP
+            }
+    
+            double processPayment() {
+                double discountedAmount = applyDiscount(amount);
+                return discountedAmount * (1 + TAX_RATE);
+            }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "Child display", isCorrect: true },
-            { text: "Parent display", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
+    
+        public class PaymentSystem {
+            public static void main(String[] args) {
+                Transaction t = new CreditCardTransaction(1000);
+                System.out.println(t.processPayment());
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$945", "isCorrect": true },
+            { "text": "$1000", "isCorrect": false },
+            { "text": "$950", "isCorrect": false },
+            { "text": "$960", "isCorrect": false }
         ],
-        explanation: "This demonstrates runtime polymorphism where the overridden `display` method in `Child` is called at runtime.",
-        difficulty: 'Easy',
-        category: 'Polymorphism',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Base Amount:** **$1000**
+        2. **Apply 10% Discount:** **$1000 * 0.90 = $900**
+        3. **Apply 5% Tax:** **$900 * 1.05 = $945**
+        4. **Final Output:** **$945**
+        `,
+        "difficulty": "Very Hard",
+        "category": "Abstract Classes & Interfaces",
+        "hasCode": true
     },
     {
-        id: 65,
-        question: `What happens in this aggregation scenario?
-    \`\`\`java
-    class Course {
-        private String name;
-        Course(String name) {
-            this.name = name;
+        "id": 50,
+        "question": `A travel agency calculates the total cost for a trip:
+        - **Abstract class** for base pricing.
+        - **Interface** for extra charges.
+        - **Static final TAX_RATE = 0.08**
+        - Compute the final cost for a customer with baggage fees.
+    
+        \`\`\`java
+        abstract class Travel {
+            static final double TAX_RATE = 0.08;
+            double baseFare;
+    
+            Travel(double baseFare) {
+                this.baseFare = baseFare;
+            }
+    
+            abstract double computeFare();
         }
-        String getName() {
-            return name;
+    
+        interface ExtraCharges {
+            double addBaggageFee(double fare);
         }
-    }
-    class Student {
-        private List<Course> courses;
-        Student() {
-            courses = new ArrayList<>();
+    
+        class FlightBooking extends Travel implements ExtraCharges {
+            FlightBooking(double baseFare) {
+                super(baseFare);
+            }
+    
+            public double addBaggageFee(double fare) {
+                return fare + 50; // $50 baggage fee
+            }
+    
+            double computeFare() {
+                double fareWithBaggage = addBaggageFee(baseFare);
+                return fareWithBaggage * (1 + TAX_RATE);
+            }
         }
-        void addCourse(Course course) {
-            courses.add(course);
+    
+        public class TravelAgency {
+            public static void main(String[] args) {
+                Travel flight = new FlightBooking(300);
+                System.out.println(flight.computeFare());
+            }
         }
-        List<Course> getCourses() {
-            return courses;
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Student student = new Student();
-            student.addCourse(new Course("Math"));
-            System.out.println(student.getCourses().get(0).getName());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Math", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false },
-            { text: "Null", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "$378", "isCorrect": true },
+            { "text": "$350", "isCorrect": false },
+            { "text": "$365", "isCorrect": false },
+            { "text": "$400", "isCorrect": false }
         ],
-        explanation: "The `Student` class maintains a list of `Course` objects, representing aggregation as the courses are loosely coupled.",
-        difficulty: 'Medium',
-        category: 'Aggregation',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Base Fare:** **$300**
+        2. **Add Baggage Fee:** **$300 + $50 = $350**
+        3. **Apply Tax (8%):** **$350 * 1.08 = $378**
+        4. **Final Output:** **$378**
+        `,
+        "difficulty": "Very Hard",
+        "category": "Abstract Classes & Extra Charges",
+        "hasCode": true
     },
     {
-        id: 66,
-        question: `What happens in this example of encapsulation?
-    \`\`\`java
-    class Product {
-        private double price;
-        public double getPrice() {
-            return price;
+        "id": 50,
+        "question": `A transportation company charges fees based on vehicle type:
+        - **Base Fare:**
+          - Car: **$50**
+          - Truck: **$80**
+        - **Toll Fees:**
+          - Small Vehicles: **$10 per toll**
+          - Heavy Vehicles: **$20 per toll**
+        - **Static final SERVICE_TAX = 8%**
+        - Compute the total fee for a truck passing 3 tolls.
+    
+        \`\`\`java
+        abstract class Vehicle {
+            static final double SERVICE_TAX = 0.08;
+            double baseFare;
+    
+            Vehicle(double baseFare) {
+                this.baseFare = baseFare;
+            }
+    
+            abstract double computeTotalFare(int tolls);
         }
-        public void setPrice(double price) {
-            if (price > 0) {
+    
+        class Truck extends Vehicle {
+            Truck() {
+                super(80);
+            }
+    
+            double computeTotalFare(int tolls) {
+                double total = baseFare + (tolls * 20);
+                return total * (1 + SERVICE_TAX);
+            }
+        }
+    
+        public class TollSystem {
+            public static void main(String[] args) {
+                Vehicle truck = new Truck();
+                System.out.println(truck.computeTotalFare(3));
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$129.60", "isCorrect": true },
+            { "text": "$140.00", "isCorrect": false },
+            { "text": "$136.00", "isCorrect": false },
+            { "text": "$120.00", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Base Fare for Truck:** **$80**
+        2. **Toll Fees:** **3 * $20 = $60**
+        3. **Subtotal:** **$80 + $60 = $140**
+        4. **Service Tax (8%):** **$140 * 1.08 = $129.60**
+        5. **Final Output:** **$129.60**
+        `,
+        "difficulty": "Extreme",
+        "category": "Abstract Classes & Static Final Variables",
+        "hasCode": true
+    },
+    {
+        "id": 51,
+        "question": `A smart home system integrates different devices:
+        - **Interface** for power management.
+        - **Interface** for device control.
+        - **Dependency injection** to operate devices.
+        - Compute power consumption after running devices.
+    
+        \`\`\`java
+        interface PowerManagement {
+            void consumePower(int units);
+            int getPowerUsage();
+        }
+    
+        interface DeviceControl {
+            void turnOn();
+            void turnOff();
+        }
+    
+        class SmartDevice implements PowerManagement, DeviceControl {
+            private int powerUsage;
+            private boolean isOn;
+    
+            public void consumePower(int units) {
+                if (isOn) {
+                    powerUsage += units;
+                }
+            }
+    
+            public int getPowerUsage() {
+                return powerUsage;
+            }
+    
+            public void turnOn() {
+                isOn = true;
+            }
+    
+            public void turnOff() {
+                isOn = false;
+            }
+        }
+    
+        public class SmartHome {
+            public static void main(String[] args) {
+                SmartDevice device = new SmartDevice();
+                device.turnOn();
+                device.consumePower(5);
+                device.consumePower(3);
+                device.turnOff();
+                System.out.println(device.getPowerUsage());
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "8", "isCorrect": true },
+            { "text": "5", "isCorrect": false },
+            { "text": "3", "isCorrect": false },
+            { "text": "0", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+    
+        1. **Device turned ON.**
+        2. **Power consumed:** **5 units**.
+        3. **Power consumed:** **3 units**.
+        4. **Device turned OFF.**
+        5. **Final Power Usage:** **8 units**.
+        `,
+        "difficulty": "Extreme",
+        "category": "Multiple Interfaces & Dependency Injection",
+        "hasCode": true
+    },
+    {
+        "id": 52,
+        "question": `An online food ordering system calculates order costs:
+        - **Abstract class** for restaurant orders.
+        - **Factory pattern** to generate different orders.
+        - **Tax of 5% on total bill.**
+        - Compute final bill for a pizza order.
+    
+        \`\`\`java
+        abstract class Order {
+            static final double TAX_RATE = 0.05;
+            double price;
+    
+            Order(double price) {
                 this.price = price;
             }
+    
+            abstract double computeTotal();
         }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Product product = new Product();
-            product.setPrice(100.50);
-            System.out.println(product.getPrice());
+    
+        class PizzaOrder extends Order {
+            PizzaOrder() {
+                super(20);
+            }
+    
+            double computeTotal() {
+                return price * (1 + TAX_RATE);
+            }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "100.5", isCorrect: true },
-            { text: "0.0", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
+    
+        class OrderFactory {
+            static Order createOrder(String type) {
+                if (type.equals("Pizza")) return new PizzaOrder();
+                return null;
+            }
+        }
+    
+        public class FoodOrderingSystem {
+            public static void main(String[] args) {
+                Order order = OrderFactory.createOrder("Pizza");
+                System.out.println(order.computeTotal());
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$21.00", "isCorrect": false },
+            { "text": "$21.00", "isCorrect": true },
+            { "text": "$22.00", "isCorrect": false },
+            { "text": "$20.50", "isCorrect": false }
         ],
-        explanation: "The `price` variable is encapsulated and only accessible through the public getter and setter methods.",
-        difficulty: 'Easy',
-        category: 'Encapsulation',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Pizza Base Price:** **$20**
+        2. **Tax (5%):** **$20 * 1.05 = $21.00**
+        3. **Final Output:** **$21.00**
+        `,
+        "difficulty": "Extreme",
+        "category": "Abstract Classes & Factory Pattern",
+        "hasCode": true
     },
     {
-        id: 67,
-        question: `What will the following program print?
-    \`\`\`java
-    abstract class Shape {
-        abstract double area();
-    }
-    class Rectangle extends Shape {
-        private double length, width;
-        Rectangle(double length, double width) {
-            this.length = length;
-            this.width = width;
+        "id": 53,
+        "question": `A banking system handles different account types:
+        - **Interface for banking transactions.**
+        - **Interface for interest calculations.**
+        - **Compute final balance after multiple operations.**
+    
+        \`\`\`java
+        interface BankingTransactions {
+            void deposit(double amount);
+            void withdraw(double amount);
         }
-        double area() {
-            return length * width;
+    
+        interface InterestCalculations {
+            void applyInterest();
         }
-    }
-    class Circle extends Shape {
-        private double radius;
-        Circle(double radius) {
-            this.radius = radius;
-        }
-        double area() {
-            return Math.PI * radius * radius;
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Shape shape1 = new Rectangle(4, 5);
-            Shape shape2 = new Circle(3);
-            System.out.println(shape1.area());
-            System.out.println(shape2.area());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "20.0\n28.27", isCorrect: true },
-            { text: "20.0\nRuntime Error", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates abstraction where the `area` method is defined in the abstract class `Shape` and implemented in its subclasses.",
-        difficulty: 'Medium',
-        category: 'Abstraction',
-        hasCode: true
-    },
-    {
-        id: 68,
-        question: `What is demonstrated by this code?
-    \`\`\`java
-    class Author {
-        private String name;
-        Author(String name) {
-            this.name = name;
-        }
-        String getName() {
-            return name;
-        }
-    }
-    class Book {
-        private String title;
-        private Author author;
-        Book(String title, Author author) {
-            this.title = title;
-            this.author = author;
-        }
-        String getDetails() {
-            return title + " by " + author.getName();
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Author author = new Author("George Orwell");
-            Book book = new Book("1984", author);
-            System.out.println(book.getDetails());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "1984 by George Orwell", isCorrect: true },
-            { text: "George Orwell", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates aggregation, where `Book` has an `Author` object but does not control its lifecycle.",
-        difficulty: 'Medium',
-        category: 'Aggregation',
-        hasCode: true
-    },
-    {
-        id: 69,
-        question: `What is the output of this program?
-    \`\`\`java
-    class Animal {
-        void sound() {
-            System.out.println("Animal makes sound");
-        }
-    }
-    class Dog extends Animal {
-        void sound() {
-            System.out.println("Dog barks");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Animal animal = new Dog();
-            animal.sound();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Dog barks", isCorrect: true },
-            { text: "Animal makes sound", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates runtime polymorphism where the overridden `sound` method is called based on the object type.",
-        difficulty: 'Easy',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 70,
-        question: `What type of inheritance is shown here?
-    \`\`\`java
-    class Vehicle {
-        void run() {
-            System.out.println("Vehicle is running");
-        }
-    }
-    class Car extends Vehicle {
-        void run() {
-            System.out.println("Car is running");
-        }
-    }
-    class Bike extends Vehicle {
-        void run() {
-            System.out.println("Bike is running");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Vehicle car = new Car();
-            Vehicle bike = new Bike();
-            car.run();
-            bike.run();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Hierarchical Inheritance", isCorrect: true },
-            { text: "Multilevel Inheritance", isCorrect: false },
-            { text: "Single Inheritance", isCorrect: false },
-            { text: "Composition", isCorrect: false }
-        ],
-        explanation: "This demonstrates hierarchical inheritance where multiple classes (Car, Bike) inherit from a single parent class (Vehicle).",
-        difficulty: 'Medium',
-        category: 'Inheritance',
-        hasCode: true
-    },
-    {
-        id: 71,
-        question: `What is encapsulated in the following class?
-    \`\`\`java
-    class BankAccount {
-        private double balance;
-        public double getBalance() {
-            return balance;
-        }
-        public void deposit(double amount) {
-            if (amount > 0) {
+    
+        class SavingsAccount implements BankingTransactions, InterestCalculations {
+            private double balance;
+    
+            SavingsAccount(double balance) {
+                this.balance = balance;
+            }
+    
+            public void deposit(double amount) {
                 balance += amount;
             }
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            BankAccount account = new BankAccount();
-            account.deposit(1000);
-            System.out.println(account.getBalance());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "The balance variable", isCorrect: true },
-            { text: "The deposit method", isCorrect: false },
-            { text: "Encapsulation is not used", isCorrect: false },
-            { text: "No data is encapsulated", isCorrect: false }
-        ],
-        explanation: "The balance is a private variable, accessible only via controlled public methods, demonstrating encapsulation.",
-        difficulty: 'Easy',
-        category: 'Encapsulation',
-        hasCode: true
-    },
-    {
-        id: 72,
-        question: `What is the result of this abstract class implementation?
-    \`\`\`java
-    abstract class Shape {
-        abstract void draw();
-    }
-    class Circle extends Shape {
-        void draw() {
-            System.out.println("Drawing Circle");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Shape shape = new Circle();
-            shape.draw();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Drawing Circle", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false },
-            { text: "No Output", isCorrect: false }
-        ],
-        explanation: "The abstract method `draw` is implemented in the `Circle` class and called via polymorphism.",
-        difficulty: 'Easy',
-        category: 'Abstraction',
-        hasCode: true
-    },
-    {
-        id: 73,
-        question: `What happens in this composition scenario?
-    \`\`\`java
-    class Processor {
-        void process() {
-            System.out.println("Processing...");
-        }
-    }
-    class Computer {
-        private Processor processor = new Processor();
-        void compute() {
-            processor.process();
-            System.out.println("Computing tasks...");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Computer computer = new Computer();
-            computer.compute();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Processing...\nComputing tasks...", isCorrect: true },
-            { text: "Computing tasks...", isCorrect: false },
-            { text: "Processing...", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false }
-        ],
-        explanation: "The `Computer` class owns and controls the lifecycle of the `Processor` class, demonstrating composition.",
-        difficulty: 'Medium',
-        category: 'Composition',
-        hasCode: true
-    },
-    {
-        id: 74,
-        question: `What happens with this aggregation code?
-    \`\`\`java
-    class Department {
-        private String name;
-        Department(String name) {
-            this.name = name;
-        }
-        String getName() {
-            return name;
-        }
-    }
-    class Company {
-        private List<Department> departments = new ArrayList<>();
-        void addDepartment(Department dept) {
-            departments.add(dept);
-        }
-        List<Department> getDepartments() {
-            return departments;
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Company company = new Company();
-            company.addDepartment(new Department("HR"));
-            System.out.println(company.getDepartments().get(0).getName());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "HR", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false },
-            { text: "Null", isCorrect: false }
-        ],
-        explanation: "The `Company` class holds references to multiple `Department` objects without owning their lifecycle, representing aggregation.",
-        difficulty: 'Medium',
-        category: 'Aggregation',
-        hasCode: true
-    },
-    {
-        id: 75,
-        question: `What happens when the following code is executed?
-    \`\`\`java
-    class Parent {
-        void display() {
-            System.out.println("Parent display");
-        }
-    }
-    class Child extends Parent {
-        void display() {
-            System.out.println("Child display");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Parent obj = new Child();
-            obj.display();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Child display", isCorrect: true },
-            { text: "Parent display", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates runtime polymorphism where the overridden `display` method in the `Child` class is called at runtime.",
-        difficulty: 'Easy',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 76,
-        question: `What is the type of relationship demonstrated in the code below?
-    \`\`\`java
-    class Wheel {
-        void rotate() {
-            System.out.println("Wheel rotates");
-        }
-    }
-    class Car {
-        private Wheel wheel;
-        Car(Wheel wheel) {
-            this.wheel = wheel;
-        }
-        void move() {
-            wheel.rotate();
-            System.out.println("Car moves");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Wheel wheel = new Wheel();
-            Car car = new Car(wheel);
-            car.move();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Aggregation", isCorrect: true },
-            { text: "Composition", isCorrect: false },
-            { text: "Inheritance", isCorrect: false },
-            { text: "Polymorphism", isCorrect: false }
-        ],
-        explanation: "The `Car` class uses a `Wheel` object but does not control its lifecycle, representing aggregation.",
-        difficulty: 'Medium',
-        category: 'Aggregation',
-        hasCode: true
-    },
-    {
-        id: 77,
-        question: `What is demonstrated by this code?
-    \`\`\`java
-    abstract class Appliance {
-        abstract void turnOn();
-    }
-    class Fan extends Appliance {
-        void turnOn() {
-            System.out.println("Fan turns on");
-        }
-    }
-    class Light extends Appliance {
-        void turnOn() {
-            System.out.println("Light turns on");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Appliance fan = new Fan();
-            Appliance light = new Light();
-            fan.turnOn();
-            light.turnOn();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Fan turns on\nLight turns on", isCorrect: true },
-            { text: "Light turns on\nFan turns on", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates abstraction and polymorphism where the abstract method `turnOn` is implemented in different ways by subclasses.",
-        difficulty: 'Medium',
-        category: 'Abstraction',
-        hasCode: true
-    },
-    {
-        id: 78,
-        question: `What is the output of this encapsulation example?
-    \`\`\`java
-    class Student {
-        private String name;
-        private int age;
-        public String getName() {
-            return name;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
-        public int getAge() {
-            return age;
-        }
-        public void setAge(int age) {
-            if (age > 0) {
-                this.age = age;
+    
+            public void withdraw(double amount) {
+                if (balance >= amount) {
+                    balance -= amount;
+                }
+            }
+    
+            public void applyInterest() {
+                balance *= 1.03; // 3% Interest
+            }
+    
+            public double getBalance() {
+                return balance;
             }
         }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Student student = new Student();
-            student.setName("Alice");
-            student.setAge(20);
-            System.out.println(student.getName() + " is " + student.getAge() + " years old.");
+    
+        public class BankSystem {
+            public static void main(String[] args) {
+                SavingsAccount account = new SavingsAccount(1000);
+                account.deposit(200);
+                account.withdraw(100);
+                account.applyInterest();
+                System.out.println(account.getBalance());
+            }
         }
-    }
-    \`\`\``,
-        options: [
-            { text: "Alice is 20 years old.", isCorrect: true },
-            { text: "Alice is 0 years old.", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
+        \`\`\``,
+        "options": [
+            { "text": "$1133.00", "isCorrect": false },
+            { "text": "$1133.00", "isCorrect": true },
+            { "text": "$1100.00", "isCorrect": false },
+            { "text": "$1120.00", "isCorrect": false }
         ],
-        explanation: "The `name` and `age` fields are private and accessed only through public methods, demonstrating encapsulation.",
-        difficulty: 'Easy',
-        category: 'Encapsulation',
-        hasCode: true
+        "explanation": `
+        **Step-by-step execution:**
+        
+        1. **Initial Balance:** **$1000**
+        2. **Deposit:** **$200** → **Balance = $1200**
+        3. **Withdraw:** **$100** → **Balance = $1100**
+        4. **Apply Interest (3%):** **$1100 * 1.03 = $1133**
+        5. **Final Output:** **$1133**
+        `,
+        "difficulty": "Extreme",
+        "category": "Multiple Interface Hierarchies",
+        "hasCode": true
     },
     {
-        id: 79,
-        question: `What is demonstrated by this inheritance example?
-    \`\`\`java
-    class Employee {
-        void work() {
-            System.out.println("Employee works");
+        "id": 54,
+        "question": `A company's payroll system:
+        - Uses an **abstract class** Employee with a static block initializing a static variable.
+        - A subclass **Manager** overrides the salary calculation.
+        - Compute the final salary for a **Manager with $7500 base pay**.
+    
+        \`\`\`java
+        abstract class Employee {
+            static final double TAX_RATE;
+            static {
+                TAX_RATE = 0.12; // Static block initializing TAX_RATE
+            }
+            double baseSalary;
+    
+            Employee(double baseSalary) {
+                this.baseSalary = baseSalary;
+            }
+    
+            abstract double calculateSalary();
         }
+    
+        class Manager extends Employee {
+            Manager(double baseSalary) {
+                super(baseSalary);
+            }
+    
+            double calculateSalary() {
+                double bonus = baseSalary * 0.15; // 15% bonus
+                return (baseSalary + bonus) * (1 - TAX_RATE);
+            }
+        }
+    
+        public class PayrollSystem {
+            public static void main(String[] args) {
+                Employee emp = new Manager(7500);
+                System.out.println(emp.calculateSalary());
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "$7395", "isCorrect": true },
+            { "text": "$7500", "isCorrect": false },
+            { "text": "$7400", "isCorrect": false },
+            { "text": "$7200", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        1. **Static Block Executes:** TAX_RATE = 12%.
+        2. **Base Salary:** $7500.
+        3. **Bonus Calculation:** $7500 * 0.15 = $1125.
+        4. **Gross Salary:** $7500 + $1125 = $8625.
+        5. **Applying Tax (12%):** $8625 * 0.88 = **$7395**.
+        `,
+        "difficulty": "Extreme",
+        "category": "Static Blocks & Constructor Chaining",
+        "hasCode": true
+    },
+    {
+        "id": 56,
+        "question": `A logistics company manages different types of cargo:
+        - Uses **Generics** to handle multiple types.
+        - Implements **Upper Bounded Wildcards**.
+        - What will be the output?
+    
+        \`\`\`java
+        import java.util.*;
+    
+        class Cargo<T> {
+            T weight;
+            Cargo(T weight) {
+                this.weight = weight;
+            }
+    
+            void printWeight() {
+                System.out.println(weight);
+            }
+        }
+    
+        class CargoHandler {
+            static void displayWeight(List<? extends Cargo<?>> list) {
+                for (Cargo<?> c : list) {
+                    c.printWeight();
+                }
+            }
+        }
+    
+        public class Logistics {
+            public static void main(String[] args) {
+                List<Cargo<Integer>> intCargo = Arrays.asList(new Cargo<>(50), new Cargo<>(100));
+                CargoHandler.displayWeight(intCargo);
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "50 100", "isCorrect": true },
+            { "text": "Compilation Error", "isCorrect": false },
+            { "text": "Runtime Error", "isCorrect": false },
+            { "text": "50 100 null", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        1. **Cargo<Integer> objects created** with values 50 & 100.
+        2. **List<Cargo<Integer>> is passed to the method.**
+        3. **displayWeight() uses \`? extends Cargo<?>\` to allow any subtype.**
+        4. **All Cargo objects print their weight successfully.**
+        5. **Final Output:** 50 100.
+        `,
+        "difficulty": "Extreme",
+        "category": "Generics & Wildcards",
+        "hasCode": true
+    },
+    {
+        "id": 57,
+        "question": `A system dynamically calls a method using Reflection:
+        - Uses **Reflection API** to invoke methods at runtime.
+        - Uses **Annotations** to mark methods.
+        - What will be the output?
+    
+        \`\`\`java
+        import java.lang.reflect.*;
+    
+        @interface Test {}
+    
+        class Utility {
+            @Test
+            public void execute() {
+                System.out.println("Executed!");
+            }
+        }
+    
+        public class ReflectionDemo {
+            public static void main(String[] args) throws Exception {
+                Utility obj = new Utility();
+                Method method = obj.getClass().getMethod("execute");
+    
+                if (method.isAnnotationPresent(Test.class)) {
+                    method.invoke(obj);
+                }
+            }
+        }
+        \`\`\``,
+        "options": [
+            { "text": "Executed!", "isCorrect": true },
+            { "text": "Compilation Error", "isCorrect": false },
+            { "text": "Runtime Error", "isCorrect": false },
+            { "text": "No Output", "isCorrect": false }
+        ],
+        "explanation": `
+        **Step-by-step execution:**
+        1. **Annotation \`@Test\` marks the \`execute()\` method.**
+        2. **Reflection API dynamically retrieves the method.**
+        3. **It checks if the method has the \`@Test\` annotation.**
+        4. **Since it does, \`method.invoke(obj)\` executes \`execute()\`.**
+        5. **Final Output:** "Executed!".
+        `,
+        "difficulty": "Extreme",
+        "category": "Reflection & Annotations",
+        "hasCode": true
+    },
+    {
+    "id": 58,
+    "question": `A payroll system:
+    - Uses an **abstract class** Employee with a static block initializing a static variable.
+    - A subclass **Manager** overrides the salary calculation.
+    - Compute the final salary for a **Manager with $7500 base pay**.
+
+    \`\`\`java
+    abstract class Employee {
+        static final double TAX_RATE;
+        static {
+            TAX_RATE = 0.12; // Static block initializing TAX_RATE
+        }
+        double baseSalary;
+
+        Employee(double baseSalary) {
+            this.baseSalary = baseSalary;
+        }
+
+        abstract double calculateSalary();
     }
+
     class Manager extends Employee {
-        void manage() {
-            System.out.println("Manager manages");
+        Manager(double baseSalary) {
+            super(baseSalary);
+        }
+
+        double calculateSalary() {
+            double bonus = baseSalary * 0.15; // 15% bonus
+            return (baseSalary + bonus) * (1 - TAX_RATE);
         }
     }
-    class Developer extends Employee {
-        void code() {
-            System.out.println("Developer codes");
-        }
-    }
-    public class Test {
+
+    public class PayrollSystem {
         public static void main(String[] args) {
-            Manager manager = new Manager();
-            Developer developer = new Developer();
-            manager.work();
-            manager.manage();
-            developer.work();
-            developer.code();
+            Employee emp = new Manager(7500);
+            System.out.println(emp.calculateSalary());
         }
     }
     \`\`\``,
-        options: [
-            { text: "Hierarchical Inheritance", isCorrect: true },
-            { text: "Multilevel Inheritance", isCorrect: false },
-            { text: "Composition", isCorrect: false },
-            { text: "Aggregation", isCorrect: false }
-        ],
-        explanation: "Both `Manager` and `Developer` classes inherit from the `Employee` class, representing hierarchical inheritance.",
-        difficulty: 'Medium',
-        category: 'Inheritance',
-        hasCode: true
-    },
-    {
-        id: 80,
-        question: `What happens when this code is executed?
+    "options": [
+        { "text": "$7395", "isCorrect": true },
+        { "text": "$7500", "isCorrect": false },
+        { "text": "$7400", "isCorrect": false },
+        { "text": "$7200", "isCorrect": false }
+    ],
+    "explanation": `
+    **Step-by-step execution:**
+    1. **Static Block Executes:** TAX_RATE = 12%.
+    2. **Base Salary:** $7500.
+    3. **Bonus Calculation:** $7500 * 0.15 = $1125.
+    4. **Gross Salary:** $7500 + $1125 = $8625.
+    5. **Applying Tax (12%):** $8625 * 0.88 = **$7395**.
+    `,
+    "difficulty": "Extreme",
+    "category": "Static Blocks & Constructor Chaining",
+    "hasCode": true
+},
+{
+    "id": 59,
+    "question": `A payroll system:
+    - Uses an **abstract class** Employee with a static block initializing a static variable.
+    - A subclass **Manager** overrides the salary calculation.
+    - Another subclass **Director** gets an additional 20% performance bonus.
+    - Compute the final salary for a **Director with $8000 base pay**.
+
     \`\`\`java
-    interface Payment {
-        void pay(double amount);
+    abstract class Employee {
+        static final double TAX_RATE;
+        static {
+            TAX_RATE = 0.12; // Static block initializing TAX_RATE
+        }
+        double baseSalary;
+
+        Employee(double baseSalary) {
+            this.baseSalary = baseSalary;
+        }
+
+        abstract double calculateSalary();
     }
-    class CreditCardPayment implements Payment {
-        public void pay(double amount) {
-            System.out.println("Paid " + amount + " using Credit Card");
+
+    class Manager extends Employee {
+        Manager(double baseSalary) {
+            super(baseSalary);
+        }
+
+        double calculateSalary() {
+            double bonus = baseSalary * 0.15; // 15% bonus
+            return (baseSalary + bonus) * (1 - TAX_RATE);
         }
     }
-    class PayPalPayment implements Payment {
-        public void pay(double amount) {
-            System.out.println("Paid " + amount + " using PayPal");
+
+    class Director extends Manager {
+        Director(double baseSalary) {
+            super(baseSalary);
+        }
+
+        double calculateSalary() {
+            double managerSalary = super.calculateSalary();
+            double performanceBonus = baseSalary * 0.20; // 20% extra
+            return (managerSalary + performanceBonus) * (1 - TAX_RATE);
         }
     }
-    public class Test {
+
+    public class PayrollSystem {
         public static void main(String[] args) {
-            Payment payment = new CreditCardPayment();
-            payment.pay(100.0);
-            payment = new PayPalPayment();
-            payment.pay(200.0);
+            Employee emp = new Director(8000);
+            System.out.println(emp.calculateSalary());
         }
     }
     \`\`\``,
-        options: [
-            { text: "Paid 100.0 using Credit Card\nPaid 200.0 using PayPal", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false },
-            { text: "Paid 200.0 using PayPal", isCorrect: false }
-        ],
-        explanation: "This demonstrates polymorphism where different implementations of the `pay` method are invoked dynamically.",
-        difficulty: 'Medium',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 81,
-        question: `What type of relationship is demonstrated?
+    "options": [
+        { "text": "$7640", "isCorrect": true },
+        { "text": "$7800", "isCorrect": false },
+        { "text": "$7500", "isCorrect": false },
+        { "text": "$8000", "isCorrect": false }
+    ],
+    "explanation": `
+    **Step-by-step execution:**
+    1. **Static Block Executes:** TAX_RATE = 12%.
+    2. **Base Salary:** $8000.
+    3. **Manager Bonus Calculation:** $8000 * 0.15 = $1200.
+    4. **Manager Gross Salary:** $8000 + $1200 = $9200.
+    5. **Manager Post-Tax Salary:** $9200 * 0.88 = $8096.
+    6. **Director Performance Bonus:** $8000 * 0.20 = $1600.
+    7. **Final Director Salary:** ($8096 + $1600) * 0.88 = **$7640**.
+    `,
+    "difficulty": "Extreme",
+    "category": "Multi-level Inheritance & Static Blocks",
+    "hasCode": true
+},
+{
+    "id": 60,
+    "question": `A banking system:
+    - Uses **two interfaces**: BankingTransactions and InterestCalculations.
+    - **Overdraft protection** applies if balance goes negative.
+    - Compute the final balance after multiple transactions.
+
     \`\`\`java
-    class CPU {
-        void process() {
-            System.out.println("CPU processing...");
-        }
+    interface BankingTransactions {
+        void deposit(double amount);
+        void withdraw(double amount);
     }
-    class Laptop {
-        private CPU cpu = new CPU();
-        void run() {
-            cpu.process();
-            System.out.println("Laptop running...");
-        }
+
+    interface InterestCalculations {
+        void applyInterest();
     }
-    public class Test {
-        public static void main(String[] args) {
-            Laptop laptop = new Laptop();
-            laptop.run();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Composition", isCorrect: true },
-            { text: "Aggregation", isCorrect: false },
-            { text: "Inheritance", isCorrect: false },
-            { text: "Encapsulation", isCorrect: false }
-        ],
-        explanation: "The `Laptop` class owns and controls the lifecycle of the `CPU` object, demonstrating composition.",
-        difficulty: 'Medium',
-        category: 'Composition',
-        hasCode: true
-    },
-    {
-        id: 82,
-        question: `What happens when this code is executed?
-    \`\`\`java
-    class Animal {
-        void makeSound() {
-            System.out.println("Animal makes sound");
-        }
-    }
-    class Dog extends Animal {
-        void makeSound() {
-            System.out.println("Dog barks");
-        }
-    }
-    class Cat extends Animal {
-        void makeSound() {
-            System.out.println("Cat meows");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Animal animal1 = new Dog();
-            Animal animal2 = new Cat();
-            animal1.makeSound();
-            animal2.makeSound();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Dog barks\nCat meows", isCorrect: true },
-            { text: "Animal makes sound\nAnimal makes sound", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates polymorphism where the overridden `makeSound` method is resolved dynamically based on the object type.",
-        difficulty: 'Medium',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 83,
-        question: `What type of relationship is demonstrated in this code?
-    \`\`\`java
-    class Screen {
-        void display() {
-            System.out.println("Displaying on screen...");
-        }
-    }
-    class Laptop {
-        private Screen screen = new Screen();
-        void show() {
-            screen.display();
-            System.out.println("Laptop in use...");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Laptop laptop = new Laptop();
-            laptop.show();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Composition", isCorrect: true },
-            { text: "Aggregation", isCorrect: false },
-            { text: "Inheritance", isCorrect: false },
-            { text: "Encapsulation", isCorrect: false }
-        ],
-        explanation: "The `Laptop` class owns and manages the `Screen` object, representing composition.",
-        difficulty: 'Medium',
-        category: 'Composition',
-        hasCode: true
-    },
-    {
-        id: 84,
-        question: `What is the output of this code?
-    \`\`\`java
-    class Animal {
-        void makeSound() {
-            System.out.println("Animal makes a sound");
-        }
-    }
-    class Bird extends Animal {
-        void makeSound() {
-            System.out.println("Bird chirps");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Animal animal = new Bird();
-            animal.makeSound();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Bird chirps", isCorrect: true },
-            { text: "Animal makes a sound", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates runtime polymorphism where the `makeSound` method is dynamically resolved to the `Bird` class implementation.",
-        difficulty: 'Easy',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 85,
-        question: `What is the purpose of this abstract class?
-    \`\`\`java
-    abstract class Account {
-        abstract double getBalance();
-    }
-    class SavingsAccount extends Account {
+
+    class SavingsAccount implements BankingTransactions, InterestCalculations {
         private double balance;
+
         SavingsAccount(double balance) {
             this.balance = balance;
         }
-        double getBalance() {
+
+        public void deposit(double amount) {
+            balance += amount;
+        }
+
+        public void withdraw(double amount) {
+            if (balance - amount < 0) {
+                balance -= 10; // Overdraft fee
+            } else {
+                balance -= amount;
+            }
+        }
+
+        public void applyInterest() {
+            balance *= 1.05; // 5% Interest
+        }
+
+        public double getBalance() {
             return balance;
         }
     }
-    public class Test {
+
+    public class BankSystem {
         public static void main(String[] args) {
-            Account account = new SavingsAccount(1000);
+            SavingsAccount account = new SavingsAccount(500);
+            account.deposit(300);
+            account.withdraw(900);
+            account.applyInterest();
             System.out.println(account.getBalance());
         }
     }
     \`\`\``,
-        options: [
-            { text: "1000", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false },
-            { text: "Abstract class cannot have instances", isCorrect: false }
-        ],
-        explanation: "The abstract class `Account` provides a blueprint for subclasses like `SavingsAccount` to implement the `getBalance` method.",
-        difficulty: 'Medium',
-        category: 'Abstraction',
-        hasCode: true
-    },
-    {
-        id: 86,
-        question: `What happens when this interface is used?
+    "options": [
+        { "text": "$-10", "isCorrect": false },
+        { "text": "$-11.55", "isCorrect": true },
+        { "text": "$-5", "isCorrect": false },
+        { "text": "$0", "isCorrect": false }
+    ],
+    "explanation": `
+    **Step-by-step execution:**
+    1. **Initial Balance:** $500.
+    2. **Deposit:** $300 → **Balance = $800**.
+    3. **Withdraw:** $900 → Overdraft! **$800 - $900 = -100**.
+    4. **Overdraft Fee:** -100 - 10 = **-110**.
+    5. **Apply Interest (5%):** -110 * 1.05 = **-115.50**.
+    6. **Final Output:** **$-11.55**.
+    `,
+    "difficulty": "Extreme",
+    "category": "Interfaces & Banking System",
+    "hasCode": true
+},
+{
+    "id": 61,
+    "question": `A company wants to filter employees:
+    - Uses **Lambda Expressions** for salary filtering.
+    - Uses **Streams API** to process the list.
+    - Compute the total salary of employees earning more than $5000.
+
     \`\`\`java
-    interface Payment {
-        void makePayment(double amount);
-    }
-    class CreditCardPayment implements Payment {
-        public void makePayment(double amount) {
-            System.out.println("Payment of " + amount + " made via Credit Card.");
-        }
-    }
-    class PayPalPayment implements Payment {
-        public void makePayment(double amount) {
-            System.out.println("Payment of " + amount + " made via PayPal.");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Payment payment = new CreditCardPayment();
-            payment.makePayment(500);
-            payment = new PayPalPayment();
-            payment.makePayment(750);
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Payment of 500 made via Credit Card.\nPayment of 750 made via PayPal.", isCorrect: true },
-            { text: "Payment of 750 made via PayPal.", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates polymorphism through an interface where different implementations of `makePayment` are invoked dynamically.",
-        difficulty: 'Medium',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 87,
-        question: `What type of inheritance is demonstrated here?
-    \`\`\`java
-    class Vehicle {
-        void run() {
-            System.out.println("Vehicle is running");
-        }
-    }
-    class Truck extends Vehicle {
-        void load() {
-            System.out.println("Truck is loading");
-        }
-    }
-    class Bike extends Vehicle {
-        void balance() {
-            System.out.println("Bike is balancing");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Truck truck = new Truck();
-            Bike bike = new Bike();
-            truck.run();
-            truck.load();
-            bike.run();
-            bike.balance();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Hierarchical Inheritance", isCorrect: true },
-            { text: "Multilevel Inheritance", isCorrect: false },
-            { text: "Single Inheritance", isCorrect: false },
-            { text: "Composition", isCorrect: false }
-        ],
-        explanation: "Multiple child classes (`Truck` and `Bike`) inherit from a single parent class (`Vehicle`), representing hierarchical inheritance.",
-        difficulty: 'Medium',
-        category: 'Inheritance',
-        hasCode: true
-    },
-    {
-        id: 88,
-        question: `What is encapsulated in this code?
-    \`\`\`java
+    import java.util.*;
+    import java.util.stream.*;
+
     class Employee {
-        private String name;
-        private double salary;
-        public String getName() {
-            return name;
-        }
-        public void setName(String name) {
+        String name;
+        double salary;
+
+        Employee(String name, double salary) {
             this.name = name;
-        }
-        public double getSalary() {
-            return salary;
-        }
-        public void setSalary(double salary) {
-            if (salary > 0) {
-                this.salary = salary;
-            }
+            this.salary = salary;
         }
     }
-    public class Test {
+
+    public class SalaryProcessing {
         public static void main(String[] args) {
-            Employee emp = new Employee();
-            emp.setName("John");
-            emp.setSalary(5000);
-            System.out.println(emp.getName() + " earns " + emp.getSalary());
+            List<Employee> employees = Arrays.asList(
+                new Employee("John", 4500),
+                new Employee("Alice", 7000),
+                new Employee("Bob", 5500),
+                new Employee("Charlie", 4800)
+            );
+
+            double totalSalary = employees.stream()
+                .filter(e -> e.salary > 5000)
+                .mapToDouble(e -> e.salary)
+                .sum();
+
+            System.out.println(totalSalary);
         }
     }
     \`\`\``,
-        options: [
-            { text: "John earns 5000", isCorrect: true },
-            { text: "John earns 0", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "The `name` and `salary` fields are private and accessed via getter and setter methods, demonstrating encapsulation.",
-        difficulty: 'Easy',
-        category: 'Encapsulation',
-        hasCode: true
-    },
-    {
-        id: 89,
-        question: `What will this program print?
+    "options": [
+        { "text": "$12500", "isCorrect": true },
+        { "text": "$10000", "isCorrect": false },
+        { "text": "$11500", "isCorrect": false },
+        { "text": "$13000", "isCorrect": false }
+    ],
+    "explanation": `
+    **Step-by-step execution:**
+    1. **Employee List Created:**
+       - John: $4500
+       - Alice: $7000
+       - Bob: $5500
+       - Charlie: $4800
+    2. **Stream API filters employees with salary > $5000:**
+       - Alice: $7000
+       - Bob: $5500
+    3. **Sum of Filtered Salaries:** $7000 + $5500 = **$12500**.
+    `,
+    "difficulty": "Extreme",
+    "category": "Lambda Expressions & Streams",
+    "hasCode": true
+},
+{
+    "id": 62,
+    "question": `What will be the output of the following Java code?
+    - Uses **post-increment and pre-decrement** inside method calls.
+    - Pay attention to how **values are updated** after each operation.
+
     \`\`\`java
-    abstract class Shape {
-        abstract double area();
-    }
-    class Rectangle extends Shape {
-        private double length, width;
-        Rectangle(double length, double width) {
-            this.length = length;
-            this.width = width;
+    class IncrementTrick {
+        static int process(int a, int b) {
+            a += b++ - --a * 3 + b--;
+            return a;
         }
-        double area() {
-            return length * width;
-        }
-    }
-    class Circle extends Shape {
-        private double radius;
-        Circle(double radius) {
-            this.radius = radius;
-        }
-        double area() {
-            return Math.PI * radius * radius;
-        }
-    }
-    public class Test {
+
         public static void main(String[] args) {
-            Shape shape1 = new Rectangle(5, 10);
-            Shape shape2 = new Circle(7);
-            System.out.println(shape1.area());
-            System.out.println(shape2.area());
+            int x = 6, y = 4;
+            int result = process(x, y);
+            System.out.println(result + " " + x + " " + y);
         }
     }
     \`\`\``,
-        options: [
-            { text: "50.0\n153.93804002589985", isCorrect: true },
-            { text: "50.0\n49.0", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates abstraction where the `area` method is implemented differently in each subclass.",
-        difficulty: 'Medium',
-        category: 'Abstraction',
-        hasCode: true
-    },
-    {
-        id: 90,
-        question: `What type of relationship is demonstrated in this code?
+    "options": [
+        { "text": "-8 6 4", "isCorrect": true },
+        { "text": "10 7 3", "isCorrect": false },
+        { "text": "-9 6 5", "isCorrect": false },
+        { "text": "Compilation Error", "isCorrect": false }
+    ],
+    "explanation": `
+    **Step-by-step execution:**
+    
+    1. **x = 6, y = 4**.
+    2. **Inside process():**
+       - \`a += b++ - --a * 3 + b--\`
+       - Breakdown:
+         - \`--a\` → \`a = 5\`
+         - \`b++\` → Returns \`4\`, then \`b = 5\`
+         - \`b--\` → Returns \`5\`, then \`b = 4\`
+         - Expression: \`4 - (5 * 3) + 5 = -8\`
+       - Final **a = -8**.
+    3. **Final Output:** \`-8 6 4\`.
+    `,
+    "difficulty": "Extreme",
+    "category": "Operator Precedence & Increment/Decrement",
+    "hasCode": true
+},
+{
+    "id": 63,
+    "question": `What will be the output of the following Java code?
+    - Uses **static blocks** and **final variables**.
+    - Watch out for **the order of execution**.
+
     \`\`\`java
-    class Engine {
-        void start() {
-            System.out.println("Engine starts");
+    class StaticFinalExample {
+        static final int BASE;
+        static int x;
+        
+        static {
+            BASE = 100;
+            x = BASE / 2;
         }
-    }
-    class Car {
-        private Engine engine;
-        Car(Engine engine) {
-            this.engine = engine;
-        }
-        void drive() {
-            engine.start();
-            System.out.println("Car is driving");
-        }
-    }
-    public class Test {
+
         public static void main(String[] args) {
-            Engine engine = new Engine();
-            Car car = new Car(engine);
-            car.drive();
+            System.out.println(BASE + " " + x);
         }
     }
     \`\`\``,
-        options: [
-            { text: "Aggregation", isCorrect: true },
-            { text: "Composition", isCorrect: false },
-            { text: "Inheritance", isCorrect: false },
-            { text: "Encapsulation", isCorrect: false }
-        ],
-        explanation: "The `Car` class uses the `Engine` object but does not control its lifecycle, representing aggregation.",
-        difficulty: 'Medium',
-        category: 'Aggregation',
-        hasCode: true
-    },
-    {
-        id: 91,
-        question: `What happens in this example of polymorphism?
-    \`\`\`java
-    class Animal {
-        void eat() {
-            System.out.println("Animal eats");
-        }
-    }
-    class Lion extends Animal {
-        void eat() {
-            System.out.println("Lion eats meat");
-        }
-    }
-    class Deer extends Animal {
-        void eat() {
-            System.out.println("Deer eats grass");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Animal animal1 = new Lion();
-            Animal animal2 = new Deer();
-            animal1.eat();
-            animal2.eat();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Lion eats meat\nDeer eats grass", isCorrect: true },
-            { text: "Animal eats\nAnimal eats", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates runtime polymorphism where the `eat` method is overridden and dynamically resolved based on the object type.",
-        difficulty: 'Medium',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 92,
-        question: `What is demonstrated in this abstraction example?
-    \`\`\`java
-    abstract class Vehicle {
-        abstract void run();
-    }
-    class Car extends Vehicle {
-        void run() {
-            System.out.println("Car is running");
-        }
-    }
-    class Bike extends Vehicle {
-        void run() {
-            System.out.println("Bike is running");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Vehicle car = new Car();
-            Vehicle bike = new Bike();
-            car.run();
-            bike.run();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Car is running\nBike is running", isCorrect: true },
-            { text: "Vehicle is running\nVehicle is running", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates abstraction where the abstract method `run` is implemented differently in each subclass.",
-        difficulty: 'Medium',
-        category: 'Abstraction',
-        hasCode: true
-    },
-    {
-        id: 93,
-        question: `What type of inheritance is used in this code?
-    \`\`\`java
-    class Animal {
-        void live() {
-            System.out.println("Animal lives");
-        }
-    }
-    class Mammal extends Animal {
-        void giveBirth() {
-            System.out.println("Mammal gives birth");
-        }
-    }
-    class Human extends Mammal {
-        void speak() {
-            System.out.println("Human speaks");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Human human = new Human();
-            human.live();
-            human.giveBirth();
-            human.speak();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Multilevel Inheritance", isCorrect: true },
-            { text: "Hierarchical Inheritance", isCorrect: false },
-            { text: "Single Inheritance", isCorrect: false },
-            { text: "Composition", isCorrect: false }
-        ],
-        explanation: "This demonstrates multilevel inheritance where `Human` inherits from `Mammal`, and `Mammal` inherits from `Animal`.",
-        difficulty: 'Medium',
-        category: 'Inheritance',
-        hasCode: true
-    },
-    {
-        id: 94,
-        question: `What happens when the following code is executed?
-    \`\`\`java
-    class Parent {
-        void display() {
-            System.out.println("Parent display");
-        }
-    }
-    class Child extends Parent {
-        @Override
-        void display() {
-            System.out.println("Child display");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Parent obj = new Child();
-            obj.display();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Child display", isCorrect: true },
-            { text: "Parent display", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates runtime polymorphism where the `display` method in the `Child` class overrides the method in `Parent`.",
-        difficulty: 'Easy',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 95,
-        question: `What is the purpose of encapsulation in this example?
-    \`\`\`java
-    class Product {
-        private String name;
-        private double price;
-        public String getName() {
-            return name;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
-        public double getPrice() {
-            return price;
-        }
-        public void setPrice(double price) {
-            if (price > 0) {
-                this.price = price;
-            }
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Product product = new Product();
-            product.setName("Laptop");
-            product.setPrice(1000);
-            System.out.println(product.getName() + " costs $" + product.getPrice());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Laptop costs $1000", isCorrect: true },
-            { text: "Laptop costs $0", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "The `name` and `price` fields are encapsulated, ensuring controlled access via getter and setter methods.",
-        difficulty: 'Easy',
-        category: 'Encapsulation',
-        hasCode: true
-    },
-    {
-        id: 96,
-        question: `What is demonstrated in this polymorphism example?
-    \`\`\`java
-    interface Animal {
-        void sound();
-    }
-    class Dog implements Animal {
-        public void sound() {
-            System.out.println("Dog barks");
-        }
-    }
-    class Cat implements Animal {
-        public void sound() {
-            System.out.println("Cat meows");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Animal dog = new Dog();
-            Animal cat = new Cat();
-            dog.sound();
-            cat.sound();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Dog barks\nCat meows", isCorrect: true },
-            { text: "Animal makes sound\nAnimal makes sound", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "This demonstrates polymorphism through interfaces, where the `sound` method is implemented differently in each class.",
-        difficulty: 'Medium',
-        category: 'Polymorphism',
-        hasCode: true
-    },
-    {
-        id: 97,
-        question: `What type of relationship is demonstrated in this code?
-    \`\`\`java
-    class Library {
-        private String name;
-        Library(String name) {
-            this.name = name;
-        }
-        String getName() {
-            return name;
-        }
-    }
-    class Book {
-        private Library library;
-        Book(Library library) {
-            this.library = library;
-        }
-        String getLibraryName() {
-            return library.getName();
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Library library = new Library("City Library");
-            Book book = new Book(library);
-            System.out.println("The book belongs to " + book.getLibraryName());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Aggregation", isCorrect: true },
-            { text: "Composition", isCorrect: false },
-            { text: "Inheritance", isCorrect: false },
-            { text: "Encapsulation", isCorrect: false }
-        ],
-        explanation: "The `Book` class holds a reference to the `Library` class, representing aggregation as the lifecycle of the library is independent.",
-        difficulty: 'Medium',
-        category: 'Aggregation',
-        hasCode: true
-    },
-    {
-        id: 98,
-        question: `What is the output of this abstraction example?
-    \`\`\`java
-    abstract class Instrument {
-        abstract void play();
-    }
-    class Guitar extends Instrument {
-        void play() {
-            System.out.println("Playing Guitar");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Instrument guitar = new Guitar();
-            guitar.play();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Playing Guitar", isCorrect: true },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false },
-            { text: "No Output", isCorrect: false }
-        ],
-        explanation: "This demonstrates abstraction where the `play` method is defined in the abstract class and implemented in the subclass.",
-        difficulty: 'Easy',
-        category: 'Abstraction',
-        hasCode: true
-    },
-    {
-        id: 99,
-        question: `What type of inheritance is used here?
-    \`\`\`java
-    class Shape {
-        void display() {
-            System.out.println("Displaying shape");
-        }
-    }
-    class Circle extends Shape {
-        void draw() {
-            System.out.println("Drawing circle");
-        }
-    }
-    class Square extends Shape {
-        void draw() {
-            System.out.println("Drawing square");
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            Circle circle = new Circle();
-            Square square = new Square();
-            circle.display();
-            circle.draw();
-            square.display();
-            square.draw();
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Hierarchical Inheritance", isCorrect: true },
-            { text: "Multilevel Inheritance", isCorrect: false },
-            { text: "Single Inheritance", isCorrect: false },
-            { text: "Composition", isCorrect: false }
-        ],
-        explanation: "Multiple subclasses (`Circle` and `Square`) inherit from the same parent class (`Shape`), demonstrating hierarchical inheritance.",
-        difficulty: 'Medium',
-        category: 'Inheritance',
-        hasCode: true
-    },
-    {
-        id: 100,
-        question: `What is the purpose of encapsulation in this example?
-    \`\`\`java
-    class BankAccount {
-        private double balance;
-        public double getBalance() {
-            return balance;
-        }
-        public void deposit(double amount) {
-            if (amount > 0) {
-                balance += amount;
-            }
-        }
-        public void withdraw(double amount) {
-            if (amount > 0 && amount <= balance) {
-                balance -= amount;
-            }
-        }
-    }
-    public class Test {
-        public static void main(String[] args) {
-            BankAccount account = new BankAccount();
-            account.deposit(1000);
-            account.withdraw(500);
-            System.out.println("Remaining Balance: " + account.getBalance());
-        }
-    }
-    \`\`\``,
-        options: [
-            { text: "Remaining Balance: 500", isCorrect: true },
-            { text: "Remaining Balance: 0", isCorrect: false },
-            { text: "Compilation Error", isCorrect: false },
-            { text: "Runtime Error", isCorrect: false }
-        ],
-        explanation: "Encapsulation ensures the balance is accessed and modified only through controlled methods, promoting data security.",
-        difficulty: 'Easy',
-        category: 'Encapsulation',
-        hasCode: true
-    }
-  
-  ];
-  
-  shuffleOptions(oopMCQs);
+    "options": [
+        { "text": "100 50", "isCorrect": true },
+        { "text": "Compilation Error", "isCorrect": false },
+        { "text": "100 0", "isCorrect": false },
+        { "text": "Runtime Error", "isCorrect": false }
+    ],
+    "explanation": `
+    **Step-by-step execution:**
+    
+    1. **Static Block Executes Before Main():**
+       - \`BASE\` is declared as **static final**, but **initialized inside a static block**.
+       - \`x = BASE / 2\` → \`x = 50\`.
+    2. **Final Output:** \`100 50\`.
+    `,
+    "difficulty": "Hard",
+    "category": "Static Blocks & Final Variables",
+    "hasCode": true
+},
+
+
+
+    
+];
+
+shuffleOptions(oopMCQs);
